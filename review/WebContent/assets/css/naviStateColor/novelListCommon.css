@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+/*현재 위치 메뉴 색 NovelList*/
+			.novelList a{
+				color : #CD8F49 !important;
+			}	

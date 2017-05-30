@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+
+		/*현재 위치 메뉴 색 TodayNovel*/
+			.todayNovel a{
+				color : #CD8F49 !important;
+			}	
+			

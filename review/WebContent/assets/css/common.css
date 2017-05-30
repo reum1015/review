@@ -1,0 +1,23 @@
+.container{
+width: 80%;
+height: auto;
+}
+body{
+	padding-top: 50px;
+	padding-bottom: 120px;
+}
+
+.navbar-fixed-top {
+	max-height: 100%;
+}
+
+.topmenu-brands{
+	margin-top: 5px;
+}
+.topmenu-search {
+	margin-top: 10px;
+}
+
+.topmenu-login {
+	margin-top: 15px;
+}

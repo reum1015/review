@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+<configuration>
+	<!-- mysql 접속 정보를 지정 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver"/>
+				<property name="url" 
+					value="jdbc:mysql://localhost:3306/reviewnbang?characterEncoding=UTF-8"/>
+				<property name="username" value="root"/>	
+				<property name="password" value="root"/>
+			</dataSource>	
+		</environment>
+	</environments>
+	
+<mappers>
+	<mapper resource="review/dao/mapper/MemberMapper.xml" />
+	<mapper resource="review/dao/mapper/ArticleMapper.xml" />
+	<mapper resource="review/dao/mapper/ImageFileMapper.xml" />	
+	<mapper resource="review/dao/mapper/BookMarkMapper.xml" />
+	<!--<mapper resource="review/dao/mapper/LikeMapper.xml" />-->
+	<mapper resource="review/dao/mapper/RelationMapper.xml" />
+	<mapper resource="review/dao/mapper/CommentMapper.xml" />
+		
+	</mappers>
+	
+</configuration>
+
+
+
+

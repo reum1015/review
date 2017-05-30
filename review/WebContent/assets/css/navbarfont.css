@@ -1,0 +1,37 @@
+@IMPORT url("https://fonts.googleapis.com/css?family=Raleway:900i|Sansita+One|Aclonica");
+
+.main_navi #myNavbar li{
+	font-family: 'Raleway', sans-serif;
+	font-size: 15px;
+}
+
+.main_navi #myNavbar li a:hover{
+	color : #CD8F49;
+}
+
+.main_navi #myNavbar .todayNovel a,
+.main_navi #myNavbar .novelList a,
+.main_navi #myNavbar .community a,
+.main_navi #myNavbar .mymenu a,
+.main_navi #myNavbar .main_admin a{
+	
+}
+
+
+.bookstoryhome{
+	font-family: 'Sansita One', cursive;
+	font-size: 18px;	
+}
+
+.bookstoryhome:hover{
+	background-color: #DCAD67;
+	
+}
+
+
+
+/*
+font-family: 'Raleway', sans-serif;
+font-family: 'Sansita One', cursive;
+font-family: 'Aclonica', sans-serif;
+*/

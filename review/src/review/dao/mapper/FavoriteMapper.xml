@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 파일의 경로를 config.xml에 명시해야 한다. -->
+
+<!-- Member 테이블에 대한 CRUD 기능을 구현하기 위한 Mapper -->
+<mapper namespace="FavoriteMapper">
+	
+	<!-- Beans 클래스의 객체이름(id)과 클래스 이름(type)를 명시한다. -->
+	<resultMap id="favorite" type="review.model.Favorite" >
+	<!-- 빈즈의 멤버 변수(property) 이름과 대상테이블의 컬럼(column)을 연결한다-->
+		<result property="id" column="id"/>
+		<result property="member_id" column="member_id"/>
+		<result property="article_id" column="article_id"/>
+		<result property="reg_date" column="reg_date"/>
+		<result property="imagePath" column="image_path"/>
+		
+	</resultMap>
+	
+	<!-- 관심등록 한 작품인지 아닌지 확인 -->
+	<select id="selectCountFavoriteArticleById"  parameterType="review.model.Favorite" resultType="int">
+	SELECT count(id) FROM favorite WHERE member_id=#{member_id} AND article_id=#{article_id}
+	</select>
+	
+	<!-- 관심등록 추가 -->
+	<insert id="insertAddFavorite" parameterType="review.model.Favorite" useGeneratedKeys="true" keyProperty="id">
+	INSERT INTO favorite (
+	 member_id, article_id, reg_date
+	)	VALUES (
+	 #{member_id}, #{article_id}, now()
+	 )
+	</insert> 
+	
+	
+	<delete id="deleteRemoveFavorite" parameterType="review.model.Favorite">
+	 DELETE FROM favorite WHERE member_id=#{member_id} AND article_id=#{article_id}	
+	</delete>
+	
+		
+		<!-- 관심작품 목록을 조회한다. -->
+	<select id="selectFavoriteList" parameterType="review.model.Favorite" resultMap="favorite">
+    SELECT f.article_id, concat(i.file_dir, '/', i.file_name) as imagePath 
+      FROM member as m 
+      LEFT JOIN favorite as f ON m.id = f.member_id
+      LEFT JOIN article as a ON f.article_id = a.id 
+      LEFT JOIN imageFile as i ON b.id = i.article_id where i.content_type LIKE ('image/%') 
+      AND member_id=#{member_id}
+        
+        ORDER BY a.id DESC
+       	LIMIT #{limitStart}, #{listCount}
+       
+	</select>		
+	
+	
+		<!-- 전체 관심작품 수를 조회한다. 페이지 구현 위해서 -->
+	<select id="selectFavoriteCount" parameterType="review.model.Favorite" resultType="int">
+	SELECT COUNT(id) FROM favorite WHERE member_id =#{member_id}	
+	</select>
+	
+	<!-- 특정 멤버에 속한 모든 관심작품을 삭제한다. -->
+	<delete id="deleteFavoriteAll" parameterType="review.model.Favorite">
+	  DELETE FROM favorite WHERE member_id =#{member_id}
+	</delete>
+	
+
+
+
+	
+
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 파일의 경로를 config.xml에 명시해야 한다. -->
+
+<!-- Member 테이블에 대한 CRUD 기능을 구현하기 위한 Mapper -->
+<mapper namespace="BookMarkMapper">
+	
+	<!-- Beans 클래스의 객체이름(id)과 클래스 이름(type)를 명시한다. -->
+	<resultMap id="bookmark" type="review.model.BookMark" >
+	<!-- 빈즈의 멤버 변수(property) 이름과 대상테이블의 컬럼(column)을 연결한다-->
+		<result property="id" column="id"/>
+		<result property="member_id" column="member_id"/>
+		<result property="article_id" column="article_id"/>		
+		<result property="imagePath" column="image_path"/>
+		<result property="reg_date" column="reg_date"/>		
+		
+	</resultMap>
+	
+	<!-- 북마크 추가 -->
+	<insert id="insertAddBookMark" parameterType="review.model.BookMark" useGeneratedKeys="true" keyProperty="id">
+	INSERT INTO bookmark (
+	   member_id, article_id, reg_date
+	) VALUES (
+	   #{member_id}, #{article_id}, now()
+	   )
+	</insert> 
+	
+	<!-- 북마크 등록 한 작품인지 아닌지 확인 -->
+	<select id="selectCountBookMarkById"  parameterType="review.model.BookMark" resultType="int">
+	SELECT count(id) FROM bookmark WHERE member_id=#{member_id} AND article_id=#{article_id}
+	</select>
+	
+	<delete id="deleteRemoveBookMark" parameterType="review.model.BookMark">
+         DELETE FROM bookmark WHERE member_id=#{member_id} AND article_id=#{article_id}
+	</delete>
+		
+		<!-- 북마크 목록을 조회한다. -->
+	<select id="selectBookMarkList" parameterType="review.model.BookMark" resultMap="bookmark">
+    SELECT b.episode_id, b.book_id, k.book_name, e.episode_order, e.episode_name, concat(i.file_dir, '/', i.file_name) as imagePath 
+      FROM member as m 
+      LEFT JOIN bookmark as b ON m.id = b.member_id
+      LEFT JOIN article as a ON b.article_id = a.id
+      LEFT JOIN imagefile as i ON e.id = i.article_id 
+        where i.content_type LIKE ('image/%') AND member_id=#{member_id}
+       
+       	ORDER BY e.id DESC  
+       	LIMIT #{limitStart}, #{listCount}
+       
+	</select>	
+		
+	<!-- 전체 게시물 수를 조회한다. 페이지 구현 위해서 -->
+	<select id="selectBookMarkCount" parameterType="review.model.BookMark" resultType="int">
+	SELECT COUNT(id) FROM bookmark WHERE member_id =#{member_id}	
+	</select>
+	
+	<!-- 특정 멤버에 속한 모든 북마크를 삭제한다. -->
+	<delete id="deleteBookMarkAll" parameterType="review.model.BookMark">
+	  DELETE FROM bookmark WHERE member_id =#{member_id}
+	</delete>
+
+
+	
+</mapper>

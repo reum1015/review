@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
+<mapper namespace="MemberMapper">
+
+    <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="member" type="review.model.Member" >
+	    <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+       <result property="id" column="id"/>
+	    <result property="member_level" column="member_level"/>
+	    <result property="nick_name" column="nick_name"/>
+	    <result property="name" column="name" />
+	    <result property="age" column="age"/>
+	    <result property="email" column="email"/>
+	    <result property="user_pw" column="user_pw"/>
+	    <result property="gender" column="gender"/>
+	    <result property="reg_date" column="reg_date"/>
+	    <result property="edit_date" column="edit_date"/>	            
+	    <result property="introduce" column="introduce"/>
+	      <result property="imagePath" column="imagePath" />
+	</resultMap>
+	
+	<!-- 회원정보를 저장한다 : 가입 -->
+	<insert id="insertMember" parameterType="review.model.Member" useGeneratedKeys="true" keyProperty="id">
+	  INSERT INTO member (
+	    nick_name, name, age, email, user_pw,
+	     gender, reg_date, edit_date, member_level
+	  ) VALUES (
+	    #{nick_name}, #{name}, #{age}, #{email}, password(#{user_pw}),
+	     #{gender}, now(), now(), "AA"
+	  )
+	</insert>
+	
+	<!-- 아이디와 비밀번호가 일치하는 회원정보를 조회한다. -->
+	<select id="selectLoginInfo" parameterType="review.model.Member" resultMap="member">
+	  SELECT
+	      id, nick_name, name, user_pw, email, gender, age,
+	      reg_date, edit_date, member_level, introduce
+	  FROM member
+	  WHERE email=#{email} AND user_pw=password(#{user_pw})
+	  ORDER BY id DESC
+	  LIMIT 0, 1
+	</select>
+			
+	<!-- 닉네임 중복검사를 수행한다. -->
+	<select id="selectNickNameCount" parameterType="review.model.Member" resultType="int">
+	  SELECT count(id) FROM member WHERE nick_name=#{nick_name}
+	</select>
+	
+	<!-- 이메일 중복검사를 수행한다. -->
+	<select id="selectEmailCount" parameterType="review.model.Member" resultType="int">
+	  SELECT count(id) FROM member WHERE email=#{email}
+	</select>
+	
+	<!-- 현재 로그인 중인 회원의 비밀번호를 검사한다. -->
+    <select id="selectMemberPasswordCount" parameterType="review.model.Member" 
+    	resultType="int">
+        SELECT count(id) FROM member 
+        WHERE id=#{id} AND user_pw=password(#{user_pw})
+    </select>
+	
+	<!-- 비밀번호 재발급: 이메일주소가 일치하는 비밀번호를 변경한다 -->
+	<update id="updateMemberPasswordByEmail" parameterType="review.model.Member">
+	UPDATE member SET user_pw=password(#{user_pw}), edit_date=now() 
+	WHERE email=#{email}
+	</update>
+	
+	<!-- 회원정보를 변경한다 -->
+	<update id="updateAccountMember" parameterType="review.model.Member">
+		UPDATE member SET
+			email=#{email}, nick_name=#{nick_name}, name=#{name}, edit_date=now()		
+		WHERE id=#{id}
+	</update>
+	
+	<update id="updateEditProfile" parameterType="review.model.Member">
+		UPDATE member SET
+			age=#{age}, gender=#{gender}, introduce=#{introduce}, edit_date=now()		
+		WHERE id=#{id}
+	</update>
+	
+	
+	<!-- 프로필 사진 수정 위한 회원정보 조회 -->
+    <select id="selectMemberPic" parameterType="review.model.Member" 
+    	resultMap="member">
+        SELECT
+         id, nick_name, name, user_pw, email, gender, age,
+	      reg_date, edit_date, member_level, introduce,
+			   (SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE member_id=member.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath
+        FROM member
+        WHERE id=#{id}
+    </select>
+    
+    
+    
+	
+	
+		
+	<!-- 일련번호에 의한 회원정보 조회 -->
+    <select id="selectMember" parameterType="review.model.Member" 
+    	resultMap="member">
+        SELECT
+         id, nick_name, name, user_pw, email, gender, age,
+	      reg_date, edit_date, member_level, introduce
+        FROM member
+        WHERE id=#{id}
+    </select>
+    
+    <!-- 비밀번호를 변경한다 -->
+	<update id="updatePassword" parameterType="review.model.Member">
+		UPDATE member SET edit_date=now()
+				<if test="new_user_pw != null and new_user_pw != ''">
+				, user_pw=password(#{new_user_pw})
+			</if>		
+		WHERE id=#{id}
+	</update>	
+	
+	<!-- 프로필을 변경한다 -->
+	<update id="updateProfile" parameterType="review.model.Member">
+		UPDATE member SET introduce=#{introduce}, edit_date= now()			
+				
+		WHERE id=#{id}
+	</update>
+	
+	
+	
+</mapper>

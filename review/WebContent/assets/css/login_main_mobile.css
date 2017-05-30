@@ -1,0 +1,63 @@
+.container{
+	width: 100%;
+height: auto;
+}
+body{
+	padding-top: 50px;
+	padding-bottom: 120px;
+}
+
+.navbar-fixed-top {
+	max-height: 100%;
+}
+
+.topmenu-brands{
+	margin-top: 5px;
+}
+.topmenu-search {
+	margin-top: 10px;
+}
+
+.topmenu-login {
+	margin-top: 15px;
+}
+
+.container_sgin {
+	  margin-top: 80px;	
+}
+      .login_intro {
+      margin-top: 10px; 
+   
+      }
+      /*     login      */
+      .login_form {
+     margin-top: 80px;
+      height: 100%;
+        padding: 30x; 
+        text-align: center;
+        background-color: rgba( 255, 255, 255, 0.5 );
+      }
+       /*     login      */
+     /*      sign up      */
+       .sign_up_form {
+       margin-top: 35px;
+       height: 40%;
+        padding: 30x; 
+        text-align: center;
+        background-color: rgba( 255, 255, 255, 0.5 );
+      }
+      .form-groups  {
+       
+        width: 100%;
+      }    
+   
+      .form-groups-age {
+       
+      width: 100%;
+      }
+      .btn-default {
+      border-color: #fff;
+      }
+        /*      sign up      */
+      
+}

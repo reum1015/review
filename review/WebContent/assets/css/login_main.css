@@ -1,0 +1,38 @@
+.container{
+	height: 100%;
+}
+      .login_intro {
+      margin-top: 40px; 
+   
+      }
+      /*     login      */
+      .login_form {
+      margin-top: 120px;
+        padding: 30x; 
+        text-align: center;
+        background-color: rgba( 255, 255, 255, 0.5 );
+      }
+       /*     login      */
+     /*      sign up      */
+       .sign_up_form {
+       margin-top: 35px;
+       height: 40%;
+        padding: 30x; 
+        text-align: center;
+        background-color: rgba( 255, 255, 255, 0.5 );
+      }
+      .form-groups  {
+       margin-left: 30px;
+        width: 80%;
+      }    
+   
+      .form-groups-age {
+       margin-left: 30px;
+      width: 80%;
+      }
+      .btn-default {
+      border-color: #fff;
+      }
+        /*      sign up      */
+      
+}

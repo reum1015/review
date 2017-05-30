@@ -1,0 +1,62 @@
+.containers{	
+	height: 100%;
+}        
+      /*     edit      */
+        .btn-default {
+      border-color: #fff;
+      }
+      .container_edit {
+      width: 100%;
+      margin-top: 35px;
+      border: 5px solid red;
+      border-color: #FAFAFA;      
+      min-height: 450px;
+      }
+      .account_basic {
+      margin-left: 20px;
+       margin-top: 35px;
+       border-right: 5px solid red;
+      border-color: #FAFAFA;      
+      min-height: 450px;
+      }
+      
+     .edit_form {       
+       height: 40%;       
+       margin-top: 20px;       
+        padding: 30x; 
+        text-align: center;
+        background-color: rgba( 255, 255, 255, 0.5 );
+      }
+      
+    .textarea {
+    height: 100px;
+    line-height: 40px;
+    resize: vertical;
+}
+    /*     edit      */   
+    
+    
+     /*     my menu     */  
+      .container_mypage {
+      width: 100%;
+      margin-top: 50px;
+      border: 5px solid red;
+      border-color: #FAFAFA;      
+      min-height: 450px;
+      }
+      
+      .profile_part {
+       margin-top: 35px;
+      }
+      
+       .account_basic_mobile {
+      margin-top: 60px;
+        padding: 30x;        
+        background-color: rgba( 255, 255, 255, 0.5 );
+      }
+  
+      
+      /*     my menu     */
+      
+      
+}
