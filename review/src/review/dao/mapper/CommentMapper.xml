@@ -51,7 +51,7 @@
 		SELECT   id, nick_name, content, 
 			     DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
 			     DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
-			     ip_address, member_id, bbs_document_id
+			     ip_address, member_id, article_id
 		FROM     comment
 		WHERE    article_id=#{article_id}
 		ORDER BY id ASC

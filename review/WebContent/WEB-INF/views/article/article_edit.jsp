@@ -26,7 +26,7 @@
 		<div class="container_write">
 			<!-- Write Review -->
 			<form class="form-horizontal" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/article/article_edit_ok">
-				<input type="hidden" name="article_id" value="${article_id}" />
+				<input type="hidden" name="article_id" value="<%=request.getAttribute("article_id") %>" />
 				<!-- file upload -->
 				<div class="form-group">
 					<label for="file" class="col-lg-12 col-md-12 col-sm-12 hidden-xs">Photo</label>
