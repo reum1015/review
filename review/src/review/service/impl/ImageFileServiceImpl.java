@@ -63,9 +63,6 @@ public class ImageFileServiceImpl implements ImageFileService{
 		}
 		
 	}
-	
-	
-	
 	@Override
 	public ImageFile selectFile(ImageFile file) throws Exception {
 	  	ImageFile result = null;
@@ -123,7 +120,7 @@ public class ImageFileServiceImpl implements ImageFileService{
 
 	@Override
 	public List<ImageFile> selectProfileFileList(ImageFile file) throws Exception {
-List<ImageFile> result = null;
+      List<ImageFile> result = null;
 		
 		try {
 			// 첨부파일이 없는 경우도 있으므로, 조회결과가 null인 경우 예외를 발생하지 않는다.

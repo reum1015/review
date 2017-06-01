@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import review.dao.MybatisConnectionFactory;
 import review.jsp.helper.BaseController;
-import review.jsp.helper.RegexHelper;
+
 import review.jsp.helper.WebHelper;
 import review.model.Comment;
 import review.model.Member;
@@ -35,8 +35,7 @@ public class CommentDeleteOk extends BaseController {
 	/** (1) 사용하고자 하는 Helper+Service 객체 선언 */
 	WebHelper web;
 	Logger logger;
-	SqlSession sqlSession;
-	RegexHelper regex;
+	SqlSession sqlSession;	
 	CommentService commentService;
 	
 	@Override
@@ -49,8 +48,7 @@ public class CommentDeleteOk extends BaseController {
 		web = WebHelper.getInstance(request, response);
 		logger = LogManager.getFormatterLogger(request.getRequestURI());
 		// --> import study.jsp.mysite.service.impl.MemberServiceImpl;
-		sqlSession = MybatisConnectionFactory.getSqlSession();
-		regex = RegexHelper.getInstance();
+		sqlSession = MybatisConnectionFactory.getSqlSession();		
 		commentService = new CommentServiceImpl(sqlSession, logger);
 		
 		/** (3) 파라미터 받기 */
@@ -79,8 +77,8 @@ public class CommentDeleteOk extends BaseController {
 		try {
 			// Beans에 추가된 자신의 회원번호를 사용하여 자신의 덧글임을 판별한다.
 			// --> 자신의 덧글이 아니라면 비밀번호 검사
-			if (commentService.selectCommentCountByMemberId(comment) < 1) {
-			}
+			if ( commentService.selectCommentCountByMemberId(comment) < 1) {
+		}
 			commentService.deleteComment(comment);	// 덧글삭제
 		} catch (Exception e) {
 			web.printJsonRt(e.getLocalizedMessage());

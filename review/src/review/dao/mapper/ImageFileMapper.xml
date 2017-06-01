@@ -24,7 +24,7 @@
 	
 	</resultMap>
 	
-	<!-- 게시글에 속한 첨부파일의 정보를 저장한다. -->
+	<!-- 게시글에 속한 첨부파일의 정보를 저장한다. article_write -->
 	<insert id="insertArticleFile" parameterType="review.model.ImageFile"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO imageFile (
@@ -58,7 +58,7 @@
 		WHERE  member_id=#{member_id}
 	</select>
 	
-	<!-- 하나의 게시물에 속한 파일목록을 조회한다. -->
+	<!-- 하나의 게시물에 속한 파일목록을 조회한다. article_read -->
 	<select id="selectArticleFileList" parameterType="review.model.ImageFile" 
 		resultMap="imageFile">
 		SELECT id, origin_name, file_dir, file_name, content_type,
@@ -68,18 +68,18 @@
 	</select>
 	
 	
-	<!-- 하나의 파일을 조회한다. -->
+	<!-- 하나의 파일을 조회한다. article_edit_ok -->
 	<select id="selectFile" parameterType="review.model.ImageFile" 
 		resultMap="imageFile">
 		SELECT file_dir, file_name FROM imageFile WHERE id=#{id}
 	</select>
 	
-	<!-- 하나의 파일을 삭제한다. -->
+	<!-- 하나의 파일을 삭제한다. article_edit_ok -->
 	<delete id="deleteFile" parameterType="review.model.ImageFile">
 		DELETE FROM imageFile WHERE id=#{id}
 	</delete>
 	
-	<!-- 게시글에 속한 파일을 전체 삭제한다. -->
+	<!-- 게시글에 속한 파일을 전체 삭제한다. article_delete -->
 	<delete id="deleteFileAll" parameterType="review.model.ImageFile">
 		DELETE FROM imageFile WHERE article_id=#{article_id}
 	</delete>	

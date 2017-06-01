@@ -44,10 +44,10 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<Article> selectArticle(Article article) throws Exception {
-		List<Article> result = null;
+	public Article selectArticle(Article article) throws Exception {
+		Article result = null;
 		try {
-			result = sqlSession.selectList("ArticleMapper.selectArticle", article);
+			result = sqlSession.selectOne("ArticleMapper.selectArticle", article);
 			if (result == null) {
 				throw new NullPointerException();
 			}
@@ -204,7 +204,7 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+			throw new Exception("존재하지 않는 게시물에 대한 요청입니다..서비스.");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());

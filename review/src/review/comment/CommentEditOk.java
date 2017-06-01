@@ -86,7 +86,7 @@ public class CommentEditOk extends BaseController {
 					// 소유권을 의미하는 변수 변경
 					myComment = true;
 					// 입력되지 않은 정보들 갱신
-					nick_name = loginInfo.getName();
+					nick_name = loginInfo.getNick_name();
 					member_id = loginInfo.getId();
 				}
 			} catch (Exception e) {
@@ -128,7 +128,7 @@ public class CommentEditOk extends BaseController {
 
 		/** (7) 게시물 변경을 위한 Service 기능을 호출 */
 		Comment item = null;
-		try {		
+		try {
 			commentService.updateComment(comment);
 			// 변경된 결과를 조회
 			item = commentService.selectComment(comment);

@@ -25,6 +25,8 @@ import review.service.impl.ArticleServiceImpl;
 import review.service.impl.ImageFileServiceImpl;
 
 
+
+
 @WebServlet("/article/article_edit")
 public class ArticleEdit extends BaseController {
 	private static final long serialVersionUID = -1391748040235555563L;
@@ -72,36 +74,22 @@ public class ArticleEdit extends BaseController {
 			
 			/** (4) 게시물 일련번호를 사용한 데이터 조회 */
 			// 지금 읽고 있는 게시물이 저장될 객체
-			List<Article> readArticle = null;
-			List<ImageFile> fileList = null;
-
-			try {
+			Article readArticle = null;
+			List<ImageFile> articlefileList = null;			
+			
+			try {			
 				readArticle = articleService.selectArticle(article);
-				fileList = imageFileService.selectArticleFileList(file);
+				articlefileList = imageFileService.selectArticleFileList(file);
 			} catch (Exception e) {
 				web.redirect(null, e.getMessage());
 				return null;
 			} finally {
 				sqlSession.close();
 			}
-			// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체(에피소드 리스트)
-					if (readArticle != null) {
-						for (int i=0; i<readArticle.size(); i++) {
-							Article item = readArticle.get(i);
-							String imagePath = item.getImagePath();
-							if (imagePath != null) {
-								String thumbPath = upload.createThumbnail(imagePath, 320, 320, true);
-								// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
-								item.setImagePath(thumbPath);
-								logger.debug("thumbnail create > " + item.getImagePath());
-							}
-						}
-					}
+		
 			/** (7) 읽은 데이터를 View에게 전달한다 */
 			request.setAttribute("readArticle", readArticle);
-			request.setAttribute("fileList", fileList);
-			request.setAttribute("article_id", article_id);
-		
+			request.setAttribute("fileList", articlefileList);
 				
 		String view = "article/article_edit";
 		return view;

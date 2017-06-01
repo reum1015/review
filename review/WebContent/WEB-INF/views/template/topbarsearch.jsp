@@ -98,9 +98,14 @@ placeholder="Search" value="${keyword}" />
        <!-- top_invite -->
        	
        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
-       <a href="#" data-toggle="modal" data-target="" class="navbar-brand glyphicon glyphicon-envelope"></a>
+       <a href="${pageContext.request.contextPath}/member/invite" data-toggle="modal" data-target="" class="navbar-brand glyphicon glyphicon-envelope"></a>
        </div>
        <!-- top_invite -->
+        <!-- top_article -->
+		<div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
+		<a href="${pageContext.request.contextPath}/article/article_list_main" data-toggle="modal" data-target="" class="navbar-brand glyphicon glyphicon-search"></a>		
+		</div>
+		<!--// top_article -->
        <!-- top_write -->
 		<div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
 		<a href="${pageContext.request.contextPath}/article/article_write" data-toggle="modal" data-target="" class="navbar-brand glyphicon glyphicon-edit"></a>		

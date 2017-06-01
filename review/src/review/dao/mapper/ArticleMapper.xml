@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이 XML의 구조대로 구현될 클래스의 이름 => Impl클래스를 대체한다. -->
+<mapper namespace="ArticleMapper">
+
+    <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="article" type="review.model.Article" >
+	    <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+       <result property="id" column="id"/>
+	    <result property="title" column="title"/>
+	    <result property="nick_name" column="nick_name"/>	    
+	    <result property="content" column="content"/>	    
+	    <result property="reg_date" column="reg_date"/>
+	    <result property="edit_date" column="edit_date"/>	   
+	    <result property="hit" column="hit"/>
+	    <result property="ip_address" column="ip_address"/>
+	     <result property="member_id" column="member_id" />
+	     <result property="imagePath" column="imagePath" />
+	     
+        
+	</resultMap>
+	
+	<!-- 게시글 정보 저장하기 article_write -->
+	<insert id="insertArticle" parameterType="review.model.Article" 
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO article (
+			category, title, content, reg_date, edit_date, member_id, nick_name, hit, ip_address 
+		) VALUES (
+			#{category}, #{title}, #{content}, now(), now(), #{member_id}, #{nick_name}, 0, #{ip_address}
+		)
+	</insert>
+	
+	<!-- 게시물 하나에 대한 정보를 조회한다. article_read -->
+	<select id="selectArticle" parameterType="review.model.Article" 
+		resultMap="article">
+		SELECT id, category, nick_name, title, content, hit, ip_address,
+			   DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date, 
+			   DATE_FORMAT(edit_date, '%Y-%m-%d') as edit_date, 
+			   member_id
+		FROM   article
+		WHERE  id=#{id}
+	</select>
+
+<!-- 검색 게시물 목록을 조회한다. article_list-->
+	<select id="selectArticleList" parameterType="review.model.Article" 
+		resultMap="article">
+		SELECT id, category, nick_name, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
+		(SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE article_id=article.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath		 
+		FROM   article
+			WHERE			
+			 replace(category,' ','') like concat('%', #{category}, '%')
+		OR replace(title ,' ','') like concat('%', #{title }, '%')
+		OR replace(content ,' ','') like concat('%', #{content }, '%')		
+		ORDER  BY id DESC		
+		LIMIT #{limit_start}, #{list_count}
+	</select>
+	
+	<!--전체 게시물 목록을 조회한다. article_list_main-->
+	<select id="selectArticleListMain" parameterType="review.model.Article" 
+		resultMap="article">
+		SELECT id, category, nick_name, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
+		(SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE article_id=article.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath			   
+		FROM   article				
+		ORDER  BY id DESC	
+		LIMIT #{limit_start}, #{list_count}
+	
+	</select>
+	
+	<!--회원 게시물 목록을 조회한다. -->
+	<select id="selectArticleListMember" parameterType="review.model.Article" 
+		resultMap="article">
+		SELECT id, category, nick_name, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
+		(SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE article_id=article.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath			   
+		FROM   article		
+		WHERE member_id=#{member_id}
+		ORDER  BY id DESC	
+		LIMIT #{limit_start}, #{list_count}	
+	</select>
+	
+	<!-- 검색 전체 게시물 수를 조회한다. article_list -->
+	<select id="selectArticleCount" parameterType="review.model.Article" resultType="int">
+		SELECT COUNT(id) 
+		FROM   article
+			WHERE			
+			 replace(category,' ','') like concat('%', #{category}, '%')
+		OR replace(title ,' ','') like concat('%', #{title }, '%')
+		OR replace(content ,' ','') like concat('%', #{content }, '%')
+		
+		</select>
+	
+	<!-- 전체 게시물 수를 조회한다. article_list_main-->
+	<select id="selectArticleMainCount" parameterType="review.model.Article" resultType="int">
+		SELECT COUNT(id) 
+		FROM   article			
+		</select>
+	
+	<!-- 조회수 1 증가한다. article_read-->
+	<update id="updateArticleHit" parameterType="review.model.Article" >
+		UPDATE article SET hit=hit+1 WHERE id=#{id}	
+		</update>
+		
+		<!-- 자신의 게시물인지 검사한다. article_delete -->
+	<select id="selectArticleCountByMemberId" parameterType="review.model.Article"
+		resultType="int">
+		SELECT COUNT(id) FROM article
+		WHERE id=#{id} AND member_id=#{member_id}
+	</select>
+	
+	<!-- 게시글 삭제 하기 article_delete -->
+	<delete id="deleteArticle" parameterType="review.model.Article">
+		DELETE FROM article WHERE id=#{id}
+	</delete>
+	
+	
+	<!-- 게시글 정보 수정하기 article_update-->
+	<update id="updateArticle" parameterType="review.model.Article">
+		UPDATE article SET
+			category=#{category}, title=#{title}, content=#{content}, 
+			ip_address=#{ip_address}, edit_date=now()
+		WHERE id=#{id}
+	</update>
+
+</mapper>

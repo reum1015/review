@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-md-4 col-sm-6 col-xs-6">
 					<h2>HTML5</h2>					
-					<a href="#" role="button">iphone7</a>
+					<a href="${pageContext.request.contextPath}/article/article_list?keyword=canadas" role="button">iphone7</a>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-6">
 					<h2>HTML5</h2>					

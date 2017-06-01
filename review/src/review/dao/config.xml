@@ -11,8 +11,8 @@
 				<property name="driver" value="com.mysql.jdbc.Driver"/>
 				<property name="url" 
 					value="jdbc:mysql://localhost:3306/reviewnbang?characterEncoding=UTF-8"/>
-				<property name="username" value="root"/>	
-				<property name="password" value="root"/>
+				<property name="username" value="reviewadmin"/>	
+				<property name="password" value="bang123"/>
 			</dataSource>	
 		</environment>
 	</environments>
@@ -22,7 +22,7 @@
 	<mapper resource="review/dao/mapper/ArticleMapper.xml" />
 	<mapper resource="review/dao/mapper/ImageFileMapper.xml" />	
 	<mapper resource="review/dao/mapper/BookMarkMapper.xml" />
-	<!--<mapper resource="review/dao/mapper/LikeMapper.xml" />-->
+   <mapper resource="review/dao/mapper/FavoriteMapper.xml" />
 	<mapper resource="review/dao/mapper/RelationMapper.xml" />
 	<mapper resource="review/dao/mapper/CommentMapper.xml" />
 		

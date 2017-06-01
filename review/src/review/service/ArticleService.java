@@ -24,7 +24,7 @@ public interface ArticleService {
 	 * @return article - 읽어들인 게시물 내용
 	 * @throws Exception
 	 */
-	public List<Article> selectArticle(Article article) throws Exception;
+	public Article selectArticle(Article article) throws Exception;
 
 	/**
 	 * 검색 게시글 목록 조회

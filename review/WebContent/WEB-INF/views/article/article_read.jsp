@@ -9,12 +9,10 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
 
 <!-- main css -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/article_list.css" />
+
 
 <style type="text/css">
-.container {
-	width: 60%;
+.container {	
 	height: auto;
 }
 
@@ -25,7 +23,7 @@
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/template/topbar.jsp" />
+	<jsp:include page="/WEB-INF/views/template/topbarsearch.jsp" />
 	<jsp:include page="/WEB-INF/views/template/bottombar.jsp" />
 
 	<!-- 메인 화면 시작 -->
@@ -39,56 +37,55 @@
 		<div class="content_body">
 			<!-- content body picture -->
 			<div class="review-content row multi-columns-row">
-				<c:choose>
-					<c:when test="${fn:length(readArticle) > 0}">
-						<c:forEach var="article" items="${readArticle}">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<c:url var="readUrl" value="/article/article_read">
-										<c:param name="article_id" value="${article.id}" />
+										<c:param name="article_id" value="${readArticle.id}" />
 									</c:url>
 									<!-- 링크 + 썸네일 -->
 									<div class="read-container">
-										<h3 class="page-header" style="text-align: left; margin-top: -5px;"> ${article.nick_name} 
+										<h3 class="page-header" style="text-align: left; margin-top: -5px;"> ${readArticle.nick_name} 
 											<span class="pull-right"> 
 												<!--  ** 페이지 호출 할 때 article_id를 url에 포함하여 삭제 페이지를 호출 할 때 article_id를 넘겨주는 소스입니다.  --> 
 												<!-- 추가 : article.member_id와 loginInfo의 id를 비교하여 버튼을 노출할 것인지를 판단 -->
-												<c:if test="${article.member_id==loginInfo.id}">
-													<a href="${pageContext.request.contextPath}/article/article_edit?article_id=${article.id}">
+												<c:if test="${readArticle.member_id==loginInfo.id}">
+													<a href="${pageContext.request.contextPath}/article/article_edit?article_id=${readArticle.id}">
 						                  				<i class="glyphicon glyphicon-edit"></i></a>
-						                  	 		<a href="${pageContext.request.contextPath}/article/article_delete?article_id=${article.id}">
+						                  	 		<a href="${pageContext.request.contextPath}/article/article_delete?article_id=${readArticle.id}">
 						                  	  			<i class="glyphicon glyphicon-remove"></i></a>
 												</c:if>
 											</span> <br /> 
-											<small>${article.reg_date}</small>
-											<small class="pull-right"> Hit: ${article.hit}</small> <br /> 
+											<small>${readArticle.reg_date}</small>
+											<small class="pull-right"> Hit: ${readArticle.hit}</small> <br /> 
 											<small>
 												<font size="4" color="#28282 "> keyword: </font> 
-												<font size="4" color="#a0a0a0"> ${article.category}</font></small> <br />
+												<font size="4" color="#a0a0a0"> ${readArticle.category}</font></small> <br />
 											<small>
 												<font size="4" color="#28282 ">title:</font>
-												<font size="4" color="#a0a0a0"> ${article.title} </font>
+												<font size="4" color="#a0a0a0"> ${readArticle.title} </font>
 											</small>
 										</h3>
 									</div>
-									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4">
-										<c:choose>
-											<c:when test="${article.imagePath != null}">
-												<c:url var="downloadUrl" value="/download">
-													<c:param name="file" value="${article.imagePath}" />
-												</c:url>
-												<img src="${downloadUrl}" class="img-responsive" />
-											</c:when>
-											<c:otherwise>
-												<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive" />
-											</c:otherwise>
-										</c:choose>
-									</a>
+									<!-- 이미지 화면에 출력 -->
+									<c:if test="${fileList != null}">
+									 <c:forEach var="file" items="${fileList}">
+									   <c:if test="${fn:substringBefore(file.contentType, '/') == 'image'}">
+									    <c:url var="downloadUrl" value="/download">
+									           <c:param name="file" value="${file.fileDir}/${file.fileName}" />
+									     </c:url>
+									     <p class="col-lg-4 col-md-4 col-sm-4">
+									     <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
+									     </p>
+									   </c:if>
+									 </c:forEach>										
+															
+									</c:if>				
 									<!--// 링크 + 썸네일 -->
 									<!-- 제목 + 작성자 + 조회수 -->
 									<div class="item col-lg-8 col-md-8 col-sm-7">
 										<div style="overflow: auto; width: 100%; max-height: 350px;">
-											${article.content}
+											${readArticle.content}
 										</div>
 									</div>
 									<!--// 제목 + 작성자 + 조회수 -->
@@ -102,33 +99,20 @@
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Book mark</i></a>
 									</div>
-
 									<!--// like + comment + book mark -->
 								</div>
-							</div>
-						
-					
+							</div>						
+					</div>
+			<!--// content body picture -->
+		</div>
+		<!--// content body -->
 		<!-- comment -->
 		<!-- 덧글 -->
 		<hr />
 		<form id="comment_form" method="post"
 			action="${pageContext.request.contextPath}/comment/comment_write">
 			<!-- 글 번호 상태 유지 -->
-			<input type='hidden' name='article_id' value='${article.id}' />
-			<c:if test="${loginInfo == null}">
-				<div class='form-group form-inline'>
-					<!-- 이름, 비밀번호, 이메일 -->
-					<div class="form-group">
-						<input type="text" name="writer_name" class="form-control" placeholder='작성자' />
-					</div>
-					<div class="form-group">
-						<input type="password" name="writer_pw" class="form-control" placeholder='비밀번호' />
-					</div>
-					<div class="form-group">
-						<input type="email" name="email" class="form-control" placeholder='이메일' />
-					</div>
-				</div>
-			</c:if>
+			<input type='hidden' name='article_id' value='${readArticle.id}' />
 			<!-- 내용입력, 저장버튼 -->
 			<div class='form-group'>
 				<div class="input-group">
@@ -138,26 +122,12 @@
 					</span>
 				</div>
 			</div>
-		</form>
-
+		</form>		
+		<!--// comment -->	
+			
 		<!-- 덧글 리스트 -->
 		<ul class="media-list" id="comment_list">
 		</ul>
-		<!--// comment -->
-		</c:forEach>
-		
-		</c:when>
-					<c:otherwise>
-						<tr>
-							<td colspan="5" class="text-center" style="line-height: 100px;">
-								조회된 글이 없습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<!--// content body picture -->
-		</div>
-		<!--// content body -->
 		<!--// Review Content  -->
 	</div>
 
@@ -169,7 +139,7 @@
 
 	<!-- 덧글 항목에 대한 템플릿 참조 -->
 <script id="tmpl_comment_item" type="text/x-handlebars-template">
-    <li class="media" style='border-top: 1px dotted #ccc; padding-top: 15px'>
+    <li class="media" style='border-top: 1px dotted #ccc; padding-top: 15px' id="comment_{{id}}">
         <div class="media-body" style='display: block;'>
             <h4 class="media-heading clearfix">
                 <!-- 작성자,작성일시 -->
@@ -179,13 +149,13 @@
                     </small>
                 </div>
                 <!-- 수정,삭제 버튼 -->
-                <div class='pull-right'>
-                    <a href='${pageContext.request.contextPath}/bbs/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
+                <div class='pull-right'>              
+                    <a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
                         <i class='glyphicon glyphicon-edit'></i>
                     </a>
-                    <a href='${pageContext.request.contextPath}/bbs/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
+                    <a href='${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
                         <i class='glyphicon glyphicon-remove'></i>
-                    </a>
+                    </a>              
                 </div>
             </h4>
             <!-- 내용 -->
@@ -216,7 +186,7 @@
 	$(function() {
 		/** 페이지가 열리면서 동작하도록 이벤트 정의 없이 Ajax요청 */
 		$.get("${pageContext.request.contextPath}/comment/comment_list", {
-			article_id: "${readArticle.article_id}"
+			article_id: "${readArticle.id}"
 		}, function(json) {
 			if (json.rt != "OK") {
 				alert(json.rt);
@@ -320,5 +290,6 @@
 		});
 	});
 </script>
+	
 </body>
 </html>

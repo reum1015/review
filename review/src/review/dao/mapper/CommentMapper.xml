@@ -18,8 +18,7 @@
 	    <result property="reported" column="reported"/>
 	    <result property="tag" column="tag"/>
 	     <result property="member_id" column="member_id"/>
-	     <result property="article_id" column="article_id"/>
-        
+	     <result property="article_id" column="article_id"/>        
 	</resultMap>
 	
 <!-- 덧글 정보 저장하기 -->
@@ -38,8 +37,8 @@
 	<select id="selectComment" parameterType="review.model.Comment" 
 		resultMap="comment">
 		SELECT id, nick_name, content, 
-			   DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
-			   DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
+			   DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i') as reg_date, 
+			   DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i') as edit_date, 
 			   ip_address, member_id, article_id
 		FROM   comment
 		WHERE  id=#{id}
@@ -49,8 +48,8 @@
 	<select id="selectCommentList" parameterType="review.model.Comment" 
 		resultMap="comment">
 		SELECT   id, nick_name, content, 
-			     DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, 
-			     DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i:%s') as edit_date, 
+			     DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i') as reg_date, 
+			     DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i') as edit_date, 
 			     ip_address, member_id, article_id
 		FROM     comment
 		WHERE    article_id=#{article_id}
@@ -73,8 +72,7 @@
 	
 	<!-- 덧글 정보 수정하기 -->
 	<update id="updateComment" parameterType="review.model.Comment">
-		UPDATE bbs_comment SET
-			nick_name=#{nick_name},
+		UPDATE bbs_comment SET		  		
 			content=#{content},
 			ip_address=#{ip_address},
 			edit_date=now()

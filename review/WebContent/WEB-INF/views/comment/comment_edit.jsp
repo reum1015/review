@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true"%>
 <form id="comment_edit_form" method="post" 
-	action="${pageContext.request.contextPath}/bbs/comment_edit_ok.do">
+	action="${pageContext.request.contextPath}/comment/comment_edit_ok">
 	<!-- 삭제 대상에 대한 상태유지 -->
 	<input type="hidden" name="comment_id" value="${comment.id}" />
 	<div class="modal-header">
