@@ -22,7 +22,7 @@
        <!--// top_main -->
        	<!-- top_search -->
       <div class="topmenu-search col-lg-4 col-md-4 hidden-sm hidden-xs">
-       <form method="get" action="${pageContext.request.contextPath}/article/article_list" style="width:200px; height:50px; ">
+       <form method="get" action="${pageContext.request.contextPath}/article/article_list_mobile" style="width:200px; height:50px; ">
 <div class="input-group">
 <input type="text" name="keyword" class="form-control"
 placeholder="Search" value="${keyword}" />
@@ -34,7 +34,7 @@ placeholder="Search" value="${keyword}" />
 </div>
 </form>       
        </div>
-        <div class="topmenu-search hidden-lg hidden-md col-sm-offset-3 col-sm-4 col-xs-offset-1 col-xs-5">
+        <div class="topmenu-search hidden-lg hidden-md col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-5">
        <form method="get" action="${pageContext.request.contextPath}/article/article_list_mobile" style="width:200px; height:50px; margin-top: 10px; ">
 <div class="input-group">
 <input type="text" name="keyword" class="form-control"
@@ -69,7 +69,7 @@ placeholder="Search" value="${keyword}" />
        <!--// top_main -->
        <!-- top_search -->
       <div class="topmenu-search col-lg-4 col-md-4 hidden-sm hidden-xs">
-       <form method="get" action="${pageContext.request.contextPath}/article/article_list" style="width:200px; height:50px; ">
+       <form method="get" action="${pageContext.request.contextPath}/article/article_list_mobile" style="width:200px; height:50px; ">
 <div class="input-group">
 <input type="text" name="keyword" class="form-control"
 placeholder="Search" value="${keyword}" />
@@ -81,7 +81,7 @@ placeholder="Search" value="${keyword}" />
 </div>
 </form>       
        </div>
-        <div class="topmenu-search hidden-lg hidden-md col-sm-offset-3 col-sm-4 col-xs-offset-1 col-xs-5">
+        <div class="topmenu-search hidden-lg hidden-md col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-5">
        <form method="get" action="${pageContext.request.contextPath}/article/article_list_mobile" style="width:200px; height:50px; margin-top: 10px; ">
 <div class="input-group">
 <input type="text" name="keyword" class="form-control"

@@ -76,7 +76,7 @@
 		<div class="form-group">
 			<label for="content" class="col-sm-2 control-label">내용</label>
 			<div class="col-sm-10">
-			<textarea id="content" name="content" style="width: 100%; height: 240px;">${readArticle.content}"</textarea>			
+			<textarea id="content" name="content" style="width: 100%; height: 240px;">${readArticle.content}</textarea>			
 			</div>
 		</div>		
 

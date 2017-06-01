@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
  
  <!-- main css -->
- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/eachMain.css" />
+ 
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_list_main.css" />
 
 <style type="text/css">
@@ -24,7 +24,8 @@
 		<div class="container">		
 		    <!-- Recent Review -->
 		       <div class="recent-container">
-		       <h1 class="page-header">${cateogry} - <small>Recent Review</small></h1>
+		       <h1 class="page-header">
+		       <small>Review List</small></h1>
 		      <!--// Recent Review category -->
 		      <!-- Recent Review Content  -->
 		     <div class="review-content row multi-columns-row">
@@ -70,7 +71,7 @@
 		    		<c:otherwise>
 		    			<tr>
 				            <td colspan="5" class="text-center" style="line-height: 100px;">
-				                조회된 글이 없습니다.</td>
+				                No Post</td>
 				        </tr>
 		    		</c:otherwise>
 		    	</c:choose>

@@ -32,7 +32,7 @@ margin-top: 55px;
 		<!-- Best Review category -->
 		<div class="best-container">
 			<h1 class="page-header">
-			<small>${article.category} - Best Review</small>
+				<small>Best Review about ${keyword}</small>
 			</h1>
 			<!--// Best Review category -->
 			<!-- Best Review Content  -->
@@ -44,7 +44,7 @@ margin-top: 55px;
 		<!-- Recent Review category -->
 		<div class="recent-container">
 			<h1 class="page-header">
-			<small>${article.category} - Recent Review</small>
+			<small>Review ${keyword}</small>
 			</h1>
 			<!--// Recent Review category -->
 			<!-- Recent Review Content  -->
@@ -108,7 +108,9 @@ margin-top: 55px;
 		    		<c:otherwise>
 		    			<tr>
 				            <td colspan="5" class="text-center" style="line-height: 100px;">
-				                조회된 글이 없습니다.</td>
+				                No Post about ${keyword}.
+				               <br/>
+				               Why don't you be a first reviewer about ${keyword}</td>
 				        </tr>
 		    		</c:otherwise>
 		    	</c:choose>
@@ -126,7 +128,7 @@ margin-top: 55px;
 						<c:when test="${pageHelper.prevPage > 0 }">
 							<!-- 이전 그룹에 대한 페이지 번호가 존재한다면? -->
 							<!-- 이전 그룹으로 이동하기 위한 URL을 생성해서 "prevUrl"에 저장 -->
-							<c:url var="prevUrl" value="/article/article_list">
+							<c:url var="prevUrl" value="/article/article_list_mobile">
 								<c:param name="keyword" value="${keyword}"></c:param>
 								<c:param name="page" value="${pageHelper.prevPage }"></c:param>
 							</c:url>
@@ -144,7 +146,7 @@ margin-top: 55px;
 						end="${pageHelper.endPage }" step="1">
 
 						<!-- 각 페이지 번호로 이동할 수 있는 URL을 생성하여 page_url에 저장 -->
-						<c:url var="pageUrl" value="/article/article_list">
+						<c:url var="pageUrl" value="/article/article_list_mobile">
 							<c:param name="keyword" value="${keyword}"></c:param>
 							<c:param name="page" value="${i}"></c:param>
 						</c:url>
@@ -164,7 +166,7 @@ margin-top: 55px;
 						<c:when test="${pageHelper.nextPage > 0 }">
 							<!-- 다음 그룹에 대한 페이지 번호가 존재한다면? -->
 							<!-- 다음 그룹으로 이동하기 위한 URL을 생성해서 "nextUrl"에 저장 -->
-							<c:url var="nextUrl" value="/article/article_list">
+							<c:url var="nextUrl" value="/article/article_list_mobile">
 								<c:param name="keyword" value="${keyword}"></c:param>
 								<c:param name="page" value="${pageHelper.nextPage }"></c:param>
 							</c:url>

@@ -39,7 +39,7 @@
 		  <!--// bottom_write -->
        <!-- bottom_invite -->
 		 <div class="col-xs-2 col-sm-2">
-		  <a class="navbar-brand glyphicon glyphicon-envelope" href="#"></a>
+		  <a class="navbar-brand glyphicon glyphicon-envelope" href="${pageContext.request.contextPath}/member/invite"></a>
 		  </div>
 		   <!-- bottom_invite -->       
 		<!-- bottom_user -->

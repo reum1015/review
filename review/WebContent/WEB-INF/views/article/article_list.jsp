@@ -25,8 +25,8 @@
 
 		<!-- Best Review category -->
 		<div class="best-container">
-			<h1 class="page-header">${cateogry}
-				- <small>Best Review</small>
+			<h1 class="page-header">
+				<small>Best Review about ${keyword}</small>
 			</h1>
 			<!--// Best Review category -->
 			<!-- Best Review Content  -->
@@ -37,8 +37,8 @@
 
 		<!-- Recent Review category -->
 		<div class="recent-container">
-			<h1 class="page-header">${article.cateogry}
-				- <small>Recent Review</small>
+			<h1 class="page-header">
+			<small>Review ${keyword}</small>
 			</h1>
 			<!--// Recent Review category -->
 			<!-- Recent Review Content  -->
@@ -101,7 +101,10 @@
 		    		<c:otherwise>
 		    			<tr>
 				            <td colspan="5" class="text-center" style="line-height: 100px;">
-				                조회된 글이 없습니다.</td>
+				               No Post about ${keyword}.
+				               <br/>
+				               Why don't you be a first reviewer about ${keyword} 
+				               </td>
 				        </tr>
 		    		</c:otherwise>
 		    	</c:choose>

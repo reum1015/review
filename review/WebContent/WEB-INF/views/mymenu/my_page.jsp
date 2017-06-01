@@ -8,9 +8,7 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/mypage.css" />
 
-<style type="text/css">
-  
-</style>
+
 
 </head>
 <body>
@@ -36,7 +34,7 @@
 		</div>
 		<!--// profile part-->	
 		<!-- setting -->	
-	<div class="topmenu-user pull-right col-lg-1 col-md-1 hidden-sm hidden-xs">	  
+	  <div class="topmenu-user pull-right col-lg-1 col-md-1 col-sm-1 col-xs-1">	  
 	  <a class="navbar-brand glyphicon glyphicon-cog" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>	  
 	  </div> 
 		<!--// setting -->		
@@ -48,15 +46,15 @@
 				<a href="${pageContext.request.contextPath}/mymenu/my_page" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
 				<a href="${pageContext.request.contextPath}/mymenu/my_page2" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
 	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
-				<c:if test="${member.id==loginInfo.id}">
+				
 				<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
-               </c:if>		
+               	
 		</div>		
 		<!--// page menu bar -->
 		<!-- member article  -->
-			       <div class="recent-container">
+			   <div class="recent-container">
 		      <!-- Recent Review Content  -->
-		     <div class="review-content row multi-columns-row">
+		   
 		       
 		    	<c:choose>
 		    		<c:when test="${fn:length(articleList) > 0}">
@@ -99,13 +97,13 @@
 		    		<c:otherwise>
 		    			<tr>
 				            <td colspan="5" class="text-center" style="line-height: 100px;">
-				                조회된 글이 없습니다.</td>
+				                No Post</td>
 				        </tr>
 		    		</c:otherwise>
 		    	</c:choose>
 		   
 		   
-		      </div>		      
+		     		      
 		      <!--// Recent Review Content  -->	
 		      <!-- page number -->
 		        <nav class="text-center">
@@ -115,7 +113,7 @@
 <c:when test="${pageHelper.prevPage > 0 }">
 <!-- 이전 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 이전 그룹으로 이동하기 위한 URL을 생성해서 "prevUrl"에 저장 -->
-<c:url var="prevUrl" value="/article/article_list_main">
+<c:url var="prevUrl" value="/mymenu/my_page">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${pageHelper.prevPage }"></c:param>
 </c:url>
@@ -133,7 +131,7 @@
 end="${pageHelper.endPage }" step="1">
 
 <!-- 각 페이지 번호로 이동할 수 있는 URL을 생성하여 page_url에 저장 -->
-<c:url var="pageUrl" value="/article/article_list_main">
+<c:url var="pageUrl" value="/mymenu/my_page">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${i}"></c:param>
 </c:url>
@@ -153,7 +151,7 @@ end="${pageHelper.endPage }" step="1">
 <c:when test="${pageHelper.nextPage > 0 }">
 <!-- 다음 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 다음 그룹으로 이동하기 위한 URL을 생성해서 "nextUrl"에 저장 -->
-<c:url var="nextUrl" value="/article/article_list_main">
+<c:url var="nextUrl" value="/mymenu/my_page">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${pageHelper.nextPage }"></c:param>
 </c:url>

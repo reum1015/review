@@ -33,7 +33,8 @@
 		<div class="container">		
 		    <!-- Recent Review -->
 		       <div class="recent-container">
-		       <h1 class="page-header">${cateogry} <small>-Review List</small></h1>
+		       <h1 class="page-header">
+		       <small>Review List</small></h1>
 		      <!--// Recent Review category -->
 		      <!-- Recent Review Content  -->
 		     <div class="review-content row multi-columns-row">
@@ -80,7 +81,7 @@
 		    		<c:otherwise>
 		    			<tr>
 				            <td colspan="5" class="text-center" style="line-height: 100px;">
-				                조회된 글이 없습니다.</td>
+				                No Post</td>
 				        </tr>
 		    		</c:otherwise>
 		    	</c:choose>
@@ -96,7 +97,7 @@
 <c:when test="${pageHelper.prevPage > 0 }">
 <!-- 이전 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 이전 그룹으로 이동하기 위한 URL을 생성해서 "prevUrl"에 저장 -->
-<c:url var="prevUrl" value="/article/article_list_main">
+<c:url var="prevUrl" value="/article/article_list_main_mobile">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${pageHelper.prevPage }"></c:param>
 </c:url>
@@ -114,7 +115,7 @@
 end="${pageHelper.endPage }" step="1">
 
 <!-- 각 페이지 번호로 이동할 수 있는 URL을 생성하여 page_url에 저장 -->
-<c:url var="pageUrl" value="/article/article_list_main">
+<c:url var="pageUrl" value="/article/article_list_main_mobile">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${i}"></c:param>
 </c:url>
@@ -134,7 +135,7 @@ end="${pageHelper.endPage }" step="1">
 <c:when test="${pageHelper.nextPage > 0 }">
 <!-- 다음 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 다음 그룹으로 이동하기 위한 URL을 생성해서 "nextUrl"에 저장 -->
-<c:url var="nextUrl" value="/article/article_list_main">
+<c:url var="nextUrl" value="/article/article_list_main_mobile">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${pageHelper.nextPage }"></c:param>
 </c:url>
