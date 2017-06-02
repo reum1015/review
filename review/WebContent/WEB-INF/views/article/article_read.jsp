@@ -55,6 +55,9 @@
 						                  	 		<a href="${pageContext.request.contextPath}/article/article_delete?article_id=${readArticle.id}">
 						                  	  			<i class="glyphicon glyphicon-remove"></i></a>
 												</c:if>
+												<a href="${pageContext.request.contextPath}/article/article_list_main">
+						                  				<i class="glyphicon glyphicon-th-list"></i></a>
+						                  	 		
 											</span> <br /> 
 											<small>${readArticle.reg_date}</small>
 											<small class="pull-right"> Hit: ${readArticle.hit}</small> <br /> 

@@ -118,6 +118,17 @@ public class ArticleEditOk extends BaseController {
 				logger.debug("ip_address=" + ip_address);
 				logger.debug("member_id=" + member_id);
 				
+				if(!regex.isValue(title)) {
+					sqlSession.close();
+					web.redirect(null, "title field is required");
+					return null;
+				}
+				
+				if(!regex.isValue(content)) {
+					sqlSession.close();
+					web.redirect(null, "content field is required");
+					return null;
+				}
 				
 				  Article article = new Article();
 				  article.setId(article_id);
@@ -149,7 +160,7 @@ public class ArticleEditOk extends BaseController {
 						// 콤마 단위로 잘라서 배열로 변환
 						String[] delFileList = delFile.split(",");
 				
-						for (int i = 0; i > delFileList.length; i++) {
+						for (int i = 0; i < delFileList.length; i++) {
 							try {
 								// 체크박스에 의해서 전달된 id값으로 개별 파일에 대한 Beans 생성
 								ImageFile file = new ImageFile();
