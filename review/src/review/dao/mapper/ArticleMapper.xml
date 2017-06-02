@@ -84,13 +84,13 @@
 		resultMap="article">
 		SELECT id, category, nick_name, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile
-		 WHERE article_id=article.id 
+		 WHERE article_id=a.id 
 		 AND 
 		 content_type LIKE ('image/%') 		
 			ORDER BY id ASC LIMIT 0, 1
 			) 	AS imagePath			   
-		FROM   article		
-		WHERE member_id=#{member_id}
+		FROM   article	as a	
+		WHERE a.member_id=#{member_id}
 		ORDER  BY id DESC	
 		LIMIT #{limit_start}, #{list_count}	
 	</select>

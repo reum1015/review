@@ -32,7 +32,7 @@ margin-top: 55px;
 		<!-- Best Review category -->
 		<div class="best-container">
 			<h1 class="page-header">
-				<small>Best Review about ${keyword}</small>
+				<small>Best Review about <font size="5" color="#282828">${keyword}</font></small>
 			</h1>
 			<!--// Best Review category -->
 			<!-- Best Review Content  -->
@@ -44,7 +44,7 @@ margin-top: 55px;
 		<!-- Recent Review category -->
 		<div class="recent-container">
 			<h1 class="page-header">
-			<small>Review ${keyword}</small>
+			<small>Review  about <font size="5" color="#282828">${keyword}</font></small>
 			</h1>
 			<!--// Recent Review category -->
 			<!-- Recent Review Content  -->
@@ -57,6 +57,9 @@ margin-top: 55px;
 		    				<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		    				<c:url var="readUrl" value="/article/article_read">
 					            		<c:param name="article_id" value="${article.id}" />
+					            	</c:url>
+					            	<c:url var="readUser" value="/mymenu/my_page">
+					            		<c:param name="member_id" value="${article.member_id}" />
 					            	</c:url>
 					            	<!-- 링크 + 썸네일 -->
 					            	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4">
@@ -75,7 +78,7 @@ margin-top: 55px;
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
 					            	<div class="item col-lg-8 col-md-8 col-sm-7">
-								<a><font size="4" color="#c8c8c8">${article.nick_name}</font></a><div class="pull-right"> ${article.reg_date}
+								<a href="${readUser}"><font size="4" color="#c8c8c8">${article.nick_name}</font></a><div class="pull-right"> ${article.reg_date}
 								</div>								
 								<div>
 								<font size="3" color="#28282 "> keyword: </font> <font size="3" color="#a0a0a0">	${article.category}</font>

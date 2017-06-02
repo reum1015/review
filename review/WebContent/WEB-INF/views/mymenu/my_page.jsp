@@ -63,7 +63,7 @@
 		    				<div class="thumbnail">
 		    				<c:url var="readUrl" value="/article/article_read">
 					            		<c:param name="article_id" value="${article.id}" />
-					            	</c:url>
+					      </c:url>
 					            	<!-- 링크 + 썸네일 -->
 					            	<a href="${readUrl}">
 								<c:choose>

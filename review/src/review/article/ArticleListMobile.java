@@ -77,7 +77,7 @@ public class ArticleListMobile extends BaseController {
 			total_count = articleService.selectArticleCount(article);
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
-			pageHelper.pageProcess(page, total_count, 8, 8);
+			pageHelper.pageProcess(page, total_count, 10, 8);
 			
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
