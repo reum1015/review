@@ -152,14 +152,18 @@
                     </small>
                 </div>
                 <!-- 수정,삭제 버튼 -->
-                <div class='pull-right'>              
+        
+                <div class='pull-right'>    
+             
                     <a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
                         <i class='glyphicon glyphicon-edit'></i>
                     </a>
                     <a href='${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
                         <i class='glyphicon glyphicon-remove'></i>
-                    </a>              
+                    </a>     
+         
                 </div>
+             
             </h4>
             <!-- 내용 -->
             <p>{{{content}}}</p>
