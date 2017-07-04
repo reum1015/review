@@ -38,7 +38,7 @@ body{
  <div class="topmenu-main col-lg-12 col-md-12 col-sm-12 col-xs-12">
        <!-- top_main -->
        <div class="topmenu-brands col-lg-4 col-md-4 hidden-sm hidden-xs" >       
-       <a class="topmenu-brands" href="${pageContext.request.contextPath}/main" >
+       <a class="topmenu-brands" href="${pageContext.request.contextPath}/index" >
 	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.jpg"
 	 height="50px" width="140px"  />
 	</a>	
@@ -85,13 +85,13 @@ placeholder="Search" value="${keyword}" />
 	<!-- login top_bar -->
 	<!-- top_main -->
 <div class="topmenu-brands col-lg-4 col-md-4 hidden-sm hidden-xs" >       
-       <a class="topmenu-brands" href="${pageContext.request.contextPath}/main" >
+       <a class="topmenu-brands" href="${pageContext.request.contextPath}/index" >
 	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.jpg"
 	 height="50px" width="140px"  />
 	</a>	
        </div>
        <div class="hidden-lg hidden-md col-sm-offset-3 col-sm-4 col-xs-offset-1 col-xs-4">       
-       <a class="topmenu-brands" href="${pageContext.request.contextPath}/main">
+       <a class="topmenu-brands" href="${pageContext.request.contextPath}/index">
 	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.jpg"
 	height="42px" width="200px" />
 	</a>

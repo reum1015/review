@@ -153,7 +153,7 @@ public class ArticleWriteOk extends BaseController {
 		}
 		
 				
-		String view = "main";
+		String view = "index";
 		return view;
 	}
 	

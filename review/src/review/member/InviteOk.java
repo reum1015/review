@@ -92,7 +92,7 @@ public class InviteOk extends BaseController {
 		/** (9) 메인페이지로 이동 */		
 		web.redirect(null, "We've sent an email to your friend. Thanks ");
 		
-		String view = "main";
+		String view = "index";
 		/** 로그인 페이지로 변경 member/login */
 		return view;		
 	

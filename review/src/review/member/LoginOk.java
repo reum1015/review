@@ -96,7 +96,7 @@ public class LoginOk extends BaseController {
 		sqlSession.close();
 		
 		
-		String view = "main";
+		String view = "index";
 		/** 로그인 페이지로 변경 member/login */
 		return view;
 	

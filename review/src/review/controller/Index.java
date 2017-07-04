@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import review.jsp.helper.BaseController;
 
 
-@WebServlet("/main")
-public class Main extends BaseController {
+@WebServlet("/index")
+public class Index extends BaseController {
 
 	private static final long serialVersionUID = -1391748040235555563L;
 
@@ -20,7 +20,7 @@ public class Main extends BaseController {
 			throws ServletException, IOException {
 		
 			
-		String view = "main";
+		String view = "index";
 		return view;
 	}
 	

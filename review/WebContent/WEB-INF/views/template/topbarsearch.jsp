@@ -14,7 +14,7 @@
  <div class="topmenu-main col-lg-12 col-md-12 col-sm-12 col-xs-12">
        <!-- top_main -->
        <div class="topmenu-brands col-lg-4 col-md-4 hidden-sm hidden-xs" >       
-       <a class="topmenu-brands" href="${pageContext.request.contextPath}/main" >
+       <a class="topmenu-brands" href="${pageContext.request.contextPath}/index" >
 	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.jpg"
 	 height="50px" width="140px"  />
 	</a>	
@@ -61,7 +61,7 @@ placeholder="Search" value="${keyword}" />
 	<!-- login top_bar -->
 	<!-- top_main -->
 	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs">       
-       <a class="topmenu-brands" href="${pageContext.request.contextPath}/main">
+       <a class="topmenu-brands" href="${pageContext.request.contextPath}/index">
 	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.jpg"
 	height="42px" width="140px" />
 	</a>
