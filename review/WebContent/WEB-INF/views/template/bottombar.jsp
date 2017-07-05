@@ -24,7 +24,7 @@
 		<div class="hidden-lg col-md-12 col-sm-12 col-xs-12 pull-right" style="margin-top: 5px;">		 				    
 		 <!-- bottom_main -->
 		 <div class="col-xs-offset-1 col-xs-2 col-sm-offset-1 col-sm-2">
-		  <a class="navbar-brand glyphicon glyphicon-home" href="${pageContext.request.contextPath}/main"></a>
+		  <a class="navbar-brand glyphicon glyphicon-home" href="${pageContext.request.contextPath}/index"></a>
 		  </div>
 		   <!--// bottom_main -->
 		    <!--bottom_search -->

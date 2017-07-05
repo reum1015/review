@@ -140,11 +140,7 @@ public class ArticleEditOk extends BaseController {
 				  logger.debug("article >> " + article.toString());
 				  
 				  /** (10) 게시물 변경을 위한 Service 기능을 호출 */
-					try {
-						// 자신의 글이 아니라면 
-						if (!myArticle) {
-						
-						}
+					try {						
 						articleService.updateArticle(article);
 					} catch (Exception e) {
 						sqlSession.close();
@@ -180,17 +176,17 @@ public class ArticleEditOk extends BaseController {
 						}
 					}
 	
-					/** (10) 첨부파일 목록 처리 */
+					/** (12)  첨부파일 목록 처리 */
 					// 업로드 된 파일 목록
 					// --> import study.jsp.helper.FileInfo;
 					List<FileInfo> fileList = upload.getFileList();
 									
 						// 업로드 된 파일의 수 만큼 반복 처리 한다.
-						if (fileList.size() > 0) {
+						for(int i = 0; i <fileList.size(); i++){
 							// 업로드 된 정보 하나 추출하여 데이터베이스에 저장하기 위한 형태로 가공해야 한다.
-							FileInfo info = fileList.get(0);
-
-							// DB에 저장하기 위한 항목 생성
+							FileInfo info = fileList.get(i);
+							
+							//DB에 저장하기 위한 항목 하나 생성
 							ImageFile file = new ImageFile();
 
 							// 데이터 복사
@@ -200,19 +196,20 @@ public class ArticleEditOk extends BaseController {
 							file.setContentType(info.getContentType());
 							file.setFileSize(info.getFileSize());
 							
+							// 어느 게시물에 속한 파일인지 인식
 							file.setArticle_id(article_id);
 							
-							// 저장처리
-							try {
-								imageFileService.insertArticleFile(file);				
-					} catch (Exception e) {
-						web.redirect(null, e.getLocalizedMessage());
-						return null;
-					}
-					}
+							// 저장처리	
+						try {
+								imageFileService.insertArticleFile(file);
+						}catch (Exception e) {
+							web.redirect(null, e.getLocalizedMessage());
+							return null;
+						}//end try ~ catch
+					}//end if
 					
-				sqlSession.close();
-						
+					/** (13) 모든 절차가 종료되었으므로 DB접속 해제 후 페이지 이동 */	
+				sqlSession.close();						
 				String url = "%s/article/article_read?article_id=%d";
 				url = String.format(url, web.getRootPath(), article_id);
 				web.redirect(url, null);

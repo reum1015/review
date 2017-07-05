@@ -42,7 +42,7 @@ public class LogOut extends BaseController {
 		
 		/** (5) 페이지 이동 */		
 		
-		String view = "main";
+		String view = "index";
 		
 		return view;
 	}

@@ -8,9 +8,7 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/mypage.css" />
 
-<style type="text/css">
-  
-</style>
+
 
 </head>
 <body>
@@ -36,23 +34,27 @@
 		</div>
 		<!--// profile part-->	
 		<!-- setting -->	
-	<div class="topmenu-user pull-right col-lg-1 col-md-1 hidden-sm hidden-xs">	  
+	  <div class="topmenu-user pull-right col-lg-1 col-md-1 col-sm-1 col-xs-1">	  
 	  <a class="navbar-brand glyphicon glyphicon-cog" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>	  
 	  </div> 
 		<!--// setting -->		
 		<!--// page header -->
 		</div>
 		<!-- page menu bar -->
+		<!-- 추가 : article.member_id와 loginInfo의 id를 비교하여 버튼을 노출할 것인지를 판단 -->
 		<div class="breadcrumb btn-group btn-block">
 				<a href="${pageContext.request.contextPath}/mymenu/my_page" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
 				<a href="${pageContext.request.contextPath}/mymenu/my_page2" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
+	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
+				
 				<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
+               	
 		</div>		
 		<!--// page menu bar -->
 		<!-- member article  -->
-			       <div class="recent-container">
+			   <div class="recent-container">
 		      <!-- Recent Review Content  -->
-		     <div class="review-content row multi-columns-row">
+		   
 		       
 		    	<c:choose>
 		    		<c:when test="${fn:length(articleList) > 0}">
@@ -61,7 +63,7 @@
 		    				<div class="thumbnail">
 		    				<c:url var="readUrl" value="/article/article_read">
 					            		<c:param name="article_id" value="${article.id}" />
-					            	</c:url>
+					      </c:url>
 					            	<!-- 링크 + 썸네일 -->
 					            	<a href="${readUrl}">
 								<c:choose>
@@ -101,7 +103,7 @@
 		    	</c:choose>
 		   
 		   
-		      </div>		      
+		     		      
 		      <!--// Recent Review Content  -->	
 		      <!-- page number -->
 		        <nav class="text-center">
@@ -169,8 +171,8 @@ end="${pageHelper.endPage }" step="1">
 					
 		</div>
 	</div>
-	
-		<!-- 메인 화면 끝 -->
+
+	<!-- 메인 화면 끝 -->
 
 	<!-- footer -->
 	

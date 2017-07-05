@@ -36,6 +36,14 @@ public class RegexHelper {
 		}
 		return result;
 	}
+	
+	public boolean isValues(String str) {
+		boolean result = false;
+		if (str != null) {
+			
+		}
+		return result;
+	}
 
 	/**
 	 * 숫자 모양에 대한 형식 검사
@@ -92,10 +100,20 @@ public class RegexHelper {
 	public boolean isEngNum(String str) {
 		boolean result = false;
 		if (isValue(str)) {
-			result = Pattern.matches("^[a-zA-Z0-9]{5,20}$", str);
+			result = Pattern.matches("^[a-zA-Z0-9]{3,20}$", str);
 		}
 		return result;
 	}
+	
+	public boolean isEngorNum(String str) {
+		boolean result = false;
+		if (isValue(str)) {
+			result = Pattern.matches("^[a-zA-Z0-9|\\w+]{5,20}$", "acdefg1gkzfdfdfdfdf");
+		}
+		return result;
+	}
+	
+	
 	
 	/**
 	 * 영문과 숫자 한글 로만 구성되었는지에 대한 형식 검사

@@ -127,7 +127,7 @@ public class ArticleDeleteOk extends BaseController {
 			}
 		
 				
-		String view = "index";
+		String view = "article/article_list_main";
 		return view;
 	}
 	

@@ -37,7 +37,7 @@
 		<div class="form-group">
 			<label for="file" class="col-sm-2 control-label">photo</label>
 			<div class="col-sm-10">
-				<input type="file" class="form-control" id="file" name="file"  />
+				<input type="file" class="form-control" id="article_img" name="article_img"  />
 				
 				<!-- 첨부파일 리스트가 존재할 경우만 삭제할 항목 선택 가능 -->
 				<c:if test="${fileList != null}">
@@ -53,6 +53,15 @@
 			            		${file.originName} Delete
 			            		<a href="${downloadUrl}">[download]</a>
 			            	</label>
+			            	<script type="text/javascript">
+			            	  $(function() {
+			            		  // 이미지가 등록된 상태이므로, 파일의 신규 등록을 방지
+			            		  $("#article_img").prop("disabled", true);
+			            		  $("#img_del").change(function() {
+			            			  $("#article_img").prop("disabled", !$(this).is(":checked"));
+			            		  });
+			            	  });			            	  
+			            	</script>
 			            </div>
 					</c:forEach>
 				</c:if>

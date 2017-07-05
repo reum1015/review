@@ -77,8 +77,7 @@ public class MyPage extends BaseController {
 		/** (6) 게시물 목록 조회 */
 		int total_count = 0;
 		List<Article> articleList = null;
-		
-		
+				
 		try {		
 			// 전체 게시물 수
 			total_count = articleService.selectArticleMainCount(article);

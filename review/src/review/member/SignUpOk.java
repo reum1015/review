@@ -98,7 +98,7 @@ public class SignUpOk extends BaseController {
 
 				if (!regex.isEngNum(user_pw)) {
 					sqlSession.close();
-					web.redirect(null, "This password is too easy to guess. Please create a new one.");
+					web.redirect(null, "This password is too easy to guess. Please create a new one. letter+number");
 					return null;
 				}
 
@@ -123,7 +123,7 @@ public class SignUpOk extends BaseController {
 
 				if (!regex.isEng(name)) {
 					sqlSession.close();
-					web.redirect(null, "Usernames can only use letters");
+					web.redirect(null, "Usernames can only use English letters");
 					return null;
 				}
 						
@@ -134,22 +134,22 @@ public class SignUpOk extends BaseController {
 			web.redirect(null, "Nickname field is required.");
 			return null;
 		}
-
-		if (!regex.isEngNum(nick_name)) {
+				
+		if (!regex.isEngorNum(nick_name) ) {
 			sqlSession.close();
 			web.redirect(null, "Nicknames can only use letters, numbers");
 			return null;
 		}
 		
-		if (nick_name.length() < 6) {
+		if (nick_name.length() < 3) {
 			sqlSession.close();
-			web.redirect(null, "Create a password at least 6 characters long.");
+			web.redirect(null, "Create a nickname at least 3 characters long.");
 			return null;
 		}
 
 		if (nick_name.length() > 20) {
 			sqlSession.close();
-			web.redirect(null, "Create a password at most 20 characters long.");
+			web.redirect(null, "Create a nickname at most 20 characters long.");
 			return null;
 		}
 
