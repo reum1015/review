@@ -19,7 +19,7 @@ import review.jsp.helper.RegexHelper;
 import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Article;
-
+import review.model.Member;
 import review.service.ArticleService;
 import review.service.ImageFileService;
 import review.service.impl.ArticleServiceImpl;
@@ -67,6 +67,14 @@ public class ArticleList extends BaseController {
 		
 		int page = web.getInt("page", 1);
 		
+		int member_id = 0;
+		
+		Member loginInfo = (Member)web.getSession("loginInfo");
+		
+		if(loginInfo != null){
+			member_id = loginInfo.getId();
+		}
+		
 		
 		/** (6) 게시물 목록 조회 */
 		int total_count = 0;
@@ -111,7 +119,7 @@ public class ArticleList extends BaseController {
 		request.setAttribute("articleList", articleList);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("pageHelper", pageHelper);
-		
+		request.setAttribute("member_id", member_id);
 		
 		String view = "article/article_list";
 		

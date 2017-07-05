@@ -9,9 +9,35 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
 
 <!-- main css -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/article_list.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_list.css" />
 
+<script type="text/javascript">
+	$(function() {
+		var member_id = $("#member_id").val();
+		
+		$('.like_button').on('click', function(e) {
+			var member_id = $("#member_id").val();
+			var article_id = $(this).attr('id');
+			
+			if(member_id ==0){
+				alert("LogIn is required.");
+				return;
+			}else{
+				alert(member_id);
+				alert(article_id);
+			}
+			
+			
+		})
+		
+		
+	})
+	
+
+
+
+
+</script>
 
 
 </head>
@@ -91,9 +117,11 @@
 							<br />
 							<!-- like + comment + book mark -->
 							<div class="btn-group btn-block">
-							 <a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Like</i></a>
-							 <a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Comment</i></a>
-							 <a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Book mark</i></a>
+							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id}"><i class="">Like</i></a>
+							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Comment</i></a>
+							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Book mark</i></a>
+								
+							<input type="hidden" value="${member_id }" id="member_id">
 							</div>
 		    				<!--// like + comment + book mark -->
 		    				
