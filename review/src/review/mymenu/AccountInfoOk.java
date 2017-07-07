@@ -52,7 +52,7 @@ public class AccountInfoOk extends BaseController {
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
 			if(web.getSession("loginInfo") == null){
 					sqlSession.close();
-					web.redirect(web.getRootPath() + "/main", "you are need log in.");
+					web.redirect(web.getRootPath() + "/index", "you are need log in.");
 					return null;
 				}		
 				
@@ -68,7 +68,7 @@ public class AccountInfoOk extends BaseController {
 				logger.debug("name=" + name);
 	
 				
-				/** (5) 입력값의 유효성 검사 */
+				
 			
 						/** (7) 전달받은 파라미터를 Beans 객체에 담는다. */
 						Member member = new Member();						

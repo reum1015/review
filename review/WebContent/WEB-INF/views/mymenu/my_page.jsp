@@ -22,9 +22,12 @@
 	<!-- page header -->
 	 <div class="my_page_box row col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	 <!-- profile image  -->
-		<div class="profile_img col-lg-4 col-md-4 col-sm-4 col-xs-4">
-		<p>image</p>
-		</div>
+	 <c:url var="downloadUrl" value="/download">
+				 <c:param name="file" value="${readArticle.imagePath}" />
+			</c:url>
+			         <a class="profile_img col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			      <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
+			      </a>			
 	<!--// profile image -->	
 	<!-- profile part-->	
 	<div class="profile_part col-lg-4 col-md-4">

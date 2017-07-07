@@ -66,7 +66,7 @@ public class ArticleRead extends BaseController {
 		//  파라미터를 Beans로 묶기
 		Article article = new Article();
 		article.setId(article_id);
-		
+						
 		ImageFile file = new ImageFile();
 		file.setArticle_id(article_id);
 		
@@ -74,6 +74,7 @@ public class ArticleRead extends BaseController {
 		// 지금 읽고 있는 게시물이 저장될 객체
 		Article readArticle = null;
 		List<ImageFile> articlefileList = null;
+		
 		
 		/** 조회수 중복 갱신 방지 처리 */
 		// 카테고리와 게시물 일련번호를 조합한 문자열을 생성
@@ -91,16 +92,28 @@ public class ArticleRead extends BaseController {
 					}
 			readArticle = articleService.selectArticle(article);
 			articlefileList = imageFileService.selectArticleFileList(file);
+			
 		} catch (Exception e) {
 			web.redirect(null, e.getMessage());
 			return null;
 		} finally {
 			sqlSession.close();
 		}
+		
+		if (readArticle != null) {
+			String imagePath = readArticle.getImagePath();
+			if (imagePath != null) {
+				String thumbPath = upload.createThumbnail(imagePath, 340, 300, true);
+			// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
+			readArticle.setImagePath(thumbPath);
+				logger.debug("thumbnail create > " + readArticle.getImagePath());
+							}
+		}
 	
 		/** (7) 읽은 데이터를 View에게 전달한다 */
 		request.setAttribute("readArticle", readArticle);
 		request.setAttribute("fileList", articlefileList);
+		
 				
 		String view = "article/article_read";
 		return view;

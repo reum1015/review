@@ -19,6 +19,7 @@ import review.jsp.helper.RegexHelper;
 import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Article;
+import review.model.Member;
 import review.service.ArticleService;
 import review.service.ImageFileService;
 import review.service.MemberService;
@@ -60,15 +61,32 @@ public class MyPage extends BaseController {
 		pageHelper = PageHelper.getInstance();
 		
 				
-		/** (3) 로그인 여부 검사 */
+		/** (3) 로그인 여부 검사 */		
+		Member loginInfo = (Member) web.getSession("loginInfo");
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
+			if(web.getSession("loginInfo") == null){
+					sqlSession.close();
+					web.redirect(web.getRootPath() + "/index", "you are need log in.");
+					return null;
+				}	
 		
-		if (web.getSession("loginInfo") == null) {
-			web.redirect(web.getRootPath() + "/main", "you should login");
+		/** (4) 회원 번호 파라미터 받기 */
+		int member_id = web.getInt("member_id");
+		logger.debug("member_id" + member_id);
+		
+		
+		if (member_id == 0) {
+			web.redirect(null, "회원 번호가 지정되지 않았습니다.");
+			sqlSession.close();
 			return null;
 		}
 		
+		
+		
 		/** (5) 조회할 정보에 대한 Beans 생성 */
+		/** (7) 전달받은 파라미터를 Beans 객체에 담는다. */
+		Member member = new Member();						
+		member.setId(loginInfo.getId());
 		
 		Article article = new Article();
 		

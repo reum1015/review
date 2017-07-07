@@ -39,7 +39,13 @@
 		SELECT id, category, nick_name, title, content, hit, ip_address,
 			   DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date, 
 			   DATE_FORMAT(edit_date, '%Y-%m-%d') as edit_date, 
-			   member_id
+			   member_id,
+			   (SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE article_id=article.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath	
 		FROM   article
 		WHERE  id=#{id}
 	</select>
