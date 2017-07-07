@@ -98,9 +98,6 @@
         WHERE id=#{id}
     </select>
     
-    
-    
-	
 	
 		
 	<!-- 일련번호에 의한 회원정보 조회 -->
@@ -108,7 +105,13 @@
     	resultMap="member">
         SELECT
          id, nick_name, name, user_pw, email, gender, age,
-	      reg_date, edit_date, member_level, introduce
+	      reg_date, edit_date, member_level, introduce,
+	      (SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE member_id=member.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath	
         FROM member
         WHERE id=#{id}
     </select>

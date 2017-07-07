@@ -84,7 +84,7 @@ $(function() {
 			},
 			nick_name: {
 				required: "Nickname field is required.",
-				nick: "Nicknames can only use letters, number, '.', '_', '-' '",
+				nick: "Nicknames can only use letters, number, '.', '_', '-', without space", 
 				minlength: "Create a nickname at least 3 characters long.",
 				maxlength: "Create a nickname at most 20 characters long."
 			},

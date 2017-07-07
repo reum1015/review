@@ -7,8 +7,8 @@
 		<!--<RollingFile name="RollingFile" fileName="C:/Users/yunsig/Desktop/Java/workspace/logs/log.log"
 			filePattern="C:/Users/yunsig/Desktop/Java/workspace/logs/log-%d{yyyy-MM-dd}.log" append="false">
 		  -->
-		<RollingFile name="RollingFile" fileName="C:/Users/yunsig/Desktop/Java/workspace/logs/log.log"
-			filePattern="C:/Users/yunsig/Desktop/Java/workspace/logs/log-%d{yyyy-MM-dd}.log" append="false">
+		<RollingFile name="RollingFile" fileName="/home/logs/log.log"
+			filePattern="/home/logs/log-%d{yyyy-MM-dd}.log" append="false">
 		  		
 			<PatternLayout pattern="%d %5p [%c] %m%n" />
 			<Policies>

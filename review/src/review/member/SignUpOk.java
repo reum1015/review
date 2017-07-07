@@ -50,7 +50,7 @@ public class SignUpOk extends BaseController {
 		// 로그인 중이라면 이 페이지를 동작시켜서는 안된다.
 				if(web.getSession("loginInfo") !=null){
 					sqlSession.close();
-					web.redirect(web.getRootPath() + "/main", "you are already log in.ssssss");
+					web.redirect(web.getRootPath() + "/index", "you are already log in.ssssss");
 					return null;
 				}		
 
@@ -76,95 +76,10 @@ public class SignUpOk extends BaseController {
 	
 
 		/** (5) 입력값의 유효성 검사 */
-		// 이메일 검사
-		if (!regex.isValue(email)) {
-			sqlSession.close();
-			web.redirect(null, "email field is required.");
-			return null;
-		}
-
-		if (!regex.isEmail(email)) {
-			sqlSession.close();
-			web.redirect(null, "Enter a valid email address.");
-			return null;
-		}
-
-		// 비밀번호 검사
-				if (!regex.isValue(user_pw)) {
-					sqlSession.close();
-					web.redirect(null, "password field is required.");
-					return null;
-				}
-
-				if (!regex.isEngNum(user_pw)) {
-					sqlSession.close();
-					web.redirect(null, "This password is too easy to guess. Please create a new one. letter+number");
-					return null;
-				}
-
-				if (user_pw.length() > 30) {
-					sqlSession.close();
-					web.redirect(null, "Create a password at most 30 characters long.");
-					return null;
-				}
-
-				if (user_pw.length() < 6) {
-					sqlSession.close();
-					web.redirect(null, "Create a password at least 6 characters long.");
-					return null;
-				}
-				
-		// 이름 검사
-				if (!regex.isValue(name)) {
-					sqlSession.close();
-					web.redirect(null, "Username field is required.");
-					return null;
-				}
-
-				if (!regex.isEng(name)) {
-					sqlSession.close();
-					web.redirect(null, "Usernames can only use English letters");
-					return null;
-				}
-						
 		
-		// 닉네임검사
-		if (!regex.isValue(nick_name)) {
-			sqlSession.close();
-			web.redirect(null, "Nickname field is required.");
-			return null;
-		}
-				
-		if (!regex.isEngorNum(nick_name) ) {
-			sqlSession.close();
-			web.redirect(null, "Nicknames can only use letters, numbers");
-			return null;
-		}
-		
-		if (nick_name.length() < 3) {
-			sqlSession.close();
-			web.redirect(null, "Create a nickname at least 3 characters long.");
-			return null;
-		}
 
-		if (nick_name.length() > 20) {
-			sqlSession.close();
-			web.redirect(null, "Create a nickname at most 20 characters long.");
-			return null;
-		}
 
-		// 나이 검사
-		if (!regex.isValue(age)) {
-			sqlSession.close();
-			web.redirect(null, "age field is required.");
-			return null;
-		}
 		
-		if (!regex.isNum(age)) {
-			sqlSession.close();
-			web.redirect(null, "please enter a valid number.");
-			return null;
-		}		
 
 		// 성별 검사
 				if (!regex.isValue(gender)) {

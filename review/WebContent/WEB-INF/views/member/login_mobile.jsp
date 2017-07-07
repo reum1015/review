@@ -10,11 +10,53 @@
  <!-- main css -->
  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/login_main_mobile.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/validate/additional-methods.min.js"></script>
 
-<style type="text/css">
-
-</style>
-
+<script type="text/javascript">
+$(function() {
+		
+	$.validator.addMethod( "pwd", function( value, element ) {
+		return this.optional(element) ||  /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{3,25}$/i.test(value);
+	});
+	
+	// form태그에 부여한 id속성에 대한 유효성 검사 함수 호출
+	$("#myform").validate({
+		/** 입력검사 규칙 */
+		rules: {
+			// 필수입력 + 이메일 형식 일치 필요
+			email: {
+				required: true,
+				email: true
+			},			
+			// 필수입력 + 글자수 길이 제한
+			user_pw: {
+				required: true,
+				pwd: true,
+				minlength: 6,
+				maxlength: 25
+			},
+			
+			
+			
+		},
+		/** 규칙이 맞지 않을 경우의 메시지 */
+		messages: {
+			email: {
+				required: "email field is required.",
+				email: "Enter a valid email address."
+			},			
+			user_pw: {
+				required: "password field is required.",	
+				pwd: "This password is too easy to guess. Please create a new one. ",
+				minlength: "Create a password at least 6 characters long.",
+				maxlength: "Create a password at most 25 characters long."
+			},			
+								
+		}
+	}); // end validate()
+});
+</script>
 </head>
 <body>
 	  <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
@@ -40,7 +82,8 @@
 			
 					<fieldset>
 						<legend>Review&Bang</legend>
-          <form name="form" method="post" action="${pageContext.request.contextPath}/member/login_ok">
+          <form name="form" method="post" id="myform" 
+          action="${pageContext.request.contextPath}/member/login_ok">
 						<div class="form-groups">
 							<input type="email" id="email" name="email" class="form-control" placeholder="email" autofocus>
 						</div>
