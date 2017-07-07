@@ -69,58 +69,6 @@ public class AccountInfoOk extends BaseController {
 	
 				
 				/** (5) 입력값의 유효성 검사 */
-				// 이메일 검사
-				if (!regex.isValue(email)) {
-					sqlSession.close();
-					web.redirect(null, "email field is required.");
-					return null;
-				}
-
-				if (!regex.isEmail(email)) {
-					sqlSession.close();
-					web.redirect(null, "Enter a valid email address.");
-					return null;
-				}
-
-				
-				// 닉네임검사
-				if (!regex.isValue(nick_name)) {
-					sqlSession.close();
-					web.redirect(null, "Nickname field is required.");
-					return null;
-				}
-
-				if (!regex.isEngNum(nick_name)) {
-					sqlSession.close();
-					web.redirect(null, "Nicknames can only use letters, numbers");
-					return null;
-				}
-				
-				if (nick_name.length() < 6) {
-					sqlSession.close();
-					web.redirect(null, "Create a password at least 6 characters long.");
-					return null;
-				}
-
-				if (nick_name.length() > 20) {
-					sqlSession.close();
-					web.redirect(null, "Create a password at most 20 characters long.");
-					return null;
-				}
-				
-				// 이름 검사
-				if (!regex.isValue(name)) {
-					sqlSession.close();
-					web.redirect(null, "Username field is required.");
-					return null;
-				}
-
-				if (!regex.isEng(name)) {
-					sqlSession.close();
-					web.redirect(null, "Usernames can only use letters");
-					return null;
-				}		
-
 			
 						/** (7) 전달받은 파라미터를 Beans 객체에 담는다. */
 						Member member = new Member();						

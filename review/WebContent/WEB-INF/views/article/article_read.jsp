@@ -71,19 +71,12 @@
 										</h3>
 									</div>
 									<!-- 이미지 화면에 출력 -->
-									<c:if test="${fileList != null}">
-									 <c:forEach var="file" items="${fileList}">
-									   <c:if test="${fn:substringBefore(file.contentType, '/') == 'image'}">
-									    <c:url var="downloadUrl" value="/download">
-									           <c:param name="file" value="${file.fileDir}/${file.fileName}" />
-									     </c:url>
-									     <p class="col-lg-4 col-md-4 col-sm-4">
-									     <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
-									     </p>
-									   </c:if>
-									 </c:forEach>										
-															
-									</c:if>				
+			<c:url var="downloadUrl" value="/download">
+				 <c:param name="file" value="${readArticle.imagePath}" />
+			</c:url>
+			         <a class="col-lg-4 col-md-4 col-sm-4">
+			      <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
+			      </a>				
 									<!--// 링크 + 썸네일 -->
 									<!-- 제목 + 작성자 + 조회수 -->
 									<div class="item col-lg-8 col-md-8 col-sm-7">

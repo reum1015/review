@@ -7,6 +7,72 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/common.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/mymenu.css" />
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/validate/additional-methods.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	
+	// 유효성 검사 추가 함수
+	$.validator.addMethod( "engspace", function( value, element ) {
+		return this.optional( element ) || /^[a-zA-Z\s]*$/i.test( value );
+	});
+		
+	$.validator.addMethod( "nick", function( value, element ) {
+		return this.optional( element ) || /^[a-z0-9_.-]*$/i.test( value );
+	});
+	
+		
+	// form태그에 부여한 id속성에 대한 유효성 검사 함수 호출
+	$("#myform").validate({
+		/** 입력검사 규칙 */
+		rules: {
+			// 필수입력 + 이메일 형식 일치 필요
+			email: {
+				required: true,
+				email: true
+			},			
+						
+			// 필수 입력 + 한글 입력
+			name: {
+				required: true,
+				engspace: true
+			},
+			nick_name: {
+				required: true,
+				nick: true,
+				minlength: 3,
+				maxlength: 20
+			},
+						
+			
+		},
+		/** 규칙이 맞지 않을 경우의 메시지 */
+		messages: {
+			email: {
+				required: "email field is required.",
+				email: "Enter a valid email address."
+			},			
+				
+			name: {
+				required: "Username field is required.",
+				engspace: "Usernames can only use letters."				
+			},
+			nick_name: {
+				required: "Nickname field is required.",
+				nick: "Nicknames can only use letters, number, '-', '_', '.'  ",
+				minlength: "Create a nickname at least 3 characters long.",
+				maxlength: "Create a nickname at most 20 characters long."
+			},
+			
+			
+					
+		}
+	}); // end validate()
+});
+</script>
+
 </head>
 <body>
 	  <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
@@ -40,7 +106,7 @@
 		<div class="edit_form col-lg-offset-1 col-lg-5 col-md-offset-1 col-md-5 col-sm-12 col-xs-12">		
 				<fieldset>
 						<legend>Account Info</legend>						
-		<form class="form-horizontal" name="sign_up_form" method="post"
+		<form class="form-horizontal" name="sign_up_form" method="post" id="myform"
       action="${pageContext.request.contextPath}/mymenu/account_info_ok">
 			<div class="form-groups">
 			<label for="email" class="pull-left">email</label>

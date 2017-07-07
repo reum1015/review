@@ -52,7 +52,7 @@ public class EditProfileOk extends BaseController {
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
 			if(web.getSession("loginInfo") == null){
 					sqlSession.close();
-					web.redirect(web.getRootPath() + "/main", "you are need log in.");
+					web.redirect(web.getRootPath() + "/index", "you should log in.");
 					return null;
 				}		
 				
@@ -76,20 +76,6 @@ public class EditProfileOk extends BaseController {
 				
 				/** (5) 입력값의 유효성 검사 */
 			
-						
-		
-				// 나이 검사
-				if (!regex.isValue(age)) {
-					sqlSession.close();
-					web.redirect(null, "age field is required.");
-					return null;
-				}
-				
-				if (!regex.isNum(age)) {
-					sqlSession.close();
-					web.redirect(null, "please enter a valid number.");
-					return null;
-				}		
 
 				// 성별 검사
 						if (!regex.isValue(gender)) {
