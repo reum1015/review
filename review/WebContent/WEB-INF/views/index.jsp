@@ -12,9 +12,37 @@
  
  
  <style type="text/css">
-
-</style> 
- 
+ /*mobile-start*/
+ .main-toptext-mobile {
+ margin-top: -20px;
+}
+ .main-toptexts-mobile {
+ margin-top: -23px;
+ margin-bottom: 12px;
+}
+.main-text-mobile {
+ margin-top: -20px;
+}
+ .main-texts-mobile {
+ margin-top: -33px;
+ margin-bottom: 12px;
+}
+.main-bottom-mobile {
+margin-bottom: -40px;
+}
+/*mobile end*/
+/*web start*/
+.main-text-web {
+margin-top: -20px;
+}
+.main-text-bottom-web {
+margin-bottom: -15px;
+}
+.main-bottom-web {
+margin-bottom: -70px;
+}
+/*web end*/
+</style>
   
 </head>
 <body>   
@@ -22,20 +50,58 @@
 	<div class="container content_body">
 		<!-- 점보트론 -->
 			<div class="jumbotron">
-				<p>
+				<p >
 				  <font size="4"> Visit Review&Bang.com  </font>
 				  <br />
-				   <font size="6" color="#484848"> Before or After doing something </font> 
-				   <br />
-				   <br />				   
+				   <div class="hidden-xs main-text-web">	   
+				   <font size="6" color="#484848"> Before or After doing something </font>
+				    </div>
+				    <div class="hidden-lg hidden-md hidden-sm main-toptext-mobile">	   
+				   <font size="5" color="#484848"> Before or After &emsp;</font>
+				   </div>
+				   <div class="hidden-lg hidden-md hidden-sm main-toptexts-mobile">
+				   <font size="5" color="#484848"> doing something </font>
+				    </div>	
+				  
+				   <div class="hidden-xs main-text-bottom-web">	   
 				   <font size="10" color="#585858">Share &emsp;&nbsp; </font><font size="5" color="#BDBDBD"> your Experience </font>
-				    <br />
-					<font size="10" color="#585858">Product &nbsp;</font> <font size="5" color="#BDBDBD">what you used  </font>
-					<br />
-					<font size="10" color="#585858">Movie &emsp;&nbsp;</font> <font size="5" color="#BDBDBD"> what you watched </font>
-					 <br />
-					<font size="10" color="#585858">Travel &emsp;&nbsp;</font> <font size="5" color="#BDBDBD"> what you felt</font>
-					<br />				 
+				    </div>
+				    <div class="hidden-lg hidden-md hidden-sm main-text-mobile">	   
+				   <font size="6" color="#585858">Share &emsp;&emsp;&emsp;&emsp;</font>
+				   </div>
+				   <div class="hidden-lg hidden-md hidden-sm main-texts-mobile">
+				   <font size="4" color="#BDBDBD"> your Experience </font>
+				    </div>							   
+				    
+				   <div class="hidden-xs main-text-bottom-web">	   
+				   <font size="10" color="#585858">Product &nbsp;</font> <font size="5" color="#BDBDBD">what you used  </font>
+				    </div>
+				    <div class="hidden-lg hidden-md hidden-sm main-text-mobile">	   
+				   <font size="6" color="#585858">Product &emsp;&emsp;&emsp;</font>
+				   </div>
+				   <div class="hidden-lg hidden-md hidden-sm main-texts-mobile">
+				    <font size="4" color="#BDBDBD">what you used  </font>
+				    </div>	
+				    
+				  <div class="hidden-xs main-text-bottom-web">	   
+				   <font size="10" color="#585858">Movie &emsp;&nbsp;</font> <font size="5" color="#BDBDBD"> what you watched </font>
+				    </div>
+				    <div class="hidden-lg hidden-md hidden-sm main-text-mobile">	   
+				   <font size="6" color="#585858">Movie &emsp;&emsp;&emsp;&emsp;</font>
+				   </div>
+				   <div class="hidden-lg hidden-md hidden-sm main-texts-mobile">
+				    <font size="4" color="#BDBDBD"> what you watched </font>
+				    </div>	
+				    
+				  <div class="hidden-xs main-text-bottom-web main-bottom-web">	   
+				   <font size="10" color="#585858">Travel &emsp;&nbsp;</font> <font size="5" color="#BDBDBD"> how you felt</font>
+				    </div>
+				    <div class="hidden-lg hidden-md hidden-sm main-text-mobile">	   
+				   <font size="6" color="#585858">Travel &emsp;&emsp;&emsp;&emsp;</font>
+				   </div>
+				   <div class="hidden-lg hidden-md hidden-sm main-texts-mobile main-bottom-mobile">
+				    <font size="4" color="#BDBDBD"> how you felt</font>
+				    </div>								 
 				</p>
 				
 			</div>

@@ -52,7 +52,7 @@ public class AccountInfoOk extends BaseController {
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
 			if(web.getSession("loginInfo") == null){
 					sqlSession.close();
-					web.redirect(web.getRootPath() + "/index", "you are need log in.");
+					web.redirect(web.getRootPath() + "/index", "you need log in.");
 					return null;
 				}		
 				
@@ -80,8 +80,8 @@ public class AccountInfoOk extends BaseController {
 						/** (9) Service를 통한 데이터베이스 저장 처리 */
 						// 변경된 정보를 저장하기 위한 객체
 						Member editInfo = null;
-						try {							
-							memberService.updateAccountMember(member);
+						try {														
+							memberService.updateAccountMember(member);							
 							editInfo = memberService.selectMember(member);
 						} catch (Exception e) {
 							web.redirect(null, e.getLocalizedMessage());

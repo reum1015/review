@@ -60,9 +60,9 @@
 	<select id="selectCommentCountByMemberId"
 		parameterType="review.model.Comment"
 		resultType="int">
-		SELECT COUNT(id) FROM comment
+		SELECT COUNT(id) FROM comment 
 		WHERE id=#{id} AND member_id=#{member_id}
-	</select>
+   </select>
 	
 	
 	<!-- 덧글 삭제 하기 -->
@@ -72,7 +72,7 @@
 	
 	<!-- 덧글 정보 수정하기 -->
 	<update id="updateComment" parameterType="review.model.Comment">
-		UPDATE bbs_comment SET		  		
+		UPDATE comment SET		  		
 			content=#{content},
 			ip_address=#{ip_address},
 			edit_date=now()

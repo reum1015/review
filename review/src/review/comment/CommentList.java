@@ -72,6 +72,7 @@ public class CommentList extends BaseController {
 		Comment comment = new Comment();
 		comment.setArticle_id(article_id);
 		
+		
 		/** (6) Service를 통한 덧글 목록 조회 */
 		// 작성 결과를 저장할 객체
 		List<Comment> item = null;

@@ -59,37 +59,25 @@ public class MyPage extends BaseController {
 		articleService = new ArticleServiceImpl(sqlSession, logger);
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 		pageHelper = PageHelper.getInstance();
+			
 		
-				
-		/** (3) 로그인 여부 검사 */		
-		Member loginInfo = (Member) web.getSession("loginInfo");
-		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
-			if(web.getSession("loginInfo") == null){
-					sqlSession.close();
-					web.redirect(web.getRootPath() + "/index", "you are need log in.");
-					return null;
-				}	
-		
-		/** (4) 회원 번호 파라미터 받기 */
+		/** (3) 회원 번호 파라미터 받기 */
 		int member_id = web.getInt("member_id");
-		logger.debug("member_id" + member_id);
-		
-		
+		logger.debug("member_id=" + member_id);
+				
 		if (member_id == 0) {
 			web.redirect(null, "회원 번호가 지정되지 않았습니다.");
 			sqlSession.close();
 			return null;
 		}
-		
-		
+		//  회원번호 파라미터를 Beans로 묶기
+		Member member = new Member();						
+		member.setId(member_id);
+		// 지금 읽고 있는 게시물이 저장될 객체
+		Member readMember = null;
 		
 		/** (5) 조회할 정보에 대한 Beans 생성 */
-		/** (7) 전달받은 파라미터를 Beans 객체에 담는다. */
-		Member member = new Member();						
-		member.setId(loginInfo.getId());
-		
-		Article article = new Article();
-		
+		Article article = new Article();		
 		int page = web.getInt("page", 1);
 		
 		/** (6) 게시물 목록 조회 */
@@ -106,13 +94,25 @@ public class MyPage extends BaseController {
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());			
-			
 			articleList = articleService.selectArticleListMember(article);
+			readMember = memberService.selectMember(member);
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
 		} finally {
-			sqlSession.close();
+			sqlSession.close();			
+		}
+		
+		
+		// 회원 프로필 사진
+		if (readMember != null) {
+			String imagePath = readMember.getImagePath();
+			if (imagePath != null) {
+				String thumbPath = upload.createThumbnail(imagePath, 200, 200, true);
+			// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
+				readMember.setImagePath(thumbPath);
+				logger.debug("thumbnail create > " + readMember.getImagePath());
+							}
 		}
 		
 		// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체(에피소드 리스트)
@@ -131,10 +131,11 @@ public class MyPage extends BaseController {
 						
 		
 		/** (7) 조회 결과를 View에 전달 */
+		request.setAttribute("readMember", readMember);
 	
 		request.setAttribute("articleList", articleList);
 		request.setAttribute("pageHelper", pageHelper);
-				
+		
 						
 		String view = "mymenu/my_page";
 		return view;

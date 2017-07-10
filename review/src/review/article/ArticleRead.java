@@ -1,7 +1,7 @@
 package review.article;
 
 import java.io.IOException;
-import java.util.List;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +18,12 @@ import review.jsp.helper.RegexHelper;
 import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Article;
-import review.model.ImageFile;
+
 import review.service.ArticleService;
+import review.service.CommentService;
 import review.service.ImageFileService;
 import review.service.impl.ArticleServiceImpl;
+import review.service.impl.CommentServiceImpl;
 import review.service.impl.ImageFileServiceImpl;
 
 
@@ -37,6 +39,7 @@ public class ArticleRead extends BaseController {
 	UploadHelper upload;			
 	ArticleService articleService;
 	ImageFileService imageFileService;
+	CommentService commentService;
 	
 	@Override
 	public String doRun(HttpServletRequest request, HttpServletResponse response) 
@@ -51,7 +54,7 @@ public class ArticleRead extends BaseController {
 		upload = UploadHelper.getInstance();
 		articleService = new ArticleServiceImpl(sqlSession, logger);
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
-					
+		commentService = new CommentServiceImpl(sqlSession, logger);			
 		
 		/** (3) 글 번호 파라미터 받기 */
 		int article_id = web.getInt("article_id");
@@ -65,15 +68,14 @@ public class ArticleRead extends BaseController {
 		
 		//  파라미터를 Beans로 묶기
 		Article article = new Article();
-		article.setId(article_id);
-						
-		ImageFile file = new ImageFile();
-		file.setArticle_id(article_id);
+		article.setId(article_id);		
+	
+		
 		
 		/** (4) 게시물 일련번호를 사용한 데이터 조회 */
 		// 지금 읽고 있는 게시물이 저장될 객체
 		Article readArticle = null;
-		List<ImageFile> articlefileList = null;
+		
 		
 		
 		/** 조회수 중복 갱신 방지 처리 */
@@ -90,8 +92,7 @@ public class ArticleRead extends BaseController {
 						// 준비한 문자열에 대한 쿠키를 24시간동안 저장
 			web.setCookie(cookieKey, "Y", 60 * 60 * 24);
 					}
-			readArticle = articleService.selectArticle(article);
-			articlefileList = imageFileService.selectArticleFileList(file);
+			readArticle = articleService.selectArticle(article);	
 			
 		} catch (Exception e) {
 			web.redirect(null, e.getMessage());
@@ -112,7 +113,7 @@ public class ArticleRead extends BaseController {
 	
 		/** (7) 읽은 데이터를 View에게 전달한다 */
 		request.setAttribute("readArticle", readArticle);
-		request.setAttribute("fileList", articlefileList);
+		
 		
 				
 		String view = "article/article_read";

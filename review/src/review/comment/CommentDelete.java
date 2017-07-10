@@ -53,13 +53,12 @@ public class CommentDelete extends BaseController {
 		
 		/** (3) 파라미터 받기 */
 		int comment_id = web.getInt("comment_id");
-		logger.debug("comment_id=" + comment_id);
+		logger.debug("comment_id=" + comment_id);		
 		
-		/** (4) 입력 받은 파라미터에 대한 유효성 검사 */
 		// 덧글이 소속될 게시물의 일련번호
 		if (comment_id == 0) {
 			sqlSession.close();
-			web.printJsonRt("덧글 일련번호가 없습니다.");
+			web.redirect(null, "덧글 일련번호가 없습니다.");
 			return null;
 		}
 		
@@ -92,9 +91,7 @@ public class CommentDelete extends BaseController {
 		
 		// 상태유지를 위하여 게시글 일련번호를 View에 전달한다.
 		request.setAttribute("comment_id", comment_id);
-		
-		
-		
+						
 		return "comment/comment_delete";
 	}
 

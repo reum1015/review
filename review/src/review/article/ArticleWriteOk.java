@@ -153,8 +153,12 @@ public class ArticleWriteOk extends BaseController {
 		}
 		
 				
-		String view = "article/article_list_main";
-		return view;
+		sqlSession.close();						
+		String url = "%s/article/article_read?article_id=%d";
+		url = String.format(url, web.getRootPath(), article.getId());
+		web.redirect(url, null);
+
+		return null;
 	}
 	
        

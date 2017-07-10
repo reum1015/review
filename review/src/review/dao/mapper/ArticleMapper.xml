@@ -18,9 +18,7 @@
 	    <result property="hit" column="hit"/>
 	    <result property="ip_address" column="ip_address"/>
 	     <result property="member_id" column="member_id" />
-	     <result property="imagePath" column="imagePath" />
-	     
-        
+	     <result property="imagePath" column="imagePath" />  
 	</resultMap>
 	
 	<!-- 게시글 정보 저장하기 article_write -->
@@ -36,7 +34,7 @@
 	<!-- 게시물 하나에 대한 정보를 조회한다. article_read -->
 	<select id="selectArticle" parameterType="review.model.Article" 
 		resultMap="article">
-		SELECT id, category, nick_name, title, content, hit, ip_address,
+		SELECT id, category, nick_name, title, member_id, content, hit, ip_address,
 			   DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date, 
 			   DATE_FORMAT(edit_date, '%Y-%m-%d') as edit_date, 
 			   member_id,
@@ -53,7 +51,7 @@
 <!-- 검색 게시물 목록을 조회한다. article_list-->
 	<select id="selectArticleList" parameterType="review.model.Article" 
 		resultMap="article">
-		SELECT id, category, nick_name, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
+		SELECT id, category, nick_name, title, content, member_id, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile
 		 WHERE article_id=article.id 
 		 AND 
@@ -72,7 +70,7 @@
 	<!--전체 게시물 목록을 조회한다. article_list_main-->
 	<select id="selectArticleListMain" parameterType="review.model.Article" 
 		resultMap="article">
-		SELECT id, category, nick_name, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
+		SELECT id, category, nick_name, title, content, member_id, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile
 		 WHERE article_id=article.id 
 		 AND 
@@ -88,15 +86,15 @@
 	<!--회원 게시물 목록을 조회한다. -->
 	<select id="selectArticleListMember" parameterType="review.model.Article" 
 		resultMap="article">
-		SELECT id, category, nick_name, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
+		SELECT id, category, nick_name, title, content, member_id, DATE_FORMAT(reg_date, '%Y-%m-%d') as reg_date,
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile
-		 WHERE article_id=a.id 
+		 WHERE article_id=article.id 
 		 AND 
 		 content_type LIKE ('image/%') 		
 			ORDER BY id ASC LIMIT 0, 1
 			) 	AS imagePath			   
-		FROM   article	as a	
-		WHERE a.member_id=#{member_id}
+		FROM   article		
+		WHERE article.member_id=#{member_id}
 		ORDER  BY id DESC	
 		LIMIT #{limit_start}, #{list_count}	
 	</select>
@@ -123,7 +121,7 @@
 		UPDATE article SET hit=hit+1 WHERE id=#{id}	
 		</update>
 		
-		<!-- 자신의 게시물인지 검사한다. article_delete -->
+	<!-- 자신의 게시물인지 검사한다. article_delete -->
 	<select id="selectArticleCountByMemberId" parameterType="review.model.Article"
 		resultType="int">
 		SELECT COUNT(id) FROM article

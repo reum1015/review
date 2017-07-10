@@ -10,6 +10,7 @@
 		</button>
 		<h4 class="modal-title">덧글 삭제</h4>
 	</div>
+	
 	<div class="modal-body">
 		<c:choose>
 			<c:when test="${myComment == true}">

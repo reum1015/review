@@ -56,10 +56,9 @@ public class ArticleListMain extends BaseController {
 		pageHelper = PageHelper.getInstance();			
 	
 	/** (5) 조회할 정보에 대한 Beans 생성 */
-		// 검색어
 		
-		Article article = new Article();
 		
+		Article article = new Article();		
 		int page = web.getInt("page", 1);
 		
 		/** (6) 게시물 목록 조회 */
@@ -77,7 +76,6 @@ public class ArticleListMain extends BaseController {
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());
-			
 			
 			articleList = articleService.selectArticleListMain(article);
 		} catch (Exception e) {

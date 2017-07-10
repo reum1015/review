@@ -43,9 +43,13 @@
 									<c:url var="readUrl" value="/article/article_read">
 										<c:param name="article_id" value="${readArticle.id}" />
 									</c:url>
+									<c:url var="readUser" value="/mymenu/my_page">					            						            	
+					            		<c:param name="member_id" value="${readArticle.member_id}" />
+					            	</c:url>
 									<!-- 링크 + 썸네일 -->
-									<div class="read-container">
-										<h3 class="page-header" style="text-align: left; margin-top: -5px;"> ${readArticle.nick_name} 
+									<div class="read-container">									
+										<h3 class="page-header" style="text-align: left; margin-top: -5px;">
+										<a href="${readUser}"> ${readArticle.nick_name} </a>
 											<span class="pull-right"> 
 												<!--  ** 페이지 호출 할 때 article_id를 url에 포함하여 삭제 페이지를 호출 할 때 article_id를 넘겨주는 소스입니다.  --> 
 												<!-- 추가 : article.member_id와 loginInfo의 id를 비교하여 버튼을 노출할 것인지를 판단 -->
@@ -135,7 +139,8 @@
 
 	<!-- 덧글 항목에 대한 템플릿 참조 -->
 <script id="tmpl_comment_item" type="text/x-handlebars-template">
-    <li class="media" style='border-top: 1px dotted #ccc; padding-top: 15px' id="comment_{{id}}">
+    <li class="media" style='border-top: 1px dotted #ccc; padding-top: 15px' 
+       id="comment_{{id}}">
         <div class="media-body" style='display: block;'>
             <h4 class="media-heading clearfix">
                 <!-- 작성자,작성일시 -->
@@ -241,7 +246,7 @@
 		});
 		
 		/** 동적으로 로드된 폼 안에서의 submit 이벤트 */
-		$(article).on('submit', "#comment_delete_form", function(e) {
+		$(document).on('submit', "#comment_delete_form", function(e) {
 			e.preventDefault();
 
 			// AjaxForm 플러그인의 강제 호출
@@ -249,9 +254,9 @@
 				if (json.rt != "OK") {
 					alert(json.rt);
 					return false;
-				}
-				
+				}				
 				alert("삭제되었습니다.");
+				
 				// modal 강제로 닫기
 				$("#comment_delete_modal").modal('hide');
 				
@@ -262,7 +267,7 @@
 		});
 		
 		/** 동적으로 로드된 폼 안에서의 submit 이벤트 */
-		$(article).on('submit', "#comment_edit_form", function(e) {
+		$(document).on('submit', "#comment_edit_form", function(e) {
 			e.preventDefault();
 			
 			// AjaxForm 플러그인의 강제 호출

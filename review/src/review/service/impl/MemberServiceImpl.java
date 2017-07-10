@@ -124,6 +124,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void updateMemberPasswordByEmail(Member member) throws Exception {
+	
 		try{
 			int result = sqlSession.update("MemberMapper.updateMemberPasswordByEmail", member);
 			// 중복된 데이터가 존재한다면?
@@ -143,6 +144,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void updateAccountMember(Member member) throws Exception {
+		
 		try {
 			int result = sqlSession.update("MemberMapper.updateAccountMember", member);
 			if (result == 0) {
