@@ -152,14 +152,14 @@
                 <!-- 수정,삭제 버튼 -->
         
                 <div class='pull-right'>    
-             
+             <c:if test='${readArticle.member_id==loginInfo.id}'>
                     <a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
                         <i class='glyphicon glyphicon-edit'></i>
                     </a>
                     <a href='${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
                         <i class='glyphicon glyphicon-remove'></i>
                     </a>     
-         
+         </c:if>
                 </div>
              
             </h4>
@@ -262,7 +262,7 @@
 				
 				// JSON 결과에 포함된 덧글일련번호를 사용하여 삭제할 <li>의 id값을 찾는다.
 				var comment_id = json.comment_id;
-				$("#comment_" + comment_id).remove();
+				$("#comment_"+comment_id).remove();
 			});
 		});
 		

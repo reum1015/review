@@ -54,6 +54,7 @@ margin-bottom: -70px;
 				<p >
 				  <font size="4"> Visit Review&Bang.com  </font>
 				  <br />
+				  
 				   <div class="hidden-xs main-text-web">	   
 				   <font size="6" color="#484848"> Before or After doing something </font>
 				    </div>
@@ -62,8 +63,7 @@ margin-bottom: -70px;
 				   </div>
 				   <div class="hidden-lg hidden-md hidden-sm main-toptexts-mobile">
 				   <font size="5" color="#484848"> doing something </font>
-				    </div>	
-				  
+				    </div>					  
 				   <div class="hidden-xs main-text-bottom-web">	   
 				   <font size="10" color="#585858">Share &emsp;&nbsp; </font><font size="5" color="#BDBDBD"> your Experience </font>
 				    </div>

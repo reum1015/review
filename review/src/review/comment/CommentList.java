@@ -75,9 +75,10 @@ public class CommentList extends BaseController {
 		
 		/** (6) Service를 통한 덧글 목록 조회 */
 		// 작성 결과를 저장할 객체
+		
 		List<Comment> item = null;
 		try {
-			item = commentService.selectCommentList(comment);
+			item = commentService.selectCommentList(comment);			
 		} catch (Exception e) {
 			web.printJsonRt(e.getLocalizedMessage());
 			return null;
@@ -101,6 +102,9 @@ public class CommentList extends BaseController {
 		// --> import com.fasterxml.jackson.databind.ObjectMapper;
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue(response.getWriter(), data);
+		
+		
+		
 		
 		return null;
 	}

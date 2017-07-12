@@ -170,6 +170,10 @@ $(function() {
 	                 <div class="btn_sign_up" >
 						<button type="submit" class="btn btn-warning btn-block">Sign Up</button>							
                      </div>
+                     <p>By signing up, you agree to the 
+                     <a href="${pageContext.request.contextPath}/legal/Privacy">Privacy Policy</a>& 
+	                <a href="${pageContext.request.contextPath}/legal/Terms">Terms of Service.</a>
+	                </p> 
                      </form>		
 					</fieldset>
 				

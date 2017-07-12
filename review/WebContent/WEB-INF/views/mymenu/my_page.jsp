@@ -39,7 +39,8 @@
 						 	<!--// 작성자 + 소개 -->
 						 	<!-- 설정 -->
 						<c:if test="${readMember.id==loginInfo.id}">
-	                          <a class="pull-right navbar-brand glyphicon glyphicon-cog" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>	  
+						<a class="pull-right navbar-brand glyphicon glyphicon-cog col-lg-1 col-md-3 hidden-sm hidden-xs" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>
+	                      <a class="pull-right navbar-brand glyphicon glyphicon-cog hidden-lg hidden-md col-sm-3 col-xs-3" href="${pageContext.request.contextPath}/mymenu/options_mobile" style="font-size: 1.5em;"></a>	  
 	                              </c:if> 	
 	                              <!--// 설정 -->											
 								<br /> 											

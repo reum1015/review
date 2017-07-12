@@ -68,7 +68,7 @@ margin-top: 55px;
 										<c:url var="downloadUrl" value="/download">
 											<c:param name="file" value="${article.imagePath}" />
 										</c:url>
-										<img src="${downloadUrl}" class="img-responsive"/>
+										<img src="${downloadUrl}" class="img-responsive img-rounded"/>
 									</c:when>
 									<c:otherwise>
 										<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive"/>
