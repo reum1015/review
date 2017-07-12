@@ -75,12 +75,22 @@
 										</h3>
 									</div>
 									<!-- 이미지 화면에 출력 -->
-			<c:url var="downloadUrl" value="/download">
-				 <c:param name="file" value="${readArticle.imagePath}" />
-			</c:url>
+									<c:choose>
+						<c:when test="${readArticle.imagePath != null}">
+			           <c:url var="downloadUrl" value="/download">
+				    <c:param name="file" value="${readArticle.imagePath}" />
+			        </c:url>
 			         <a class="col-lg-4 col-md-4 col-sm-4">
 			      <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
-			      </a>				
+			      </a>	
+									</c:when>
+					<c:otherwise>
+					<a class=" col-lg-4 col-md-4 col-sm-4 ">
+						<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-circle img-responsive"/>
+						</a>
+					</c:otherwise>
+								</c:choose>		
+						
 									<!--// 링크 + 썸네일 -->
 									<!-- 제목 + 작성자 + 조회수 -->
 									<div class="item col-lg-8 col-md-8 col-sm-7">

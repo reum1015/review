@@ -25,10 +25,20 @@
 				 <c:param name="file" value="${readMember.imagePath}" />
 			       </c:url>			
 						<h3 style="text-align: left; margin-top: 2px;">
-						<!-- 이미지 화면에 출력 -->					
-					<a class="profile_img pull-left col-lg-4 col-md-4 col-sm-4 col-xs-5">
+						<!-- 이미지 화면에 출력 -->
+						<c:choose>
+						<c:when test="${readMember.imagePath != null}">
+								<a class="profile_img pull-left col-lg-4 col-md-4 col-sm-4 col-xs-5">
 		             <img src="${downloadUrl}" class="img-circle img-responsive" style="margin: auto" />
 			           </a>	
+									</c:when>
+									<c:otherwise>
+									<a class="profile_img pull-left col-lg-3 col-md-3 col-sm-4 col-xs-6">
+						<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-circle img-responsive"/>
+									</a>
+									</c:otherwise>
+								</c:choose>					
+					
 			           <!-- 이미지 화면에 출력 -->
 			           <!-- 작성자 + 소개 -->
 			           <span style="overflow: auto; width: 100%; max-height: 350px;">
