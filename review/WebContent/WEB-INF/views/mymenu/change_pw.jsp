@@ -86,7 +86,7 @@ $(function() {
 		   	</div>
 		   	<br  />
 		   	  	<div class="btn btn-default edit">
-		   	<a href="${pageContext.request.contextPath}/mymenu/edit_pic"><font size="4" color="#2E2EFE">Change Picture</font></a>
+		   	<a href="${pageContext.request.contextPath}/mymenu/edit_pic?member_id=${loginInfo.id}"><font size="4" color="#2E2EFE">Change Picture</font></a>
 		   	</div>
 		   	<br  />
 		   	<div class="btn btn-default edit">

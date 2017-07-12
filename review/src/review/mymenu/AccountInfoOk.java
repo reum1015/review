@@ -56,7 +56,8 @@ public class AccountInfoOk extends BaseController {
 					return null;
 				}		
 				
-
+			 int member_id = 0;
+				
 				/** (4) 파라미터 받기 */		
 			String email = web.getString("email");				
 				String nick_name = web.getString("nick_name");
@@ -68,6 +69,9 @@ public class AccountInfoOk extends BaseController {
 				logger.debug("name=" + name);
 	
 				
+	              
+	         
+	               
 				
 			
 						/** (7) 전달받은 파라미터를 Beans 객체에 담는다. */
@@ -97,7 +101,11 @@ public class AccountInfoOk extends BaseController {
 						// INSERT,UPDATE,DELETE 처리를 수행하는 action 페이지들은 자체적으로 View를
 						// 갖지 않고 결과를 확인할 수 있는 다른 페이지로 강제 이동시켜야 한다. 
 						// 그러므로 View의 경로를 리턴하지 않는다.(중복실행 방지)
-						String view = "mymenu/my_page";
-						return view;
+						sqlSession.close();
+						String url = "%s/mymenu/my_page?member_id=%d";
+						url = String.format(url, web.getRootPath(), member_id);
+						web.redirect(url, null);
+
+						return null;
 	}
 }

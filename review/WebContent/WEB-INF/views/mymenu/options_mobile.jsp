@@ -33,7 +33,7 @@
 			</button>
 			</form>
 		   	<br  />
-		   	<form  name="form" method="post" action="${pageContext.request.contextPath}/mymenu/edit_pic">
+		   	<form  name="form" method="post" action="${pageContext.request.contextPath}/mymenu/edit_pic?member_id=${loginInfo.id}">
 			<button class="btn btn-block btn-lblue-gray btn-lg">		
 			<div class="btn-text" style="text-align: left">Change Picture</div>
 			</button>

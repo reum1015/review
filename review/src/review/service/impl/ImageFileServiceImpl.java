@@ -119,12 +119,12 @@ public class ImageFileServiceImpl implements ImageFileService{
 	}
 
 	@Override
-	public List<ImageFile> selectProfileFileList(ImageFile file) throws Exception {
+	public List<ImageFile> selectMemberFileList(ImageFile file) throws Exception {
       List<ImageFile> result = null;
 		
 		try {
 			// 첨부파일이 없는 경우도 있으므로, 조회결과가 null인 경우 예외를 발생하지 않는다.
-			result = sqlSession.selectList("ImageFileMapper.selectProfileFileList", file);
+			result = sqlSession.selectList("ImageFileMapper.selectMemberFileList", file);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new Exception("파일 정보 조회에 실패했습니다.");

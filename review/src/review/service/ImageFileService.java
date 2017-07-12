@@ -38,7 +38,7 @@ public interface ImageFileService {
 	 * @return 파일데이터 컬렉션
 	 * @throws Exeption
 	 */
-	public List<ImageFile> selectProfileFileList(ImageFile file) throws Exception;
+	public List<ImageFile> selectMemberFileList(ImageFile file) throws Exception;
 	
 	
 	/**

@@ -5,7 +5,6 @@ import java.util.List;
 import review.model.Article;
 
 
-
 public interface ArticleService {
 
 	/**
@@ -45,16 +44,7 @@ public interface ArticleService {
 	 */
 	public List<Article> selectArticleListMain(Article article) throws Exception;
 	
-	/**
-	 *  회원 게시글 목록 조회
-	 * 
-	 * @param article
-	 *            - 카테고리 정보가 저장된 Beans
-	 * @return List - 게시물 목록
-	 * @throws Exception
-	 */
-	public List<Article> selectArticleListMember(Article article) throws Exception;
-
+	
 
 	/**
 	 * 검색 전체 게시물 수 조회
@@ -73,6 +63,16 @@ public interface ArticleService {
 	 * @throws Exception
 	 */
 	public int selectArticleMainCount(Article article) throws Exception;
+
+	/**
+	 *  회원 게시글 목록 조회
+	 * 
+	 * @param article
+	 *            - 카테고리 정보가 저장된 Beans
+	 * @return List - 게시물 목록
+	 * @throws Exception
+	 */
+	public List<Article> selectArticleListMember(Article article) throws Exception;
 
 	
 	/**

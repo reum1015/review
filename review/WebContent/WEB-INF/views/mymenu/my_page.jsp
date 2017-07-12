@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	  <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
+ <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
   <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
   
 
@@ -20,51 +20,56 @@
 	<div class="container">
 	<div class="container_mypage ">
 	<!-- page header -->
-	 <div class="my_page_box row col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	 <!-- profile image  -->
-	 <c:url var="downloadUrl" value="/download">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">						
+							<c:url var="downloadUrl" value="/download">
 				 <c:param name="file" value="${readMember.imagePath}" />
-			</c:url>
-			         <a class="profile_img col-lg-4 col-md-4 col-sm-4 col-xs-4">
-			      <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
-			      </a>			
-	<!--// profile image -->	
-	<!-- profile part-->	
-	<div class="profile_part col-lg-4 col-md-4">
-		 ${readMember.nick_name}
-		 <br />
-		 ${readMember.introduce}
-		</div>
-		<!--// profile part-->	
-		<!-- setting -->	
-	  <div class="topmenu-user pull-right col-lg-1 col-md-1 col-sm-1 col-xs-1">	  
-	  <a class="navbar-brand glyphicon glyphicon-cog" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>	  
-	  </div> 
-		<!--// setting -->		
-		<!--// page header -->
-		</div>
-		<!-- page menu bar -->
-		<!-- 추가 : article.member_id와 loginInfo의 id를 비교하여 버튼을 노출할 것인지를 판단 -->
-		<div class="breadcrumb btn-group btn-block">
-				<a href="${pageContext.request.contextPath}/mymenu/my_page" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
+			       </c:url>			
+						<h3 style="text-align: left; margin-top: 2px;">
+						<!-- 이미지 화면에 출력 -->					
+					<a class="profile_img pull-left col-lg-4 col-md-4 col-sm-4 col-xs-5">
+		             <img src="${downloadUrl}" class="img-circle img-responsive" style="margin: auto" />
+			           </a>	
+			           <!-- 이미지 화면에 출력 -->
+			           <!-- 작성자 + 소개 -->
+			           <span style="overflow: auto; width: 100%; max-height: 350px;">
+					<small><font size="4" color="#000069"> ${readMember.nick_name}</font></small>
+						<br /> 
+					<small ><font size="4" color="#000069">${readMember.introduce}</font></small> 
+								</span>
+						 	<!--// 작성자 + 소개 -->
+						 	<!-- 설정 -->
+						<c:if test="${readMember.id==loginInfo.id}">
+	                          <a class="pull-right navbar-brand glyphicon glyphicon-cog" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>	  
+	                              </c:if> 	
+	                              <!--// 설정 -->											
+								<br /> 											
+								</h3>
+									<br />
+						<!-- my page + book mark -->
+						<div class="btn-group btn-block">
+					<a href="${pageContext.request.contextPath}/mymenu/my_page" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
 				<a href="${pageContext.request.contextPath}/mymenu/my_page2" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
 	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
-				
+				<c:if test="${readMember.id==loginInfo.id}">
 				<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
-               	
-		</div>		
-		<!--// page menu bar -->
+               	</c:if>
+					</div>
+				<!--// my page + book mark -->								
+							</div>	
+	<!--// page menu bar -->
 		<!-- member article  -->
-			   <div class="recent-container">
-		      
-		      <c:choose>
-		    		<c:when test="${fn:length(articleList) > 0}">
-		    			<c:forEach var="article" items="${articleList}">
+			   <div class="recent-container">		      
+		     <c:choose>
+		    		<c:when test="${fn:length(memberarticleList) > 0}">
+		    			<c:forEach var="article" items="${memberarticleList}">
 		    				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 		    				<div class="thumbnail">
 		    				<c:url var="readUrl" value="/article/article_read">
-					            		<c:param name="article_id" value="${article.id}" />
-					      </c:url>
+					            <c:param name="article_id" value="${article.id}" />
+					            	</c:url>
+					            	<c:url var="readUser" value="/mymenu/my_page">					            						            	
+					            		<c:param name="member_id" value="${article.member_id}" />
+					            	</c:url>
 					            	<!-- 링크 + 썸네일 -->
 					            	<a href="${readUrl}">
 								<c:choose>
@@ -83,7 +88,7 @@
 					            	<!-- 제목 + 작성자 + 조회수 -->
 					            	<div class="item">
 								<h4><font size="4" color="#000069"> ${article.title} </font></h4>
-								<div><font size="4" color="#000000">${article.nick_name}</font></div>
+								<div><font size="4" color="#000000"><a href="${readUser}">${article.nick_name}</a></font></div>
 								<div class="clearfix">
 									<div class="pull-left">${article.reg_date}</div>
 									<div class="pull-right"><font size="4" color="#000069">	${article.category}</font></div>
@@ -97,11 +102,12 @@
 		    		</c:when>
 		    		<c:otherwise>
 		    			<tr>
-				            <td colspan="5" class="text-center" style="line-height: 100px;">
+				       <td colspan="5" class="text-center" style="line-height: 100px;">
 				                No Post</td>
 				        </tr>
 		    		</c:otherwise>
 		    	</c:choose>
+		   
 		   
 		   
 		     		      

@@ -17,7 +17,7 @@ import review.jsp.helper.BaseController;
 import review.jsp.helper.RegexHelper;
 import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
-import review.model.Article;
+import review.model.ImageFile;
 import review.model.Member;
 import review.service.ImageFileService;
 import review.service.MemberService;
@@ -58,14 +58,12 @@ public class EditPic extends BaseController {
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);			
 				
 					
-		/** (3) 로그인 여부 검사 */		
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		/** (3) 로그인 여부 검사 */
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
-			if(web.getSession("loginInfo") == null){
-					sqlSession.close();
-					web.redirect(web.getRootPath() + "/main", "you are need log in.");
-					return null;
-				}		
+		if (web.getSession("loginInfo") == null) {
+			web.redirect(web.getRootPath() + "/index", "you should login");
+			return null;
+		}
 	
 
 			/** (3) 글 번호 파라미터 받기 */
@@ -81,16 +79,17 @@ public class EditPic extends BaseController {
 			//  파라미터를 Beans로 묶기
 			Member member = new Member();
 			member.setId(member_id);
-
-			/** (4) 게시물 일련번호를 사용한 데이터 조회 */
 			// 지금 읽고 있는 게시물이 저장될 객체
+			Member readMember = null;
 			
-			List<Member> readmember = null;		
-					
+			ImageFile file = new ImageFile();
+			file.setMember_id(member_id);
+			List<ImageFile> memberfileList = null;	
+			
 			try {		
 					
-				readmember = memberService.selectMemberPic(member);
-				
+				readMember = memberService.selectMember(member);
+				memberfileList = imageFileService.selectMemberFileList(file);
 			} catch (Exception e) {
 				web.redirect(null, e.getMessage());
 				return null;
@@ -98,24 +97,12 @@ public class EditPic extends BaseController {
 				sqlSession.close();
 			}
 			
-			// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체(에피소드 리스트)
-					if (readmember != null) {
-						for (int i=0; i<readmember.size(); i++) {
-							Member item = readmember.get(i);
-							String imagePath = item.getImagePath();
-							if (imagePath != null) {
-								String thumbPath = upload.createThumbnail(imagePath, 320, 320, true);
-								// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
-								item.setImagePath(thumbPath);
-								logger.debug("thumbnail create > " + item.getImagePath());
-							}
-						}
-					}
+		
 								
 		
 			/** (7) 읽은 데이터를 View에게 전달한다 */
-			request.setAttribute("readmember", readmember);
-			
+			request.setAttribute("readmember", readMember);
+			request.setAttribute("fileList", memberfileList);
 			
 			
 			

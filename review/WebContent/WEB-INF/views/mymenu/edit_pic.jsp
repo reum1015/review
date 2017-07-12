@@ -30,7 +30,7 @@
 		   	</div>
 		   	<br  />
 		   	  	<div class="btn btn-default edit">
-		   	<a href="${pageContext.request.contextPath}/mymenu/edit_pic"><font size="4" color="#2E2EFE">Change Picture</font></a>
+		   	<a href="${pageContext.request.contextPath}/mymenu/edit_pic?member_id=${loginInfo.id}"><font size="4" color="#2E2EFE">Change Picture</font></a>
 		   	</div>
 		   	<br  />
 		   	<div class="btn btn-default edit">
@@ -46,17 +46,19 @@
 		<form class="form-horizontal" name="sign_up_form" method="post"
       action="${pageContext.request.contextPath}/mymenu/edit_pic_ok" enctype="multipart/form-data">
 				
+							
+				
 			<div class="form-groups">
 			<label for="picture" class="pull-left">Picture</label>
 			</div>
 			<br />
 			<div class="form-groups">			
-			<input type="file" id="file" name="file" class="form-control" />
+			<input type="file" id="article_img" name="article_img" class="form-control" />
 			
 				<c:if test="${fileList != null}">
 					<c:forEach var="file" items="${fileList}">
 	            		<!-- 이미지를 다운받기 위한 URL 구성 -->
-		            	<c:url value="/download.do" var="downloadUrl">
+		            	<c:url value="/download" var="downloadUrl">
 		            		<c:param name="file" value="${file.fileDir}/${file.fileName}" />
 		            	</c:url>
 		            	
@@ -66,18 +68,20 @@
 			            		${file.originName} Delete
 			            		<a href="${downloadUrl}">[download]</a>
 			            	</label>
+			            	<script type="text/javascript">
+			            	  $(function() {
+			            		  // 이미지가 등록된 상태이므로, 파일의 신규 등록을 방지
+			            		  $("#article_img").prop("disabled", true);
+			            		  $("#img_del").change(function() {
+			            			  $("#article_img").prop("disabled", !$(this).is(":checked"));
+			            		  });
+			            	  });			            	  
+			            	</script>
 			            </div>
 					</c:forEach>
 				</c:if>
 			</div>			
-				<br />
-				<br />		
-			<div class="form-groups">
-			<label for="about" class="pull-left">About you</label>
-			<textarea class="form-control" id="introduce" name="introduce" >
-			${loginInfo.introduce}
-			</textarea> 
-			  </div>	
+				<br />			
 			 	<br />	
 				<br />										
 	              <div class="btn_sign_up" >

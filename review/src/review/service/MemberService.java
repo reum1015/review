@@ -2,7 +2,6 @@ package review.service;
 
 import java.util.List;
 
-
 import review.model.Member;
 
 public interface MemberService {
@@ -35,6 +34,17 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	public void insertMember(Member member)throws Exception;
+	
+	/**
+	 *  회원 게시글 목록 조회
+	 * 
+	 * @param article
+	 *            - 카테고리 정보가 저장된 Beans
+	 * @return List - 게시물 목록
+	 * @throws Exception
+	 */
+	public List<Member> selectArticleListMember(Member member) throws Exception;
+
 	
 	/**
 	 * 로그인

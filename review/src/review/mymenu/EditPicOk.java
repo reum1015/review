@@ -81,10 +81,7 @@ public class EditPicOk extends BaseController {
     		}
                
 		
-			String introduce = paramMap.get("introduce");
-			
-		
-				
+			String introduce = paramMap.get("introduce");				
 				
 
 			// 파일경로를 로그로 기록		
@@ -185,8 +182,11 @@ public class EditPicOk extends BaseController {
 					// INSERT,UPDATE,DELETE 처리를 수행하는 action 페이지들은 자체적으로 View를
 					// 갖지 않고 결과를 확인할 수 있는 다른 페이지로 강제 이동시켜야 한다. 
 					// 그러므로 View의 경로를 리턴하지 않는다.(중복실행 방지)
-					String view = "index";
-					return view;
+					String url = "%s/mymenu/my_page?member_id=%d";
+					url = String.format(url, web.getRootPath(), member_id);
+					web.redirect(url, null);
+
+					return null;
 }
 	
 

@@ -256,6 +256,26 @@ Member result = null;
 		return result;
 	}
 
+	@Override
+	public List<Member> selectArticleListMember(Member member) throws Exception {
+		List<Member> result = null;
+		try {
+			result = sqlSession.selectList("MemberMapper.selectArticleListMember", member);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 글 목록이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("글 목록 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	
+	
+
 	
 
 
