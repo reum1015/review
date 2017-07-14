@@ -54,53 +54,53 @@ margin-bottom: -70px;
 				  <font size="4"> Visit Review&Bang.com  </font>
 				  <br />
 				   <div class="hidden-xs main-text-web">	   
-				   <font size="6" color="#484848"> Before or After doing something </font>
+				   <font size="6" color="#484848"> Before or After doing something. </font>
 				    </div>
 				    <div class="hidden-lg hidden-md hidden-sm main-toptext-mobile">	   
 				   <font size="5" color="#484848"> Before or After &emsp;</font>
 				   </div>
 				   <div class="hidden-lg hidden-md hidden-sm main-toptexts-mobile">
-				   <font size="5" color="#484848"> doing something </font>
+				   <font size="5" color="#484848"> doing something. </font>
 				    </div>	
 				  
 				   <div class="hidden-xs main-text-bottom-web">	   
-				   <font size="10" color="#585858">Share &emsp;&nbsp; </font><font size="5" color="#BDBDBD"> your Experience </font>
+				   <font size="14" color=#0040FF>Share your Experience </font>
 				    </div>
 				    <div class="hidden-lg hidden-md hidden-sm main-text-mobile">	   
-				   <font size="6" color="#585858">Share &emsp;&emsp;&emsp;&emsp;</font>
+				   <font size="8" color="#0040FF">Share </font>
 				   </div>
 				   <div class="hidden-lg hidden-md hidden-sm main-texts-mobile">
-				   <font size="4" color="#BDBDBD"> your Experience </font>
+				   <font size="5" color="#D0A9F5"> your Experience</font>
 				    </div>							   
 				    
 				   <div class="hidden-xs main-text-bottom-web">	   
-				   <font size="10" color="#585858">Product &nbsp;</font> <font size="5" color="#BDBDBD">what you used  </font>
+				   <font size="10" color="#585858">Product &nbsp;</font> <font size="5" color="#BDBDBD">that you’ve used</font>
 				    </div>
 				    <div class="hidden-lg hidden-md hidden-sm main-text-mobile">	   
 				   <font size="6" color="#585858">Product &emsp;&emsp;&emsp;</font>
 				   </div>
 				   <div class="hidden-lg hidden-md hidden-sm main-texts-mobile">
-				    <font size="4" color="#BDBDBD">what you used  </font>
+				    <font size="4" color="#BDBDBD">that you’ve used</font>
 				    </div>	
 				    
 				  <div class="hidden-xs main-text-bottom-web">	   
-				   <font size="10" color="#585858">Movie &emsp;&nbsp;</font> <font size="5" color="#BDBDBD"> what you watched </font>
+				   <font size="10" color="#585858">Movie &emsp;&nbsp;</font> <font size="5" color="#BDBDBD">that you’ve watched</font>
 				    </div>
 				    <div class="hidden-lg hidden-md hidden-sm main-text-mobile">	   
 				   <font size="6" color="#585858">Movie &emsp;&emsp;&emsp;&emsp;</font>
 				   </div>
 				   <div class="hidden-lg hidden-md hidden-sm main-texts-mobile">
-				    <font size="4" color="#BDBDBD"> what you watched </font>
+				    <font size="4" color="#BDBDBD">that you’ve watched</font>
 				    </div>	
 				    
 				  <div class="hidden-xs main-text-bottom-web main-bottom-web">	   
-				   <font size="10" color="#585858">Travel &emsp;&nbsp;</font> <font size="5" color="#BDBDBD"> how you felt</font>
+				   <font size="10" color="#585858">Places &emsp;&nbsp;</font> <font size="5" color="#BDBDBD">that you’ve been</font>
 				    </div>
 				    <div class="hidden-lg hidden-md hidden-sm main-text-mobile">	   
-				   <font size="6" color="#585858">Travel &emsp;&emsp;&emsp;&emsp;</font>
+				   <font size="6" color="#585858">Places &emsp;&emsp;&emsp;&emsp;</font>
 				   </div>
 				   <div class="hidden-lg hidden-md hidden-sm main-texts-mobile main-bottom-mobile">
-				    <font size="4" color="#BDBDBD"> how you felt</font>
+				    <font size="4" color="#BDBDBD">that you’ve been</font>
 				    </div>								 
 				</p>
 				

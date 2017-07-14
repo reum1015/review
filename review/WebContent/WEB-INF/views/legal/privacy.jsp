@@ -5,9 +5,8 @@
 <html>
 <head>
 
-<title>Insert title here</title>
 </head>
 <body>
-
+<h3>Privacy Policy</h3>
 </body>
 </html>

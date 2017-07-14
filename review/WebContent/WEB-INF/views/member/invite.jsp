@@ -46,14 +46,6 @@
 		</div>
 		<!-- 메인 화면 끝 -->
 
-
-
-
-		 
-		 
-		 
-		 	<!-- 메인 화면 끝 -->
-
 	<!-- footer -->
 	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

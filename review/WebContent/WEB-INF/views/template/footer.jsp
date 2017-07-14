@@ -8,9 +8,8 @@
 <footer id="footer" >
 <p class="pull-right"><a href="#">Back to top</a></p>
 <p>&copy; Review&Bang</p>
- <a href="${pageContext.request.contextPath}/legal/Privacy">Privacy</a>&ensp; 
-	<a href="${pageContext.request.contextPath}/legal/Terms">Terms</a> &ensp;
-	<a href="${pageContext.request.contextPath}/legal/Feedback">Feedback</a> 
-				  
+    <a href="${pageContext.request.contextPath}/legal/privacy">Privacy</a>&ensp; 
+	<a href="${pageContext.request.contextPath}/legal/terms">Terms</a> &ensp;
+	<a href="${pageContext.request.contextPath}/legal/feedback">Feedback</a>
 </footer>
 </div>

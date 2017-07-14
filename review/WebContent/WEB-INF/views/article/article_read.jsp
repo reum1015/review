@@ -7,7 +7,10 @@
 <html lang='ko'>
 <head>
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
-
+ <!-- Multi-column -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/multi-column/ie-row-fix.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css"/>
+	
 <!-- main css -->
 
 
