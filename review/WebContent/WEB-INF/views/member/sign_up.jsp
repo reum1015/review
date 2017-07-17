@@ -153,15 +153,15 @@ $(function() {
 				<div class="form-groups">								
 						<div class="btn-group btn-group-justified" role="group" aria-label="${pageContext.request.contextPath}.">
 							  <div class="btn-group" role="group">
-							  <label class="btn btn-default gender">
+							  <label class="btn btn-link gender">
 							  <input type="radio" name="gender" value="M" /><span>M</span></label>							  
 							  </div>
 							  <div class="btn-group" role="group">
-							  <label class="btn btn-default gender">
+							  <label class="btn btn-link gender">
 							  <input type="radio" name="gender" value="F" /><span>F</span></label>		
 							  </div>
 							  <div class="btn-group" role="group">
-							  <label class="btn btn-default gender">
+							  <label class="btn btn-link gender">
 							  <input type="radio" name="gender" value="Others" /><span>Others</span></label>		
 							  </div>									  
 							</div>								

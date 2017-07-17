@@ -24,7 +24,7 @@
 							<c:url var="downloadUrl" value="/download">
 				 <c:param name="file" value="${readMember.imagePath}" />
 			       </c:url>			
-						<h3 style="text-align: left; margin-top: 2px;">
+						<div style="text-align: left; margin-top: 2px;">
 						<!-- 이미지 화면에 출력 -->
 						<c:choose>
 						<c:when test="${readMember.imagePath != null}">
@@ -37,24 +37,24 @@
 						<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-circle img-responsive"/>
 									</a>
 									</c:otherwise>
-								</c:choose>					
-					
+								</c:choose>		
 			           <!-- 이미지 화면에 출력 -->
-			           <!-- 작성자 + 소개 -->
-			           <span style="overflow: auto; width: 100%; max-height: 350px;">
+			           <!-- 작성자 + 소개 -->			           
+			           <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1" style="overflow: auto; width: auto; max-height: 80px;">
 					<small><font size="4" color="#000069"> ${readMember.nick_name}</font></small>
 						<br /> 
-					<small ><font size="4" color="#000069">${readMember.introduce}</font></small> 
-								</span>
+						
+					<small><font size="4" color="#000069" >${readMember.introduce}</font></small> 
+								</div>
 						 	<!--// 작성자 + 소개 -->
 						 	<!-- 설정 -->
 						<c:if test="${readMember.id==loginInfo.id}">
-						<a class="pull-right navbar-brand glyphicon glyphicon-cog col-lg-1 col-md-3 hidden-sm hidden-xs" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>
-	                      <a class="pull-right navbar-brand glyphicon glyphicon-cog hidden-lg hidden-md col-sm-3 col-xs-3" href="${pageContext.request.contextPath}/mymenu/options_mobile" style="font-size: 1.5em;"></a>	  
+						<a class="pull-right navbar-brand glyphicon glyphicon-cog col-lg-1 col-md-1 hidden-sm hidden-xs" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>
+	                      <a class="pull-right navbar-brand glyphicon glyphicon-cog hidden-lg hidden-md col-sm-1 col-xs-1" href="${pageContext.request.contextPath}/mymenu/options_mobile" style="font-size: 1.5em;"></a>	  
 	                              </c:if> 	
 	                              <!--// 설정 -->											
 								<br /> 											
-								</h3>
+								</div>
 									<br />
 						<!-- my page + book mark -->
 						<div class="btn-group btn-block">

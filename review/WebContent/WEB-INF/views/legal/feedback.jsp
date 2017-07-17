@@ -6,20 +6,35 @@
 <html lang='ko'>
 <head>
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
- 
- <!-- main css -->
- 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/legalmenu.css" />
 
-<style type="text/css">
-</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
   <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
 	<!-- 메인 화면 시작 -->	
-		<div class="container" style="min-height: 500px;">		
+		<div class="containers" >
+		<!-- 왼쪽 정보편집부분 -->
+		<div id="" class="legal_basic col-lg-2 col-md-3 hidden-sm hidden-xs">
+			<div class="btn btn-link">
+				<a href="${pageContext.request.contextPath}/legal/privacy">
+				<font	size="5">Privacy Policy</font></a>
+			</div>
+			<br />
+			<div class="btn btn-link ">
+				<a href="${pageContext.request.contextPath}/legal/terms"><font
+					size="5">Terms of Use</font></a>
+			</div>
+			<br />
+			<div class="btn btn-link">
+				<a href="${pageContext.request.contextPath}/legal/feedback"><font
+					size="5">Feedback</font></a>
+			</div>
+			<br /> <br />
+		</div>
+		<!--// 왼쪽 정보편집부분 -->				
 	<div class="row">
-    <div class="col-lg-6 col-md-6 col-md-offset-3 col-sm-12 col-xs-12" style="margin-top: 40px;">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-top: 40px;">
       <h2 class="page-header">How can i help you?</h2>
       
       <!-- 이메일 주소 입력 폼 시작 -->

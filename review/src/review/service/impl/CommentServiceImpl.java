@@ -38,7 +38,7 @@ public class CommentServiceImpl implements CommentService {
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 등록에 실패했습니다.");
+			throw new Exception("please login.");
 		} finally {
 			sqlSession.commit();
 		}

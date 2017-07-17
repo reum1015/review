@@ -6,10 +6,14 @@
 <div class="container" style="margin-top:20px; margin-bottom: -68px;">
 
 <footer id="footer" >
+<div>
 <p class="pull-right"><a href="#">Back to top</a></p>
-<p>&copy; Review&Bang</p>
+<p class="pull-left"> &copy;Review&Bang&ensp;</p>
+<p class="pull-left">
     <a href="${pageContext.request.contextPath}/legal/privacy">Privacy</a>&ensp; 
 	<a href="${pageContext.request.contextPath}/legal/terms">Terms</a> &ensp;
 	<a href="${pageContext.request.contextPath}/legal/feedback">Feedback</a>
+</p>
+</div>
 </footer>
 </div>

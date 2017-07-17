@@ -21,19 +21,19 @@
 	<div class="container_edit">
 		<!-- 왼쪽 정보편집부분 -->
 		<div class="account_basic col-lg-3 col-md-3 hidden-sm hidden-xs">
-		   	<div class="btn btn-default edit">
+		   	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/account_info"><font size="4" color="#2E2EFE">Account Info</font></a>
 		   	</div>
 		   	<br  />
-		   	<div class="btn btn-default edit">
+		   	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/edit_profile"><font size="4" color="#2E2EFE">Edit Profile</font></a>
 		   	</div>
 		   	<br  />
-		   	  	<div class="btn btn-default edit">
+		   	  	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/edit_pic?member_id=${loginInfo.id}"><font size="4" color="#2E2EFE">Change Picture</font></a>
 		   	</div>
 		   	<br  />
-		   	<div class="btn btn-default edit">
+		   	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/log_out"><font size="4" color="#2E2EFE">Log out</font></a>
 		   	</div>
 		   	<br  />		    	  

@@ -47,19 +47,19 @@ $(function() {
 	<div class="container_edit">
 		<!-- 왼쪽 정보편집부분 -->
 		<div class="account_basic col-lg-3 col-md-3 hidden-sm hidden-xs">
-		   	<div class="btn btn-default edit">
+		   	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/account_info"><font size="4" color="#2E2EFE">Account Info</font></a>
 		   	</div>
 		   	<br  />
-		   	<div class="btn btn-default edit">
+		   	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/edit_profile"><font size="4" color="#2E2EFE">Edit Profile</font></a>
 		   	</div>
 		   	<br  />
-		   	  	<div class="btn btn-default edit">
+		   	  	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/edit_pic?member_id=${loginInfo.id}"><font size="4" color="#2E2EFE">Change Picture</font></a>
 		   	</div>
 		   	<br  />
-		   	<div class="btn btn-default edit">
+		   	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/log_out"><font size="4" color="#2E2EFE">Log out</font></a>
 		   	</div>
 		   	<br  />		    	  
@@ -82,26 +82,28 @@ $(function() {
 			  <br />
 			    	<div class="form-groups">
 			 <label for="about" class="pull-left">About you</label>
-			<textarea class="form-control" id="introduce" name="introduce" >
+			<textarea class="form-control" id="introduce" name="introduce"  placeholder="about you">
 			${loginInfo.introduce}
 			</textarea> 
 			  </div>	
+			  
+			  
 			  		<br />
 				<div class="form-groups">		
 				<label for="gender" class="pull-left">gender</label>						
 						<div class="btn-group btn-group-justified" role="group" aria-label="${pageContext.request.contextPath}.">
 							  <div class="btn-group" role="group">
-							  <label class="btn btn-default gender">
+							  <label class="btn btn-link gender">
 							  <input type="radio" name="gender" value="M" 
 							  <c:if test="${loginInfo.gender == 'M'}">checked</c:if> /><span>M</span></label>							  
 							  </div>
 							  <div class="btn-group" role="group">
-							  <label class="btn btn-default gender">
+							  <label class="btn btn-link gender">
 							  <input type="radio" name="gender" value="F" 
 							  <c:if test="${loginInfo.gender == 'F'}">checked</c:if>/><span>F</span></label>		
 							  </div>
 							  <div class="btn-group" role="group">
-							  <label class="btn btn-default gender">
+							  <label class="btn btn-link gender">
 							  <input type="radio" name="gender" value="Others" 
 							  <c:if test="${loginInfo.gender == 'Others'}">checked</c:if>/><span>Others</span></label>		
 							  </div>									  

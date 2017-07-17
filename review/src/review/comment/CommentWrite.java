@@ -89,7 +89,7 @@ public class CommentWrite extends BaseController {
 		// 내용 검사
 		if (!regex.isValue(content)) {
 			sqlSession.close();
-			web.printJsonRt("내용을 입력하세요.");
+			web.printJsonRt("field is required");
 			return null;
 		}
 

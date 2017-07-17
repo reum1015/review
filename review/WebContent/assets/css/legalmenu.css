@@ -1,0 +1,26 @@
+
+    .containers {	
+	height: 100%;	
+   }        
+      /*     edit      */
+      
+         
+      .legal_basic {
+      margin-left: 20px;
+       margin-top: 45px;     
+      min-height: 450px;
+      }
+      
+     .legal_form {       
+       height: 40%;       
+       margin-top: 50px;       
+        padding: 30x; 
+         border-left: 5px solid red;
+           border-color: #FAFAFA;     
+         text-align: left;
+      }
+      
+       
+    
+      
+      

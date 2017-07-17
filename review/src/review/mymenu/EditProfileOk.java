@@ -56,7 +56,7 @@ public class EditProfileOk extends BaseController {
 					return null;
 				}		
 				
-			 int member_id = 0;
+			
 				/** (4) 파라미터 받기 */		
 								
 				
@@ -119,10 +119,7 @@ public class EditProfileOk extends BaseController {
 						// 갖지 않고 결과를 확인할 수 있는 다른 페이지로 강제 이동시켜야 한다. 
 						// 그러므로 View의 경로를 리턴하지 않는다.(중복실행 방지)
 						sqlSession.close();
-						String url = "%s/mymenu/my_page?member_id=%d";
-						url = String.format(url, web.getRootPath(), member_id);
-						web.redirect(url, null);
-
-						return null;
+						String view = "mymenu/edit_profile";
+						return view;
 	}
 }

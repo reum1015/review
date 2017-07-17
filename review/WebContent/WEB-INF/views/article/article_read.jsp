@@ -129,7 +129,7 @@
 			<!-- 내용입력, 저장버튼 -->
 			<div class='form-group'>
 				<div class="input-group">
-					<textarea class="form-control custom-control" name='content' style="resize: none; height: 80px"></textarea>
+					<textarea class="form-control custom-control" name='content' style="resize: none; height: 80px" placeholder="what's your experience?"></textarea>
 					<span class="input-group-btn">
 						<button type="submit" class="btn btn-success" style="height: 80px">Save</button>
 					</span>
@@ -268,7 +268,7 @@
 					alert(json.rt);
 					return false;
 				}				
-				alert("삭제되었습니다.");
+				
 				
 				// modal 강제로 닫기
 				$("#comment_delete_modal").modal('hide');
