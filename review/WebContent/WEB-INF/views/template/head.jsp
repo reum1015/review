@@ -9,7 +9,7 @@
 		<!-- 스마트 장치에서의 해상도 균일화 처리 -->
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,
 		maximum-scale=1.0,user-scalable=no">
-				
+						
 			<!-- 모바일 웹 페이지 설정 -->	
     <link rel="shortcut icon" href="assets/ico/favicon.ico" />
     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/assets/icon/apple-touch-icon-144-precomposed.png"/>
