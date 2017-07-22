@@ -20,7 +20,7 @@
 	     <result property="member_id" column="member_id" />
 	     <result property="imagePath" column="imagePath" />  
 	</resultMap>
-		
+			
 	<!-- 게시글 정보 저장하기 article_write -->
 	<insert id="insertArticle" parameterType="review.model.Article" 
 		useGeneratedKeys="true" keyProperty="id">
