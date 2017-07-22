@@ -13,6 +13,7 @@
 					value="jdbc:mysql://localhost:3306/reviewnbang?characterEncoding=UTF-8"/>
 				<property name="username" value="root"/>	
 				<property name="password" value="root"/>
+				
 				<!-- <property name="password" value="root"/>  -->
 				<!--<property name="password" value="bang123!@#"/> -->				 
 			</dataSource>	
