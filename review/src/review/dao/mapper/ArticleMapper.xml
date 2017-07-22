@@ -25,9 +25,9 @@
 	<insert id="insertArticle" parameterType="review.model.Article" 
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO article (
-			category, title, content, reg_date, edit_date, member_id, nick_name, hit, ip_address 
+			category, title, content, reg_date, edit_date, member_id, nick_name, hit, ip_address,like_count 
 		) VALUES (
-			#{category}, #{title}, #{content}, now(), now(), #{member_id}, #{nick_name}, 0, #{ip_address}
+			#{category}, #{title}, #{content}, now(), now(), #{member_id}, #{nick_name}, 0, #{ip_address},0
 		)
 	</insert>
 	
@@ -122,7 +122,7 @@
 	<!-- 조회수 1 증가한다. article_read-->
 	<update id="updateArticleHit" parameterType="review.model.Article" >
 		UPDATE article SET hit=hit+1 WHERE id=#{id}	
-		</update>
+	</update>
 		
 	<!-- 자신의 게시물인지 검사한다. article_delete -->
 	<select id="selectArticleCountByMemberId" parameterType="review.model.Article"
@@ -144,5 +144,17 @@
 			ip_address=#{ip_address}, edit_date=now()
 		WHERE id=#{id}
 	</update>
+	
+		<!-- like_count +1 증가-->
+	<update id="updateLikeCountPlus" parameterType="review.model.Article" >
+		UPDATE article SET like_count=like_count+1 WHERE id=#{id}	
+	</update>
+	
+			<!-- like_count +1 증가-->
+	<update id="updateLikeCountMinus" parameterType="review.model.Article" >
+		UPDATE article SET like_count=like_count-1 WHERE id=#{id}	
+	</update>
+	
+	
 
 </mapper>

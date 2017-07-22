@@ -16,7 +16,7 @@ public interface FavoriteService {
 	 * @return
 	 * @throws Exception
 	 */
-	public int selectCountFavoriteBookById(Favorite favorite)throws Exception;
+	public int selectCountFavoriteArticleById(Favorite favorite)throws Exception;
 	
 	/**
 	 * 작품에 대한 관심등록 추가
@@ -32,9 +32,7 @@ public interface FavoriteService {
 	 * @throws Exception
 	 */
 	public void deleteRemoveFavorite(Favorite favorite)throws Exception;
-	
 
-	
 	/**
 	 * 관심작품 목록 조회
 	 *  @param favorite - 관심작품이 저장된 BEans

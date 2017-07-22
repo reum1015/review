@@ -26,9 +26,9 @@
 	<!-- 관심등록 추가 -->
 	<insert id="insertAddFavorite" parameterType="review.model.Favorite" useGeneratedKeys="true" keyProperty="id">
 	INSERT INTO favorite (
-	 member_id, article_id, reg_date
+	 member_id, article_id
 	)	VALUES (
-	 #{member_id}, #{article_id}, now()
+	 #{member_id}, #{article_id}
 	 )
 	</insert> 
 	

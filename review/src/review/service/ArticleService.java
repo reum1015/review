@@ -108,6 +108,25 @@ public interface ArticleService {
 	 */
 	public void updateArticle(Article article) throws Exception;
 	
+	/**
+	 *  like_count +1
+	 * @param article
+	 * @return
+	 * @throws Exception
+	 */
+	public void likeCountPlus(Article article) throws Exception;
+	
+	/**
+	 *  like_count -1
+	 * @param article
+	 * @return
+	 * @throws Exception
+	 */
+	public void likeCountMinus(Article article) throws Exception;
+	
+	
+	
+	
 }
 
 	

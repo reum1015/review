@@ -215,6 +215,46 @@ public class ArticleServiceImpl implements ArticleService {
 		return result;
 	}
 
+	@Override
+	public void likeCountPlus(Article article) throws Exception {
+		// TODO Auto-generated method stub
+		try{
+			int result = sqlSession.update("ArticleMapper.updateLikeCountPlus", article);
+			if(result==0){
+				throw new NullPointerException();
+			}
+		}catch(NullPointerException e){
+			sqlSession.rollback();
+			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+		}catch(Exception e){
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("like_count 갱신에 실패했습니다.");
+		}finally{
+			sqlSession.commit();
+		}
+	}
+
+	@Override
+	public void likeCountMinus(Article article) throws Exception {
+		// TODO Auto-generated method stub
+		try{
+			int result = sqlSession.update("ArticleMapper.updateLikeCountMinus", article);
+			if(result==0){
+				throw new NullPointerException();
+			}
+		}catch(NullPointerException e){
+			sqlSession.rollback();
+			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+		}catch(Exception e){
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("like_count 갱신에 실패했습니다.");
+		}finally{
+			sqlSession.commit();
+		}
+	}
+
 	
 
 
