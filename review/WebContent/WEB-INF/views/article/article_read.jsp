@@ -11,9 +11,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/multi-column/ie-row-fix.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css"/>
 	
-<!-- main css -->
-
-
 <style type="text/css">
 .container {	
 	height: auto;
@@ -22,8 +19,73 @@
 .thumbnail {
 	margin-top: 30px;
 }
+
+
+
+
 </style>
 
+<script type="text/javascript">
+$(function(){		
+	
+	$('.modal').on('hidden.bs.modal', function(e){
+		//모달창 내의 내용을 강제로 지움.
+		$(this).removeData('bs.modal');
+	});
+	
+	var bookmark_count = $("#bookmark_count").val();
+	var member_id = $("#member_id").val();
+	var total_bookmark = $("#total_bookmark").val();		
+	var article_id = $("#article_id").val();
+	var isBookMarkState = $("#isBookMarkState").val();
+	
+	//관심등록 On 이면 마크 표시
+	if(bookmark_count > 0){	
+		$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");	
+		}else{
+			$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
+		}
+	
+	$("#bookmark_button").on('click',function(e){
+		e.preventDefault();
+		if(loginInfo.member_id == 0){
+			var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
+			
+			if(result){
+				location.replace('/review/member/login?article_id=' + article_id );
+				return false;
+			}else{
+				return false;
+			}
+		}
+		
+		//북마크 On/Off
+		$.get("${pageContext.request.contextPath}/article/addBookMark", 
+				{bookmark_count : bookmark_count, member_id : member_id, total_bookmark : total_bookmark, article_id: article_id},
+				function(data){
+						var isBookMarkState = data.isBookMarkState;
+						 total_bookmark=data.total_bookmark;
+						 bookmark_count = data.bookmark_count;
+					
+						$("#bookmark_count").attr("value", bookmark_count);
+						$("#concernCount").text(total_bookmark);
+						
+						
+						if(isBookMarkState){
+							alert("이 글은 책갈피로 설정되었습니다. 나의 메뉴에서 책갈피 페이지에서 확인 할 수 있습니다.");
+							$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");
+						}else{
+							alert("관심 글에서 삭제되었습니다.");
+							$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
+						}
+					});
+	});
+	
+});
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_read.css"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/template/topbarsearch.jsp" />
@@ -104,14 +166,24 @@
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
 									<!-- like + comment + book mark -->
+								
+				
 									<div class="btn-group btn-block">
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Like</i></a> 
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Comment</i></a>
-										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
-											<i class="">Book mark</i></a>
+										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
+											</a>
+											<input type="hidden" value="${bookmarkCount}" id="bookmark_count">
+	                       <input type="hidden" value="${member_id}" id="member_id">				
+                        <input type="hidden" value="${article_id}" id="article_id">	
+	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
+	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
 									</div>
+									
+									
 									<!--// like + comment + book mark -->
 								</div>
 							</div>						

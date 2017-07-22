@@ -54,7 +54,7 @@ public class InviteOk extends BaseController {
 		Member loginInfo = (Member) web.getSession("loginInfo");
 		if(web.getSession("loginInfo") == null){
 			sqlSession.close();
-			web.redirect(web.getRootPath() + "/main", "you need log in.");
+			web.redirect(web.getRootPath() + "/index", "you need log in.");
 			return null;
 		}		
 		
@@ -73,7 +73,7 @@ public class InviteOk extends BaseController {
 		
 		if(email==null) {
 			sqlSession.close();
-			web.redirect(null, "We need this information to find your account.");
+			web.redirect(null, "We need your eamil information to invite your friends.");
 			return null;
 		}
 		

@@ -47,7 +47,7 @@ public class Invite extends BaseController {
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
 		if(web.getSession("loginInfo") == null){
 			sqlSession.close();
-			web.redirect(web.getRootPath() + "/main", "you need log in.");
+			web.redirect(web.getRootPath() + "/index", "you need log in.");
 			return null;
 		}		
 				

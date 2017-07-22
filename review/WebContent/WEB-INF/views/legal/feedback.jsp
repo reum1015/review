@@ -34,24 +34,31 @@
 		</div>
 		<!--// 왼쪽 정보편집부분 -->				
 	<div class="row">
-    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-top: 40px;">
-      <h2 class="page-header">How can i help you?</h2>
+    <div class="col-lg-offset-1 col-md-offset-1  col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top: 40px;">
+      <div ></div>
+      <h1 class="page-header" style="text-align: center;">How can I help you?</h1>
       
       <!-- 이메일 주소 입력 폼 시작 -->
-       <form name="myform" method="post" action="${pageContext.request.contextPath}/member/invite_ok">
-        <div class="form-group">
-          <input type="text" name="email" class="form-control" placeholder="your friend's email" />
+       <form name="myform" method="post" action="${pageContext.request.contextPath}/legal/feedback_ok">
+        <div class="form-group"> 
+            <p>Customer feedback is extremely important to us and 
+            we'd love to hear about your customer experience.</p>
         </div>
         
          <div class="form-group">
-          <textarea id="contents" name="contents" style="width: 100%; height: 150px;" placeholder="Introduce Review&bang"></textarea>
+          <div class="form-group">
+          <input type="text" name="email" class="form-control" placeholder="Please enter the e-mail address." />
+          <p>Please enter the e-mail address associated with your Review&Bang account.</p>
+        </div>
+         <h5><strong>Subject:</strong>Feedback to Review&Bang.com</h5>
+          <textarea id="contents" name="contents" style="width: 100%; height: 150px;" placeholder="Comments"></textarea>
         </div>
         <div class="form-group">
              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
                <button type="button" class="btn btn-danger form-control" onclick="history.back();">Cancel</button>
                </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
-               <button type="submit" class="btn btn-primary form-control">Invite</button>
+               <button type="submit" class="btn btn-primary form-control">Send Message</button>
              </div>            
             </div>
       </form>
