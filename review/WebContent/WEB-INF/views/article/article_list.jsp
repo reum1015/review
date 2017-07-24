@@ -15,6 +15,8 @@
 	$(function() {
 		var member_id = $("#member_id").val();
 		
+		
+		//Like 버튼
 		$('.like_button').on('click', function(e) {
 			var member_id = $("#member_id").val();
 			var article_id = $(this).attr('id');
@@ -37,12 +39,9 @@
 								alert("Like removed");
 							}
 				});
-
 			}
-			
-			
 		});
-		
+		//Like 버튼 끝
 		
 	})
 </script>
@@ -116,7 +115,7 @@
 								 <div>
 								<font size="4" color="#A0A0FF ">title:</font><font size="4" color="#000069"> ${article.title} </font>
 								 </div>
-								<hr />																
+								<hr />
 								<div style="overflow: auto; width:100%; max-height: 180px;">
 								${article.content}
 								</div>
@@ -125,9 +124,9 @@
 							<br />
 							<!-- like + comment + book mark -->
 							<div class="btn-group btn-block">
-							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"><i class="">Like</i></a>
-							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Comment</i></a>
-							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Book mark</i></a>
+							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> <span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
+							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">Comment</i></a>
+							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">Book mark</i></a>
 								<input type="hidden" value="${member_id}" id="member_id">
 							
 							</div>
