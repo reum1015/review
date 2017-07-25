@@ -20,6 +20,7 @@ import review.jsp.helper.WebHelper;
 import review.model.Article;
 import review.model.BookMark;
 
+import review.model.Member;
 import review.service.ArticleService;
 import review.service.BookMarkService;
 import review.service.CommentService;
@@ -63,17 +64,22 @@ public class ArticleRead extends BaseController {
 		commentService = new CommentServiceImpl(sqlSession, logger);		
 		bookmarkService = new BookMarkServiceImpl(sqlSession, logger);
 		
-
 		
+	int member_id = 0;
 		
+		Member loginInfo = (Member)web.getSession("loginInfo");
 		
-		int member_id = 0;
+		if(loginInfo != null){
+			member_id = loginInfo.getId();
+		}
 		
 		logger.debug("member_id -----------------------------------> " + member_id);
 		
 		/** (3) 글 번호 파라미터 받기 */
 		int article_id = web.getInt("article_id");
 		logger.debug("article_id" + article_id);
+		
+		
 				
 		if (article_id == 0) {
 			web.redirect(null, "글 번호가 지정되지 않았습니다.");

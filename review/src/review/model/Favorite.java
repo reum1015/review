@@ -5,6 +5,10 @@ public class Favorite {
 	private int id;		// 
 	private int member_id;   //회원 번호
 	private int article_id;   // 책 번호
+
+	private String title;               // 제목
+	private String content;		//   내용
+	private String category;     // 카테고리
 		
 	// 페이지 구현을 위해서 추가된값
 	private int limitStart;
@@ -13,7 +17,6 @@ public class Favorite {
 	// 갤러리 구현을 위해서 추가된 값
 	private boolean gallery;
 	private String imagePath;
-	
 	public int getId() {
 		return id;
 	}
@@ -31,6 +34,24 @@ public class Favorite {
 	}
 	public void setArticle_id(int article_id) {
 		this.article_id = article_id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public int getLimitStart() {
 		return limitStart;
@@ -58,12 +79,9 @@ public class Favorite {
 	}
 	@Override
 	public String toString() {
-		return "Like [id=" + id + ", member_id=" + member_id + ", article_id=" + article_id + ", limitStart="
-				+ limitStart + ", listCount=" + listCount + ", gallery=" + gallery + ", imagePath=" + imagePath + "]";
+		return "Favorite [id=" + id + ", member_id=" + member_id + ", article_id=" + article_id + ", title=" + title
+				+ ", content=" + content + ", category=" + category + ", limitStart=" + limitStart + ", listCount="
+				+ listCount + ", gallery=" + gallery + ", imagePath=" + imagePath + "]";
 	}
-	
-	
-	
-
 	
 }

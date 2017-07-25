@@ -88,7 +88,7 @@ public class FavoriteAdd extends BaseController{
 			
 			
 		}catch (Exception e) {
-			// TODO: handle exception
+			
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
 		}finally {

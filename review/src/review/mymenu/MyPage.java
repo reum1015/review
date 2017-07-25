@@ -105,15 +105,15 @@ public class MyPage extends BaseController {
 		
 		
 		// 회원 프로필 사진
-		if (readMember != null) {
-			String imagePath = readMember.getImagePath();
-			if (imagePath != null) {
-				String thumbPath = upload.createThumbnail(imagePath, 150, 150, true);
-			// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
-				readMember.setImagePath(thumbPath);
-				logger.debug("thumbnail create > " + readMember.getImagePath());
-							}
-		}
+				if (readMember != null) {
+					String imagePath = readMember.getImagePath();
+					if (imagePath != null) {
+						String thumbPath = upload.createThumbnail(imagePath, 150, 150, true);
+					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
+						readMember.setImagePath(thumbPath);
+						logger.debug("thumbnail create > " + readMember.getImagePath());
+									}
+				}
 		
 		// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체(에피소드 리스트)
 				if (memberarticleList != null) {

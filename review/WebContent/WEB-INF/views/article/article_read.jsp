@@ -48,7 +48,7 @@ $(function(){
 	
 	$("#bookmark_button").on('click',function(e){
 		e.preventDefault();
-		if(loginInfo.member_id == 0){
+		if(member_id == 0){
 			var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
 			
 			if(result){
@@ -237,7 +237,7 @@ $(function(){
                 <!-- 수정,삭제 버튼 -->
         
                 <div class='pull-right'>    
-             <c:if test='${readArticle.member_id==loginInfo.id}'>
+             <c:if test='${comment.member_id==loginInfo.id}'>
                     <a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
                         <i class='glyphicon glyphicon-edit'></i>
                     </a>

@@ -15,6 +15,9 @@
 		<result property="article_id" column="article_id"/>
 		<result property="reg_date" column="reg_date"/>
 		<result property="imagePath" column="image_path"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="category" column="category"/>
 		
 	</resultMap>
 	
@@ -40,32 +43,34 @@
 		
 		<!-- 관심작품 목록을 조회한다. -->
 	<select id="selectFavoriteList" parameterType="review.model.Favorite" resultMap="favorite">
-    SELECT f.article_id, concat(i.file_dir, '/', i.file_name) as imagePath 
-      FROM member as m 
-      LEFT JOIN favorite as f ON m.id = f.member_id
-      LEFT JOIN article as a ON f.article_id = a.id 
-      LEFT JOIN imageFile as i ON b.id = i.article_id where i.content_type LIKE ('image/%') 
-      AND member_id=#{member_id}
-        
-        ORDER BY a.id DESC
-       	LIMIT #{limitStart}, #{listCount}
-       
+       	SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date,
+		(SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE article_id=a.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath		 
+		FROM   favorite as f
+         LEFT JOIN member as m ON f.member_id = m.id
+         LEFT JOIN article as a ON a.id = f.article_id 
+         WHERE			
+		replace(category,' ','') like concat('%', #{category}, '%')
+		OR replace(title ,' ','') like concat('%', #{title }, '%')
+		OR replace(content ,' ','') like concat('%', #{content }, '%')		       
+        ORDER BY a.like_count DESC
+       	LIMIT #{limitStart}, #{listCount}              
 	</select>		
 	
 	
 		<!-- 전체 관심작품 수를 조회한다. 페이지 구현 위해서 -->
 	<select id="selectFavoriteCount" parameterType="review.model.Favorite" resultType="int">
-	SELECT COUNT(id) FROM favorite WHERE member_id =#{member_id}	
+	SELECT COUNT(id) FROM favorite 	
 	</select>
 	
 	<!-- 특정 멤버에 속한 모든 관심작품을 삭제한다. -->
 	<delete id="deleteFavoriteAll" parameterType="review.model.Favorite">
 	  DELETE FROM favorite WHERE member_id =#{member_id}
 	</delete>
-	
-
-
-
 	
 
 </mapper>

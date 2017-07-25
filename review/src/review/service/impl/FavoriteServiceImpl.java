@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.Logger;
 
+
 import review.model.Favorite;
 import review.service.FavoriteService;
 
@@ -43,7 +44,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
 	@Override
 	public int insertAddFavorite(Favorite favorite) throws Exception {
-		// TODO Auto-generated method stub
+		
 		try{
 			int result = sqlSession.insert("FavoriteMapper.insertAddFavorite",favorite);
 			if(result == 0){
@@ -68,7 +69,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
 	@Override
 	public void deleteRemoveFavorite(Favorite favorite) throws Exception {
-		// TODO Auto-generated method stub
+	
 		try{
 			int result = sqlSession.delete("FavoriteMapper.deleteRemoveFavorite",favorite);
 			if(result == 0){
@@ -90,16 +91,36 @@ public class FavoriteServiceImpl implements FavoriteService {
 
 	@Override
 	public List<Favorite> selectFavoriteList(Favorite favorite) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<Favorite> result = null;
+		try {
+			result = sqlSession.selectList("FavoriteMapper.selectFavoriteList", favorite);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("검색한 좋아요 조회된 글 목록이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("검색한 좋아요 글 목록 조회에 실패했습니다.");
+		}
+		return result;
 	}
 
 
 
 	@Override
 	public int selectFavoriteCount(Favorite favorite) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+            int result = 0;		
+		try {
+			// 게시물 수가 0건인 경우도 있으므로
+			// 결과값이 0인 경우에 예외를 발생시키지 않는다.
+			result = sqlSession.selectOne("FavoriteMapper.selectFavoriteCount", favorite);
+		} catch(Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("관심작품 수 조회에 실패했습니다. ");
+		}
+		
+		return result;
 	}
 
 
