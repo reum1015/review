@@ -69,21 +69,21 @@
 		       
 		    	<c:choose>
 		    		<c:when test="${fn:length(favoriteList) > 0}">
-		    			<c:forEach var="article" items="${favoriteList}">
+		    			<c:forEach var="favorite" items="${favoriteList}">
 		    				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		    				<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		    				<c:url var="readUrl" value="/article/article_read">
-					            		<c:param name="article_id" value="${article.id}" />
+					            		<c:param name="favorite_id" value="${favorite.id}" />
 					            	</c:url>
 					            	<c:url var="readUser" value="/mymenu/my_page">					            						            	
-					            		<c:param name="member_id" value="${article.member_id}" />
+					            		<c:param name="member_id" value="${favorite.member_id}" />
 					            	</c:url>
 					            	<!-- 링크 + 썸네일 -->
 					            	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4">
 								<c:choose>
-									<c:when test="${article.imagePath != null}">
+									<c:when test="${favorite.imagePath != null}">
 										<c:url var="downloadUrl" value="/download">
-											<c:param name="file" value="${article.imagePath}" />
+											<c:param name="file" value="${favorite.imagePath}" />
 										</c:url>										
 										<img src="${downloadUrl}" class="img-responsive img-rounded"/>
 									</c:when>
@@ -95,17 +95,17 @@
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
 					            	<div class="item col-lg-8 col-md-8 col-sm-7">
-								<a href="${readUser}"><font size="4" color="#000000">${article.nick_name}</font></a><div class="pull-right"> ${article.reg_date}
+								<a href="${readUser}"><font size="4" color="#000000">${favorite.nick_name}</font></a><div class="pull-right"> ${favorite.reg_date}
 								</div>								
 								<div>
-								<font size="4" color="#A0A0FF "> keyword: </font> <font size="4" color="#000069">	${article.category}</font>
+								<font size="4" color="#A0A0FF "> keyword: </font> <font size="4" color="#000069">	${favorite.category}</font>
 								 </div>
 								 <div>
-								<font size="4" color="#A0A0FF ">title:</font><font size="4" color="#000069"> ${article.title} </font>
+								<font size="4" color="#A0A0FF ">title:</font><font size="4" color="#000069"> ${favorite.title} </font>
 								 </div>
 								<hr />
 								<div style="overflow: auto; width:100%; max-height: 180px;">
-								${article.content}
+								${favorite.content}
 								</div>
 								</div>							
 							<!--// 제목 + 작성자 + 조회수 -->
@@ -113,8 +113,8 @@
 							<!-- like + comment + book mark -->
 							<div class="btn-group btn-block">
 							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> <span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
-							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">Comment</i></a>
-							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">Book mark</i></a>
+							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i>Comment</i></a>
+							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i>Book mark</i></a>
 								<input type="hidden" value="${member_id}" id="member_id">
 							
 							</div>
@@ -130,7 +130,7 @@
 				            <td colspan="5" class="text-center" style="line-height: 100px;">
 				               No Post about ${keyword}.
 				               <br/>
-				               Why don't you be a first reviewer about ${keyword} 
+				               Why don't you be a first best reviewer about ${keyword} 
 				               </td>
 				        </tr>
 		    		</c:otherwise>
@@ -259,8 +259,8 @@
 							<!-- like + comment + book mark -->
 							<div class="btn-group btn-block">
 							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> <span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
-							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">Comment</i></a>
-							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">Book mark</i></a>
+							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i>Comment</i></a>
+							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i> Book mark</i></a>
 								<input type="hidden" value="${member_id}" id="member_id">
 							
 							</div>

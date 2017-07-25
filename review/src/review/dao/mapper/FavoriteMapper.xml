@@ -62,9 +62,16 @@
 	</select>		
 	
 	
-		<!-- 전체 관심작품 수를 조회한다. 페이지 구현 위해서 -->
+	<!-- 전체 관심작품 수를 조회한다. 페이지 구현 위해서 -->
 	<select id="selectFavoriteCount" parameterType="review.model.Favorite" resultType="int">
-	SELECT COUNT(id) FROM favorite 	
+	SELECT COUNT(f.id) 
+	FROM  favorite as f       
+         LEFT JOIN article as a ON  f.article_id =a.id 
+	 WHERE			
+		replace(category,' ','') like concat('%', #{category}, '%')
+		OR replace(title ,' ','') like concat('%', #{title }, '%')
+		OR replace(content ,' ','') like concat('%', #{content }, '%')	
+	
 	</select>
 	
 	<!-- 특정 멤버에 속한 모든 관심작품을 삭제한다. -->

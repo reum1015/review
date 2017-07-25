@@ -110,7 +110,7 @@
 		SELECT COUNT(id) 
 		FROM   article
 			WHERE			
-			 replace(category,' ','') like concat('%', #{category}, '%')
+			replace(category,' ','') like concat('%', #{category}, '%')
 		OR replace(title ,' ','') like concat('%', #{title }, '%')
 		OR replace(content ,' ','') like concat('%', #{content }, '%')
 		
