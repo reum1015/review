@@ -7,9 +7,45 @@
 <html lang='ko'>
 <head>
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
- <!-- Multi-column -->
+	<!-- Javascript -->
+	  	<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/tab-x/bootstrap-tabs-x.min.js"></script>
+	    
+	   
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>   		
+	<!-- StarRating -->    		
+	<link href="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.css" media="all" rel="stylesheet" type="text/css" />    		
+	    		
+	<!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
+	<link href="${pageContext.request.contextPath}/assets/css/star-rating/theme.css" media="all" rel="stylesheet" type="text/css" />
+	
+	
+	<link href="${pageContext.request.contextPath}/assets/css/selectbox/css/bootstrap-select.css" media="all" rel="stylesheet" type="text/css" />
+	
+	<!-- important mandatory libraries -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.js" type="text/javascript"></script>
+	
+	<!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
+	<script src="${pageContext.request.contextPath}/assets/css/star-rating/theme.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+	
+	<!-- Multi-column -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/multi-column/ie-row-fix.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css"/>
+	
+    <!-- handlebars -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/handlebars/handlebars-v4.0.5.js"></script>
+	
+	<!-- ajax -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.css"/>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.js"></script>
+	
+	<!-- ajaxForm -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/ajax-form/jquery.form.min.js"></script> 
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_read.css"/>
 	
 <style type="text/css">
 .container {	
@@ -20,9 +56,46 @@
 	margin-top: 30px;
 }
 
+.chk_bookmark label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
 
+.icon_bookmark2 {
+    width: 19px;
+    height: 29px;
+    background-image: url(../assets/imgs/clipping/sp_icon.png);
+     background-position: -90px -290px;
+}
 
+.bookmark_On {
+    width: 19px;
+    height: 29px;
+    background-image: url(../assets/imgs/clipping/sp_icon.png);
+     background-position: -60px -290px;
+}
 
+.bookmark_Off {
+    width: 19px;
+    height: 29px;
+    background-image: url(../assets/imgs/clipping/sp_icon.png);
+     background-position: -90px -290px;
+}
+
+.bmk {
+overflow: hidden;
+}
+
+[class^=icon_] {
+    font-size: 0;
+    line-height: 0;
+    vertical-align: top;
+    color: rgba(1, 0, 0, 0) !important;
+    display: inline-block;
+    overflow: hidden;       
+}
 </style>
 
 <script type="text/javascript">
@@ -85,7 +158,7 @@ $(function(){
 
 </script>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_read.css"/>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/template/topbarsearch.jsp" />
@@ -169,11 +242,11 @@ $(function(){
 								
 				
 									<div class="btn-group btn-block">
-										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
 											<i class="">Like</i></a> 
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Comment</i></a>
-										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 											</a>
 											<input type="hidden" value="${bookmarkCount}" id="bookmark_count">
@@ -220,8 +293,8 @@ $(function(){
 
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
+   <c:if test="${item[0].member_id ==loginInfo.id}">  
+</c:if>
 	<!-- 덧글 항목에 대한 템플릿 참조 -->
 <script id="tmpl_comment_item" type="text/x-handlebars-template">
     <li class="media" style='border-top: 1px dotted #ccc; padding-top: 15px' 
@@ -232,12 +305,13 @@ $(function(){
                 <div class='pull-left'>
                     {{nick_name}}
                     <small> / {{reg_date}}
+ <small> /
+   {{member_id}}
                     </small>
                 </div>
-                <!-- 수정,삭제 버튼 -->
-        
-                <div class='pull-right'>    
-             <c:if test='${comment.member_id==loginInfo.id}'>
+                <!-- 수정,삭제 버튼 -->        	
+                <div class='pull-right'>
+           <c:if test="${readArticle.member_id == loginInfo.id}">             
                     <a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
                         <i class='glyphicon glyphicon-edit'></i>
                     </a>

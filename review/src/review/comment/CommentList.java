@@ -60,9 +60,7 @@ public class CommentList extends BaseController {
 		int article_id = web.getInt("article_id");
 		logger.debug("article_id=" + article_id);
 		
-		int comment_id = web.getInt("comment_id");
-		logger.debug("comment_id=" + comment_id);
-		
+				
 		/** (4) 입력 받은 파라미터에 대한 유효성 검사 */
 		// 덧글이 소속될 게시물의 일련번호
 		if (article_id == 0) {
@@ -74,10 +72,6 @@ public class CommentList extends BaseController {
 		/** (5) 입력 받은 파라미터를 Beans로 묶기 */
 		Comment comment = new Comment();
 		comment.setArticle_id(article_id);
-		
-
-		comment.setId(comment_id);
-		
 		
 		/** (6) Service를 통한 덧글 목록 조회 */
 		// 작성 결과를 저장할 객체
@@ -104,14 +98,10 @@ public class CommentList extends BaseController {
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("rt", "OK");
 		data.put("item", item);
-		data.put("comment_id", comment_id);
-		
+				
 		// --> import com.fasterxml.jackson.databind.ObjectMapper;
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue(response.getWriter(), data);
-		
-		
-		
 		
 		return null;
 	}

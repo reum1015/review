@@ -119,7 +119,7 @@ public class EditProfileOk extends BaseController {
 						// 갖지 않고 결과를 확인할 수 있는 다른 페이지로 강제 이동시켜야 한다. 
 						// 그러므로 View의 경로를 리턴하지 않는다.(중복실행 방지)
 						sqlSession.close();
-						String view = "mymenu/edit_profile";
+						String view = "mymenu/account_info";
 						return view;
 	}
 }

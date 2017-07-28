@@ -34,7 +34,7 @@ placeholder="Search" value="${keyword}" />
 </div>
 </form>       
        </div>
-        <div class="topmenu-search hidden-lg hidden-md col-sm-offset-3 col-sm-6 col-xs-offset-2 col-xs-5">
+        <div class="topmenu-search hidden-lg hidden-md col-sm-offset-3 col-sm-6 col-xs-offset-1 col-xs-6">
        <form method="get" action="${pageContext.request.contextPath}/article/article_list_mobile" style="width:200px; height:50px; margin-top: 10px; ">
 <div class="input-group">
 <input type="text" name="keyword" class="form-control"

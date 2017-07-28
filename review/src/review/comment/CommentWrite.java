@@ -58,10 +58,11 @@ public class CommentWrite extends BaseController {
 		int article_id = web.getInt("article_id");
 		String nick_name = web.getString("nick_name");
 		String content = web.getString("content");
+		int member_id = web.getInt("member_id");
 		// 작성자 아이피 주소 가져오기
 		String ip_address = web.getClientIP();
 		// 회원 일련번호 --> 비 로그인인 경우 0
-		int member_id = 0;
+		
 		
 		// 로그인 한 경우, 입력하지 않은 이름, 비밀번호, 이메일을 세션정보로 대체
 		Member loginInfo = (Member) web.getSession("loginInfo");
@@ -85,7 +86,6 @@ public class CommentWrite extends BaseController {
 			return null;
 		}
 				
-
 		// 내용 검사
 		if (!regex.isValue(content)) {
 			sqlSession.close();

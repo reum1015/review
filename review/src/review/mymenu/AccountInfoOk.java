@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,31 +58,38 @@ public class AccountInfoOk extends BaseController {
 				}		
 		
 				/** (4) 파라미터 받기 */		
-			String email = web.getString("email");				
+			    String email = web.getString("email");				
 				String nick_name = web.getString("nick_name");
 				String name = web.getString("name");
 
 				// 전달받은 파라미터는 값의 정상여부 확인을 위해서 로그로 확인				
 				logger.debug("email=" + email);
-				logger.debug("nick_name=" + nick_name);
+				logger.debug("nick_name=======================" + nick_name);
 				logger.debug("name=" + name);
-												
-			
+				
+				
 						/** (7) 전달받은 파라미터를 Beans 객체에 담는다. */
 						Member member = new Member();						
 						member.setId(loginInfo.getId());
 						member.setNick_name(nick_name);		
 						member.setEmail(email);		
 						member.setName(name);		
-						
-						
 					
-		
 						/** (9) Service를 통한 데이터베이스 저장 처리 */
 						// 변경된 정보를 저장하기 위한 객체
 						Member editInfo = null;
-						try {														
-							memberService.updateAccountMember(member);							
+						try {						
+							if (	email.equals(loginInfo.getEmail())) {	
+							}else{
+								memberService.selectEmailCount(member);
+							}
+							
+							if (	nick_name.equals(loginInfo.getNick_name())) {	
+							}else{
+								memberService.selectNickNameCount(member);								
+							}
+					
+							memberService.updateAccountMember(member);	
 							editInfo = memberService.selectMember(member);
 						} catch (Exception e) {
 							web.redirect(null, e.getLocalizedMessage());
@@ -91,10 +99,8 @@ public class AccountInfoOk extends BaseController {
 						}
 						// 세션을 갱신한다.
 						web.removeSession("loginInfo");
-						web.setSession("loginInfo", editInfo);	
-					
-						
-						
+						web.setSession("loginInfo", editInfo);			
+												
 						// INSERT,UPDATE,DELETE 처리를 수행하는 action 페이지들은 자체적으로 View를
 						// 갖지 않고 결과를 확인할 수 있는 다른 페이지로 강제 이동시켜야 한다. 
 						// 그러므로 View의 경로를 리턴하지 않는다.(중복실행 방지)

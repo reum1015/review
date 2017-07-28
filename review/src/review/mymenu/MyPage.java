@@ -60,11 +60,11 @@ public class MyPage extends BaseController {
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 		pageHelper = PageHelper.getInstance();
 			
-		
+
 		/** (3) 회원 번호 파라미터 받기 */
 		int member_id = web.getInt("member_id");
 		logger.debug("member_id=" + member_id);
-				
+				System.out.println("-----"+ member_id);
 		if (member_id == 0) {
 			web.redirect(null, "회원 번호가 지정되지 않았습니다.");
 			sqlSession.close();
@@ -83,10 +83,13 @@ public class MyPage extends BaseController {
 		/** (6) 게시물 목록 조회 */
 		int total_count = 0;
 		List<Article> memberarticleList = null;
-				
+		
+	
+			
 		try {		
 			// 전체 게시물 수
 			total_count = articleService.selectArticleMainCount(article);
+System.out.println(total_count);
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
 			pageHelper.pageProcess(page, total_count, 8, 8);
@@ -94,8 +97,13 @@ public class MyPage extends BaseController {
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());			
+
 			memberarticleList = articleService.selectArticleListMember(article);
+			System.out.println(memberarticleList);
+
 			readMember = memberService.selectMember(member);
+			
+			
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
@@ -133,6 +141,7 @@ public class MyPage extends BaseController {
 		/** (7) 조회 결과를 View에 전달 */
 		request.setAttribute("readMember", readMember);
 		request.setAttribute("member_id", member_id);	
+
 		request.setAttribute("memberarticleList", memberarticleList);
 		request.setAttribute("pageHelper", pageHelper);
 						

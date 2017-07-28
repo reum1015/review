@@ -21,7 +21,7 @@
 	<!-- 나눔고딕 웹 폰트 적용 -->
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/nanumfont.css"/>
 		<!-- bootstrap-tabs-x  -->		
-		
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/js/tab-x/bootstrap-tabs-x.min.css"/>
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 			
 	

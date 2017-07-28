@@ -76,8 +76,9 @@ public class ArticleListMain extends BaseController {
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());
-			
+
 			articleList = articleService.selectArticleListMain(article);
+			
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
@@ -104,7 +105,7 @@ public class ArticleListMain extends BaseController {
 	
 		request.setAttribute("articleList", articleList);
 		request.setAttribute("pageHelper", pageHelper);
-		
+
 		String view = "article/article_list_main";
 		return view;
 	}

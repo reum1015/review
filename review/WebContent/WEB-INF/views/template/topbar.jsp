@@ -36,14 +36,22 @@ body{
 <c:when test="${loginInfo == null }">
   <!-- not login top_bar -->	
  <div class="topmenu-main col-lg-12 col-md-12 col-sm-12 col-xs-12">
-       <!-- top_main -->
-       <div class="topmenu-brands col-lg-4 col-md-4 hidden-sm hidden-xs" >       
+       <!-- top_main big-->
+       <div class="topmenu-brands col-lg-4 col-md-4  hidden-sm  hidden-xs" >       
        <a class="topmenu-brands" href="${pageContext.request.contextPath}/index" >
 	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.jpg"
 	 height="50px" width="140px"  />
 	</a>	
        </div>      
-       <!--// top_main -->
+       <!--// top_main big -->
+         <!-- top_main small -->
+             <div class="topmenu-brands hidden-lg hidden-md col-sm-offset-4 col-sm-4 col-xs-offset-2 col-xs-6" >       
+       <a class="topmenu-brands" href="${pageContext.request.contextPath}/index" >
+	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.jpg"
+	 height="50px" width="140px"  />
+	</a>	
+       </div>
+       <!--// top_main small -->
        	<!-- top_search -->
       <div class="topmenu-search col-lg-4 col-md-4 hidden-sm hidden-xs">
        <form method="get" action="${pageContext.request.contextPath}/article/article_list" style="width:200px; height:50px; ">
@@ -57,21 +65,8 @@ placeholder="Search" value="${keyword}" />
 </span>
 </div>
 </form>       
-       </div>
-        <div class="topmenu-search hidden-lg hidden-md col-sm-offset-3 col-sm-4 col-xs-offset-1 col-xs-5">
-       <form method="get" action="${pageContext.request.contextPath}/article/article_list_mobile" style="width:200px; height:50px; ">
-<div class="input-group">
-<input type="text" name="keyword" class="form-control"
-placeholder="Search" value="${keyword}" />
-<span class="input-group-btn">
-<button class="btn btn-success" type="submit">
-<i class="glyphicon glyphicon-search"></i>
-</button>
-</span>
-</div>
-</form>       
-       </div>
-       <!--// top_search -->
+       </div>   
+       <!--// top_search -->       
        <!-- top_login -->
        <div class="topmenu-login  col-lg-4 col-md-4 hidden-sm hidden-xs">
        <a class="topmenu-sign" href="${pageContext.request.contextPath}/member/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up /</a>       

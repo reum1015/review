@@ -58,7 +58,7 @@
 									<br />
 						<!-- my page + book mark -->
 						<div class="btn-group btn-block">
-					<a href="${pageContext.request.contextPath}/mymenu/my_page" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
+					<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
 				<a href="${pageContext.request.contextPath}/mymenu/my_page2" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
 	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
 				<c:if test="${readMember.id==loginInfo.id}">
@@ -108,8 +108,7 @@
 							<!--// 제목 + 작성자 + 조회수 -->
 		    				</div>
 		    				</div>
-		    				</c:forEach>
-		    			
+		    				</c:forEach>		    			
 		    		</c:when>
 		    		<c:otherwise>
 		    			<tr>

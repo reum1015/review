@@ -82,11 +82,12 @@ public class MyPage2 extends BaseController {
 		
 		/** (6) 게시물 목록 조회 */
 		int total_count = 0;
-		List<Member> memberarticleList = null;
-				
+		List<Article> memberarticleList = null;
+			
 		try {		
 			// 전체 게시물 수
 			total_count = articleService.selectArticleMainCount(article);
+
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
 			pageHelper.pageProcess(page, total_count, 8, 8);
@@ -94,8 +95,11 @@ public class MyPage2 extends BaseController {
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());			
-			memberarticleList = memberService.selectArticleListMember(member);
+
+			memberarticleList = articleService.selectArticleListMember(article);
 			readMember = memberService.selectMember(member);
+			
+			
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
@@ -105,20 +109,20 @@ public class MyPage2 extends BaseController {
 		
 		
 		// 회원 프로필 사진
-		if (readMember != null) {
-			String imagePath = readMember.getImagePath();
-			if (imagePath != null) {
-				String thumbPath = upload.createThumbnail(imagePath, 200, 200, true);
-			// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
-				readMember.setImagePath(thumbPath);
-				logger.debug("thumbnail create > " + readMember.getImagePath());
-							}
-		}
+				if (readMember != null) {
+					String imagePath = readMember.getImagePath();
+					if (imagePath != null) {
+						String thumbPath = upload.createThumbnail(imagePath, 150, 150, true);
+					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
+						readMember.setImagePath(thumbPath);
+						logger.debug("thumbnail create > " + readMember.getImagePath());
+									}
+				}
 		
 		// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체(에피소드 리스트)
 				if (memberarticleList != null) {
 					for (int i=0; i<memberarticleList.size(); i++) {
-						Member item = memberarticleList.get(i);
+						Article item = memberarticleList.get(i);
 						String imagePath = item.getImagePath();
 						if (imagePath != null) {
 							String thumbPath = upload.createThumbnail(imagePath, 220, 190, true);
@@ -132,15 +136,14 @@ public class MyPage2 extends BaseController {
 		
 		/** (7) 조회 결과를 View에 전달 */
 		request.setAttribute("readMember", readMember);
-	
+		request.setAttribute("member_id", member_id);	
 		request.setAttribute("memberarticleList", memberarticleList);
+		System.out.println(memberarticleList  + "///");
 		request.setAttribute("pageHelper", pageHelper);
-		
 						
 		String view = "mymenu/my_page2";
 		return view;
 	}
 	
-       
     
 }

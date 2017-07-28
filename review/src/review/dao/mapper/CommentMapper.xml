@@ -44,15 +44,17 @@
 		WHERE  id=#{id}
 	</select>
 	
+	
 	<!-- 하나의 게시물에 속한 모든 덧글 목록을 조회한다. -->
 	<select id="selectCommentList" parameterType="review.model.Comment" 
 		resultMap="comment">
-		SELECT   id, nick_name, content, 
-			     DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i') as reg_date, 
-			     DATE_FORMAT(edit_date, '%Y-%m-%d %H:%i') as edit_date, 
-			     ip_address, member_id, article_id
-		FROM     comment
-		WHERE    article_id=#{article_id}
+		SELECT   c.id, m.nick_name, c.content, 
+			     DATE_FORMAT(c.reg_date, '%Y-%m-%d %H:%i') as reg_date, 
+			     DATE_FORMAT(c.edit_date, '%Y-%m-%d %H:%i') as edit_date, 
+			     c.ip_address, c.member_id, c.article_id
+		FROM     comment as c
+		 LEFT JOIN member as m ON c.member_id = m.id
+		WHERE    c.article_id=#{article_id}
 		ORDER BY id ASC
 	</select>
 	
