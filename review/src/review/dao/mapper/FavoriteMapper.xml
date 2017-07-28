@@ -58,7 +58,7 @@
 		OR replace(title ,' ','') like concat('%', #{title }, '%')
 		OR replace(content ,' ','') like concat('%', #{content }, '%')		       
         ORDER BY a.like_count DESC
-       	LIMIT #{limitStart}, #{listCount}              
+       LIMIT #{limit_start}, #{list_count}            
 	</select>		
 	
 	

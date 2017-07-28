@@ -19,12 +19,15 @@ import review.jsp.helper.RegexHelper;
 import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Article;
+import review.model.BookMark;
 import review.model.Favorite;
 import review.model.Member;
 import review.service.ArticleService;
+import review.service.BookMarkService;
 import review.service.FavoriteService;
 import review.service.ImageFileService;
 import review.service.impl.ArticleServiceImpl;
+import review.service.impl.BookMarkServiceImpl;
 import review.service.impl.FavoriteServiceImpl;
 import review.service.impl.ImageFileServiceImpl;
 
@@ -44,6 +47,7 @@ public class ArticleList extends BaseController {
 	ImageFileService imageFileService;
 	PageHelper pageHelper;
 	FavoriteService favoriteService;
+	BookMarkService bookmarkService;
 	
 	@Override
 	public String doRun(HttpServletRequest request, HttpServletResponse response) 
@@ -60,6 +64,8 @@ public class ArticleList extends BaseController {
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 		pageHelper = PageHelper.getInstance();			
 	   favoriteService = new FavoriteServiceImpl(sqlSession, logger);
+	   bookmarkService = new BookMarkServiceImpl(sqlSession, logger);
+	   
 	/** (5) 조회할 정보에 대한 Beans 생성 */
 		// 검색어
 		String keyword = web.getString("keyword");
@@ -88,7 +94,15 @@ public class ArticleList extends BaseController {
 		
 		favorite.setCategory(keyword);
 		favorite.setTitle(keyword);
-		favorite.setContent(keyword);		
+		favorite.setContent(keyword);	
+		
+		
+		// 북마크 저장변수
+		int bookmarkCount = 0;
+		
+        BookMark bookmark = new BookMark();
+        bookmark.setMember_id(member_id);
+        bookmark.setArticle_id(article_id);
 		
 		/** (6) 게시물 목록 조회 */
 		int total_count = 0;
@@ -100,6 +114,7 @@ public class ArticleList extends BaseController {
 			// 전체 게시물 수
 			total_count = articleService.selectArticleCount(article);
 			totalCount = favoriteService.selectFavoriteCount(favorite);
+			
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
 			pageHelper.pageProcess(page, total_count, 10, 8);
@@ -108,6 +123,9 @@ public class ArticleList extends BaseController {
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());
+			
+			favorite.setLimit_start(pageHelper.getLimit_start());
+			favorite.setList_count(pageHelper.getList_count());
 			
 			articleList = articleService.selectArticleList(article);
 			favoriteList = favoriteService.selectFavoriteList(favorite);					
@@ -147,7 +165,8 @@ public class ArticleList extends BaseController {
 			}
 		}
 				
-		
+		boolean isBookMarkState = bookmarkCount > 0;
+		logger.debug("bookmarkCount --------------->" + bookmarkCount);
 		/** (7) 조회 결과를 View에 전달 */
 	
 		request.setAttribute("articleList", articleList);
@@ -155,6 +174,8 @@ public class ArticleList extends BaseController {
 		request.setAttribute("pageHelper", pageHelper);
 		request.setAttribute("member_id", member_id);
 		request.setAttribute("favoriteList", favoriteList);
+		request.setAttribute("isBookMarkState", isBookMarkState);
+        request.setAttribute("bookmarkCount", bookmarkCount);
 		
 		
 		String view = "article/article_list";

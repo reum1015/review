@@ -7,9 +7,93 @@
 <html lang='ko'>
 <head>
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
+	<!-- Javascript -->
+	  	<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/tab-x/bootstrap-tabs-x.min.js"></script>
+	    
+	   
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>   		
+	<!-- StarRating -->    		
+	<link href="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.css" media="all" rel="stylesheet" type="text/css" />    		
+	    		
+	<!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
+	<link href="${pageContext.request.contextPath}/assets/css/star-rating/theme.css" media="all" rel="stylesheet" type="text/css" />
+	
+	
+	<link href="${pageContext.request.contextPath}/assets/css/selectbox/css/bootstrap-select.css" media="all" rel="stylesheet" type="text/css" />
+	
+	<!-- important mandatory libraries -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.js" type="text/javascript"></script>
+	
+	<!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
+	<script src="${pageContext.request.contextPath}/assets/css/star-rating/theme.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+	
+	<!-- Multi-column -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/multi-column/ie-row-fix.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css"/>
+	
+    <!-- handlebars -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/handlebars/handlebars-v4.0.5.js"></script>
+	
+	<!-- ajax -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.css"/>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.js"></script>
+	
+	<!-- ajaxForm -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/ajax-form/jquery.form.min.js"></script> 
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 <!-- main css -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_list.css" />
+
+<style type="text/css">
+
+
+.chk_bookmark label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.icon_bookmark2 {
+    width: 19px;
+    height: 29px;
+    background-image: url(../assets/imgs/clipping/sp_icon.png);
+     background-position: -90px -290px;
+}
+
+.bookmark_On {
+    width: 19px;
+    height: 29px;
+    background-image: url(../assets/imgs/clipping/sp_icon.png);
+     background-position: -60px -290px;
+}
+
+.bookmark_Off {
+    width: 19px;
+    height: 29px;
+    background-image: url(../assets/imgs/clipping/sp_icon.png);
+     background-position: -90px -290px;
+}
+
+.bmk {
+overflow: hidden;
+}
+
+[class^=icon_] {
+    font-size: 0;
+    line-height: 0;
+    vertical-align: top;
+    color: rgba(1, 0, 0, 0) !important;
+    display: inline-block;
+    overflow: hidden;       
+}
+</style>
+
+
 
 <script type="text/javascript">
 	$(function() {
@@ -41,9 +125,58 @@
 				});
 			}
 		});
-		//Like 버튼 끝
+		//Like 버튼 끝		
 		
-	})
+		
+		var bookmark_count = $("#bookmark_count").val();
+		var member_id = $("#member_id").val();
+		var total_bookmark = $("#total_bookmark").val();		
+		var article_id = $("#article_id").val();
+		var isBookMarkState = $("#isBookMarkState").val();
+		
+		//관심등록 On 이면 마크 표시
+		if(bookmark_count > 0){	
+			$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");	
+			}else{
+				$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
+			}
+		
+		$("#bookmark_button").on('click',function(e){
+			e.preventDefault();
+			if(member_id == 0){
+				var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
+				
+				if(result){
+					location.replace('/review/member/login?article_id=' + article_id );
+					return false;
+				}else{
+					return false;
+				}
+			}
+			
+			//북마크 On/Off
+			$.get("${pageContext.request.contextPath}/article/addBookMark", 
+					{bookmark_count : bookmark_count, member_id : member_id, total_bookmark : total_bookmark, article_id: article_id},
+					function(data){
+							var isBookMarkState = data.isBookMarkState;
+							 total_bookmark=data.total_bookmark;
+							 bookmark_count = data.bookmark_count;
+						
+							$("#bookmark_count").attr("value", bookmark_count);
+							$("#concernCount").text(total_bookmark);
+							
+							
+							if(isBookMarkState){							
+								$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");
+							}else{							
+								$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
+							}
+						});
+		});
+		
+		
+		
+	});
 </script>
 
 
@@ -114,10 +247,14 @@
 							<div class="btn-group btn-block">
 							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> <span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
 							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i>Comment</i></a>
-							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i>Book mark</i></a>
-								<input type="hidden" value="${member_id}" id="member_id">
-							
-							</div>
+							 	<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+							 <span class="bookmark_Off pull-right" id="bookmark_img"></span></a>
+											<input type="hidden" value="${bookmarkCount}" id="bookmark_count">
+	                       <input type="hidden" value="${member_id}" id="member_id">				
+                        <input type="hidden" value="${article_id}" id="article_id">	
+	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
+	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
+									</div>
 		    				<!--// like + comment + book mark -->
 		    				
 		    				</div>
@@ -260,10 +397,14 @@
 							<div class="btn-group btn-block">
 							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> <span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
 							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i>Comment</i></a>
-							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i> Book mark</i></a>
-								<input type="hidden" value="${member_id}" id="member_id">
-							
-							</div>
+							 	<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+							 <span class="bookmark_Off pull-right" id="bookmark_img"></span></a>
+							<input type="hidden" value="${bookmarkCount}" id="bookmark_count">
+	                       <input type="hidden" value="${member_id}" id="member_id">				
+                        <input type="hidden" value="${article_id}" id="article_id">	
+	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
+	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
+									</div>
 		    				<!--// like + comment + book mark -->
 		    				
 		    				</div>
