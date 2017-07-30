@@ -94,6 +94,37 @@ public class ArticleServiceImpl implements ArticleService {
 		return result;
 	}
 	
+	@Override
+	public List<Article> selectMemberArticleList(Article article) throws Exception {
+		List<Article> result = null;
+		try {
+			result = sqlSession.selectList("ArticleMapper.selectMemberArticleList", article);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 글 목록이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("글 목록 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public int selectMemberArticleCount(Article article) throws Exception {
+		  int result = 0;		
+			try {
+				// 게시물 수가 0건인 경우도 있으므로
+				// 결과값이 0인 경우에 예외를 발생시키지 않는다.
+				result = sqlSession.selectOne("ArticleMapper.selectMemberArticleCount", article);
+			} catch(Exception e) {
+				logger.error(e.getLocalizedMessage());
+				throw new Exception("회원작품 수 조회에 실패했습니다. ");
+			}
+			
+			return result;
+		}
 	
 	@Override
 	public int selectArticleCount(Article article) throws Exception {
@@ -198,26 +229,9 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 	}
 
-	@Override
-	public List<Article> selectArticleListMember(Article article) throws Exception {
-		List<Article> result = null;
-		try {
-			result = sqlSession.selectList("ArticleMapper.selectArticleListMember", article);
-			if (result == null) {
-				throw new NullPointerException();
-			}
-		} catch (NullPointerException e) {
-			throw new Exception("조회된 글 목록이 없습니다.");
-		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
-			throw new Exception("글 목록 조회에 실패했습니다.");
-		}
-		return result;
-	}
-
+	
 	@Override
 	public void likeCountPlus(Article article) throws Exception {
-		// TODO Auto-generated method stub
 		try{
 			int result = sqlSession.update("ArticleMapper.updateLikeCountPlus", article);
 			if(result==0){
@@ -237,7 +251,6 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public void likeCountMinus(Article article) throws Exception {
-		// TODO Auto-generated method stub
 		try{
 			int result = sqlSession.update("ArticleMapper.updateLikeCountMinus", article);
 			if(result==0){
@@ -256,7 +269,6 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	
-
 
 		
 }

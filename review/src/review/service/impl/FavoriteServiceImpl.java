@@ -127,8 +127,17 @@ public class FavoriteServiceImpl implements FavoriteService {
 
 	@Override
 	public void deleteFavoriteAll(Favorite favorite) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try{
+			// 북마크가 존재하지 않는 회원에 대한 요청일 수 있으므로,
+			// NullPointerException을 발생시키지 않는다.
+			sqlSession.delete("FavoriteMapper.deleteFavoriteAll", favorite);
+		}catch(Exception e){
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("게시글 좋아요 삭제에 실패했습니다.");
+		}finally{
+			sqlSession.commit();
+		}
 	}
 
 }

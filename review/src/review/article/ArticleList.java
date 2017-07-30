@@ -85,20 +85,23 @@ public class ArticleList extends BaseController {
 			member_id = loginInfo.getId();
 		}
 		
+		logger.debug("member_id -----------------------------------> " + member_id);
 		
 		int article_id = web.getInt("article_id");
 		logger.debug("article_id" + article_id);
 		
+		
+		int favoriteCount = 0;
+
+		// 북마크 저장변수
+		int bookmarkCount = 0;
+		
 		Favorite favorite = new Favorite();
 		favorite.setArticle_id(article_id);
-		
+		favorite.setMember_id(member_id);		
 		favorite.setCategory(keyword);
 		favorite.setTitle(keyword);
 		favorite.setContent(keyword);	
-		
-		
-		// 북마크 저장변수
-		int bookmarkCount = 0;
 		
         BookMark bookmark = new BookMark();
         bookmark.setMember_id(member_id);
@@ -128,7 +131,9 @@ public class ArticleList extends BaseController {
 			favorite.setList_count(pageHelper.getList_count());
 			
 			articleList = articleService.selectArticleList(article);
-			favoriteList = favoriteService.selectFavoriteList(favorite);					
+			favoriteList = favoriteService.selectFavoriteList(favorite);
+			bookmarkCount = bookmarkService.selectCountBookMarkById(bookmark);
+			favoriteCount = favoriteService.selectCountFavoriteArticleById(favorite);
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
@@ -167,6 +172,9 @@ public class ArticleList extends BaseController {
 				
 		boolean isBookMarkState = bookmarkCount > 0;
 		logger.debug("bookmarkCount --------------->" + bookmarkCount);
+				
+		boolean isFavoriteState = favoriteCount > 0;
+		logger.debug("favoriteCount ------->" + favoriteCount);
 		/** (7) 조회 결과를 View에 전달 */
 	
 		request.setAttribute("articleList", articleList);
@@ -176,7 +184,8 @@ public class ArticleList extends BaseController {
 		request.setAttribute("favoriteList", favoriteList);
 		request.setAttribute("isBookMarkState", isBookMarkState);
         request.setAttribute("bookmarkCount", bookmarkCount);
-		
+        request.setAttribute("favoriteCount", favoriteCount);
+        request.setAttribute("isFavoriteState", isFavoriteState);
 		
 		String view = "article/article_list";
 		

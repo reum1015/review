@@ -22,6 +22,7 @@
 	    <result property="introduce" column="introduce"/>
 	     <result property="imagePath" column="imagePath" />
 	     <result property="member_id" column="member_id" />
+	     <result property="article_id" column="article_id"/>
 	</resultMap>
 	
 	<!-- 회원정보를 저장한다 : 가입 -->
@@ -97,9 +98,27 @@
         WHERE id=#{id}
     </select>
     
-   
-
-			
+    <!--회원 게시물 목록을 조회한다. -->
+	<select id="selectArticleListMember" parameterType="review.model.Member" 
+		resultMap="member">
+		 SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date,
+		(SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE article_id=a.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath		 
+		FROM   article as a
+         LEFT JOIN member as m ON a.member_id = m.id WHERE m.id=#{member_id}		
+		ORDER  BY a.id DESC	
+		LIMIT #{limit_start}, #{list_count}	
+	</select>
+	
+	<!-- 회원 전체 게시물 수를 조회한다. article_list_main-->
+	<select id="selectArticleMemberCount" parameterType="review.model.Member" resultType="int">
+		SELECT COUNT(id) 
+		FROM   article	WHERE member_id =#{member_id}	
+		</select>
 
     <!-- 비밀번호를 변경한다 -->
 	<update id="updatePassword" parameterType="review.model.Member">

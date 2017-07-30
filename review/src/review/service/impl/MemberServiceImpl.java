@@ -256,6 +256,38 @@ Member result = null;
 		return result;
 	}
 
+	@Override
+	public List<Member> selectArticleListMember(Member member) throws Exception {
+		List<Member> result = null;
+		try {
+			result = sqlSession.selectList("MemberMapper.selectArticleListMember", member);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 글 목록이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("글 목록 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public int selectArticleMemberCount(Member member) throws Exception {
+        int result = 0;		
+		try {
+			// 게시물 수가 0건인 경우도 있으므로
+			// 결과값이 0인 경우에 예외를 발생시키지 않는다.
+			result = sqlSession.selectOne("MemberMapper.selectArticleMemberCount", member);
+		} catch(Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("회원작품 수 조회에 실패했습니다. ");
+		}
+		
+		return result;
+	}
+
 	
 
 	

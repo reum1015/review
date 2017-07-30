@@ -18,14 +18,20 @@ import review.jsp.helper.RegexHelper;
 import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Article;
+import review.model.BookMark;
 import review.model.Comment;
+import review.model.Favorite;
 import review.model.ImageFile;
 import review.model.Member;
 import review.service.ArticleService;
+import review.service.BookMarkService;
 import review.service.CommentService;
+import review.service.FavoriteService;
 import review.service.ImageFileService;
 import review.service.impl.ArticleServiceImpl;
+import review.service.impl.BookMarkServiceImpl;
 import review.service.impl.CommentServiceImpl;
+import review.service.impl.FavoriteServiceImpl;
 import review.service.impl.ImageFileServiceImpl;
 
 
@@ -44,6 +50,8 @@ public class ArticleDeleteOk extends BaseController {
 	ArticleService articleService;
 	ImageFileService imageFileService;
 	CommentService commentService;
+	FavoriteService favoriteService;
+	BookMarkService bookmarkService;
 	
 	@Override
 	public String doRun(HttpServletRequest request, HttpServletResponse response) 
@@ -59,7 +67,8 @@ public class ArticleDeleteOk extends BaseController {
 		articleService = new ArticleServiceImpl(sqlSession, logger);
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 		commentService = new CommentServiceImpl(sqlSession, logger);
-		
+		favoriteService = new FavoriteServiceImpl(sqlSession, logger);
+		bookmarkService = new BookMarkServiceImpl(sqlSession, logger);
 		
 		/** (3) 글 번호 파라미터 받기 */
 		int article_id = web.getInt("article_id");
@@ -82,6 +91,11 @@ public class ArticleDeleteOk extends BaseController {
 			Comment comment = new Comment();
 			comment.setArticle_id(article_id);
 			
+			Favorite favorite = new Favorite();
+			favorite.setArticle_id(article_id);
+			
+			BookMark bookmark = new BookMark();	        
+	        bookmark.setArticle_id(article_id);
 			
 			/** (7) 데이터 삭제 처리 */
 			// 로그인 중이라면 회원일련번호를 Beans에 추가한다.
@@ -103,7 +117,8 @@ public class ArticleDeleteOk extends BaseController {
 				
 				// 덧글이 게시물을 참조하므로, 덧글이 먼저 삭제되어야 한다.
 			    commentService.deleteCommentAll(comment);
-			    
+			    bookmarkService.deleteBookMarkAll(bookmark);
+			    favoriteService.deleteFavoriteAll(favorite);
 				articleService.deleteArticle(article);	// 게시글 삭제
 			} catch (Exception e) {
 				web.redirect(null, e.getLocalizedMessage());
@@ -127,7 +142,7 @@ public class ArticleDeleteOk extends BaseController {
 			}
 		
 				
-		String view = "article/article_list_main";
+		String view = "index";
 		return view;
 	}
 	

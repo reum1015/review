@@ -19,15 +19,17 @@ import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Article;
 import review.model.BookMark;
-
+import review.model.Favorite;
 import review.model.Member;
 import review.service.ArticleService;
 import review.service.BookMarkService;
 import review.service.CommentService;
+import review.service.FavoriteService;
 import review.service.ImageFileService;
 import review.service.impl.ArticleServiceImpl;
 import review.service.impl.BookMarkServiceImpl;
 import review.service.impl.CommentServiceImpl;
+import review.service.impl.FavoriteServiceImpl;
 import review.service.impl.ImageFileServiceImpl;
 
 
@@ -47,11 +49,12 @@ public class ArticleRead extends BaseController {
 	ImageFileService imageFileService;
 	CommentService commentService;
 	BookMarkService bookmarkService;
+	FavoriteService favoriteService;
 	
 	@Override
 	public String doRun(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
+		response.setContentType("application/json");
 		/** (2) 필요한 헬퍼 객체 생성 */
 		logger = LogManager.getFormatterLogger(request.getRequestURI());
 		// --> import study.jsp.mysite.service.impl.MemberServiceImpl;
@@ -63,7 +66,7 @@ public class ArticleRead extends BaseController {
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 		commentService = new CommentServiceImpl(sqlSession, logger);		
 		bookmarkService = new BookMarkServiceImpl(sqlSession, logger);
-		
+		favoriteService = new FavoriteServiceImpl(sqlSession, logger);
 		
 	int member_id = 0;
 		
@@ -79,8 +82,7 @@ public class ArticleRead extends BaseController {
 		int article_id = web.getInt("article_id");
 		logger.debug("article_id" + article_id);
 		
-		
-				
+						
 		if (article_id == 0) {
 			web.redirect(null, "글 번호가 지정되지 않았습니다.");
 			sqlSession.close();
@@ -93,11 +95,16 @@ public class ArticleRead extends BaseController {
 	
 		// 북마크 저장변수
 				int bookmarkCount = 0;
+				int favoriteCount = 0;
 				
 		        BookMark bookmark = new BookMark();
 		        bookmark.setMember_id(member_id);
 		        bookmark.setArticle_id(article_id);
 		
+		        Favorite favorite = new Favorite();
+				favorite.setArticle_id(article_id);
+				favorite.setMember_id(member_id);
+		        
 		/** (4) 게시물 일련번호를 사용한 데이터 조회 */
 		// 지금 읽고 있는 게시물이 저장될 객체
 		Article readArticle = null;
@@ -121,7 +128,7 @@ public class ArticleRead extends BaseController {
 			readArticle = articleService.selectArticle(article);	
 			// 북마크 확인용
 			bookmarkCount = bookmarkService.selectCountBookMarkById(bookmark);
-			
+			favoriteCount = favoriteService.selectCountFavoriteArticleById(favorite);
 			
 		} catch (Exception e) {
 			web.redirect(null, e.getMessage());
@@ -145,11 +152,16 @@ public class ArticleRead extends BaseController {
 		boolean isBookMarkState = bookmarkCount > 0;
 		logger.debug("bookmarkCount ------->" + bookmarkCount);
 		
+		boolean isFavoriteState = favoriteCount > 0;
+		logger.debug("favoriteCount ------->" + favoriteCount);
+		
 		/** (7) 읽은 데이터를 View에게 전달한다 */
 		request.setAttribute("readArticle", readArticle);
 		
 		request.setAttribute("isBookMarkState", isBookMarkState);
         request.setAttribute("bookmarkCount", bookmarkCount);
+        request.setAttribute("favoriteCount", favoriteCount);
+        request.setAttribute("isFavoriteState", isFavoriteState);
         request.setAttribute("member_id", member_id);
 		request.setAttribute("article_id", article_id);
 		

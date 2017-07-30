@@ -5,6 +5,7 @@ import java.util.List;
 import review.model.Article;
 
 
+
 public interface ArticleService {
 
 	/**
@@ -65,6 +66,14 @@ public interface ArticleService {
 	public int selectArticleMainCount(Article article) throws Exception;
 
 	/**
+	 *  전체 회원 게시글 목록 조회
+	 *  @param favorite - 관심작품이 저장된 BEans
+	 *  @return int
+	 * @throws Exception
+	 */
+	public int selectMemberArticleCount(Article article) throws Exception;
+	
+	/**
 	 *  회원 게시글 목록 조회
 	 * 
 	 * @param article
@@ -72,7 +81,7 @@ public interface ArticleService {
 	 * @return List - 게시물 목록
 	 * @throws Exception
 	 */
-	public List<Article> selectArticleListMember(Article article) throws Exception;
+	public List<Article> selectMemberArticleList(Article article) throws Exception;
 
 	
 	/**

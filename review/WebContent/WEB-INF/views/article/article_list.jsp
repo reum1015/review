@@ -50,7 +50,6 @@
 
 <style type="text/css">
 
-
 .chk_bookmark label {
     position: absolute;
     top: 0;
@@ -91,9 +90,39 @@ overflow: hidden;
     display: inline-block;
     overflow: hidden;       
 }
+
+
+/* 관심등록 Off 일때*/
+.favorite_Off{
+	display: inline-block;
+	zoom: 1;
+	width: 23px;
+    height: 21px;
+    background-image: url(../assets/imgs/clipping/sp_likeit2.png);
+    background-position: 0 0;
+}
+
+/* 관심등록 On 일때*/
+.favorite_On{
+	display: inline-block;
+	zoom: 1;
+	width: 23px;
+    height: 21px;
+    background-image: url(../assets/imgs/clipping/sp_likeit2.png);
+    background-position: -30px 0px;
+}
+
+.btn_h3{
+	padding-top: 15px;
+}
+
+.total {
+	font-size: 18px;
+    color: #999;
+    font-family: arial;
+    font-weight: normal;
+}
 </style>
-
-
 
 <script type="text/javascript">
 	$(function() {
@@ -101,40 +130,60 @@ overflow: hidden;
 		
 		
 		//Like 버튼
-		$('.like_button').on('click', function(e) {
-			var member_id = $("#member_id").val();
-			var article_id = $(this).attr('id');
-			
-			//로그인 안된 상태
-			if(member_id ==0){
-				alert("LogIn is required.");
-				return;
-			//로그인 상태	
+		var favorite_count = $("#favorite_count").val();
+		var member_id = $("#member_id").val();
+		var total_favorite = $("#total_favorite").val();
+		var article_id = $("#article_id").val();
+		var isFavoriteState = $("#isFavoriteState").val();
+
+
+	//관심등록 On 이면 마크 표시
+		if(favorite_count > 0){
+	$("#favorite_img").removeClass("favorite_Off").addClass("favorite_On");
 			}else{
-				$.get("${pageContext.request.contextPath}/favorite/favoriteAdd", 
-						{member_id : member_id, article_id : article_id},
-						function(data) {
-							var isLikeState = data.isLikeState;
-							var likeCount = data.likeCount;
-	
-							if(isLikeState){
-								alert("Like added");
-							}else{
-								alert("Like removed");
-							}
-				});
+$("#favorite_img").removeClass("favorite_On").addClass("favorite_Off");
 			}
-		});
-		//Like 버튼 끝		
+			
+	$("#favorite_button").on('click',function(e){
+			e.preventDefault();
+			if(member_id == 0){
+var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
+				
+				if(result){
+	location.replace('/review/member/login?article_id=' + article_id );
+					return false;
+				}else{
+					return false;
+				}
+			}
+//관심등록  On/Off
+	$.get("${pageContext.request.contextPath}/article/addFavorite", 
+{favorite_count : favorite_count, member_id : member_id, total_favorite : total_favorite, article_id: article_id},
+   function(data){
+		var isFavoriteState = data.isFavoriteState;
+		 total_favorite=data.total_favorite;
+                          favorite_count = data.favorite_count;
+						
+	$("#favorite_count").attr("value", favorite_count);
+		$("#concernCount").text(total_favorite);
+
+	if(isFavoriteState){
+				$("#favorite_img").removeClass("favorite_Off").addClass("favorite_On");
+		}else{
+	$("#favorite_img").removeClass("favorite_On").addClass("favorite_Off");
+							}
+						});
+		});		
+		//Like 버튼 끝
 		
-		
+		// Bookmark 버튼
 		var bookmark_count = $("#bookmark_count").val();
 		var member_id = $("#member_id").val();
 		var total_bookmark = $("#total_bookmark").val();		
 		var article_id = $("#article_id").val();
 		var isBookMarkState = $("#isBookMarkState").val();
 		
-		//관심등록 On 이면 마크 표시
+		//북마크 On 이면 마크 표시
 		if(bookmark_count > 0){	
 			$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");	
 			}else{
@@ -172,14 +221,10 @@ overflow: hidden;
 								$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
 							}
 						});
-		});
-		
-		
-		
+		});		
+		// Bookmark 버튼
 	});
 </script>
-
-
 
 
 </head>
@@ -206,10 +251,10 @@ overflow: hidden;
 		    				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		    				<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		    				<c:url var="readUrl" value="/article/article_read">
-					            		<c:param name="favorite_id" value="${favorite.id}" />
+					            		<c:param name="article_id" value="${article.id}" />
 					            	</c:url>
-					            	<c:url var="readUser" value="/mymenu/my_page">					            						            	
-					            		<c:param name="member_id" value="${favorite.member_id}" />
+					            	<c:url var="readUser" value="/mymenu/user_page">					            						            	
+					            		<c:param name="member_id" value="${article.member_id}" />
 					            	</c:url>
 					            	<!-- 링크 + 썸네일 -->
 					            	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4">
@@ -244,16 +289,23 @@ overflow: hidden;
 							<!--// 제목 + 작성자 + 조회수 -->
 							<br />
 							<!-- like + comment + book mark -->
-							<div class="btn-group btn-block">
-							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> <span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
-							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i>Comment</i></a>
-							 	<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
-							 <span class="bookmark_Off pull-right" id="bookmark_img"></span></a>
-											<input type="hidden" value="${bookmarkCount}" id="bookmark_count">
+									<div class="btn-group btn-block">
+										<a href="#" id="favorite_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+	                               <span class="favorite_Off  pull-right" id="favorite_img"></span></a>
+										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+											<i class="">Comment</i></a>
+										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
+											</a>
+							
 	                       <input type="hidden" value="${member_id}" id="member_id">				
-                        <input type="hidden" value="${article_id}" id="article_id">	
+                        <input type="hidden" value="${article_id}" id="article_id">                        
+                        <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
 	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
-	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
+	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
+	                     <input type="hidden" value="${favoriteCount}" id="total_favorite">
+	                     <input type="hidden" value="${favoriteCount}" id="favorite_count">                          
+	                     <input type="hidden" value="${isFavoriteState}" id="isFavoriteState">	                     
 									</div>
 		    				<!--// like + comment + book mark -->
 		    				
@@ -358,7 +410,7 @@ overflow: hidden;
 		    				<c:url var="readUrl" value="/article/article_read">
 					            		<c:param name="article_id" value="${article.id}" />
 					            	</c:url>
-					            	<c:url var="readUser" value="/mymenu/my_page">					            						            	
+					            	<c:url var="readUser" value="/mymenu/user_page">					            						            	
 					            		<c:param name="member_id" value="${article.member_id}" />
 					            	</c:url>
 					            	<!-- 링크 + 썸네일 -->
@@ -394,16 +446,23 @@ overflow: hidden;
 							<!--// 제목 + 작성자 + 조회수 -->
 							<br />
 							<!-- like + comment + book mark -->
-							<div class="btn-group btn-block">
-							 	<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> <span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
-							 	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i>Comment</i></a>
-							 	<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
-							 <span class="bookmark_Off pull-right" id="bookmark_img"></span></a>
-							<input type="hidden" value="${bookmarkCount}" id="bookmark_count">
+									<div class="btn-group btn-block">
+										<a href="#" id="favorite_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+	                               <span class="favorite_Off  pull-right" id="favorite_img"></span></a>
+										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+											<i class="">Comment</i></a>
+										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
+											</a>
+							
 	                       <input type="hidden" value="${member_id}" id="member_id">				
-                        <input type="hidden" value="${article_id}" id="article_id">	
+                        <input type="hidden" value="${article_id}" id="article_id">                        
+                        <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
 	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
-	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
+	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
+	                     <input type="hidden" value="${favoriteCount}" id="total_favorite">
+	                     <input type="hidden" value="${favoriteCount}" id="favorite_count">                          
+	                     <input type="hidden" value="${isFavoriteState}" id="isFavoriteState">	                     
 									</div>
 		    				<!--// like + comment + book mark -->
 		    				

@@ -39,7 +39,7 @@ public class FavoriteAdd extends BaseController{
 
 	@Override
 	public String doRun(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.setContentType("application/json");
 		
 		/** (2) 필요한 헬퍼 객체 생성 */

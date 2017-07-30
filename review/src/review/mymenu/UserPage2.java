@@ -28,8 +28,8 @@ import review.service.impl.ImageFileServiceImpl;
 import review.service.impl.MemberServiceImpl;
 
 
-@WebServlet("/mymenu/my_page")
-public class MyPage extends BaseController {
+@WebServlet("/mymenu/user_page2")
+public class UserPage2 extends BaseController {
 	private static final long serialVersionUID = -1391748040235555563L;
 
 	/** (1) 사용하고자 하는 Helper 객체 선언 */
@@ -59,12 +59,12 @@ public class MyPage extends BaseController {
 		articleService = new ArticleServiceImpl(sqlSession, logger);
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 		pageHelper = PageHelper.getInstance();
-			
-
+		
+				
 		/** (3) 회원 번호 파라미터 받기 */
 		int member_id = web.getInt("member_id");
 		logger.debug("member_id=" + member_id);
-				System.out.println("-----"+ member_id);
+				
 		if (member_id == 0) {
 			web.redirect(null, "회원 번호가 지정되지 않았습니다.");
 			sqlSession.close();
@@ -83,13 +83,11 @@ public class MyPage extends BaseController {
 		/** (6) 게시물 목록 조회 */
 		int total_count = 0;
 		List<Article> memberarticleList = null;
-		
-	
 			
 		try {		
 			// 전체 게시물 수
-			total_count = articleService.selectArticleMainCount(article);
-System.out.println(total_count);
+			total_count = articleService.selectMemberArticleCount(article);
+
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
 			pageHelper.pageProcess(page, total_count, 8, 8);
@@ -98,9 +96,7 @@ System.out.println(total_count);
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());			
 
-			memberarticleList = articleService.selectArticleListMember(article);
-			System.out.println(memberarticleList);
-
+			memberarticleList = articleService.selectMemberArticleList(article);
 			readMember = memberService.selectMember(member);
 			
 			
@@ -141,14 +137,13 @@ System.out.println(total_count);
 		/** (7) 조회 결과를 View에 전달 */
 		request.setAttribute("readMember", readMember);
 		request.setAttribute("member_id", member_id);	
-
 		request.setAttribute("memberarticleList", memberarticleList);
+		System.out.println(memberarticleList  + "///");
 		request.setAttribute("pageHelper", pageHelper);
 						
-		String view = "mymenu/my_page";
+		String view = "mymenu/user_page2";
 		return view;
 	}
 	
-       
     
 }

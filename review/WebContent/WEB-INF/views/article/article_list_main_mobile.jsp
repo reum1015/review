@@ -48,7 +48,7 @@
 		    				<c:url var="readUrl" value="/article/article_read">
 					            		<c:param name="article_id" value="${article.id}" />
 					            	</c:url>
-					            	<c:url var="readUser" value="/mymenu/my_page">					            						            	
+					            	<c:url var="readUser" value="/mymenu/user_page">					            						            	
 					            		<c:param name="member_id" value="${article.member_id}" />
 					            	</c:url>
 					            	<!-- 링크 + 썸네일 -->

@@ -5,6 +5,7 @@ public class Member {
 	private int id;						// 회원번호
 	private String member_level;
 	private String nick_name;		// 닉네임
+	private int article_id;   // 책 번호
 	private String name;				// 이름
 	private String age;						
 	private String email;				// 이메일
@@ -17,8 +18,12 @@ public class Member {
 	private String member_id;
 	
 	// 페이지 구현을 위해서 추가된 값
-			private int limit_start;
-			private int list_count;
+	private int limit_start;
+	private int list_count;
+	
+	private String title;               // 제목
+	private String content;		//   내용
+	private String category;     // 카테고리
 		
 	//갤러리 구현
 	private String imagePath;
@@ -45,6 +50,14 @@ public class Member {
 
 	public void setNick_name(String nick_name) {
 		this.nick_name = nick_name;
+	}
+
+	public int getArticle_id() {
+		return article_id;
+	}
+
+	public void setArticle_id(int article_id) {
+		this.article_id = article_id;
 	}
 
 	public String getName() {
@@ -143,6 +156,30 @@ public class Member {
 		this.list_count = list_count;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -153,15 +190,15 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", member_level=" + member_level + ", nick_name=" + nick_name + ", name=" + name
-				+ ", age=" + age + ", email=" + email + ", user_pw=" + user_pw + ", gender=" + gender + ", reg_date="
-				+ reg_date + ", edit_date=" + edit_date + ", introduce=" + introduce + ", new_user_pw=" + new_user_pw
-				+ ", member_id=" + member_id + ", limit_start=" + limit_start + ", list_count=" + list_count
-				+ ", imagePath=" + imagePath + "]";
+		return "Member [id=" + id + ", member_level=" + member_level + ", nick_name=" + nick_name + ", article_id="
+				+ article_id + ", name=" + name + ", age=" + age + ", email=" + email + ", user_pw=" + user_pw
+				+ ", gender=" + gender + ", reg_date=" + reg_date + ", edit_date=" + edit_date + ", introduce="
+				+ introduce + ", new_user_pw=" + new_user_pw + ", member_id=" + member_id + ", limit_start="
+				+ limit_start + ", list_count=" + list_count + ", title=" + title + ", content=" + content
+				+ ", category=" + category + ", imagePath=" + imagePath + "]";
 	}
 
-	
-	
 
+	
 	
 }

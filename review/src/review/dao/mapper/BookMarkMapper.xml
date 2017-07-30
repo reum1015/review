@@ -38,16 +38,19 @@
 		
 		<!-- 북마크 목록을 조회한다. -->
 	<select id="selectBookMarkList" parameterType="review.model.BookMark" resultMap="bookmark">
-    SELECT b.episode_id, b.book_id, k.book_name, e.episode_order, e.episode_name, concat(i.file_dir, '/', i.file_name) as imagePath 
-      FROM member as m 
-      LEFT JOIN bookmark as b ON m.id = b.member_id
-      LEFT JOIN article as a ON b.article_id = a.id
-      LEFT JOIN imagefile as i ON e.id = i.article_id 
-        where i.content_type LIKE ('image/%') AND member_id=#{member_id}
-       
-       	ORDER BY e.id DESC  
-       	LIMIT #{limitStart}, #{listCount}
-       
+     		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, 
+		(SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE article_id=a.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath	
+		FROM   article as a
+        INNER JOIN member as m ON a.member_id = m.id
+         INNER JOIN bookmark as b ON b.article_id = a.id        
+         WHERE  b.member_id=#{member_id}
+       	ORDER BY b.id DESC  
+         LIMIT #{limit_start}, #{list_count}        
 	</select>	
 		
 	<!-- 전체 게시물 수를 조회한다. 페이지 구현 위해서 -->
@@ -55,9 +58,9 @@
 	SELECT COUNT(id) FROM bookmark WHERE member_id =#{member_id}	
 	</select>
 	
-	<!-- 특정 멤버에 속한 모든 북마크를 삭제한다. -->
+	<!-- 특정 게시글에 속한 모든 북마크를 삭제한다. -->
 	<delete id="deleteBookMarkAll" parameterType="review.model.BookMark">
-	  DELETE FROM bookmark WHERE member_id =#{member_id}
+	  DELETE FROM bookmark WHERE article_id =#{article_id}
 	</delete>
 
 

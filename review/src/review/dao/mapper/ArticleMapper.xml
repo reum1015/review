@@ -26,9 +26,9 @@
 	<insert id="insertArticle" parameterType="review.model.Article" 
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO article (
-			category, title, content, reg_date, edit_date, member_id, nick_name, hit, ip_address,like_count 
+			category, title, content, reg_date, edit_date, member_id, nick_name, hit, ip_address, favorite_count, bookmark_count 
 		) VALUES (
-			#{category}, #{title}, #{content}, now(), now(), #{member_id}, #{nick_name}, 0, #{ip_address},0
+			#{category}, #{title}, #{content}, now(), now(), #{member_id}, #{nick_name}, 0, #{ip_address},0, 0
 		)
 	</insert>
 	
@@ -87,24 +87,24 @@
 	</select>
 	
 	 <!--회원 게시물 목록을 조회한다. -->
-	<select id="selectArticleListMember" parameterType="review.model.Article" 
-		resultMap="article">
-		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, 
-		DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date,
+	<select id="selectMemberArticleList" parameterType="review.model.Article"  resultMap="article">
+		 SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date,
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile
 		 WHERE article_id=a.id 
 		 AND 
 		 content_type LIKE ('image/%') 		
 			ORDER BY id ASC LIMIT 0, 1
-			) 	AS imagePath			   
-		FROM   member as m, article as a 
-		WHERE m.id=a.member_id and m.id=#{member_id}
+			) 	AS imagePath		 
+		FROM   article as a
+         INNER JOIN member as m ON a.member_id = m.id WHERE m.id=#{member_id}		
 		ORDER  BY a.id DESC	
 		LIMIT #{limit_start}, #{list_count}	
 	</select>
 	
-		
-	
+		<!-- 회원 전체 게시물 수를 조회한다. article_list_main-->			
+	<select id="selectMemberArticleCount" parameterType="review.model.Article" resultType="int">
+		 SELECT COUNT(id) FROM article WHERE member_id=#{member_id}
+		</select>	
 	
 	<!-- 검색 전체 게시물 수를 조회한다. article_list -->
 	<select id="selectArticleCount" parameterType="review.model.Article" resultType="int">
@@ -151,12 +151,12 @@
 	
 		<!-- like_count +1 증가-->
 	<update id="updateLikeCountPlus" parameterType="review.model.Article" >
-		UPDATE article SET like_count=like_count+1 WHERE id=#{id}	
+		UPDATE article SET favorite_count=favorite_count+1 WHERE id=#{id}	
 	</update>
 	
 			<!-- like_count +1 증가-->
 	<update id="updateLikeCountMinus" parameterType="review.model.Article" >
-		UPDATE article SET like_count=like_count-1 WHERE id=#{id}	
+		UPDATE article SET favorite_count=favorite_count-1 WHERE id=#{id}	
 	</update>
 	
 	

@@ -122,7 +122,7 @@ public class BookMarkServiceImpl implements BookMarkService {
 		}catch(Exception e){
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("북마크 삭제에 실패했습니다.");
+			throw new Exception("게시글 북마크 삭제에 실패했습니다.");
 		}finally{
 			sqlSession.commit();
 		}

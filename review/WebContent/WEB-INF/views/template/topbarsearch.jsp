@@ -113,7 +113,7 @@ placeholder="Search" value="${keyword}" />
 		<!--// top_write -->
 		<!-- top_user -->
 		 <div class="topmenu-user col-lg-1 col-md-1 hidden-sm hidden-xs">
-		  <a class="navbar-brand glyphicon glyphicon-user" href="${pageContext.request.contextPath}/mymenu/my_page?member_id=${loginInfo.id}"></a>
+		  <a class="navbar-brand glyphicon glyphicon-user" href="${pageContext.request.contextPath}/mymenu/user_page?member_id=${loginInfo.id}"></a>
 		  </div>
 		
 		  <!--// top_user -->

@@ -96,63 +96,141 @@ overflow: hidden;
     display: inline-block;
     overflow: hidden;       
 }
+
+
+/* 관심등록 Off 일때*/
+.favorite_Off{
+	display: inline-block;
+	zoom: 1;
+	width: 23px;
+    height: 21px;
+    background-image: url(../assets/imgs/clipping/sp_likeit2.png);
+    background-position: 0 0;
+}
+
+/* 관심등록 On 일때*/
+.favorite_On{
+	display: inline-block;
+	zoom: 1;
+	width: 23px;
+    height: 21px;
+    background-image: url(../assets/imgs/clipping/sp_likeit2.png);
+    background-position: -30px 0px;
+}
+
+.btn_h3{
+	padding-top: 15px;
+}
+
+.total {
+	font-size: 18px;
+    color: #999;
+    font-family: arial;
+    font-weight: normal;
+}
 </style>
 
 <script type="text/javascript">
-$(function(){		
-	
-	
-	
-	var bookmark_count = $("#bookmark_count").val();
-	var member_id = $("#member_id").val();
-	var total_bookmark = $("#total_bookmark").val();		
-	var article_id = $("#article_id").val();
-	var isBookMarkState = $("#isBookMarkState").val();
-	
-	//관심등록 On 이면 마크 표시
-	if(bookmark_count > 0){	
-		$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");	
-		}else{
-			$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
-		}
-	
-	$("#bookmark_button").on('click',function(e){
-		e.preventDefault();
-		if(member_id == 0){
-			var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
-			
-			if(result){
-				location.replace('/review/member/login?article_id=' + article_id );
-				return false;
-			}else{
-				return false;
-			}
-		}
+	$(function() {
+		var member_id = $("#member_id").val();
 		
-		//북마크 On/Off
-		$.get("${pageContext.request.contextPath}/article/addBookMark", 
-				{bookmark_count : bookmark_count, member_id : member_id, total_bookmark : total_bookmark, article_id: article_id},
-				function(data){
-						var isBookMarkState = data.isBookMarkState;
-						 total_bookmark=data.total_bookmark;
-						 bookmark_count = data.bookmark_count;
-					
-						$("#bookmark_count").attr("value", bookmark_count);
-						$("#concernCount").text(total_bookmark);
+		
+		//Like 버튼
+		var favorite_count = $("#favorite_count").val();
+		var member_id = $("#member_id").val();
+		var total_favorite = $("#total_favorite").val();
+		var article_id = $("#article_id").val();
+		var isFavoriteState = $("#isFavoriteState").val();
+
+
+	//관심등록 On 이면 마크 표시
+		if(favorite_count > 0){
+	$("#favorite_img").removeClass("favorite_Off").addClass("favorite_On");
+			}else{
+$("#favorite_img").removeClass("favorite_On").addClass("favorite_Off");
+			}
+			
+	$("#favorite_button").on('click',function(e){
+			e.preventDefault();
+			if(member_id == 0){
+var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
+				
+				if(result){
+	location.replace('/review/member/login?article_id=' + article_id );
+					return false;
+				}else{
+					return false;
+				}
+			}
+//관심등록  On/Off
+	$.get("${pageContext.request.contextPath}/article/addFavorite", 
+{favorite_count : favorite_count, member_id : member_id, total_favorite : total_favorite, article_id: article_id},
+   function(data){
+		var isFavoriteState = data.isFavoriteState;
+		 total_favorite=data.total_favorite;
+                          favorite_count = data.favorite_count;
 						
+	$("#favorite_count").attr("value", favorite_count);
+		$("#concernCount").text(total_favorite);
+
+	if(isFavoriteState){
+				$("#favorite_img").removeClass("favorite_Off").addClass("favorite_On");
+		}else{
+	$("#favorite_img").removeClass("favorite_On").addClass("favorite_Off");
+							}
+						});
+		});		
+		//Like 버튼 끝
+		
+		// Bookmark 버튼
+		var bookmark_count = $("#bookmark_count").val();
+		var member_id = $("#member_id").val();
+		var total_bookmark = $("#total_bookmark").val();		
+		var article_id = $("#article_id").val();
+		var isBookMarkState = $("#isBookMarkState").val();
+		
+		//북마크 On 이면 마크 표시
+		if(bookmark_count > 0){	
+			$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");	
+			}else{
+				$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
+			}
+		
+		$("#bookmark_button").on('click',function(e){
+			e.preventDefault();
+			if(member_id == 0){
+				var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
+				
+				if(result){
+					location.replace('/review/member/login?article_id=' + article_id );
+					return false;
+				}else{
+					return false;
+				}
+			}
+			
+			//북마크 On/Off
+			$.get("${pageContext.request.contextPath}/article/addBookMark", 
+					{bookmark_count : bookmark_count, member_id : member_id, total_bookmark : total_bookmark, article_id: article_id},
+					function(data){
+							var isBookMarkState = data.isBookMarkState;
+							 total_bookmark=data.total_bookmark;
+							 bookmark_count = data.bookmark_count;
 						
-						if(isBookMarkState){							
-							$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");
-						}else{							
-							$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
-						}
-					});
+							$("#bookmark_count").attr("value", bookmark_count);
+							$("#concernCount").text(total_bookmark);
+							
+							
+							if(isBookMarkState){							
+								$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");
+							}else{							
+								$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
+							}
+						});
+		});		
+		// Bookmark 버튼
 	});
-	
-});
-
 </script>
-
 
 </head>
 <body>
@@ -176,7 +254,7 @@ $(function(){
 									<c:url var="readUrl" value="/article/article_read">
 										<c:param name="article_id" value="${readArticle.id}" />
 									</c:url>
-									<c:url var="readUser" value="/mymenu/my_page">					            						            	
+									<c:url var="readUser" value="/mymenu/user_page">					            						            	
 					            		<c:param name="member_id" value="${readArticle.member_id}" />
 					            	</c:url>
 									<!-- 링크 + 썸네일 -->
@@ -234,24 +312,24 @@ $(function(){
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
 									<!-- like + comment + book mark -->
-								
-				
 									<div class="btn-group btn-block">
-										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
-											<i class="">Like</i></a> 
+										<a href="#" id="favorite_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+	                               <span class="favorite_Off  pull-right" id="favorite_img"></span></a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Comment</i></a>
 										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 											</a>
-							<input type="hidden" value="${bookmarkCount}" id="bookmark_count">
+							
 	                       <input type="hidden" value="${member_id}" id="member_id">				
-                        <input type="hidden" value="${article_id}" id="article_id">	
+                        <input type="hidden" value="${article_id}" id="article_id">                        
+                        <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
 	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
-	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
+	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
+	                     <input type="hidden" value="${favoriteCount}" id="total_favorite">
+	                     <input type="hidden" value="${favoriteCount}" id="favorite_count">                          
+	                     <input type="hidden" value="${isFavoriteState}" id="isFavoriteState">	                     
 									</div>
-									
-									
 									<!--// like + comment + book mark -->
 								</div>
 							</div>						
@@ -306,7 +384,7 @@ $(function(){
                 </div>
                 <!-- 수정,삭제 버튼 -->        	
                 <div class='pull-right'>
-           <c:if test="${readArticle.member_id == loginInfo.id}">             
+           <c:if test="{itme[0].member_id == loginInfo.id}">             
                     <a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
                         <i class='glyphicon glyphicon-edit'></i>
                     </a>

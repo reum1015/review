@@ -1,6 +1,7 @@
 package review.comment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import review.model.Comment;
 
 import review.service.CommentService;
 import review.service.impl.CommentServiceImpl;
+
 
 
 
@@ -76,7 +78,8 @@ public class CommentList extends BaseController {
 		/** (6) Service를 통한 덧글 목록 조회 */
 		// 작성 결과를 저장할 객체
 		
-		List<Comment> item = null;
+		List<Comment> item = new ArrayList<Comment>(); 
+		item = null;
 		try {
 			item = commentService.selectCommentList(comment);			
 		} catch (Exception e) {
