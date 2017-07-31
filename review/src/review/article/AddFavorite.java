@@ -93,6 +93,7 @@ public class AddFavorite extends BaseController {
 			try{
 				//관심등록 삭제
 				favoriteService.deleteRemoveFavorite(favorite);
+				articleService.likeCountMinus(article);
 				
 			
 				
@@ -124,6 +125,10 @@ public class AddFavorite extends BaseController {
 			
 			favorite.setMember_id(member_id);
 			
+			//작품의 총 관심등록 -1을 위 한 Beans 셋팅
+			  Article article = new Article();
+			  article.setId(article_id);
+				
 			//총 관심등록 수 +1 파라미터 Beans에 담기
 			//총 관심등록 수 +1은 Sql구문에 SET total_favorite=total_favorite+1을 통해 업데이트
 		
@@ -135,7 +140,7 @@ public class AddFavorite extends BaseController {
 			try{
 				//관심등록 테이블에 추가
 				favoriteService.insertAddFavorite(favorite);
-							
+				articleService.likeCountPlus(article);			
 				
 			}catch (Exception e) {				
 				web.redirect(null, e.getLocalizedMessage());
