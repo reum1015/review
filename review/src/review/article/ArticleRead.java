@@ -95,7 +95,7 @@ public class ArticleRead extends BaseController {
 	
 		// 북마크 저장변수
 				int bookmarkCount = 0;
-				int favoriteCount = 0;
+				int likeCount = 0;
 				
 		        BookMark bookmark = new BookMark();
 		        bookmark.setMember_id(member_id);
@@ -128,7 +128,7 @@ public class ArticleRead extends BaseController {
 			readArticle = articleService.selectArticle(article);	
 			// 북마크 확인용
 			bookmarkCount = bookmarkService.selectCountBookMarkById(bookmark);
-			favoriteCount = favoriteService.selectCountFavoriteArticleById(favorite);
+			likeCount = favoriteService.selectCountFavoriteArticleById(favorite);
 			
 		} catch (Exception e) {
 			web.redirect(null, e.getMessage());
@@ -152,16 +152,16 @@ public class ArticleRead extends BaseController {
 		boolean isBookMarkState = bookmarkCount > 0;
 		logger.debug("bookmarkCount ------->" + bookmarkCount);
 		
-		boolean isFavoriteState = favoriteCount > 0;
-		logger.debug("favoriteCount ------->" + favoriteCount);
+		boolean isLikeState = likeCount > 0;
+		logger.debug("likeCount ------->" + likeCount);
 		
 		/** (7) 읽은 데이터를 View에게 전달한다 */
 		request.setAttribute("readArticle", readArticle);
 		
 		request.setAttribute("isBookMarkState", isBookMarkState);
         request.setAttribute("bookmarkCount", bookmarkCount);
-        request.setAttribute("favoriteCount", favoriteCount);
-        request.setAttribute("isFavoriteState", isFavoriteState);
+        request.setAttribute("likeCount", likeCount);
+        request.setAttribute("isLikeState", isLikeState);
         request.setAttribute("member_id", member_id);
 		request.setAttribute("article_id", article_id);
 		

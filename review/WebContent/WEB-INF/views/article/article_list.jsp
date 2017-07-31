@@ -93,7 +93,7 @@ overflow: hidden;
 
 
 /* 관심등록 Off 일때*/
-.favorite_Off{
+.like_Off{
 	display: inline-block;
 	zoom: 1;
 	width: 23px;
@@ -103,7 +103,7 @@ overflow: hidden;
 }
 
 /* 관심등록 On 일때*/
-.favorite_On{
+.like_On{
 	display: inline-block;
 	zoom: 1;
 	width: 23px;
@@ -128,11 +128,11 @@ overflow: hidden;
 	$(function() {
 		var member_id = $("#member_id").val();
 		
-		var favorite_count = $("#favorite_count").val();
+		var likeCount = $("#likeCount").val();
 		var member_id = $("#member_id").val();
-		var total_favorite = $("#total_favorite").val();
+		var totalLike = $("#totalLike").val();
 		var article_id = $("#article_id").val();
-		var isFavoriteState = $("#isFavoriteState").val();
+		var isLikeState = $("#isLikeState").val();
 
 		$('.like_button').on('click', function(e) {
 					var member_id = $("#member_id").val();
@@ -144,7 +144,7 @@ overflow: hidden;
 			 				return;
 			 			//로그인 상태	
 			 			}else{
-			 				$.get("${pageContext.request.contextPath}/favorite/favoriteAdd", 
+			 				$.get("${pageContext.request.contextPath}/like/favoriteAdd", 
 			 						{member_id : member_id, article_id : article_id},
 			 						function(data) {
 			 							var isLikeState = data.isLikeState;
@@ -152,11 +152,11 @@ overflow: hidden;
 			 	
 			 							if(isLikeState){
 			 								alert("Like added");
-			 								$("#favorite_img").removeClass("favorite_Off").addClass("favorite_On");
+			 								$("#like_img").removeClass("like_Off").addClass("like_On");
 
 			 							}else{
 			 								alert("Like removed");
-			 								$("#favorite_img").removeClass("favorite_On").addClass("favorite_Off");
+			 								$("#like_img").removeClass("like_On").addClass("like_Off");
 
 			 							}
 			 				});
@@ -283,7 +283,7 @@ overflow: hidden;
 									<div class="btn-group btn-block">
 									
 										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
-										<span class="favorite_Off  pull-right" id="favorite_img"></span>
+										<span class="like_Off  pull-right" id="like_img"></span>
 										</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Comment</i></a>
@@ -296,9 +296,9 @@ overflow: hidden;
                         <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
 	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
 	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
-	                     <input type="hidden" value="${favoriteCount}" id="total_like">
-	                     <input type="hidden" value="${favoriteCount}" id="like_count">                          
-	                     <input type="hidden" value="${isFavoriteState}" id="isFavoriteState">	                     
+	                     <input type="hidden" value="${likeCount}" id="total_like">
+	                     <input type="hidden" value="${likeCount}" id="like_count">                          
+	                     <input type="hidden" value="${isLikeState}" id="isLikeState">	                     
 									</div>
 		    				<!--// like + comment + book mark -->
 		    				
@@ -441,7 +441,7 @@ overflow: hidden;
 							<!-- like + comment + book mark -->
 									<div class="btn-group btn-block">
 									<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
-									<span class="favorite_Off  pull-right" id="favorite_img"></span></a>
+									<span class="like_Off  pull-right" id="like_img"></span></a>
 										
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Comment</i></a>
@@ -454,9 +454,9 @@ overflow: hidden;
                         <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
 	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
 	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
-	                     <input type="hidden" value="${favoriteCount}" id="total_favorite">
-	                     <input type="hidden" value="${favoriteCount}" id="favorite_count">                          
-	                     <input type="hidden" value="${isFavoriteState}" id="isFavoriteState">	                     
+	                     <input type="hidden" value="${likeCount}" id="totalLike">
+	                     <input type="hidden" value="${likeCount}" id="likeCount">                          
+	                     <input type="hidden" value="${isLikeState}" id="isLikeState">	                     
 									</div>
 		    				<!--// like + comment + book mark -->
 		    				

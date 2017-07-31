@@ -99,7 +99,7 @@ overflow: hidden;
 
 
 /* 관심등록 Off 일때*/
-.favorite_Off{
+.like_Off{
 	display: inline-block;
 	zoom: 1;
 	width: 23px;
@@ -109,7 +109,7 @@ overflow: hidden;
 }
 
 /* 관심등록 On 일때*/
-.favorite_On{
+.like_On{
 	display: inline-block;
 	zoom: 1;
 	width: 23px;
@@ -136,21 +136,21 @@ overflow: hidden;
 		
 		
 		//Like 버튼
-		var favorite_count = $("#favorite_count").val();
+		var likeCount = $("#likeCount").val();
 		var member_id = $("#member_id").val();
-		var total_favorite = $("#total_favorite").val();
+		var totalLike = $("#totalLike").val();
 		var article_id = $("#article_id").val();
-		var isFavoriteState = $("#isFavoriteState").val();
+		var isLikeState = $("#isLikeState").val();
 
 
 	//관심등록 On 이면 마크 표시
-		if(favorite_count > 0){
-	$("#favorite_img").removeClass("favorite_Off").addClass("favorite_On");
+		if(likeCount > 0){
+	$("#like_img").removeClass("like_Off").addClass("like_On");
 			}else{
-$("#favorite_img").removeClass("favorite_On").addClass("favorite_Off");
+$("#like_img").removeClass("like_On").addClass("like_Off");
 			}
 			
-	$("#favorite_button").on('click',function(e){
+	$("#like_button").on('click',function(e){
 			e.preventDefault();
 			if(member_id == 0){
 var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
@@ -164,19 +164,19 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 			}
 //관심등록  On/Off
 	$.get("${pageContext.request.contextPath}/article/addFavorite", 
-{favorite_count : favorite_count, member_id : member_id, total_favorite : total_favorite, article_id: article_id},
+{likeCount : likeCount, member_id : member_id, totalLike : totalLike, article_id: article_id},
    function(data){
-		var isFavoriteState = data.isFavoriteState;
-		 total_favorite=data.total_favorite;
-                          favorite_count = data.favorite_count;
+		var isLikeState = data.isLikeState;
+		 totalLike=data.totalLike;
+                          likeCount = data.likeCount;
 						
-	$("#favorite_count").attr("value", favorite_count);
-		$("#concernCount").text(total_favorite);
+	$("#likeCount").attr("value", likeCount);
+		$("#concernCount").text(totalLike);
 
-	if(isFavoriteState){
-				$("#favorite_img").removeClass("favorite_Off").addClass("favorite_On");
+	if(isLikeState){
+				$("#like_img").removeClass("like_Off").addClass("like_On");
 		}else{
-	$("#favorite_img").removeClass("favorite_On").addClass("favorite_Off");
+	$("#like_img").removeClass("like_On").addClass("like_Off");
 							}
 						});
 		});		
@@ -313,8 +313,8 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 									<br />
 									<!-- like + comment + book mark -->
 									<div class="btn-group btn-block">
-										<a href="#" id="favorite_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
-	                               <span class="favorite_Off  pull-right" id="favorite_img"></span></a>
+										<a href="#" id="like_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+	                               <span class="like_Off  pull-right" id="like_img"></span></a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Comment</i></a>
 										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
@@ -326,9 +326,9 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
                         <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
 	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
 	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
-	                     <input type="hidden" value="${favoriteCount}" id="total_favorite">
-	                     <input type="hidden" value="${favoriteCount}" id="favorite_count">                          
-	                     <input type="hidden" value="${isFavoriteState}" id="isFavoriteState">	                     
+	                     <input type="hidden" value="${likeCount}" id="totalLike">
+	                     <input type="hidden" value="${likeCount}" id="likeCount">                          
+	                     <input type="hidden" value="${isLikeState}" id="isLikeState">	                     
 									</div>
 									<!--// like + comment + book mark -->
 								</div>

@@ -91,7 +91,7 @@ public class ArticleList extends BaseController {
 		logger.debug("article_id" + article_id);
 		
 		
-		int favoriteCount = 0;
+		int likeCount = 0;
 
 		// 북마크 저장변수
 		int bookmarkCount = 0;
@@ -133,7 +133,7 @@ public class ArticleList extends BaseController {
 			articleList = articleService.selectArticleList(article);
 			favoriteList = favoriteService.selectFavoriteList(favorite);
 			bookmarkCount = bookmarkService.selectCountBookMarkById(bookmark);
-			favoriteCount = favoriteService.selectCountFavoriteArticleById(favorite);
+			likeCount = favoriteService.selectCountFavoriteArticleById(favorite);
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
@@ -173,8 +173,8 @@ public class ArticleList extends BaseController {
 		boolean isBookMarkState = bookmarkCount > 0;
 		logger.debug("bookmarkCount --------------->" + bookmarkCount);
 				
-		boolean isFavoriteState = favoriteCount > 0;
-		logger.debug("favoriteCount ------->" + favoriteCount);
+		boolean isLikeState = likeCount > 0;
+		logger.debug("likeCount ------->" + likeCount);
 		/** (7) 조회 결과를 View에 전달 */
 	
 		request.setAttribute("articleList", articleList);
@@ -184,8 +184,8 @@ public class ArticleList extends BaseController {
 		request.setAttribute("favoriteList", favoriteList);
 		request.setAttribute("isBookMarkState", isBookMarkState);
         request.setAttribute("bookmarkCount", bookmarkCount);
-        request.setAttribute("favoriteCount", favoriteCount);
-        request.setAttribute("isFavoriteState", isFavoriteState);
+        request.setAttribute("likeCount", likeCount);
+        request.setAttribute("isLikeState", isLikeState);
 		
 		String view = "article/article_list";
 		
