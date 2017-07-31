@@ -128,7 +128,12 @@ overflow: hidden;
 	$(function() {
 		var member_id = $("#member_id").val();
 		
-		
+		var favorite_count = $("#favorite_count").val();
+		var member_id = $("#member_id").val();
+		var total_favorite = $("#total_favorite").val();
+		var article_id = $("#article_id").val();
+		var isFavoriteState = $("#isFavoriteState").val();
+
 		$('.like_button').on('click', function(e) {
 					var member_id = $("#member_id").val();
 						var article_id = $(this).attr('id');
@@ -147,8 +152,12 @@ overflow: hidden;
 			 	
 			 							if(isLikeState){
 			 								alert("Like added");
+			 								$("#favorite_img").removeClass("favorite_Off").addClass("favorite_On");
+
 			 							}else{
 			 								alert("Like removed");
+			 								$("#favorite_img").removeClass("favorite_On").addClass("favorite_Off");
+
 			 							}
 			 				});
 			 
@@ -273,10 +282,12 @@ overflow: hidden;
 							<!-- like + comment + book mark -->
 									<div class="btn-group btn-block">
 									
-										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"><i class="">Like</i></a>
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
+										<span class="favorite_Off  pull-right" id="favorite_img"></span>
+										</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Comment</i></a>
-										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 											</a>
 							
@@ -285,7 +296,7 @@ overflow: hidden;
                         <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
 	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
 	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
-	                     <input type="hidden" value="${favoriteCount}" id="total_favorite">
+	                     <input type="hidden" value="${favoriteCount}" id="total_like">
 	                     <input type="hidden" value="${favoriteCount}" id="like_count">                          
 	                     <input type="hidden" value="${isFavoriteState}" id="isFavoriteState">	                     
 									</div>
@@ -429,11 +440,12 @@ overflow: hidden;
 							<br />
 							<!-- like + comment + book mark -->
 									<div class="btn-group btn-block">
-									<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"><i class="">Like</i></a>
+									<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
+									<span class="favorite_Off  pull-right" id="favorite_img"></span></a>
 										
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<i class="">Comment</i></a>
-										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+										<a  id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 											</a>
 							

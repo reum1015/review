@@ -52,13 +52,12 @@
 			) 	AS imagePath		 
 		FROM   article as a
          INNER JOIN member as m ON a.member_id = m.id
-         INNER JOIN favorite as f ON f.article_id = a.id
-         WHERE         		
-		replace(category,' ','') like concat('%', #{category}, '%')
+         INNER JOIN favorite as f ON f.article_id = a.id 
+         WHERE   
+         f.member_id=a.member_id  AND      		
+		(replace(category,' ','') like concat('%', #{category}, '%')
 		OR replace(title ,' ','') like concat('%', #{title}, '%')
-		OR replace(content ,' ','') like concat('%', #{content }, '%')
-		AND
-		f.member_id=a.member_id 			       
+		OR replace(content ,' ','') like concat('%', #{content }, '%'))					       
         ORDER BY a.like_count DESC
        LIMIT #{limit_start}, #{list_count}            
 	</select>		

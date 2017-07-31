@@ -234,7 +234,7 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/template/topbarsearch.jsp" />
+	<jsp:include page="/WEB-INF/views/template/topbar.jsp" />
 	<jsp:include page="/WEB-INF/views/template/bottombar.jsp" />
 
 	<!-- 메인 화면 시작 -->

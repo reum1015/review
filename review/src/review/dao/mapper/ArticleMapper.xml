@@ -26,9 +26,9 @@
 	<insert id="insertArticle" parameterType="review.model.Article" 
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO article (
-			category, title, content, reg_date, edit_date, member_id, nick_name, hit, ip_address, like_count, bookmark_count 
+			category, title, content, reg_date, edit_date, member_id, nick_name, hit, ip_address, like_count  
 		) VALUES (
-			#{category}, #{title}, #{content}, now(), now(), #{member_id}, #{nick_name}, 0, #{ip_address},0, 0
+			#{category}, #{title}, #{content}, now(), now(), #{member_id}, #{nick_name}, 0, #{ip_address},0
 		)
 	</insert>
 	
