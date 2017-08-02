@@ -17,7 +17,7 @@ public class Favorite {
 	// 페이지 구현을 위해서 추가된 값
 	private int limit_start;
 	private int list_count;
-	
+	private int total_like;
 	// 갤러리 구현을 위해서 추가된 값
 	private boolean gallery;
 	private String imagePath;
@@ -99,6 +99,12 @@ public class Favorite {
 	public void setList_count(int list_count) {
 		this.list_count = list_count;
 	}
+	public int getTotal_like() {
+		return total_like;
+	}
+	public void setTotal_like(int total_like) {
+		this.total_like = total_like;
+	}
 	public boolean isGallery() {
 		return gallery;
 	}
@@ -116,11 +122,10 @@ public class Favorite {
 		return "Favorite [id=" + id + ", member_id=" + member_id + ", article_id=" + article_id + ", nick_name="
 				+ nick_name + ", title=" + title + ", content=" + content + ", category=" + category + ", reg_date="
 				+ reg_date + ", edit_date=" + edit_date + ", ip_address=" + ip_address + ", tag=" + tag
-				+ ", limit_start=" + limit_start + ", list_count=" + list_count + ", gallery=" + gallery
-				+ ", imagePath=" + imagePath + "]";
+				+ ", limit_start=" + limit_start + ", list_count=" + list_count + ", total_like=" + total_like
+				+ ", gallery=" + gallery + ", imagePath=" + imagePath + "]";
 	}
-	
-	
+
 	
 	
 	

@@ -11,7 +11,7 @@
 		maximum-scale=1.0,user-scalable=no">
 						
 			<!-- 모바일 웹 페이지 설정 -->	
-    <link rel="shortcut icon" href="assets/ico/favicon.ico" />
+   <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/icon/reviewicon.png"/>
     <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/assets/icon/apple-touch-icon-144-precomposed.png"/>
 			  
 	<!-- bootstrap -->

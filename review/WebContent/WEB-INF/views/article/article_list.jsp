@@ -292,6 +292,7 @@ overflow: hidden;
 									
 										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
 										<span class="like_Off  pull-right" id="like_img"></span>
+										
 										</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font></a>
@@ -451,7 +452,9 @@ overflow: hidden;
 							<!-- like + comment + book mark -->
 									<div class="btn-group btn-block">
 									<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
-									<span class="like_Off  pull-right" id="like_img"></span></a>
+									<span class="like_Off  pull-right" id="like_img"></span>
+									
+									</a>
 										
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font></a>
