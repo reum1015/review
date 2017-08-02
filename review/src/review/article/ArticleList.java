@@ -1,6 +1,7 @@
 package review.article;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 import review.dao.MybatisConnectionFactory;
 import review.jsp.helper.BaseController;
@@ -30,6 +32,10 @@ import review.service.impl.ArticleServiceImpl;
 import review.service.impl.BookMarkServiceImpl;
 import review.service.impl.FavoriteServiceImpl;
 import review.service.impl.ImageFileServiceImpl;
+
+import twitter4j.JSONArray;
+import twitter4j.JSONException;
+
 
 
 
@@ -112,6 +118,15 @@ public class ArticleList extends BaseController {
 		int totalCount = 0;
 		List<Article> articleList = null;
 		List<Favorite> favoriteList = null;
+		
+		//회원의 좋아요 상태 확인
+		List<Favorite> favoriteStateList = null;
+		
+		
+		
+		
+		
+		
 				
 		try {
 			// 전체 게시물 수
@@ -134,12 +149,19 @@ public class ArticleList extends BaseController {
 			favoriteList = favoriteService.selectFavoriteList(favorite);
 			bookmarkCount = bookmarkService.selectCountBookMarkById(bookmark);
 			likeCount = favoriteService.selectCountFavoriteArticleById(favorite);
+			
+			favoriteStateList = favoriteService.selectfavoriteStateList(favorite);
+			
+			
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
 			return null;
 		} finally {
 			sqlSession.close();
 		}
+		
+		
+		System.out.println("favoriteStateList ------------> " + favoriteStateList.toString());
 		
 		// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체(에피소드 리스트)
 		if (articleList != null) {
@@ -176,7 +198,22 @@ public class ArticleList extends BaseController {
 		boolean isLikeState = likeCount > 0;
 		logger.debug("likeCount ------->" + likeCount);
 		/** (7) 조회 결과를 View에 전달 */
-	
+		
+		
+		JSONArray favoriteState = new JSONArray();
+		
+		try{
+			favoriteState = new JSONArray(favoriteStateList.toArray());
+		}catch (JSONException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		//좋아요 확인용 리스트 자바스크립트용
+		request.setAttribute("favoriteState", favoriteState);
+		
+		
+		
 		request.setAttribute("articleList", articleList);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("pageHelper", pageHelper);

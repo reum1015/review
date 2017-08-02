@@ -140,4 +140,19 @@ public class FavoriteServiceImpl implements FavoriteService {
 		}
 	}
 
+
+
+	@Override
+	public List<Favorite> selectfavoriteStateList(Favorite favorite) throws Exception {
+		List<Favorite> result = null;
+		try {
+			result = sqlSession.selectList("FavoriteMapper.selectfavoriteStateList", favorite);
+			
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("검색한 좋아요 글 목록 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
 }

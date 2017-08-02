@@ -136,10 +136,10 @@ overflow: hidden;
 
 
 		//관심등록 On 이면 마크 표시
-			if(likeCount > 0){
+		if(likeCount > 0){
 		$("#like_img").removeClass("like_Off").addClass("like_On");
 				}else{
-	$("#like_img").removeClass("like_On").addClass("like_Off");
+		$("#like_img").removeClass("like_On").addClass("like_Off");
 				}
 		
 		$('.like_button').on('click', function(e) {
@@ -160,11 +160,11 @@ overflow: hidden;
 			 	
 			 							if(isLikeState){
 			 								alert("Like added");
-			 								$("#like_img").removeClass("like_Off").addClass("like_On");
+			 								$("#" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>')
 
 			 							}else{
 			 								alert("Like removed");
-			 								$("#like_img").removeClass("like_On").addClass("like_Off");
+			 								$("#" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>')
 
 			 							}
 			 				});
@@ -222,6 +222,25 @@ overflow: hidden;
 						});
 		});		
 		// Bookmark 버튼
+		
+		
+		/*
+		구매목록 리스트
+		구매목록에 구매 완료 표시
+	*/
+	var favoriteState= eval(${favoriteState});
+	var favoriteStateLength = favoriteState.length;
+	
+	for(var i = 0; i <favoriteStateLength ; i++){
+		var epid = favoriteState[i].article_id;
+		$("#" + epid).empty();
+		$("#" + epid).append('<span class="like_On pull-right" id="like_img"></span>')
+	};
+		
+		
+	
+		
+		
 	});
 </script>
 
@@ -291,8 +310,12 @@ overflow: hidden;
 									<div class="btn-group btn-block">
 									
 										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
+<<<<<<< HEAD
 										<span class="like_Off  pull-right" id="like_img"></span>
 										
+=======
+										<span class="like_Off pull-right" id="like_img"></span>
+>>>>>>> branch 'master' of https://github.com/reum1015/review
 										</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font></a>

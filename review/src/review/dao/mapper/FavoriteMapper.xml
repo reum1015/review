@@ -79,5 +79,11 @@
 	  DELETE FROM favorite WHERE article_id =#{article_id}
 	</delete>
 	
+	
+	<select id="selectfavoriteStateList" parameterType="review.model.Favorite" resultMap="favorite">
+	SELECT article_id FROM favorite WHERE member_id=#{member_id}
+	</select>
+	
+	
 
 </mapper>

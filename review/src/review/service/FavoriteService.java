@@ -55,4 +55,14 @@ public interface FavoriteService {
 	 */
 	public void deleteFavoriteAll(Favorite favorite) throws Exception;
 	
+	
+	/**
+	 * 좋아요 버튼 상태 확인용 리스트
+	 *  @param favorite -  BEans
+	 *  @return List- 좋아요
+	 * @throws Exception
+	 */
+	public List<Favorite> selectfavoriteStateList(Favorite favorite) throws Exception;
+	
+	
 }
