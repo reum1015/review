@@ -7,120 +7,138 @@
 <html lang='ko'>
 <head>
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
-	<!-- Javascript -->
-	  	<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
-		<script src="${pageContext.request.contextPath}/assets/js/tab-x/bootstrap-tabs-x.min.js"></script>
-	    
-	   
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>   		
-	<!-- StarRating -->    		
-	<link href="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.css" media="all" rel="stylesheet" type="text/css" />    		
-	    		
-	<!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
-	<link href="${pageContext.request.contextPath}/assets/css/star-rating/theme.css" media="all" rel="stylesheet" type="text/css" />
-	
-	
-	<link href="${pageContext.request.contextPath}/assets/css/selectbox/css/bootstrap-select.css" media="all" rel="stylesheet" type="text/css" />
-	
-	<!-- important mandatory libraries -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.js" type="text/javascript"></script>
-	
-	<!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
-	<script src="${pageContext.request.contextPath}/assets/css/star-rating/theme.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
-	
-	<!-- Multi-column -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/multi-column/ie-row-fix.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css"/>
-	
-    <!-- handlebars -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/handlebars/handlebars-v4.0.5.js"></script>
-	
-	<!-- ajax -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.css"/>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.js"></script>
-	
-	<!-- ajaxForm -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/ajax-form/jquery.form.min.js"></script> 
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<!-- Javascript -->
+<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/assets/js/tab-x/bootstrap-tabs-x.min.js"></script>
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- StarRating -->
+<link
+	href="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.css"
+	media="all" rel="stylesheet" type="text/css" />
+
+<!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
+<link
+	href="${pageContext.request.contextPath}/assets/css/star-rating/theme.css"
+	media="all" rel="stylesheet" type="text/css" />
+
+
+<link
+	href="${pageContext.request.contextPath}/assets/css/selectbox/css/bootstrap-select.css"
+	media="all" rel="stylesheet" type="text/css" />
+
+<!-- important mandatory libraries -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+<script
+	src="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.js"
+	type="text/javascript"></script>
+
+<!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
+<script
+	src="${pageContext.request.contextPath}/assets/css/star-rating/theme.js"></script>
+<script
+	src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+
+<!-- Multi-column -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/plugins/multi-column/ie-row-fix.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css" />
+
+<!-- handlebars -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/plugins/handlebars/handlebars-v4.0.5.js"></script>
+
+<!-- ajax -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.css" />
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.js"></script>
+
+<!-- ajaxForm -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/ajax-form/jquery.form.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 <!-- main css -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_list.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/assets/css/article_list.css" />
 
 <style type="text/css">
-
 .chk_bookmark label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
 }
 
 .icon_bookmark2 {
-    width: 19px;
-    height: 29px;
-    background-image: url(../assets/imgs/clipping/sp_icon.png);
-     background-position: -90px -290px;
+	width: 19px;
+	height: 29px;
+	background-image: url(../assets/imgs/clipping/sp_icon.png);
+	background-position: -90px -290px;
 }
 
 .bookmark_On {
-    width: 19px;
-    height: 29px;
-    background-image: url(../assets/imgs/clipping/sp_icon.png);
-     background-position: -60px -290px;
+	width: 19px;
+	height: 29px;
+	background-image: url(../assets/imgs/clipping/sp_icon.png);
+	background-position: -60px -290px;
 }
 
 .bookmark_Off {
-    width: 19px;
-    height: 29px;
-    background-image: url(../assets/imgs/clipping/sp_icon.png);
-     background-position: -90px -290px;
+	width: 19px;
+	height: 29px;
+	background-image: url(../assets/imgs/clipping/sp_icon.png);
+	background-position: -90px -290px;
 }
 
 .bmk {
-overflow: hidden;
+	overflow: hidden;
 }
 
 [class^=icon_] {
-    font-size: 0;
-    line-height: 0;
-    vertical-align: top;
-    color: rgba(1, 0, 0, 0) !important;
-    display: inline-block;
-    overflow: hidden;       
+	font-size: 0;
+	line-height: 0;
+	vertical-align: top;
+	color: rgba(1, 0, 0, 0) !important;
+	display: inline-block;
+	overflow: hidden;
 }
 
-
 /* 관심등록 Off 일때*/
-.like_Off{
+.like_Off {
 	display: inline-block;
 	zoom: 1;
 	width: 23px;
-    height: 21px;
-    background-image: url(../assets/imgs/clipping/sp_likeit2.png);
-    background-position: 0 0;
+	height: 21px;
+	background-image: url(../assets/imgs/clipping/sp_likeit2.png);
+	background-position: 0 0;
 }
 
 /* 관심등록 On 일때*/
-.like_On{
+.like_On {
 	display: inline-block;
 	zoom: 1;
 	width: 23px;
-    height: 21px;
-    background-image: url(../assets/imgs/clipping/sp_likeit2.png);
-    background-position: -30px 0px;
+	height: 21px;
+	background-image: url(../assets/imgs/clipping/sp_likeit2.png);
+	background-position: -30px 0px;
 }
 
-.btn_h3{
+.btn_h3 {
 	padding-top: 15px;
 }
 
 .total {
 	font-size: 18px;
-    color: #999;
-    font-family: arial;
-    font-weight: normal;
+	color: #999;
+	font-family: arial;
+	font-weight: normal;
 }
 </style>
 
@@ -251,7 +269,7 @@ overflow: hidden;
 	<jsp:include page="/WEB-INF/views/template/bottombar.jsp" />
 
 	<!-- 메인 화면 시작 -->
-	
+
 	<div class="container">
 
 		<!-- Best Review category -->
@@ -262,94 +280,96 @@ overflow: hidden;
 			<!--// Best Review category -->
 			<!-- Best Review Content  -->
 			<div class="review-content row multi-columns-row">
-		       
-		    	<c:choose>
-		    		<c:when test="${fn:length(favoriteList) > 0}">
-		    			<c:forEach var="favorite" items="${favoriteList}">
-		    				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		    				<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		    				<c:url var="readUrl" value="/article/article_read">
-					            		<c:param name="article_id" value="${favorite.id}" />
-					            	</c:url>
-					            	<c:url var="readUser" value="/mymenu/user_page">					            						            	
-					            		<c:param name="member_id" value="${favorite.member_id}" />
-					            	</c:url>
-					            	<!-- 링크 + 썸네일 -->
-					            	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4">
-								<c:choose>
-									<c:when test="${favorite.imagePath != null}">
-										<c:url var="downloadUrl" value="/download">
-											<c:param name="file" value="${favorite.imagePath}" />
-										</c:url>										
-										<img src="${downloadUrl}" class="img-responsive img-rounded"/>
-									</c:when>
-									<c:otherwise>
-										<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive"/>
-									</c:otherwise>
-								</c:choose>
-							</a>
-							<!--// 링크 + 썸네일 -->
-					            	<!-- 제목 + 작성자 + 조회수 -->
-					            	<div class="item col-lg-8 col-md-8 col-sm-7">
-								<a href="${readUser}"><font size="4" color="#000000">${favorite.nick_name}</font></a><div class="pull-right"> ${favorite.reg_date}
-								</div>								
-								<div>
-								<font size="4" color="#A0A0FF "> keyword: </font> <font size="4" color="#000069">	${favorite.category}</font>
-								 </div>
-								 <div>
-								<font size="4" color="#A0A0FF ">title:</font><font size="4" color="#000069"> ${favorite.title} </font>
-								 </div>
-								<hr />
-								<div style="overflow: auto; width:100%; max-height: 180px;">
-								${favorite.content}
-								</div>
-								</div>							
-							<!--// 제목 + 작성자 + 조회수 -->
-							<br />
-							<!-- like + comment + book mark -->
-									<div class="btn-group btn-block">
-									
-										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
-	<span class="like_Off pull-right" id="like_img"></span>
 
-										</a>
-										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
-											<font color="#a0a0a0"><i class="">Comment</i></font></a>
-										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
-											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
-											</a>
-							
-	                     				
-							<input type="hidden" value="${readArticle.total_like}" id="total_like">
-	                       <input type="hidden" value="${member_id}" id="member_id">				
-                        <input type="hidden" value="${article_id}" id="article_id">                        
-                        <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
-	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
-	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
-	                     <input type="hidden" value="${likeCount}" id="total_like">
-	                     <input type="hidden" value="${likeCount}" id="like_count">                          
-	                     <input type="hidden" value="${isLikeState}" id="isLikeState">		                     
+				<c:choose>
+					<c:when test="${fn:length(favoriteList) > 0}">
+						<c:forEach var="favorite" items="${selectArticleListForBest}">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<c:url var="readUrl" value="/article/article_read">
+										<c:param name="article_id" value="${favorite.id}" />
+									</c:url>
+									<c:url var="readUser" value="/mymenu/user_page">
+										<c:param name="member_id" value="${favorite.member_id}" />
+									</c:url>
+									<!-- 링크 + 썸네일 -->
+									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4"> <c:choose>
+											<c:when test="${favorite.imagePath != null}">
+												<c:url var="downloadUrl" value="/download">
+													<c:param name="file" value="${favorite.imagePath}" />
+												</c:url>
+												<img src="${downloadUrl}" class="img-responsive img-rounded" />
+											</c:when>
+											<c:otherwise>
+												<img
+													src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg"
+													class="img-responsive" />
+											</c:otherwise>
+										</c:choose>
+									</a>
+									<!--// 링크 + 썸네일 -->
+									<!-- 제목 + 작성자 + 조회수 -->
+									<div class="item col-lg-8 col-md-8 col-sm-7">
+										<a href="${readUser}"><font size="4" color="#000000">${favorite.nick_name}</font></a>
+										<div class="pull-right">${favorite.reg_date}</div>
+										<div>
+											<font size="4" color="#A0A0FF "> keyword: </font> <font
+												size="4" color="#000069"> ${favorite.category}</font>
+										</div>
+										<div>
+											<font size="4" color="#A0A0FF ">title:</font><font size="4"
+												color="#000069"> ${favorite.title} </font>
+										</div>
+										<hr />
+										<div style="overflow: auto; width: 100%; max-height: 180px;">
+											${favorite.content}</div>
 									</div>
-		    				<!--// like + comment + book mark -->
-		    				
-		    				</div>
-		    				</div>
-		    				</c:forEach>
-		    			
-		    		</c:when>
-		    		<c:otherwise>
-		    			<tr>
-				            <td colspan="5" class="text-center" style="line-height: 100px;">
-				               No Post about ${keyword}.
-				               <br/>
-				               Why don't you be a first best reviewer about ${keyword} 
-				               </td>
-				        </tr>
-		    		</c:otherwise>
-		    	</c:choose>
-		   
-		   
-		      </div>		
+									<!--// 제목 + 작성자 + 조회수 -->
+									<br />
+									<!-- like + comment + book mark -->
+									<div class="btn-group btn-block">
+
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${favorite.id}"> 
+											<span class="like_Off pull-right" id="like_img"></span>
+										</a> 
+										
+										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+											<font color="#a0a0a0"><i class="">Comment</i></font>
+										</a> 
+										
+										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${favorite.id }"> 
+											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
+										</a> 
+										
+										<input type="hidden" value="${readArticle.total_like}" id="total_like"> 
+										<input type="hidden" value="${member_id}" id="member_id"> 
+										<input type="hidden" value="${article_id}" id="article_id">
+										<input type="hidden" value="${bookmarkCount}"id="bookmark_count"> 
+										<input type="hidden" value="${bookmarkCount}" id="total_bookmark"> 
+										<input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
+										<input type="hidden" value="${likeCount}" id="total_like">
+										<input type="hidden" value="${likeCount}" id="like_count">
+										<input type="hidden" value="${isLikeState}" id="isLikeState">
+									</div>
+									<!--// like + comment + book mark -->
+
+								</div>
+							</div>
+						</c:forEach>
+
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5" class="text-center" style="line-height: 100px;">
+								No Post about ${keyword}. <br /> Why don't you be a first best
+								reviewer about ${keyword}
+							</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+
+
+			</div>
 
 			<!--// Recent Review Content  -->
 
@@ -419,99 +439,104 @@ overflow: hidden;
 		<!-- Recent Review category -->
 		<div class="recent-container">
 			<h1 class="page-header">
-			<small>Review about <font size="5" color="#282828">${keyword}</font></small>
+				<small>Review about <font size="5" color="#282828">${keyword}</font></small>
 			</h1>
 			<!--// Recent Review category -->
 			<!-- Recent Review Content  -->
-			 <div class="review-content row multi-columns-row">
-		       
-		    	<c:choose>
-		    		<c:when test="${fn:length(articleList) > 0}">
-		    			<c:forEach var="article" items="${articleList}">
-		    				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		    				<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		    				<c:url var="readUrl" value="/article/article_read">
-					            		<c:param name="article_id" value="${article.id}" />
-					            	</c:url>
-					            	<c:url var="readUser" value="/mymenu/user_page">					            						            	
-					            		<c:param name="member_id" value="${article.member_id}" />
-					            	</c:url>
-					            	<!-- 링크 + 썸네일 -->
-					            	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4">
-								<c:choose>
-									<c:when test="${article.imagePath != null}">
-										<c:url var="downloadUrl" value="/download">
-											<c:param name="file" value="${article.imagePath}" />
-										</c:url>										
-										<img src="${downloadUrl}" class="img-responsive img-rounded"/>
-									</c:when>
-									<c:otherwise>
-										<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive"/>
-									</c:otherwise>
-								</c:choose>
-							</a>
-							<!--// 링크 + 썸네일 -->
-					            	<!-- 제목 + 작성자 + 조회수 -->
-					            	<div class="item col-lg-8 col-md-8 col-sm-7">
-								<a href="${readUser}"><font size="4" color="#000000">${article.nick_name}</font></a><div class="pull-right"> ${article.reg_date}
-								</div>								
-								<div>
-								<font size="4" color="#A0A0FF "> keyword: </font> <font size="4" color="#000069">	${article.category}</font>
-								 </div>
-								 <div>
-								<font size="4" color="#A0A0FF ">title:</font><font size="4" color="#000069"> ${article.title} </font>
-								 </div>
-								<hr />
-								<div style="overflow: auto; width:100%; max-height: 180px;">
-								${article.content}
-								</div>
-								</div>							
-							<!--// 제목 + 작성자 + 조회수 -->
-							<br />
-							<!-- like + comment + book mark -->
-									<div class="btn-group btn-block">
-									<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
-									<span class="like_Off  pull-right" id="like_img"></span>
-									<font color="#FF0040 "><span class="pull-right" id="concernCount">${article.total_like}</span></font>
-	                              				
+			<div class="review-content row multi-columns-row">
+
+				<c:choose>
+					<c:when test="${fn:length(articleList) > 0}">
+						<c:forEach var="article" items="${articleList}">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<c:url var="readUrl" value="/article/article_read">
+										<c:param name="article_id" value="${article.id}" />
+									</c:url>
+									<c:url var="readUser" value="/mymenu/user_page">
+										<c:param name="member_id" value="${article.member_id}" />
+									</c:url>
+									<!-- 링크 + 썸네일 -->
+									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4"> <c:choose>
+											<c:when test="${article.imagePath != null}">
+												<c:url var="downloadUrl" value="/download">
+													<c:param name="file" value="${article.imagePath}" />
+												</c:url>
+												<img src="${downloadUrl}" class="img-responsive img-rounded" />
+											</c:when>
+											<c:otherwise>
+												<img
+													src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg"
+													class="img-responsive" />
+											</c:otherwise>
+										</c:choose>
 									</a>
+									<!--// 링크 + 썸네일 -->
+									<!-- 제목 + 작성자 + 조회수 -->
+									<div class="item col-lg-8 col-md-8 col-sm-7">
+										<a href="${readUser}"><font size="4" color="#000000">${article.nick_name}</font></a>
+										<div class="pull-right">${article.reg_date}</div>
+										<div>
+											<font size="4" color="#A0A0FF "> keyword: </font> <font
+												size="4" color="#000069"> ${article.category}</font>
+										</div>
+										<div>
+											<font size="4" color="#A0A0FF ">title:</font><font size="4"
+												color="#000069"> ${article.title} </font>
+										</div>
+										<hr />
+										<div style="overflow: auto; width: 100%; max-height: 180px;">
+											${article.content}</div>
+									</div>
+									<!--// 제목 + 작성자 + 조회수 -->
+									<br />
+									<!-- like + comment + book mark -->
+									<div class="btn-group btn-block">
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> 
+											<span class="like_Off  pull-right" id="like_img"></span> 
+											<font color="#FF0040 ">
+												<span class="pull-right" id="concernCount">${article.total_like}</span>
+											</font>
+										</a> 
+										
 										
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
-											<font color="#a0a0a0"><i class="">Comment</i></font></a>
-										<a  id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
+											<font color="#a0a0a0"><i class="">Comment</i></font>
+										</a> 
+										
+										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }"> 
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
-											</a>
-							
-							<input type="hidden" value="${article.total_like}" id="total_like">
-	                       <input type="hidden" value="${member_id}" id="member_id">				
-                        <input type="hidden" value="${article_id}" id="article_id">                        
-                        <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
-	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
-	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
-	                     <input type="hidden" value="${likeCount}" id="total_like">
-	                     <input type="hidden" value="${likeCount}" id="like_count">                          
-	                     <input type="hidden" value="${isLikeState}" id="isLikeState">		                     
+										</a> 
+										
+										<input type="hidden" value="${article.total_like}" id="total_like"> 
+										<input type="hidden" value="${member_id}" id="member_id"> 
+										<input type="hidden" value="${article_id}" id="article_id">
+										<input type="hidden" value="${bookmarkCount}"id="bookmark_count"> 
+										<input type="hidden" value="${bookmarkCount}" id="total_bookmark"> 
+										<input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
+										<input type="hidden" value="${likeCount}" id="total_like">
+										<input type="hidden" value="${likeCount}" id="like_count">
+										<input type="hidden" value="${isLikeState}" id="isLikeState">
 									</div>
-		    				<!--// like + comment + book mark -->
-		    				
-		    				</div>
-		    				</div>
-		    				</c:forEach>
-		    			
-		    		</c:when>
-		    		<c:otherwise>
-		    			<tr>
-				            <td colspan="5" class="text-center" style="line-height: 100px;">
-				               No Post about ${keyword}.
-				               <br/>
-				               Why don't you be a first reviewer about ${keyword} 
-				               </td>
-				        </tr>
-		    		</c:otherwise>
-		    	</c:choose>
-		   
-		   
-		      </div>		
+									<!--// like + comment + book mark -->
+
+								</div>
+							</div>
+						</c:forEach>
+
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5" class="text-center" style="line-height: 100px;">
+								No Post about ${keyword}. <br /> Why don't you be a first
+								reviewer about ${keyword}
+							</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+
+
+			</div>
 
 			<!--// Recent Review Content  -->
 

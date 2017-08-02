@@ -33,6 +33,15 @@ public interface ArticleService {
 	 * @return List - 게시물 목록
 	 * @throws Exception
 	 */
+	public List<Article> selectArticleListForBest(Article article) throws Exception;
+	
+	/**
+	 * 검색 게시글 목록 조회
+	 * 
+	 * @param article 카테고리 정보가 저장된 Beans
+	 * @return List - 게시물 목록
+	 * @throws Exception
+	 */
 	public List<Article> selectArticleList(Article article) throws Exception;
 
 	/**

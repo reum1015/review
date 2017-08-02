@@ -71,6 +71,30 @@
 		LIMIT #{limit_start}, #{list_count}
 	</select>
 	
+	
+	<select id="selectArticleListForBest" parameterType="review.model.Article" 
+		resultMap="article">
+		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, a.total_like, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, like_count, total_like, 
+		(SELECT concat(file_dir, '/', file_name) FROM imageFile WHERE article_id=a.id 
+		 AND content_type LIKE ('image/%') ORDER BY id ASC LIMIT 0, 1) AS imagePath		 
+		FROM article as a
+         LEFT JOIN member as m ON a.member_id = m.id
+		WHERE a.total_like NOT IN(0) AND
+			replace(category,' ','') like concat('%', #{category}, '%')
+		OR 	replace(title ,' ','') like concat('%', #{title }, '%')
+		OR 	replace(content ,' ','') like concat('%', #{content }, '%')		
+		ORDER  BY total_like DESC		
+		LIMIT #{limit_start}, #{list_count}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!--전체 게시물 목록을 조회한다. article_list_main-->
 	<select id="selectArticleListMain" parameterType="review.model.Article" 
 		resultMap="article">

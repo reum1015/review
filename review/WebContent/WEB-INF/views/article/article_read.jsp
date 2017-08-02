@@ -376,11 +376,10 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
    <c:if test="${item[0].member_id ==loginInfo.id}">  
-</c:if>
+	</c:if>
 	<!-- 덧글 항목에 대한 템플릿 참조 -->
 <script id="tmpl_comment_item" type="text/x-handlebars-template">
-    <li class="media" style='border-top: 1px dotted #ccc; padding-top: 15px' 
-       id="comment_{{id}}">
+    <li class="media" style='border-top: 1px dotted #ccc; padding-top: 15px' id="comment_{{id}}">
         <div class="media-body" style='display: block;'>
             <h4 class="media-heading clearfix">
                 <!-- 작성자,작성일시 -->
@@ -391,17 +390,17 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
                 <!-- 수정,삭제 버튼 -->        	
                 <div class='pull-right'>
 
- <c:if test='${item[0].member_id == loginInfo.id}'> 
-<a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
+ 	{{#isMember}} 
+					<a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
                         <i class='glyphicon glyphicon-edit'></i>
                     </a>
                     <a href='${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
                         <i class='glyphicon glyphicon-remove'></i>
-                    </a>   
-</c:if >
+                    </a>
+	{{/isMember}}
 
          
-                </div>
+             </div>
              
             </h4>
             <!-- 내용 -->
@@ -430,10 +429,26 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 
 <script type="text/javascript">
 	$(function() {
+		
+		
+		Handlebars.registerHelper('isMember',function(member_id,loginInfo){
+			var result='';
+			
+			if(member_id[0]==loginInfo.id){
+				result = '<a href="${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}" data-toggle="modal" data-target="#comment_edit_modal" class="btn btn-warning btn-xs">'
+               			+'<i class="glyphicon glyphicon-edit"></i>'+
+                        '</a>'+
+                        '<a href="${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}" data-toggle="modal" data-target="#comment_delete_modal" class="btn btn-danger btn-xs">'
+                            + '<i class="glyphicon glyphicon-remove"></i>'
+                        +'</a>';
+			}
+			return result;
+		});
+		
+		
+		
 		/** 페이지가 열리면서 동작하도록 이벤트 정의 없이 Ajax요청 */
-		$.get("${pageContext.request.contextPath}/comment/comment_list", {
-			article_id: "${readArticle.id}"
-		}, function(json) {
+		$.get("${pageContext.request.contextPath}/comment/comment_list", {article_id: "${readArticle.id}"}, function(json) {
 			if (json.rt != "OK") {
 				alert(json.rt);
 				return false;

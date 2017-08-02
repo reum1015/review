@@ -125,6 +125,9 @@ public class ArticleList extends BaseController {
 		//회원의 좋아요 상태 확인
 		List<Favorite> favoriteStateList = null;
 		
+		//BestReviewList
+		List<Article> selectArticleListForBest = null;
+		
 				
 		try {
 			// 전체 게시물 수
@@ -150,6 +153,8 @@ public class ArticleList extends BaseController {
 			
 			favoriteStateList = favoriteService.selectfavoriteStateList(favorite);
 			
+			selectArticleListForBest = articleService.selectArticleListForBest(article);
+			
 			
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
@@ -159,7 +164,7 @@ public class ArticleList extends BaseController {
 		}
 		
 		
-		System.out.println("favoriteStateList ------------> " + favoriteStateList.toString());
+		System.out.println("selectArticleListForBest ------------> " + selectArticleListForBest.toString());
 		
 		// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체(에피소드 리스트)
 		if (articleList != null) {
@@ -221,7 +226,9 @@ public class ArticleList extends BaseController {
         request.setAttribute("bookmarkCount", bookmarkCount);
         request.setAttribute("likeCount", likeCount);
         request.setAttribute("isLikeState", isLikeState);
-		
+        
+        request.setAttribute("selectArticleListForBest", selectArticleListForBest);
+        
 		String view = "article/article_list";
 		
 		return view;

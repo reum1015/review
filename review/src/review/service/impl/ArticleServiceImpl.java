@@ -300,6 +300,23 @@ public class ArticleServiceImpl implements ArticleService {
 			
 			return result;
 		}
+
+	@Override
+	public List<Article> selectArticleListForBest(Article article) throws Exception {
+		List<Article> result = null;
+		try {
+			result = sqlSession.selectList("ArticleMapper.selectArticleListForBest", article);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 글 목록이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("글 목록 조회에 실패했습니다.");
+		}
+		return result;
+	}
 	
 
 		
