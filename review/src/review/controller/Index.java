@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import review.jsp.helper.BaseController;
 
 
+
+//커밋 테스트
 @WebServlet("/index")
 public class Index extends BaseController {
 
@@ -24,6 +26,5 @@ public class Index extends BaseController {
 		return view;
 	}
 	
-       
     
 }
