@@ -25,7 +25,7 @@ import review.service.FavoriteService;
 import review.service.impl.ArticleServiceImpl;
 import review.service.impl.FavoriteServiceImpl;
 
-@WebServlet("/favorite/favoriteAdd")
+@WebServlet("/like/favoriteAdd")
 public class FavoriteAdd extends BaseController{
 	private static final long serialVersionUID = -4619358184835581823L;
 	
