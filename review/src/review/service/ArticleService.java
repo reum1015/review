@@ -133,7 +133,21 @@ public interface ArticleService {
 	 */
 	public void likeCountMinus(Article article) throws Exception;
 	
+	/**
+	 * 관심작품 목록 조회
+	 *  @param favorite - 관심작품이 저장된 BEans
+	 *  @return List- 관심작품 목록
+	 * @throws Exception
+	 */
+	public List<Article> selectFavoriteList(Article article) throws Exception;
 	
+	/**
+	 *  전체 관심작품 목록 조회
+	 *  @param favorite - 관심작품이 저장된 BEans
+	 *  @return int
+	 * @throws Exception
+	 */
+	public int selectFavoriteCount(Article article) throws Exception;
 	
 	
 }

@@ -1,7 +1,7 @@
 package review.article;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -75,8 +75,13 @@ public class ArticleList extends BaseController {
 	/** (5) 조회할 정보에 대한 Beans 생성 */
 		// 검색어
 		String keyword = web.getString("keyword");
+		/** (3) 글 번호 파라미터 받기 */
+		int article_id = web.getInt("article_id");
+		logger.debug("article_id" + article_id);
+		
 		
 		Article article = new Article();
+		article.setId(article_id);	
 		article.setCategory(keyword);
 		article.setTitle(keyword);
 		article.setContent(keyword);		
@@ -93,9 +98,7 @@ public class ArticleList extends BaseController {
 		
 		logger.debug("member_id -----------------------------------> " + member_id);
 		
-		int article_id = web.getInt("article_id");
-		logger.debug("article_id" + article_id);
-		
+	
 		
 		int likeCount = 0;
 
@@ -121,11 +124,6 @@ public class ArticleList extends BaseController {
 		
 		//회원의 좋아요 상태 확인
 		List<Favorite> favoriteStateList = null;
-		
-		
-		
-		
-		
 		
 				
 		try {
@@ -205,7 +203,7 @@ public class ArticleList extends BaseController {
 		try{
 			favoriteState = new JSONArray(favoriteStateList.toArray());
 		}catch (JSONException e) {
-			// TODO: handle exception
+			
 			e.printStackTrace();
 		}
 		

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.Logger;
 
 import review.model.Article;
+
 import review.service.ArticleService;
 
 
@@ -268,6 +269,37 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 	}
 
+	@Override
+	public List<Article> selectFavoriteList(Article article) throws Exception {
+		List<Article> result = null;
+		try {
+			result = sqlSession.selectList("ArticleMapper.selectFavoriteList", article);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("검색한 좋아요 조회된 글 목록이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("검색한 좋아요 글 목록 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public int selectFavoriteCount(Article article) throws Exception {
+		   int result = 0;		
+			try {
+				// 게시물 수가 0건인 경우도 있으므로
+				// 결과값이 0인 경우에 예외를 발생시키지 않는다.
+				result = sqlSession.selectOne("ArticleMapper.selectFavoriteCount", article);
+			} catch(Exception e) {
+				logger.error(e.getLocalizedMessage());
+				throw new Exception("관심작품 수 조회에 실패했습니다. ");
+			}
+			
+			return result;
+		}
 	
 
 		

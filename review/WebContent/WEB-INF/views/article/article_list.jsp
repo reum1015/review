@@ -310,12 +310,8 @@ overflow: hidden;
 									<div class="btn-group btn-block">
 									
 										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
-<<<<<<< HEAD
-										<span class="like_Off  pull-right" id="like_img"></span>
-										
-=======
-										<span class="like_Off pull-right" id="like_img"></span>
->>>>>>> branch 'master' of https://github.com/reum1015/review
+	<span class="like_Off pull-right" id="like_img"></span>
+
 										</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font></a>
@@ -476,7 +472,8 @@ overflow: hidden;
 									<div class="btn-group btn-block">
 									<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }">
 									<span class="like_Off  pull-right" id="like_img"></span>
-									
+									<font color="#FF0040 "><span class="pull-right" id="concernCount">${article.total_like}</span></font>
+	                              				
 									</a>
 										
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
@@ -485,7 +482,7 @@ overflow: hidden;
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 											</a>
 							
-							<input type="hidden" value="${readArticle.total_like}" id="total_like">
+							<input type="hidden" value="${article.total_like}" id="total_like">
 	                       <input type="hidden" value="${member_id}" id="member_id">				
                         <input type="hidden" value="${article_id}" id="article_id">                        
                         <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
