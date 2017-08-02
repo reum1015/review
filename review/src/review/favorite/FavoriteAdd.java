@@ -65,18 +65,18 @@ public class FavoriteAdd extends BaseController{
 		
 		logger.debug("favorite= " + favorite);
 		
-		int likeCount = 0;
+		int like_count = 0;
 		
 		
 		Article article = new Article();
 		article.setId(article_id);
 		
 		try{
-			likeCount = favoriteService.selectCountFavoriteArticleById(favorite);
+			like_count = favoriteService.selectCountFavoriteArticleById(favorite);
 			//카운트 0이면 like누른상태가 아님
 			//like 상태로 전환
 			//1이면 원상복귀
-			if(likeCount == 0){
+			if(like_count == 0){
 				favoriteService.insertAddFavorite(favorite);
 				articleService.likeCountPlus(article);
 				isLikeState = true;
@@ -102,9 +102,9 @@ public class FavoriteAdd extends BaseController{
 		// --> import java.util.Map;
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("rt", "OK");
-		data.put("likeCount", likeCount);
+		data.put("like_count", like_count);
 		data.put("isLikeState", isLikeState);
-		
+	
 		// --> import com.fasterxml.jackson.databind.ObjectMapper;
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue(response.getWriter(), data);

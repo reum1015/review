@@ -64,7 +64,7 @@ margin-bottom: -70px;
 				    </div>	
 				  
 				   <div class="hidden-xs main-text-bottom-web">	   
-				   <font size="14" color=#0040FF>Share your Experience </font>
+				   <font size="14" color="#0040FF">Share your Experience </font>
 				    </div>
 				    <div class="hidden-lg hidden-md hidden-sm main-text-mobile">	   
 				   <font size="8" color="#0040FF">Share </font>

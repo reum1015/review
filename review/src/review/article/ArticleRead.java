@@ -19,6 +19,7 @@ import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Article;
 import review.model.BookMark;
+
 import review.model.Favorite;
 import review.model.Member;
 import review.service.ArticleService;
@@ -104,12 +105,13 @@ public class ArticleRead extends BaseController {
 		        Favorite favorite = new Favorite();
 				favorite.setArticle_id(article_id);
 				favorite.setMember_id(member_id);
+				
+			
 		        
 		/** (4) 게시물 일련번호를 사용한 데이터 조회 */
 		// 지금 읽고 있는 게시물이 저장될 객체
-		Article readArticle = null;
-		
-		
+		Article readArticle = new Article();		
+	
 		
 		/** 조회수 중복 갱신 방지 처리 */
 		// 카테고리와 게시물 일련번호를 조합한 문자열을 생성
@@ -164,9 +166,9 @@ public class ArticleRead extends BaseController {
         request.setAttribute("isLikeState", isLikeState);
         request.setAttribute("member_id", member_id);
 		request.setAttribute("article_id", article_id);
-		
-		
-				
+		 
+	
+	
 		String view = "article/article_read";
 		return view;
 	}

@@ -136,15 +136,15 @@ overflow: hidden;
 		
 		
 		//Like 버튼
-		var likeCount = $("#likeCount").val();
+		var like_count = $("#like_count").val();
 		var member_id = $("#member_id").val();
-		var totalLike = $("#totalLike").val();
+		var total_like = $("#total_like").val();
 		var article_id = $("#article_id").val();
 		var isLikeState = $("#isLikeState").val();
 
 
 	//관심등록 On 이면 마크 표시
-		if(likeCount > 0){
+		if(like_count > 0){
 	$("#like_img").removeClass("like_Off").addClass("like_On");
 			}else{
 $("#like_img").removeClass("like_On").addClass("like_Off");
@@ -153,6 +153,13 @@ $("#like_img").removeClass("like_On").addClass("like_Off");
 	$("#like_button").on('click',function(e){
 			e.preventDefault();
 			if(member_id == 0){
+				
+				var root = getContextPath();
+				var host = location.host;
+				
+				console.log(root);
+				console.log(host);
+				
 var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
 				
 				if(result){
@@ -164,14 +171,14 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 			}
 //관심등록  On/Off
 	$.get("${pageContext.request.contextPath}/article/addFavorite", 
-{likeCount : likeCount, member_id : member_id, totalLike : totalLike, article_id: article_id},
+{like_count : like_count, member_id : member_id, total_like : total_like, article_id: article_id},
    function(data){
 		var isLikeState = data.isLikeState;
-		 totalLike=data.totalLike;
-                          likeCount = data.likeCount;
+		 total_like=data.total_like;
+          like_count = data.like_count;
 						
-	$("#likeCount").attr("value", likeCount);
-		$("#concernCount").text(totalLike);
+	$("#like_count").attr("value", like_count);
+		$("#concernCount").text(total_like);
 
 	if(isLikeState){
 				$("#like_img").removeClass("like_Off").addClass("like_On");
@@ -307,27 +314,29 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 									<div class="item col-lg-8 col-md-8 col-sm-7">
 										<div style="overflow: auto; width: 100%; max-height: 350px;">
 											${readArticle.content}
-										</div>
+										</div>						
 									</div>
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
 									<!-- like + comment + book mark -->
 									<div class="btn-group btn-block">
 										<a href="#" id="like_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
-	                               <span class="like_Off  pull-right" id="like_img"></span></a>
+	                              			<span class="like_Off  pull-right" id="like_img"></span>                              				
+                             				<font color="#FF0040 "><span class="pull-right" id="concernCount">${readArticle.total_like}</span></font>
+	                              				</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
-											<i class="">Comment</i></a>
+											<font color="#a0a0a0"><i class="">Comment</i></font></a>
 										<a href="#" id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 											</a>
-							
+							<input type="hidden" value="${readArticle.total_like}" id="total_like">
 	                       <input type="hidden" value="${member_id}" id="member_id">				
                         <input type="hidden" value="${article_id}" id="article_id">                        
                         <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
 	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
 	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
-	                     <input type="hidden" value="${likeCount}" id="totalLike">
-	                     <input type="hidden" value="${likeCount}" id="likeCount">                          
+	                     <input type="hidden" value="${likeCount}" id="total_like">
+	                     <input type="hidden" value="${likeCount}" id="like_count">                          
 	                     <input type="hidden" value="${isLikeState}" id="isLikeState">	                     
 									</div>
 									<!--// like + comment + book mark -->
@@ -376,22 +385,22 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
             <h4 class="media-heading clearfix">
                 <!-- 작성자,작성일시 -->
                 <div class='pull-left'>
-                    {{nick_name}}
+                    <a href="${pageContext.request.contextPath}/mymenu/user_page?member_id={{member_id}}">{{nick_name}}</a>
                     <small> / {{reg_date}}
- <small> /
-   {{member_id}}
-                    </small>
                 </div>
                 <!-- 수정,삭제 버튼 -->        	
                 <div class='pull-right'>
-           <c:if test="{itme[0].member_id == loginInfo.id}">             
-                    <a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
+
+ <c:if test='${item[0].member_id == loginInfo.id}'> 
+<a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
                         <i class='glyphicon glyphicon-edit'></i>
                     </a>
                     <a href='${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
                         <i class='glyphicon glyphicon-remove'></i>
-                    </a>     
-         </c:if>
+                    </a>   
+</c:if >
+
+         
                 </div>
              
             </h4>

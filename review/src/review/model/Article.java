@@ -18,7 +18,7 @@ public class Article {
 	
 	//게시물의 좋아요 누적값
 	private int like_count;
-	
+	private int total_like;
 	// 페이지 구현을 위해서 추가된 값
 		private int limit_start;
 		private int list_count;
@@ -138,6 +138,14 @@ public class Article {
 			this.like_count = like_count;
 		}
 
+		public int getTotal_like() {
+			return total_like;
+		}
+
+		public void setTotal_like(int total_like) {
+			this.total_like = total_like;
+		}
+
 		public int getLimit_start() {
 			return limit_start;
 		}
@@ -167,11 +175,11 @@ public class Article {
 			return "Article [id=" + id + ", title=" + title + ", nick_name=" + nick_name + ", user_pw=" + user_pw
 					+ ", content=" + content + ", category=" + category + ", hit=" + hit + ", reg_date=" + reg_date
 					+ ", edit_date=" + edit_date + ", ip_address=" + ip_address + ", reported=" + reported + ", tag="
-					+ tag + ", member_id=" + member_id + ", like_count=" + like_count + ", limit_start=" + limit_start
-					+ ", list_count=" + list_count + ", imagePath=" + imagePath + "]";
+					+ tag + ", member_id=" + member_id + ", like_count=" + like_count + ", total_like=" + total_like
+					+ ", limit_start=" + limit_start + ", list_count=" + list_count + ", imagePath=" + imagePath + "]";
 		}
 
-		
 	
+		
 		
 }

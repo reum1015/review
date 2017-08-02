@@ -31,8 +31,8 @@ import review.service.impl.CommentServiceImpl;
 
 
 
-@WebServlet("/comment/comment_list")
-public class CommentList extends BaseController {
+@WebServlet("/comment/comment_select")
+public class CommentSelelct extends BaseController {
 	private static final long serialVersionUID = -1391748040235555563L;
 
 	/** (1) 사용하고자 하는 Helper+Service 객체 선언 */
@@ -86,14 +86,14 @@ public class CommentList extends BaseController {
 		logger.debug("comment >> " + comment.toString());
 		/** (6) Service를 통한 덧글 목록 조회 */
 		// 작성 결과를 저장할 객체
-		
+		Comment commentItem = null;
 		
 		List<Comment> item = new ArrayList<Comment>(); 
 		item = null;
 		
 		try {
 			item = commentService.selectCommentList(comment);	
-			
+			commentItem = commentService.selectComment(comment);
 		} catch (Exception e) {
 			web.printJsonRt(e.getLocalizedMessage());
 			return null;
@@ -113,7 +113,7 @@ public class CommentList extends BaseController {
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("rt", "OK");
 		data.put("item", item);
-		
+		data.put("commentItem", commentItem);
 				
 		// --> import com.fasterxml.jackson.databind.ObjectMapper;
 		ObjectMapper mapper = new ObjectMapper();

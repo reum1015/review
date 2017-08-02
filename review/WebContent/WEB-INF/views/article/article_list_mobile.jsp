@@ -98,7 +98,7 @@ margin-top: 55px;
 							
 							<div class="btn-group btn-block">
 							 <a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Like</i></a>
-							 <a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Comment</i></a>
+							 <a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><font color="#BDBDBD "><i class="">Comment</i></font></a></a>
 							 <a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="">Book mark</i></a>
 							</div>
 		    				

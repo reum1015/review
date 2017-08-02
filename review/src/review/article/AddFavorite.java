@@ -67,19 +67,18 @@ public class AddFavorite extends BaseController {
 		logger.debug("member_id=" + member_id);
 		logger.debug("article_id=" + article_id);
 		
-		//관심 작품 등록 해제 여부 false --> 해제 , true --> 등록
-		boolean isLikeState = false;
-				
-		int likeCount = web.getInt("likeCount");
-		int totalLike = web.getInt("totalLike");
+		int like_count = web.getInt("like_count");
+		int total_like = web.getInt("total_like");
 		
+		//관심 작품 등록 해제 여부 false --> 해제 , true --> 등록
+				boolean isLikeState = false;
 
 		
-		System.out.println("likeCount ---------------------->" + likeCount);
+		System.out.println("like_countssssss ---------------------->" + like_count);
 		
 		
 		//관심등록이 등록된 상태이면 관심 등록 삭제
-		if(likeCount == 1){
+		if(like_count == 1){
 			//관심등록 테이블(favorite)에서 삭제 할 Beans 셋팅
 			Favorite favorite = new Favorite();
 			favorite.setMember_id(member_id);
@@ -106,8 +105,8 @@ public class AddFavorite extends BaseController {
 			}//try ~ finally End
 			
 			isLikeState = false;
-			totalLike--;
-			likeCount = 0;
+			total_like--;
+			like_count = 0;
 			
 		}else{//관심등록이 되어있지 않은 상태이면 관심등록 추가
 			
@@ -130,12 +129,12 @@ public class AddFavorite extends BaseController {
 			  article.setId(article_id);
 				
 			//총 관심등록 수 +1 파라미터 Beans에 담기
-			//총 관심등록 수 +1은 Sql구문에 SET totalLike=totalLike+1을 통해 업데이트
+			//총 관심등록 수 +1은 Sql구문에 SET total_like=total_like+1을 통해 업데이트
 		
 			
 			//총 관심등록 회원수 +1
 			//json으로 화면에 뿌려줄 값(ajax 통신 완료후 화면에 뿌려주기 위한 값)
-			totalLike++;
+			total_like++;
 		
 			try{
 				//관심등록 테이블에 추가
@@ -151,16 +150,16 @@ public class AddFavorite extends BaseController {
 			
 			//관심작품 등록 상태 변경
 			isLikeState = true;
-			likeCount =1;			
+			like_count =1;			
 			
 		}//end else
 		
 		
 		Map<String, Object> data = new HashMap<>();
 		data.put("rt", "OK");
-		data.put("totalLike", totalLike);
+		data.put("total_like", total_like);
 		data.put("isLikeState", isLikeState);
-		data.put("likeCount", likeCount);
+		data.put("like_count", like_count);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue(response.getWriter(), data);

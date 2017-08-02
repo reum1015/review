@@ -134,6 +134,14 @@ overflow: hidden;
 		var article_id = $("#article_id").val();
 		var isLikeState = $("#isLikeState").val();
 
+
+		//관심등록 On 이면 마크 표시
+			if(likeCount > 0){
+		$("#like_img").removeClass("like_Off").addClass("like_On");
+				}else{
+	$("#like_img").removeClass("like_On").addClass("like_Off");
+				}
+		
 		$('.like_button').on('click', function(e) {
 					var member_id = $("#member_id").val();
 						var article_id = $(this).attr('id');
@@ -286,11 +294,13 @@ overflow: hidden;
 										<span class="like_Off  pull-right" id="like_img"></span>
 										</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
-											<i class="">Comment</i></a>
+											<font color="#a0a0a0"><i class="">Comment</i></font></a>
 										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 											</a>
 							
+	                     				
+							<input type="hidden" value="${readArticle.total_like}" id="total_like">
 	                       <input type="hidden" value="${member_id}" id="member_id">				
                         <input type="hidden" value="${article_id}" id="article_id">                        
                         <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
@@ -298,7 +308,7 @@ overflow: hidden;
 	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
 	                     <input type="hidden" value="${likeCount}" id="total_like">
 	                     <input type="hidden" value="${likeCount}" id="like_count">                          
-	                     <input type="hidden" value="${isLikeState}" id="isLikeState">	                     
+	                     <input type="hidden" value="${isLikeState}" id="isLikeState">		                     
 									</div>
 		    				<!--// like + comment + book mark -->
 		    				
@@ -444,19 +454,20 @@ overflow: hidden;
 									<span class="like_Off  pull-right" id="like_img"></span></a>
 										
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
-											<i class="">Comment</i></a>
+											<font color="#a0a0a0"><i class="">Comment</i></font></a>
 										<a  id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }">
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 											</a>
 							
+							<input type="hidden" value="${readArticle.total_like}" id="total_like">
 	                       <input type="hidden" value="${member_id}" id="member_id">				
                         <input type="hidden" value="${article_id}" id="article_id">                        
                         <input type="hidden" value="${bookmarkCount}" id="bookmark_count">	
 	                    <input type="hidden" value="${bookmarkCount}" id="total_bookmark">
 	                     <input type="hidden" value="${isBookMarkState}" id="isBookMarkState">	                     
-	                     <input type="hidden" value="${likeCount}" id="totalLike">
-	                     <input type="hidden" value="${likeCount}" id="likeCount">                          
-	                     <input type="hidden" value="${isLikeState}" id="isLikeState">	                     
+	                     <input type="hidden" value="${likeCount}" id="total_like">
+	                     <input type="hidden" value="${likeCount}" id="like_count">                          
+	                     <input type="hidden" value="${isLikeState}" id="isLikeState">		                     
 									</div>
 		    				<!--// like + comment + book mark -->
 		    				

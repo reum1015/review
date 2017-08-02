@@ -19,6 +19,7 @@
 	    <result property="ip_address" column="ip_address"/>
 	     <result property="member_id" column="member_id" />
 	     <result property="imagePath" column="imagePath" />
+	     <result property="total_like" column="total_like"/>
 	      
 	</resultMap>
 			
@@ -26,16 +27,16 @@
 	<insert id="insertArticle" parameterType="review.model.Article" 
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO article (
-			category, title, content, reg_date, edit_date, member_id, nick_name, hit, ip_address, like_count  
+			category, title, content, reg_date, edit_date, member_id, nick_name, hit, ip_address, like_count, total_like 
 		) VALUES (
-			#{category}, #{title}, #{content}, now(), now(), #{member_id}, #{nick_name}, 0, #{ip_address},0
+			#{category}, #{title}, #{content}, now(), now(), #{member_id}, #{nick_name}, 0, #{ip_address},0, 0
 		)
 	</insert>
 	
 	<!-- 게시물 하나에 대한 정보를 조회한다. article_read -->
 	<select id="selectArticle" parameterType="review.model.Article" 
 		resultMap="article">
-		SELECT a.id, a.category, m.nick_name, a.title, a.member_id, a.content, a.hit, a.ip_address,
+		SELECT a.id, a.category, m.nick_name, a.title, a.member_id, a.content, a.hit, a.ip_address, like_count, total_like,
 			   DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, 
 			   DATE_FORMAT(a.edit_date, '%Y-%m-%d') as edit_date, 
 			   
@@ -53,7 +54,7 @@
 <!-- 검색 게시물 목록을 조회한다. article_list-->
 	<select id="selectArticleList" parameterType="review.model.Article" 
 		resultMap="article">
-		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date,
+		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, a.total_like, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, like_count,  
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile
 		 WHERE article_id=a.id 
 		 AND 
@@ -73,7 +74,7 @@
 	<!--전체 게시물 목록을 조회한다. article_list_main-->
 	<select id="selectArticleListMain" parameterType="review.model.Article" 
 		resultMap="article">
-		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date,
+		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, a.total_like, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, like_count,
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile
 		 WHERE article_id=a.id 
 		 AND 
@@ -88,15 +89,15 @@
 	
 	 <!--회원 게시물 목록을 조회한다. -->
 	<select id="selectMemberArticleList" parameterType="review.model.Article"  resultMap="article">
-		 SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date,
+		 SELECT a.id, a.category, m.nick_name, a.title, a.content, m.id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, like_count,
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile
 		 WHERE article_id=a.id 
 		 AND 
 		 content_type LIKE ('image/%') 		
 			ORDER BY id ASC LIMIT 0, 1
 			) 	AS imagePath		 
-		FROM   article as a
-         INNER JOIN member as m ON a.member_id = m.id WHERE m.id=#{member_id}		
+		FROM   member as m
+         INNER JOIN article as a ON a.member_id = m.id WHERE m.id=#{member_id}		
 		ORDER  BY a.id DESC	
 		LIMIT #{limit_start}, #{list_count}	
 	</select>
@@ -140,7 +141,6 @@
 		DELETE FROM article WHERE id=#{id}
 	</delete>
 	
-	
 	<!-- 게시글 정보 수정하기 article_update-->
 	<update id="updateArticle" parameterType="review.model.Article">
 		UPDATE article SET
@@ -151,12 +151,12 @@
 	
 		<!-- like_count +1 증가-->
 	<update id="updateLikeCountPlus" parameterType="review.model.Article" >
-		UPDATE article SET like_count=like_count+1 WHERE id=#{id}	
+		UPDATE article SET total_like = total_like+1 WHERE id=#{id}	
 	</update>
 	
 			<!-- like_count +1 증가-->
 	<update id="updateLikeCountMinus" parameterType="review.model.Article" >
-		UPDATE article SET like_count=like_count-1 WHERE id=#{id}	
+		UPDATE article SET total_like = total_like-1 WHERE id=#{id}	
 	</update>
 	
 	
