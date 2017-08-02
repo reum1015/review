@@ -82,6 +82,8 @@ public class UserPage extends BaseController {
 		//  회원번호 파라미터를 Beans로 묶기
 		Member member = new Member();						
 		member.setId(member_id);
+		article.setMember_id(member_id);
+		
 		
 		// 지금 읽고 있는 게시물이 저장될 객체
 		Member readMember = null;

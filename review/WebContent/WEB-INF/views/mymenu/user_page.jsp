@@ -87,7 +87,7 @@
 								<c:choose>
 									<c:when test="${article.imagePath != null}">
 										<c:url var="downloadUrl" value="/download">
-											<c:param name="file" value="${member.imagePath}" />
+											<c:param name="file" value="${article.imagePath}" />
 										</c:url>
 										<img src="${downloadUrl}" class="img-responsive"/>
 									</c:when>
