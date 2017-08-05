@@ -12,12 +12,12 @@
 
 </head>
 <body>
- <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
+ <jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
   <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
   
 
 	<!-- 메인 화면 시작 -->
-	<div class="container">
+	<div class="container ">
 	<div class="container_mypage ">
 	<!-- page header -->
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">						
@@ -58,25 +58,25 @@
 									<br />
 						<!-- my page + book mark -->
 						<div class="btn-group btn-block">
-					<a href="${pageContext.request.contextPath}/mymenu/user_page?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
-				<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
+					<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
+				<a href="${pageContext.request.contextPath}/mymenu/user_page2_mobile?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
 	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
 				<c:if test="${readMember.id==loginInfo.id}">
-				<a href="${pageContext.request.contextPath}/mymenu/bookmarkList?member_id=${loginInfo.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
+				<a href="${pageContext.request.contextPath}/mymenu/bookmarkList_mobile?member_id=${loginInfo.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
                	</c:if>
 					</div>
 				<!--// my page + book mark -->								
 							</div>	
 	<!--// page menu bar -->
 		<!-- member article  -->
-			   <div class="recent-container">	
-			  <div class="review-content row multi-columns-row">		      
+			   <div class="recent-container">
+			   <div class="review-content row multi-columns-row">		      
 		     <c:choose>
 		    		<c:when test="${fn:length(memberarticleList) > 0}">
 		    			<c:forEach var="article" items="${memberarticleList}">
 		    				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 		    				<div class="thumbnail">
-		    				<c:url var="readUrl" value="/article/article_read">
+		    				<c:url var="readUrl" value="/article/article_read_mobile">
 					            <c:param name="article_id" value="${article.id}" />
 					            	</c:url>					            	
 					            	<!-- 링크 + 썸네일 -->
@@ -114,7 +114,7 @@
 				        </tr>
 		    		</c:otherwise>
 		    	</c:choose>
-		   </div>  		 	      
+		   </div>  		      
 		      <!--// Recent Review Content  -->	
 		      <!-- page number -->
 		        <nav class="text-center">
@@ -124,7 +124,7 @@
 <c:when test="${pageHelper.prevPage > 0 }">
 <!-- 이전 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 이전 그룹으로 이동하기 위한 URL을 생성해서 "prevUrl"에 저장 -->
-<c:url var="prevUrl" value="/mymenu/user_page2">
+<c:url var="prevUrl" value="/mymenu/user_page_mobile">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${pageHelper.prevPage }"></c:param>
 </c:url>
@@ -142,7 +142,7 @@
 end="${pageHelper.endPage }" step="1">
 
 <!-- 각 페이지 번호로 이동할 수 있는 URL을 생성하여 page_url에 저장 -->
-<c:url var="pageUrl" value="/mymenu/user_page2">
+<c:url var="pageUrl" value="/mymenu/user_page_mobile">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${i}"></c:param>
 </c:url>
@@ -162,7 +162,7 @@ end="${pageHelper.endPage }" step="1">
 <c:when test="${pageHelper.nextPage > 0 }">
 <!-- 다음 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 다음 그룹으로 이동하기 위한 URL을 생성해서 "nextUrl"에 저장 -->
-<c:url var="nextUrl" value="/mymenu/user_page2">
+<c:url var="nextUrl" value="/mymenu/user_page_mobile">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${pageHelper.nextPage }"></c:param>
 </c:url>

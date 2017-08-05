@@ -18,18 +18,21 @@ import review.jsp.helper.PageHelper;
 import review.jsp.helper.RegexHelper;
 import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
-import review.model.Article;
+
+import review.model.BookMark;
 import review.model.Member;
 import review.service.ArticleService;
+import review.service.BookMarkService;
 import review.service.ImageFileService;
 import review.service.MemberService;
 import review.service.impl.ArticleServiceImpl;
+import review.service.impl.BookMarkServiceImpl;
 import review.service.impl.ImageFileServiceImpl;
 import review.service.impl.MemberServiceImpl;
 
 
-@WebServlet("/mymenu/user_page2")
-public class UserPage2 extends BaseController {
+@WebServlet("/mymenu/bookmarkList_mobile")
+public class BookMarkListMobile extends BaseController {
 	private static final long serialVersionUID = -1391748040235555563L;
 
 	/** (1) 사용하고자 하는 Helper 객체 선언 */
@@ -42,6 +45,7 @@ public class UserPage2 extends BaseController {
 	ArticleService articleService;
 	ImageFileService imageFileService;
 	PageHelper pageHelper;
+	BookMarkService bookmarkService;
 	
 	@Override
 	public String doRun(HttpServletRequest request, HttpServletResponse response) 
@@ -59,10 +63,19 @@ public class UserPage2 extends BaseController {
 		articleService = new ArticleServiceImpl(sqlSession, logger);
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 		pageHelper = PageHelper.getInstance();
+		bookmarkService = new BookMarkServiceImpl(sqlSession, logger);
 			
-					
+		/** (3) 로그인 여부 검사 */
+		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
+			if(web.getSession("loginInfo") == null){
+					sqlSession.close();
+					web.redirect(web.getRootPath() + "/index", "you need log in.");
+					return null;
+				}
+			Member member =  (Member)web.getSession("loginInfo");
+			int member_id = web.getInt("member_id");	
 		/** (3) 회원 번호 파라미터 받기 */
-		int member_id = web.getInt("member_id");
+		
 		logger.debug("member_id=" + member_id);
 				System.out.println("-----"+ member_id);
 		if (member_id == 0) {
@@ -73,36 +86,32 @@ public class UserPage2 extends BaseController {
 		
 		
 		/** (5) 조회할 정보에 대한 Beans 생성 */
-		Article article = new Article();		
+		BookMark bookmark = new BookMark();
+		bookmark.setMember_id(member_id);
+		
 		int page = web.getInt("page", 1);
 		
 		/** (6) 게시물 목록 조회 */
 		int totalcount = 0;
-		List<Article> memberarticleList = null;
-		
-		//  회원번호 파라미터를 Beans로 묶기
-		Member member = new Member();						
-		member.setId(member_id);
-		article.setMember_id(member_id);
-		
+		List<BookMark> bookmarkList = null;
 		
 		// 지금 읽고 있는 게시물이 저장될 객체
 		Member readMember = null;
 		
 		try {		
 			// 전체 게시물 수
-			totalcount = articleService.selectMemberArticleCount(article);
+			totalcount = bookmarkService.selectBookMarkCount(bookmark);
           System.out.println(totalcount + "-----111"  );
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
           pageHelper.pageProcess(page, totalcount, 7, 5);
 			
        // 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
-       			article.setLimit_start(pageHelper.getLimit_start());
-       			article.setList_count(pageHelper.getList_count());	
+          bookmark.setLimit_start(pageHelper.getLimit_start());
+          bookmark.setList_count(pageHelper.getList_count());	
 
-			memberarticleList = articleService.selectMemberArticleList(article);
-			System.out.println(memberarticleList + "-----11221");
+          bookmarkList = bookmarkService.selectBookMarkList(bookmark);
+			System.out.println(bookmarkList + "-----11221");
 			
 
 			readMember = memberService.selectMember(member);
@@ -116,9 +125,9 @@ public class UserPage2 extends BaseController {
 		}
 		
 		// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체(에피소드 리스트)
-		if (memberarticleList != null) {
-			for (int i=0; i<memberarticleList.size(); i++) {
-				Article item = memberarticleList.get(i);
+		if (bookmarkList != null) {
+			for (int i=0; i<bookmarkList.size(); i++) {
+				BookMark item = bookmarkList.get(i);
 				String imagePath = item.getImagePath();
 				if (imagePath != null) {
 					String thumbPath = upload.createThumbnail(imagePath, 220, 190, true);
@@ -139,18 +148,22 @@ public class UserPage2 extends BaseController {
 						logger.debug("thumbnail create > " + readMember.getImagePath());
 									}
 				}
-				
+		
+		
+						
 		
 		/** (7) 조회 결과를 View에 전달 */
+	
 
-		request.setAttribute("memberarticleList", memberarticleList);
+		request.setAttribute("bookmarkList", bookmarkList);
 		request.setAttribute("pageHelper", pageHelper);
 		request.setAttribute("readMember", readMember);
-		request.setAttribute("member_id", member_id);
+		request.setAttribute("member_id", member_id);	
 						
-		String view = "mymenu/user_page2";
+		String view = "mymenu/bookmarkList_mobile";
 		return view;
 	}
 	
+       
     
 }

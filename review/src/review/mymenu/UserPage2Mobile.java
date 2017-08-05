@@ -28,8 +28,8 @@ import review.service.impl.ImageFileServiceImpl;
 import review.service.impl.MemberServiceImpl;
 
 
-@WebServlet("/mymenu/user_page2")
-public class UserPage2 extends BaseController {
+@WebServlet("/mymenu/user_page2_mobile")
+public class UserPage2Mobile extends BaseController {
 	private static final long serialVersionUID = -1391748040235555563L;
 
 	/** (1) 사용하고자 하는 Helper 객체 선언 */
@@ -148,7 +148,7 @@ public class UserPage2 extends BaseController {
 		request.setAttribute("readMember", readMember);
 		request.setAttribute("member_id", member_id);
 						
-		String view = "mymenu/user_page2";
+		String view = "mymenu/user_page2_mobile";
 		return view;
 	}
 	

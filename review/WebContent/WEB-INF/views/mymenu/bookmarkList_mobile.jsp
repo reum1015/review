@@ -12,7 +12,7 @@
 
 </head>
 <body>
- <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
+ <jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
   <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
   
 
@@ -50,7 +50,7 @@
 						 	<!-- 설정 -->
 						<c:if test="${readMember.id==loginInfo.id}">
 						<a class="navbar-brand glyphicon glyphicon-cog col-lg-offset-5 col-lg-1 col-md-offset-5 col-md-1 hidden-sm hidden-xs" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>
-	                      <a class="pull-right navbar-brand glyphicon glyphicon-cog hidden-lg hidden-md col-sm-1 col-xs-1" href="${pageContext.request.contextPath}/mymenu/options_mobile" style="font-size: 1.5em;"></a>	  
+	                     <a class="pull-right navbar-brand glyphicon glyphicon-cog hidden-lg hidden-md col-sm-1 col-xs-1" href="${pageContext.request.contextPath}/mymenu/options_mobile" style="font-size: 1.5em;"></a>	  
 	                              </c:if> 	
 	                              <!--// 설정 -->											
 								<br /> 											
@@ -58,27 +58,31 @@
 									<br />
 						<!-- my page + book mark -->
 						<div class="btn-group btn-block">
-					<a href="${pageContext.request.contextPath}/mymenu/user_page?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
-				<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
+			  <a href="${pageContext.request.contextPath}/mymenu/user_page_mobile?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
+			 <a href="${pageContext.request.contextPath}/mymenu/user_page2_mobile?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
 	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
 				<c:if test="${readMember.id==loginInfo.id}">
-				<a href="${pageContext.request.contextPath}/mymenu/bookmarkList?member_id=${loginInfo.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
+				<a href="#"  class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
                	</c:if>
 					</div>
 				<!--// my page + book mark -->								
 							</div>	
 	<!--// page menu bar -->
+	</div>
 		<!-- member article  -->
-			   <div class="recent-container">	
-			  <div class="review-content row multi-columns-row">		      
+			   <div class="recent-container">		
+			   <div class="review-content row multi-columns-row">      
 		     <c:choose>
-		    		<c:when test="${fn:length(memberarticleList) > 0}">
-		    			<c:forEach var="article" items="${memberarticleList}">
+		    		<c:when test="${fn:length(bookmarkList) > 0}">
+		    			<c:forEach var="article" items="${bookmarkList}">
 		    				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 		    				<div class="thumbnail">
-		    				<c:url var="readUrl" value="/article/article_read">
+		    				<c:url var="readUrl" value="/article/article_read_mobile">
 					            <c:param name="article_id" value="${article.id}" />
-					            	</c:url>					            	
+					            	</c:url>
+					            	<c:url var="readUser" value="/mymenu/user_page_mobile">					            						            	
+					            		<c:param name="member_id" value="${article.member_id}" />
+					            	</c:url>
 					            	<!-- 링크 + 썸네일 -->
 					            	<a href="${readUrl}">
 								<c:choose>
@@ -96,7 +100,8 @@
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
 					            	<div class="item">
-								<h4><font size="4" color="#000069"> ${article.title} </font></h4>								
+								<h4><font size="4" color="#000069"> ${article.title} </font></h4>
+								<div><font size="4" color="#000000"><a href="${readUser}">${article.nick_name}</a></font></div>
 								<div class="clearfix">
 									<div class="pull-left">${article.reg_date}</div>
 									<div class="pull-right"><font size="4" color="#000069">	${article.category}</font></div>
@@ -114,7 +119,8 @@
 				        </tr>
 		    		</c:otherwise>
 		    	</c:choose>
-		   </div>  		 	      
+		   </div>
+		     		      
 		      <!--// Recent Review Content  -->	
 		      <!-- page number -->
 		        <nav class="text-center">
@@ -124,7 +130,7 @@
 <c:when test="${pageHelper.prevPage > 0 }">
 <!-- 이전 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 이전 그룹으로 이동하기 위한 URL을 생성해서 "prevUrl"에 저장 -->
-<c:url var="prevUrl" value="/mymenu/user_page2">
+<c:url var="prevUrl" value="/mymenu/bookmarkList_mobile">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${pageHelper.prevPage }"></c:param>
 </c:url>
@@ -142,7 +148,7 @@
 end="${pageHelper.endPage }" step="1">
 
 <!-- 각 페이지 번호로 이동할 수 있는 URL을 생성하여 page_url에 저장 -->
-<c:url var="pageUrl" value="/mymenu/user_page2">
+<c:url var="pageUrl" value="/mymenu/bookmarkList_mobile">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${i}"></c:param>
 </c:url>
@@ -162,7 +168,7 @@ end="${pageHelper.endPage }" step="1">
 <c:when test="${pageHelper.nextPage > 0 }">
 <!-- 다음 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 다음 그룹으로 이동하기 위한 URL을 생성해서 "nextUrl"에 저장 -->
-<c:url var="nextUrl" value="/mymenu/user_page2">
+<c:url var="nextUrl" value="/mymenu/bookmarkList_mobile">
 <c:param name="keyword" value="${keyword}"></c:param>
 <c:param name="page" value="${pageHelper.nextPage }"></c:param>
 </c:url>
@@ -180,7 +186,7 @@ end="${pageHelper.endPage }" step="1">
 		      <!--// Recent Review -->
 		<!--// member article -->				
 					
-		</div>
+		
 	</div>
 
 	<!-- 메인 화면 끝 -->

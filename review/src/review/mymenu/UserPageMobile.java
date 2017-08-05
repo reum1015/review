@@ -27,12 +27,11 @@ import review.service.impl.ArticleServiceImpl;
 import review.service.impl.ImageFileServiceImpl;
 import review.service.impl.MemberServiceImpl;
 
-
-@WebServlet("/mymenu/user_page2")
-public class UserPage2 extends BaseController {
+@WebServlet("/mymenu/user_page_mobile")
+public class UserPageMobile extends BaseController {
 	private static final long serialVersionUID = -1391748040235555563L;
 
-	/** (1) 사용하고자 하는 Helper 객체 선언 */
+	/** (1) 사용하고자 하는 Helper+Service 객체 선언 */
 	Logger logger;
 	SqlSession sqlSession;
 	WebHelper web;
@@ -43,10 +42,10 @@ public class UserPage2 extends BaseController {
 	ImageFileService imageFileService;
 	PageHelper pageHelper;
 	
+
+
 	@Override
-	public String doRun(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-				
+	public String doRun(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/** (2) 필요한 헬퍼 객체 생성 */
 		logger = LogManager.getFormatterLogger(request.getRequestURI());
 		// --> import study.jsp.mysite.service.impl.MemberServiceImpl;
@@ -139,18 +138,22 @@ public class UserPage2 extends BaseController {
 						logger.debug("thumbnail create > " + readMember.getImagePath());
 									}
 				}
-				
+		
+		
+						
 		
 		/** (7) 조회 결과를 View에 전달 */
+	
 
 		request.setAttribute("memberarticleList", memberarticleList);
 		request.setAttribute("pageHelper", pageHelper);
 		request.setAttribute("readMember", readMember);
-		request.setAttribute("member_id", member_id);
+		request.setAttribute("member_id", member_id);	
 						
-		String view = "mymenu/user_page2";
+		String view = "mymenu/user_page_mobile";
 		return view;
 	}
 	
+       
     
 }

@@ -45,7 +45,7 @@ body{
        </div>      
        <!--// top_main big -->
          <!-- top_main small -->
-             <div class="topmenu-brands hidden-lg hidden-md col-sm-offset-4 col-sm-4 col-xs-offset-2 col-xs-6" >       
+         <div class="hidden-lg hidden-md col-sm-offset-3 col-sm-4 col-xs-offset-2 col-xs-4">     
        <a class="topmenu-brands" href="${pageContext.request.contextPath}/index" >
 	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.jpg"
 	 height="50px" width="140px"  />
@@ -54,7 +54,7 @@ body{
        <!--// top_main small -->
        	<!-- top_search -->
       <div class="topmenu-search col-lg-4 col-md-4 hidden-sm hidden-xs">
-       <form method="get" action="${pageContext.request.contextPath}/article/article_list" style="width:200px; height:50px; ">
+       <form method="post" action="${pageContext.request.contextPath}/article/article_list" style="width:200px; height:50px; ">
 <div class="input-group">
 <input type="text" name="keyword" class="form-control"
 placeholder="Search" value="${keyword}" />
@@ -85,16 +85,16 @@ placeholder="Search" value="${keyword}" />
 	 height="50px" width="140px"  />
 	</a>	
        </div>
-       <div class="hidden-lg hidden-md col-sm-offset-3 col-sm-4 col-xs-offset-1 col-xs-4">       
+       <div class="hidden-lg hidden-md col-sm-offset-3 col-sm-4 col-xs-offset-2 col-xs-4">       
        <a class="topmenu-brands" href="${pageContext.request.contextPath}/index">
 	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.jpg"
-	height="42px" width="200px" />
+	height="50px" width="140px" />
 	</a>
 	</div>		
        <!--// top_main -->
        <!-- top_search -->
      <div class="topmenu-search col-lg-4 col-md-4 hidden-sm hidden-xs">
-       <form method="get" action="${pageContext.request.contextPath}/article/article_list" style="width:200px; height:50px; ">
+       <form method="post" action="${pageContext.request.contextPath}/article/article_list" style="width:200px; height:50px; ">
 <div class="input-group">
 <input type="text" name="keyword" class="form-control"
 placeholder="Search" value="${keyword}" />
