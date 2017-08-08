@@ -166,7 +166,7 @@ margin-bottom: -70px;
 				<!-- 그리드 시스템 (모바일) -->
 			<div class="row multi-columns-row">
   			    <a href="${pageContext.request.contextPath}/article/article_list_mobile?keyword=iphone7">
-				<div class="hidden-md col-sm-6 col-xs-6">
+				<div class="hidden-lg hidden-md col-sm-6 col-xs-6">
       <img alt="" src="${pageContext.request.contextPath}/assets/imgs/main/main1.jpg" class="img-responsive" width="300px" height="250px" >
         <div class="carousel-caption">    
      <h3 >iphone7</h3>
