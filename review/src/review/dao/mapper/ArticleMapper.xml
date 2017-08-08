@@ -82,9 +82,9 @@
 		FROM article as a
          LEFT JOIN member as m ON a.member_id = m.id
 		WHERE a.total_like NOT IN(0) AND
-			replace(category,' ','') like concat('%', #{category}, '%')
+		(replace(category,' ','') like concat('%', #{category}, '%')
 		OR 	replace(title ,' ','') like concat('%', #{title }, '%')
-		OR 	replace(content ,' ','') like concat('%', #{content }, '%')		
+		OR 	replace(content ,' ','') like concat('%', #{content }, '%'))
 		ORDER  BY total_like DESC		
 		LIMIT #{limit_start}, #{list_count}
 	</select>

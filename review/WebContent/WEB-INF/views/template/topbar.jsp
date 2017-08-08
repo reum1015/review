@@ -55,16 +55,15 @@ body{
        	<!-- top_search -->
       <div class="topmenu-search col-lg-4 col-md-4 hidden-sm hidden-xs">
        <form method="post" action="${pageContext.request.contextPath}/article/article_list" style="width:200px; height:50px; ">
-<div class="input-group">
-<input type="text" name="keyword" class="form-control"
-placeholder="Search" value="${keyword}" />
-<span class="input-group-btn">
-<button class="btn btn-success" type="submit">
-<i class="glyphicon glyphicon-search"></i>
-</button>
-</span>
-</div>
-</form>       
+			<div class="input-group">
+			<input type="text" name="keyword" class="form-control" placeholder="Search" value="${keyword}" />
+			<span class="input-group-btn">
+			<button class="btn btn-success" type="submit">
+			<i class="glyphicon glyphicon-search"></i>
+			</button>
+			</span>
+			</div>
+		</form>       
        </div>   
        <!--// top_search -->       
        <!-- top_login -->

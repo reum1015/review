@@ -75,6 +75,10 @@ public class ArticleList extends BaseController {
 	/** (5) 조회할 정보에 대한 Beans 생성 */
 		// 검색어
 		String keyword = web.getString("keyword");
+		
+		logger.debug("keyword ---------------> " + keyword);
+		
+		
 		/** (3) 글 번호 파라미터 받기 */
 		int article_id = web.getInt("article_id");
 		logger.debug("article_id" + article_id);
