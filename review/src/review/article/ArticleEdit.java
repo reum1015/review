@@ -62,25 +62,31 @@ public class ArticleEdit extends BaseController {
 						sqlSession.close();
 						web.redirect(web.getRootPath() + "/index", "you need log in.");
 						return null;
-					}		
+					}	
+				
+				
+				
 			
 					/** (4) 파라미터 받기 */		
 				    String email = web.getString("email");				
 					String nick_name = web.getString("nick_name");
 					String name = web.getString("name");
-					int member_id = web.getInt("member_id");		
+							
 					
 					// 전달받은 파라미터는 값의 정상여부 확인을 위해서 로그로 확인				
 					logger.debug("email=" + email);
 					logger.debug("nick_name=======================" + nick_name);
 					logger.debug("name=" + name);
-					logger.debug("member_id=" + member_id);
+					
 			
 			
 			
 			/** (3) 글 번호 파라미터 받기 */
 			int article_id = web.getInt("article_id");
-			logger.debug("article_id" + article_id);
+		    int member_id = web.getInt("member_id");
+			
+		    logger.debug("article_id=" + article_id);
+			logger.debug("member_id=" + member_id);
 					
 			if (article_id == 0) {
 				web.redirect(null, "글 번호가 지정되지 않았습니다.");
@@ -104,12 +110,21 @@ public class ArticleEdit extends BaseController {
 			Article readArticle = null;
 			List<ImageFile> articlefileList = null;	
 			
-				
+			int article_member_id = 0;	
+			article_member_id = web.getInt("article_member_id");
+			
 			
 			if(loginInfo != null){	
 				loginInfo = (Member)web.getSession("loginInfo");
 								
 				if(member_id==loginInfo.getId()){
+				logger.debug("loginInfo.getId()  ------> " + loginInfo.getId());
+				logger.debug("article_member_id)  ------> " + article_member_id);
+				
+				
+				
+				
+				if(article_member_id != loginInfo.getId()) {
 					web.redirect(null, "접근이 제한된 페이지 입니다.");
 					return null;
 				}

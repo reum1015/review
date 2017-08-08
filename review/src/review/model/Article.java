@@ -16,6 +16,7 @@ public class Article {
 	private String tag;			//  해시태그
 	private int member_id;
 	
+	
 	//게시물의 좋아요 누적값
 	private int like_count;
 	private int total_like;
@@ -179,6 +180,7 @@ public class Article {
 					+ ", limit_start=" + limit_start + ", list_count=" + list_count + ", imagePath=" + imagePath + "]";
 		}
 
+	
 	
 		
 		

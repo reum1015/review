@@ -143,7 +143,9 @@ public class ArticleEditOk extends BaseController {
 				  
 				  /** (10) 게시물 변경을 위한 Service 기능을 호출 */
 					try {						
+						if (articleService.selectArticleCountByMemberId(article) < 1) {
 						articleService.updateArticle(article);
+						}
 					} catch (Exception e) {
 						sqlSession.close();
 						web.redirect(null, e.getLocalizedMessage());
