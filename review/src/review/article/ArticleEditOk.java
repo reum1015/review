@@ -57,6 +57,8 @@ public class ArticleEditOk extends BaseController {
 		articleService = new ArticleServiceImpl(sqlSession, logger);
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 		
+		
+		
 		/** (3) 파일이 포함된 POST 파라미터 받기 */
 		try {
 			upload.multipartRequest(request);

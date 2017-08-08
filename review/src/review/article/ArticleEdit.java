@@ -19,6 +19,7 @@ import review.jsp.helper.UploadHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Article;
 import review.model.ImageFile;
+import review.model.Member;
 import review.service.ArticleService;
 import review.service.ImageFileService;
 import review.service.impl.ArticleServiceImpl;
@@ -54,6 +55,28 @@ public class ArticleEdit extends BaseController {
 			articleService = new ArticleServiceImpl(sqlSession, logger);
 			imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 						
+			/** (3) 로그인 여부 검사 */		
+			Member loginInfo = (Member) web.getSession("loginInfo");
+			// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
+				if(web.getSession("loginInfo") == null){
+						sqlSession.close();
+						web.redirect(web.getRootPath() + "/index", "you need log in.");
+						return null;
+					}		
+			
+					/** (4) 파라미터 받기 */		
+				    String email = web.getString("email");				
+					String nick_name = web.getString("nick_name");
+					String name = web.getString("name");
+					int member_id = web.getInt("member_id");		
+					
+					// 전달받은 파라미터는 값의 정상여부 확인을 위해서 로그로 확인				
+					logger.debug("email=" + email);
+					logger.debug("nick_name=======================" + nick_name);
+					logger.debug("name=" + name);
+					logger.debug("member_id=" + member_id);
+			
+			
 			
 			/** (3) 글 번호 파라미터 받기 */
 			int article_id = web.getInt("article_id");
@@ -68,6 +91,10 @@ public class ArticleEdit extends BaseController {
 			//  파라미터를 Beans로 묶기
 			Article article = new Article();
 			article.setId(article_id);
+			article.setMember_id(member_id);
+			
+			Member member = new Member();						
+			member.setId(loginInfo.getId());
 			
 			ImageFile file = new ImageFile();
 			file.setArticle_id(article_id);
@@ -75,7 +102,18 @@ public class ArticleEdit extends BaseController {
 			/** (4) 게시물 일련번호를 사용한 데이터 조회 */
 			// 지금 읽고 있는 게시물이 저장될 객체
 			Article readArticle = null;
-			List<ImageFile> articlefileList = null;			
+			List<ImageFile> articlefileList = null;	
+			
+				
+			
+			if(loginInfo != null){	
+				loginInfo = (Member)web.getSession("loginInfo");
+								
+				if(member_id.equals(loginInfo.getId()) ){
+					web.redirect(null, "접근이 제한된 페이지 입니다.");
+					return null;
+				}
+			}
 			
 			try {			
 				readArticle = articleService.selectArticle(article);
