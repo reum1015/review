@@ -37,7 +37,7 @@
               <div class="form-group">
             <label for="category" class="col-lg-12 col-md-12 col-sm-12 hidden-xs" >keyword</label>
             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-8">
-            <input type="text" class="form-control col-xs-4" id="category" name="category" placeholder="keyword" />
+            <input type="text" class="form-control col-xs-4" id="category" name="category" placeholder="category" />
             </div>
             </div>           
             <!-- title -->

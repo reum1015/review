@@ -272,9 +272,9 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 												<!--  ** 페이지 호출 할 때 article_id를 url에 포함하여 삭제 페이지를 호출 할 때 article_id를 넘겨주는 소스입니다.  --> 
 												<!-- 추가 : article.member_id와 loginInfo의 id를 비교하여 버튼을 노출할 것인지를 판단 -->
 												<c:if test="${readArticle.member_id==loginInfo.id}">
-													<a href="${pageContext.request.contextPath}/article/article_edit?article_id=${readArticle.id}">
+													<a href="${pageContext.request.contextPath}/article/article_edit?article_id=${readArticle.id}&article_member_id=${readArticle.member_id}">
 						                  				<i class="glyphicon glyphicon-edit"></i></a>
-						                  	 		<a href="${pageContext.request.contextPath}/article/article_delete?article_id=${readArticle.id}">
+						                  	 		<a href="${pageContext.request.contextPath}/article/article_delete?article_id=${readArticle.id}&article_member_id=${readArticle.member_id}">
 						                  	  			<i class="glyphicon glyphicon-remove"></i></a>
 												</c:if>
 												<a href="${pageContext.request.contextPath}/article/article_list_main">

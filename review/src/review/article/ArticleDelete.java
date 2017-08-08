@@ -48,6 +48,20 @@ public class ArticleDelete extends BaseController {
 		upload = UploadHelper.getInstance();		
 		articleService = new ArticleServiceImpl(sqlSession, logger);
 		
+		/** (3) 로그인 여부 검사 */		
+		Member loginInfo = (Member) web.getSession("loginInfo");
+		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
+			if(web.getSession("loginInfo") == null){
+					sqlSession.close();
+					web.redirect(web.getRootPath() + "/index", "you need log in.");
+					return null;
+				}		
+			
+			/** (4) 파라미터 받기 */		
+		    int member_id = web.getInt("member_id");		
+		    logger.debug("member_id=" + member_id);
+			
+		
 		/** (3) 글 번호 파라미터 받기 */
 		int article_id = web.getInt("article_id");
 		logger.debug("article_id" + article_id);
@@ -61,8 +75,11 @@ public class ArticleDelete extends BaseController {
 		//  파라미터를 Beans로 묶기
 		Article article = new Article();
 		article.setId(article_id);
-				
-		Member loginInfo = (Member) web.getSession("loginInfo");
+		article.setMember_id(member_id);		
+		
+		Member member = new Member();						
+		member.setId(loginInfo.getId());
+		
 		if (loginInfo != null) {
 			article.setMember_id(loginInfo.getId());
 		}
@@ -70,6 +87,20 @@ public class ArticleDelete extends BaseController {
 		/** (6) 게시물 일련번호를 사용한 데이터 조회 */	
 		// 회원번호가 일치하는 게시물 수 조회하기
 		int articleCount = 0; 
+		
+		int article_member_id = 0;	
+		article_member_id = web.getInt("article_member_id");
+		
+		
+		if(loginInfo != null){	
+			loginInfo = (Member)web.getSession("loginInfo");
+							
+			if(article_member_id != loginInfo.getId()) {
+				web.redirect(null, "접근이 제한된 페이지 입니다.");
+				return null;
+			}
+		}
+		
 		try {
 			articleCount = articleService.selectArticleCountByMemberId(article);
 		} catch (Exception e) {
