@@ -348,11 +348,13 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 		<!--// content body -->
 		<!-- comment -->
 		<!-- 덧글 -->
+		
+		
+		
 		<hr />
-		<form id="comment_form" method="post"
-			action="${pageContext.request.contextPath}/comment/comment_write">
+		<form id="comment_form" method="post" action="${pageContext.request.contextPath}/comment/comment_write">
 			<!-- 글 번호 상태 유지 -->
-			<input type='hidden' name='article_id' value='${readArticle.id}' />
+			<input type='hidden' name='article_id' value='${readArticle.id}'/>
 			<!-- 내용입력, 저장버튼 -->
 			<div class='form-group'>
 				<div class="input-group">
@@ -364,6 +366,9 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 			</div>
 		</form>		
 		<!--// comment -->	
+			
+			
+			
 			
 		<!-- 덧글 리스트 -->
 		<ul class="media-list" id="comment_list">
@@ -390,14 +395,9 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
                 <!-- 수정,삭제 버튼 -->        	
                 <div class='pull-right'>
 
- 	{{#isMember}} 
-					<a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
-                        <i class='glyphicon glyphicon-edit'></i>
-                    </a>
-                    <a href='${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
-                        <i class='glyphicon glyphicon-remove'></i>
-                    </a>
-	{{/isMember}}
+{{#isMineState mine id}}
+
+{{/isMineState}}
 
          
              </div>
@@ -431,6 +431,21 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 	$(function() {
 		
 		
+		/*
+		
+		 <c:if test='${item[0].member_id == loginInfo.id}'> 
+	<a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
+                        <i class='glyphicon glyphicon-edit'></i>
+                    </a>
+                    <a href='${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
+                        <i class='glyphicon glyphicon-remove'></i>
+                    </a>   
+	</c:if >
+		
+		*/
+		
+		
+		/*
 		Handlebars.registerHelper('isMember',function(member_id,loginInfo){
 			var result='';
 			
@@ -444,9 +459,8 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 			}
 			return result;
 		});
-		
-		
-		
+		*/
+				
 		/** 페이지가 열리면서 동작하도록 이벤트 정의 없이 Ajax요청 */
 		$.get("${pageContext.request.contextPath}/comment/comment_list", {article_id: "${readArticle.id}"}, function(json) {
 			if (json.rt != "OK") {
@@ -454,8 +468,27 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 				return false;
 			}
 			
+			
 			// 템플릿 HTML을 로드한다.
 			var template = Handlebars.compile($("#tmpl_comment_item").html());
+			
+			Handlebars.registerHelper('isMineState', function(isMine,id) {
+				  var result = '';
+				  if(isMine) {
+					  result = '<a href="${pageContext.request.contextPath}/comment/comment_edit?comment_id='+id+'" data-toggle="modal" data-target="#comment_edit_modal" class="btn btn-warning btn-xs">'
+	               			+'<i class="glyphicon glyphicon-edit"></i>'+
+	                        '</a>'+
+	                        '<a href="${pageContext.request.contextPath}/comment/comment_delete?comment_id='+id+'" data-toggle="modal" data-target="#comment_delete_modal" class="btn btn-danger btn-xs">'
+	                            + '<i class="glyphicon glyphicon-remove"></i>'
+	                        +'</a>';
+					  
+				    return result;
+				  }else{
+					return result;
+				  }
+				});
+			
+			
 			
 			// JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
 			// --> 정규표현식 /~~~/g는 문자열 전체의 의미.

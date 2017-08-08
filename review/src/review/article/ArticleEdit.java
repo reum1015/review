@@ -109,7 +109,7 @@ public class ArticleEdit extends BaseController {
 			if(loginInfo != null){	
 				loginInfo = (Member)web.getSession("loginInfo");
 								
-				if(member_id.equals(loginInfo.getId()) ){
+				if(member_id==loginInfo.getId()){
 					web.redirect(null, "접근이 제한된 페이지 입니다.");
 					return null;
 				}
