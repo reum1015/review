@@ -70,6 +70,7 @@ body{
        <!-- top_search big-->
         <div class="topmenu-search col-lg-3 col-md-3 col-sm-offset-1 col-sm-2  hidden-xs">
        <form method="post" action="${pageContext.request.contextPath}/article/article_list" style="width:200px; height:50px; ">
+<<<<<<< HEAD
 <div class="input-group">
 <input type="text" name="keyword" class="form-control"
 placeholder="Search" value="${keyword}" />
@@ -105,6 +106,19 @@ placeholder="Search" value="${keyword}" />
 </form>       
        </div>
        	<!--// top_search small-->
+=======
+			<div class="input-group">
+			<input type="text" name="keyword" class="form-control" placeholder="Search" value="${keyword}" />
+			<span class="input-group-btn">
+			<button class="btn btn-success" type="submit">
+			<i class="glyphicon glyphicon-search"></i>
+			</button>
+			</span>
+			</div>
+		</form>       
+       </div>   
+       <!--// top_search -->       
+>>>>>>> branch 'master' of https://github.com/reum1015/review
        <!-- top_login -->
        <div class="topmenu-login  col-lg-2 col-md-3 hidden-sm hidden-xs">
        <a class="topmenu-sign" href="${pageContext.request.contextPath}/member/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up /</a>       

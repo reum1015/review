@@ -462,17 +462,9 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 		*/
 				
 		/** 페이지가 열리면서 동작하도록 이벤트 정의 없이 Ajax요청 */
-		$.get("${pageContext.request.contextPath}/comment/comment_list", {article_id: "${readArticle.id}"}, function(json) {
-			if (json.rt != "OK") {
-				alert(json.rt);
-				return false;
-			}
-			
-			
-			// 템플릿 HTML을 로드한다.
-			var template = Handlebars.compile($("#tmpl_comment_item").html());
-			
-			Handlebars.registerHelper('isMineState', function(isMine,id) {
+		
+		
+		Handlebars.registerHelper('isMineState', function(isMine,id) {
 				  var result = '';
 				  if(isMine) {
 					  result = '<a href="${pageContext.request.contextPath}/comment/comment_edit?comment_id='+id+'" data-toggle="modal" data-target="#comment_edit_modal" class="btn btn-warning btn-xs">'
@@ -487,8 +479,16 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 					return result;
 				  }
 				});
+		
+		$.get("${pageContext.request.contextPath}/comment/comment_list", {article_id: "${readArticle.id}"}, function(json) {
+			if (json.rt != "OK") {
+				alert(json.rt);
+				return false;
+			}
 			
 			
+			// 템플릿 HTML을 로드한다.
+			var template = Handlebars.compile($("#tmpl_comment_item").html());
 			
 			// JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
 			// --> 정규표현식 /~~~/g는 문자열 전체의 의미.
@@ -571,6 +571,12 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 				// --> JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
 				json.item.content = json.item.content.replace(/&lt;br\/&gt;/g, "<br/>");
 				
+				
+				
+				
+				
+				
+				
 				// 템플릿 HTML을 로드한다.
 				var template = Handlebars.compile($("#tmpl_comment_item").html());
 				// JSON에 포함된 작성 결과 데이터를 템플릿에 결합한다.
@@ -580,7 +586,19 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 				
 				// 덧글 수정 모달 강제로 닫기
 				$("#comment_edit_modal").modal('hide');
+				
+
+				
+				
+				
+				
 			});
+			
+			
+			
+			
+			
+			
 		});
 	});
 </script>

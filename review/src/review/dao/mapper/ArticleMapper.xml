@@ -83,7 +83,8 @@
 		(replace(a.category,' ','') like concat('%', #{category}, '%')
 		OR 	replace(a.title ,' ','') like concat('%', #{title }, '%')
 		OR 	replace(a.content ,' ','') like concat('%', #{content }, '%')	)	
-		ORDER  BY a.total_like DESC		
+		ORDER  BY a.total_like DESC      
+
 		LIMIT #{limit_start}, #{list_count}
 	</select>
 	
