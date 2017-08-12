@@ -58,11 +58,11 @@
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
 					            	<div class="item">
-								<h4><font size="4" color="#000069"> ${article.title} </font></h4>
-								<div><font size="4" color="#000000"><a href="${readUser}">${article.nick_name}</a></font></div>
+								<h4><font size="4" color="#FF8000"> ${article.title} </font></h4>
+								<div><a href="${readUser}"><font size="4" color="#585858">${article.nick_name}</font></a></div>
 								<div class="clearfix">
-									<div class="pull-left">${article.reg_date}</div>
-									<div class="pull-right"><font size="4" color="#000069">	${article.category}</font></div>
+									<div class="pull-left"><font size="2" color="#000">${article.reg_date}</font></div>
+									<div class="pull-right"><font size="4" color="#FF8000">	${article.category}</font></div>
 								</div>
 							</div>
 							<!--// 제목 + 작성자 + 조회수 -->

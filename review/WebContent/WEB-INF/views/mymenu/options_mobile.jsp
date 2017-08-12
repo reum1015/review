@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/mymenu.css" />
 </head>
 <body>
-	  <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
+	  <jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
   <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
   
 

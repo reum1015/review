@@ -12,12 +12,17 @@
 
 
 <style type="text/css">
-
+.cancel {
+background-color: #585858;
+}
+.ok {
+background-color: #FF8000;
+}
 </style>
 
 </head>
 <body>
-	  <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
+	  <jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
 	  <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
 
 	<!-- 메인 화면 시작 -->
@@ -56,10 +61,10 @@
             </div>
             <div class="form-group">
              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
-               <button type="button" class="btn btn-danger form-control" onclick="history.back();">Cancel</button>
+               <button type="button" class="btn cancel form-control" onclick="history.back();"><font size="4"  color="#fff">Cancel</font></button>
                </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
-               <button type="submit" class="btn btn-primary form-control">Post</button>
+               <button type="submit" class="btn ok form-control"><font size="4" color="#28282"> Post</font></button>
              </div>            
             </div>
 		      </form>

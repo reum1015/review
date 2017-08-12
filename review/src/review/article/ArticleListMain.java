@@ -58,8 +58,6 @@ public class ArticleListMain extends BaseController {
 		pageHelper = PageHelper.getInstance();			
 	
 	/** (5) 조회할 정보에 대한 Beans 생성 */
-		// 검색어
-		
 		
 		Article article = new Article();
 		

@@ -282,7 +282,7 @@
 			<div class="review-content row multi-columns-row">
 
 				<c:choose>
-					<c:when test="${fn:length(favoriteList) > 0}">
+					<c:when test="${fn:length(selectArticleListForBest) > 0}">
 						<c:forEach var="favorite" items="${selectArticleListForBest}">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -310,15 +310,15 @@
 									<!--// 링크 + 썸네일 -->
 									<!-- 제목 + 작성자 + 조회수 -->
 									<div class="item col-lg-8 col-md-8 col-sm-7">
-										<a href="${readUser}"><font size="4" color="#000000">${favorite.nick_name}</font></a>
+										<a href="${readUser}"><font size="4" color="#FF8000">${favorite.nick_name}</font></a>
 										<div class="pull-right">${favorite.reg_date}</div>
 										<div>
-											<font size="4" color="#A0A0FF "> keyword: </font> <font
-												size="4" color="#000069"> ${favorite.category}</font>
+											<font size="4" color="#28282 "> keyword: </font> <font
+												size="4" color="#a0a0a0"> ${favorite.category}</font>
 										</div>
 										<div>
-											<font size="4" color="#A0A0FF ">title:</font><font size="4"
-												color="#000069"> ${favorite.title} </font>
+											<font size="4" color="#28282 ">title:</font><font size="4"
+												color="#a0a0a0"> ${favorite.title} </font>
 										</div>
 										<hr />
 										<div style="overflow: auto; width: 100%; max-height: 180px;">

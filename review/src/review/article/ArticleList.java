@@ -120,7 +120,7 @@ public class ArticleList extends BaseController {
 		int total_count = 0;
 		int totalCount = 0;
 		List<Article> articleList = null;
-		List<Favorite> favoriteList = null;
+		
 		
 		//회원의 좋아요 상태 확인
 		List<Favorite> favoriteStateList = null;
@@ -132,7 +132,6 @@ public class ArticleList extends BaseController {
 		try {
 			// 전체 게시물 수
 			total_count = articleService.selectArticleCount(article);
-			totalCount = favoriteService.selectFavoriteCount(favorite);
 			
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
@@ -143,11 +142,10 @@ public class ArticleList extends BaseController {
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());
 			
-			favorite.setLimit_start(pageHelper.getLimit_start());
-			favorite.setList_count(pageHelper.getList_count());
+			
 			
 			articleList = articleService.selectArticleList(article);
-			favoriteList = favoriteService.selectFavoriteList(favorite);
+			
 			bookmarkCount = bookmarkService.selectCountBookMarkById(bookmark);
 			likeCount = favoriteService.selectCountFavoriteArticleById(favorite);
 			
@@ -182,9 +180,9 @@ public class ArticleList extends BaseController {
 		
 		
 		
-		if (favoriteList != null) {
-			for (int i=0; i<favoriteList.size(); i++) {
-				Favorite item = favoriteList.get(i);
+		if (selectArticleListForBest != null) {
+			for (int i=0; i<selectArticleListForBest.size(); i++) {
+				Article item = selectArticleListForBest.get(i);
 				String imagePath = item.getImagePath();
 				if (imagePath != null) {
 					String thumbPath = upload.createThumbnail(imagePath, 220, 190, true);
@@ -221,7 +219,7 @@ public class ArticleList extends BaseController {
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("pageHelper", pageHelper);
 		request.setAttribute("member_id", member_id);
-		request.setAttribute("favoriteList", favoriteList);
+		
 		request.setAttribute("isBookMarkState", isBookMarkState);
         request.setAttribute("bookmarkCount", bookmarkCount);
         request.setAttribute("likeCount", likeCount);

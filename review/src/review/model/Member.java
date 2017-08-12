@@ -16,6 +16,8 @@ public class Member {
 	private String introduce;
 	private String new_user_pw;  // 회원정보 수정시 신규비번 저장
 	private String member_id;
+	private String reg_date1;		// 조회일자1
+	private String reg_date2;		// 조회일자2
 	
 	// 페이지 구현을 위해서 추가된 값
 	private int limit_start;
@@ -140,6 +142,22 @@ public class Member {
 		this.member_id = member_id;
 	}
 
+	public String getReg_date1() {
+		return reg_date1;
+	}
+
+	public void setReg_date1(String reg_date1) {
+		this.reg_date1 = reg_date1;
+	}
+
+	public String getReg_date2() {
+		return reg_date2;
+	}
+
+	public void setReg_date2(String reg_date2) {
+		this.reg_date2 = reg_date2;
+	}
+
 	public int getLimit_start() {
 		return limit_start;
 	}
@@ -193,12 +211,11 @@ public class Member {
 		return "Member [id=" + id + ", member_level=" + member_level + ", nick_name=" + nick_name + ", article_id="
 				+ article_id + ", name=" + name + ", age=" + age + ", email=" + email + ", user_pw=" + user_pw
 				+ ", gender=" + gender + ", reg_date=" + reg_date + ", edit_date=" + edit_date + ", introduce="
-				+ introduce + ", new_user_pw=" + new_user_pw + ", member_id=" + member_id + ", limit_start="
-				+ limit_start + ", list_count=" + list_count + ", title=" + title + ", content=" + content
-				+ ", category=" + category + ", imagePath=" + imagePath + "]";
+				+ introduce + ", new_user_pw=" + new_user_pw + ", member_id=" + member_id + ", reg_date1=" + reg_date1
+				+ ", reg_date2=" + reg_date2 + ", limit_start=" + limit_start + ", list_count=" + list_count
+				+ ", title=" + title + ", content=" + content + ", category=" + category + ", imagePath=" + imagePath
+				+ "]";
 	}
 
-
-	
 	
 }

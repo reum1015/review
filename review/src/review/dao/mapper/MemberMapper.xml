@@ -23,6 +23,8 @@
 	     <result property="imagePath" column="imagePath" />
 	     <result property="member_id" column="member_id" />
 	     <result property="article_id" column="article_id"/>
+	       <result property="reg_date1" column="reg_date1"/>
+	     <result property="reg_date2" column="reg_date2"/>
 	</resultMap>
 	
 	<!-- 회원정보를 저장한다 : 가입 -->
@@ -131,11 +133,35 @@
 	
 	<!-- 프로필을 변경한다 -->
 	<update id="updateProfile" parameterType="review.model.Member">
-		UPDATE member SET introduce=#{introduce}, edit_date= now()			
-				
+		UPDATE member SET introduce=#{introduce}, edit_date= now()							
 		WHERE id=#{id}
 	</update>
 	
+	<!-- 관리자에서 회원 전체 수를 조회한다. -->
+	<select id="selectAdminMemberCount" parameterType="review.model.Member" resultType="int">
+		SELECT COUNT(id) FROM  member	
+		</select>
+		
+	<!-- 관리자에서 회원 전체 수를 날짜별로 조회한다. -->
+	<select id="selectAdminMemberDateCount" parameterType="review.model.Member" resultType="int">
+	select count(id) from member WHERE reg_date BETWEEN #{reg_date1} AND #{reg_date2}
+		</select>
+		
+		
+		<!-- 관리자에서 회원 전체 email 을 날짜별로 조회한다. -->
+	<select id="selectAdminMemberEmailDate" parameterType="review.model.Member" resultType="int">
+		select id, email, name, nick_name from member WHERE reg_date BETWEEN #{reg_date1} AND #{reg_date2}
+		</select>
+		
+		<!-- 관리자에서 회원 id번호  조회한다. -->
+	<select id="selectAdminMemberId" parameterType="review.model.Member" resultType="int">
+		select id from member where nick_name= #{nick_name}
+		</select>
+		
+		<!-- 관리자에서 관리자 권한 변경해줌 -->
+	<select id="updateAdminMemberLevel" parameterType="review.model.Member" resultType="int">
+		update member set  member_level="BB" where id=#{id}
+		</select>
 	
 	
 </mapper>

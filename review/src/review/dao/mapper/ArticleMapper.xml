@@ -20,9 +20,8 @@
 	     <result property="member_id" column="member_id" />
 	     <result property="imagePath" column="imagePath" />
 	     <result property="total_like" column="total_like"/>
-	    
-	     
-	      
+	     <result property="reg_date1" column="reg_date1"/>
+	     <result property="reg_date2" column="reg_date2"/>
 	</resultMap>
 			
 	<!-- 게시글 정보 저장하기 article_write -->
@@ -40,8 +39,7 @@
 		resultMap="article">
 		SELECT a.id, a.category, m.nick_name, a.title, a.member_id, a.content, a.hit, a.ip_address, like_count, total_like,
 			   DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, 
-			   DATE_FORMAT(a.edit_date, '%Y-%m-%d') as edit_date, 
-			   
+			   DATE_FORMAT(a.edit_date, '%Y-%m-%d') as edit_date, 			   
 			   (SELECT concat(file_dir, '/', file_name) FROM imageFile
 		 WHERE article_id=a.id 
 		 AND 
@@ -73,29 +71,21 @@
 		LIMIT #{limit_start}, #{list_count}
 	</select>
 	
-	
 	<select id="selectArticleListForBest" parameterType="review.model.Article" 
 		resultMap="article">
-		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, a.total_like, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, like_count, total_like, 
+		SELECT DISTINCT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, a.total_like, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, like_count, total_like, 
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile WHERE article_id=a.id 
 		 AND content_type LIKE ('image/%') ORDER BY id ASC LIMIT 0, 1) AS imagePath		 
 		FROM article as a
-         LEFT JOIN member as m ON a.member_id = m.id
-		WHERE a.total_like NOT IN(0) AND
-			replace(category,' ','') like concat('%', #{category}, '%')
-		OR 	replace(title ,' ','') like concat('%', #{title }, '%')
-		OR 	replace(content ,' ','') like concat('%', #{content }, '%')		
-		ORDER  BY total_like DESC		
+         LEFT JOIN member as m ON a.member_id = m.id 
+		WHERE a.total_like NOT IN(0) 
+		AND
+		(replace(a.category,' ','') like concat('%', #{category}, '%')
+		OR 	replace(a.title ,' ','') like concat('%', #{title }, '%')
+		OR 	replace(a.content ,' ','') like concat('%', #{content }, '%')	)	
+		ORDER  BY a.total_like DESC		
 		LIMIT #{limit_start}, #{list_count}
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	<!--전체 게시물 목록을 조회한다. article_list_main-->
 	<select id="selectArticleListMain" parameterType="review.model.Article" 
@@ -215,6 +205,10 @@
 		UPDATE article SET total_like = total_like-1 WHERE id=#{id}	
 	</update>
 	
-	
+		
+		<!-- 관리자가 전체 게시물 수를 날짜별로 조회한다. -->
+	<select id="selectArticleAdminDateCount" parameterType="review.model.Article" resultType="int">
+		select count(id) from article WHERE reg_date BETWEEN #{reg_date1} AND #{reg_date2}			
+		</select>
 
 </mapper>

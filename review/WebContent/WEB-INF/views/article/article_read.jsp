@@ -267,7 +267,7 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 									<!-- 링크 + 썸네일 -->
 									<div class="read-container">									
 										<h3 class="page-header" style="text-align: left; margin-top: -5px;">
-										<a href="${readUser}"> ${readArticle.nick_name} </a>
+										<a href="${readUser}"> <font size="6" color="#FF8000">${readArticle.nick_name}</font> </a>
 											<span class="pull-right"> 
 												<!--  ** 페이지 호출 할 때 article_id를 url에 포함하여 삭제 페이지를 호출 할 때 article_id를 넘겨주는 소스입니다.  --> 
 												<!-- 추가 : article.member_id와 loginInfo의 id를 비교하여 버튼을 노출할 것인지를 판단 -->

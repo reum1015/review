@@ -57,14 +57,14 @@ public class ArticleDelete extends BaseController {
 					return null;
 				}		
 			
-			/** (4) 파라미터 받기 */		
-		    int member_id = web.getInt("member_id");		
-		    logger.debug("member_id=" + member_id);
-			
+		
 		
 		/** (3) 글 번호 파라미터 받기 */
 		int article_id = web.getInt("article_id");
-		logger.debug("article_id" + article_id);
+		  int member_id = web.getInt("member_id");
+		
+		  logger.debug("article_id" + article_id);
+		logger.debug("member_id=" + member_id);
 		
 		if (article_id == 0) {
 			web.redirect(null, "글 번호가 지정되지 않았습니다.123");
@@ -86,22 +86,28 @@ public class ArticleDelete extends BaseController {
 		
 		/** (6) 게시물 일련번호를 사용한 데이터 조회 */	
 		// 회원번호가 일치하는 게시물 수 조회하기
+		 Article readArticle = null;
 		int articleCount = 0; 
 		
-		int article_member_id = 0;	
-		article_member_id = web.getInt("article_member_id");
-		
+		  int article_member_id = 0;   
+	         article_member_id = web.getInt("article_member_id");
+	         
 		
 		if(loginInfo != null){	
 			loginInfo = (Member)web.getSession("loginInfo");
 							
-			if(article_member_id != loginInfo.getId()) {
-				web.redirect(null, "접근이 제한된 페이지 입니다.");
-				return null;
-			}
+			 logger.debug("loginInfo.getId()  ------> " + loginInfo.getId());
+	            logger.debug("article_member_id)  ------> " + article_member_id);
+	            
 		}
 		
 		try {
+			 readArticle = articleService.selectArticle(article);
+	            
+	            if(loginInfo.getId() != readArticle.getMember_id()) {
+	                web.redirect(null, "접근이 제한된 페이지 입니다.");
+	                return null;
+	             }
 			articleCount = articleService.selectArticleCountByMemberId(article);
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
@@ -116,6 +122,7 @@ public class ArticleDelete extends BaseController {
 		request.setAttribute("myArticle", myArticle);
 		
 		// 상태유지를 위하여 게시글 일련번호를 View에 전달한다.
+		   request.setAttribute("readArticle", readArticle);
 		request.setAttribute("article_id", article_id);
 				
 		String view = "article/article_delete";

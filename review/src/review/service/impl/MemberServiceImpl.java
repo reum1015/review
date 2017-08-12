@@ -183,8 +183,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public Member selectMember(Member member) throws Exception {
-Member result = null;
-		
+        Member result = null;		
 		try {
 			result = sqlSession.selectOne("MemberMapper.selectMember", member);
 			if (result == null) {
@@ -283,10 +282,90 @@ Member result = null;
 		} catch(Exception e) {
 			logger.error(e.getLocalizedMessage());
 			throw new Exception("회원작품 수 조회에 실패했습니다. ");
-		}
-		
+		}		
 		return result;
 	}
+
+	@Override
+	public int selectAdminMemberCount(Member member) throws Exception {
+		  int result = 0;		
+			try {
+				// 게시물 수가 0건인 경우도 있으므로
+				// 결과값이 0인 경우에 예외를 발생시키지 않는다.
+				result = sqlSession.selectOne("MemberMapper.selectAdminMemberCount", member);
+			} catch(Exception e) {
+				logger.error(e.getLocalizedMessage());
+				throw new Exception("회원 수 조회에 실패했습니다. ");
+			}			
+			return result;
+		}
+
+	@Override
+	public int selectAdminMemberDateCount(Member member) throws Exception {
+		  int result = 0;		
+			try {
+				// 게시물 수가 0건인 경우도 있으므로
+				// 결과값이 0인 경우에 예외를 발생시키지 않는다.
+				result = sqlSession.selectOne("MemberMapper.selectAdminMemberDateCount", member);
+			} catch(Exception e) {
+				logger.error(e.getLocalizedMessage());
+				throw new Exception("회원 수 조회에 실패했습니다. ");
+			}			
+			return result;
+		}
+
+	@Override
+	public Member selectAdminMemberId(Member member) throws Exception {
+		Member result = null;
+		try {
+			result = sqlSession.selectOne("MemberMapper.selectAdminMemberId", member);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 회원정보가 없습니다...ad");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("회원정보 조회에 실패했습니다...asaas.");
+		}
+		return result;
+	}
+
+	@Override
+	public void updateAdminMemberLevel(Member member) throws Exception {
+		try {
+			int result = sqlSession.update("MemberMapper.updateAdminMemberLevel", member);
+			if (result == 0) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			sqlSession.rollback();
+			throw new Exception("information do not change");
+		} catch (Exception e) {
+			sqlSession.rollback();
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("It's fail to change information");
+		} finally {
+			sqlSession.commit();
+		}
+	}	
+	@Override
+	public List<Member> selectAdminMemberEmailDate(Member member) throws Exception {
+		List<Member> result = null;
+		try {
+			result = sqlSession.selectList("MemberMapper.selectAdminMemberEmailDate", member);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("조회된 email 목록이 없습니다.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception(" email 목록 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
 
 	
 
