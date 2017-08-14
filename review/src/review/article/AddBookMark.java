@@ -88,7 +88,6 @@ public class AddBookMark extends BaseController {
 			logger.debug("bookmarkCount : " + bookmarkCount);
 			
 			if(bookmarkCount > 0){
-				System.out.println("여기 실행");
 				bookmarkService.deleteRemoveBookMark(bookmark);
 			}else{
 				bookmarkService.insertAddBookMark(bookmark);
