@@ -75,7 +75,7 @@
 		     <c:choose>
 		    		<c:when test="${fn:length(bookmarkList) > 0}">
 		    			<c:forEach var="article" items="${bookmarkList}">
-		         <div class="col-lg-offset-1 col-lg-11 col-md-12 col-sm-12 col-xs-12">
+		         <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
 								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		    				<c:url var="readUrl" value="/article/article_read">
 					            <c:param name="article_id" value="${article.id}" />
