@@ -298,12 +298,12 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 			           <c:url var="downloadUrl" value="/download">
 				    <c:param name="file" value="${readArticle.imagePath}" />
 			        </c:url>
-			         <a class="col-lg-4 col-md-4 col-sm-4">
+			         <a class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 			      <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
 			      </a>	
 									</c:when>
 					<c:otherwise>
-					<a class=" col-lg-4 col-md-4 col-sm-4 ">
+					<a class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-circle img-responsive"/>
 						</a>
 					</c:otherwise>

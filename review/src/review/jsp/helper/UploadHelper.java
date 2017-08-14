@@ -53,8 +53,8 @@ public class UploadHelper {
 	//"D:/gitLocal/"; -- 아름
 	// C:/Users/yunsig/Desktop/book
 	
-	 public static final String homeDir = "D:/gitLocal/";
-	// public static final String homeDir = "D:/gitLocal/";
+	
+	 public static final String homeDir = "C:/Users/yunsig/Desktop/book";
 	/** 업로드 된 결과물이 저장될 폴더 */
 	public static final String fileDir = homeDir + "/upload";
 	/** 업로드가 진행될 임시 폴더 */

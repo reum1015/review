@@ -7,7 +7,6 @@
 <head>
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/legalmenu.css" />
 
 
 </head>
@@ -46,7 +45,7 @@
 		<div id="" class="legal_form col-lg-8  col-md-7 col-sm-12 col-xs-12">
 			<fieldset>
 				<legend><h1><font size="15" color="#484848">User Email List</font></h1></legend>
-			<form class="form-horizontal" name="sign_up_form" method="post" id="myform"
+			<form class="form-horizontal" method="post" id="myform"
       action="${pageContext.request.contextPath}/admin/user_email_list_ok">			
 			<div class="form-groups">				
 			<div>
@@ -84,7 +83,7 @@
 		    		<c:when test="${fn:length(emailList) > 0}">
 		    			<c:forEach var="member" items="${emailList}">
 		    			<c:url var="readUser" value="/mymenu/user_page_mobile">					            						            	
-					            		<c:param name="member_id" value="${member.id}" />
+					            	<c:param name="member_id" value="${member.id}" />
 					      </c:url>		    			
 		    				<tr>
 					            <td class="text-center"><a href="${readUser}">${member.id}</a></td>					            

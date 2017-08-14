@@ -20,7 +20,7 @@
 	<div class="container ">
 	<div class="container_mypage ">
 	<!-- page header -->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">						
+					<div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">						
 							<c:url var="downloadUrl" value="/download">
 				 <c:param name="file" value="${readMember.imagePath}" />
 			       </c:url>			
@@ -58,8 +58,8 @@
 									<br />
 						<!-- my page + book mark -->
 						<div class="btn-group btn-block">
-					<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
-				<a href="${pageContext.request.contextPath}/mymenu/user_page2?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
+					<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
+				<a href="${pageContext.request.contextPath}/mymenu/user_page2?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
 	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
 				<c:if test="${readMember.id==loginInfo.id}">
 				<a href="${pageContext.request.contextPath}/mymenu/bookmarkList?member_id=${loginInfo.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
@@ -74,35 +74,48 @@
 		     <c:choose>
 		    		<c:when test="${fn:length(memberarticleList) > 0}">
 		    			<c:forEach var="article" items="${memberarticleList}">
-		    				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-		    				<div class="thumbnail">
+		         <div class=" col-lg-11 col-md-12 col-sm-12 col-xs-12">
+								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		    				<c:url var="readUrl" value="/article/article_read">
 					            <c:param name="article_id" value="${article.id}" />
 					            	</c:url>					            	
 					            	<!-- 링크 + 썸네일 -->
-					            	<a href="${readUrl}">
+					            	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 								<c:choose>
 									<c:when test="${article.imagePath != null}">
 										<c:url var="downloadUrl" value="/download">
 											<c:param name="file" value="${article.imagePath}" />
 										</c:url>
-										<img src="${downloadUrl}" class="img-responsive"/>
-									</c:when>
+			      <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
+			    		</c:when>
 									<c:otherwise>
-										<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive"/>
-									</c:otherwise>
+						<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive"/>
+						</c:otherwise>
 								</c:choose>
 							</a>
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
-					            	<div class="item">
-								<h4><font size="4" color="#000069"> ${article.title} </font></h4>								
-								<div class="clearfix">
-									<div class="pull-left">${article.reg_date}</div>
-									<div class="pull-right"><font size="4" color="#000069">	${article.category}</font></div>
-								</div>
+					            		<div class="item col-lg-8 col-md-8 col-sm-7">
+					            		<small>${article.reg_date}</small>
+											<small class="pull-right"> Hit: ${article.hit}</small> <br /> 
+											<small>
+												<font size="4" color="#28282 "> category: </font> 
+												<font size="4" color="#FF8000"> ${article.category}</font></small> <br />
+											<small>
+												<font size="4" color="#28282 ">title:</font>
+												<font size="4" color=#FF8000> ${article.title} </font>
+											</small>
+					            		
+							
+								
+								
+							<div style="overflow: auto; width: 100%; max-height: 180px;">
+											${article.content}</div>					
+							
+								
 							</div>
 							<!--// 제목 + 작성자 + 조회수 -->
+							
 		    				</div>
 		    				</div>
 		    				</c:forEach>		    			
@@ -124,8 +137,7 @@
 <c:when test="${pageHelper.prevPage > 0 }">
 <!-- 이전 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 이전 그룹으로 이동하기 위한 URL을 생성해서 "prevUrl"에 저장 -->
-<c:url var="prevUrl" value="/mymenu/user_page">
-<c:param name="keyword" value="${keyword}"></c:param>
+<c:url var="prevUrl" value="/mymenu/user_page?member_id=${readMember.id}">
 <c:param name="page" value="${pageHelper.prevPage }"></c:param>
 </c:url>
 <li><a href="${prevUrl }">&laquo;</a></li>
@@ -142,8 +154,7 @@
 end="${pageHelper.endPage }" step="1">
 
 <!-- 각 페이지 번호로 이동할 수 있는 URL을 생성하여 page_url에 저장 -->
-<c:url var="pageUrl" value="/mymenu/user_page">
-<c:param name="keyword" value="${keyword}"></c:param>
+<c:url var="pageUrl" value="/mymenu/user_page?member_id=${readMember.id}">
 <c:param name="page" value="${i}"></c:param>
 </c:url>
 
@@ -162,8 +173,7 @@ end="${pageHelper.endPage }" step="1">
 <c:when test="${pageHelper.nextPage > 0 }">
 <!-- 다음 그룹에 대한 페이지 번호가 존재한다면? -->
 <!-- 다음 그룹으로 이동하기 위한 URL을 생성해서 "nextUrl"에 저장 -->
-<c:url var="nextUrl" value="/mymenu/user_page">
-<c:param name="keyword" value="${keyword}"></c:param>
+<c:url var="nextUrl" value="/mymenu/user_page?member_id=${readMember.id}">
 <c:param name="page" value="${pageHelper.nextPage }"></c:param>
 </c:url>
 <li><a href="${nextUrl }">&raquo;</a></li>
