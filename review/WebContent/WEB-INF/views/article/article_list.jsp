@@ -171,16 +171,10 @@
 			 				return;
 			 			//로그인 상태	
 			 			}else{
-			 				$.get("${pageContext.request.contextPath}/like/favoriteAdd",
-			 						{member_id : member_id, article_id : article_id},
+			 				$.get("${pageContext.request.contextPath}/like/favoriteAdd", {member_id : member_id, article_id : article_id},
 			 						function(data) {
 			 							var isLikeState = data.isLikeState;
 			 							var likeCount = data.likeCount;
-			 							
-			 							
-			 							$("#like_count").attr("value", like_count);
-			 							$("#concernCount").text(total_like);
-
 			 	
 			 							if(isLikeState){
 			 								alert("Like added");
@@ -303,11 +297,10 @@
 			<!--// Best Review category -->
 			<!-- Best Review Content  -->
 			<div class="review-content row multi-columns-row">
-			
 				<c:choose>
 					<c:when test="${fn:length(selectArticleListForBest) > 0}">
 						<c:forEach var="selectArticleListForBest" items="${selectArticleListForBest}">
-							  <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<c:url var="readUrl" value="/article/article_read">
 										<c:param name="article_id" value="${selectArticleListForBest.id}" />
@@ -316,8 +309,7 @@
 										<c:param name="member_id" value="${selectArticleListForBest.member_id}" />
 									</c:url>
 									<!-- 링크 + 썸네일 -->
-									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> 
-									<c:choose>
+									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4"> <c:choose>
 											<c:when test="${selectArticleListForBest.imagePath != null}">
 												<c:url var="downloadUrl" value="/download">
 													<c:param name="file" value="${selectArticleListForBest.imagePath}" />
@@ -325,13 +317,15 @@
 												<img src="${downloadUrl}" class="img-responsive img-rounded" />
 											</c:when>
 											<c:otherwise>
-												<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive img-rounded " />
+												<img
+													src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg"
+													class="img-responsive" />
 											</c:otherwise>
 										</c:choose>
 									</a>
 									<!--// 링크 + 썸네일 -->
 									<!-- 제목 + 작성자 + 조회수 -->
-									<div class="item col-lg-8 col-md-8 col-sm-8 col-xs-8">
+									<div class="item col-lg-8 col-md-8 col-sm-7">
 										<a href="${readUser}"><font size="4" color="#FF8000">${selectArticleListForBest.nick_name}</font></a>
 										<div class="pull-right">${selectArticleListForBest.reg_date}</div>
 										<div>
@@ -343,34 +337,28 @@
 												color="#a0a0a0"> ${selectArticleListForBest.title} </font>
 										</div>
 										<hr />
-										<div class="hidden-xs" style="overflow: auto; width: 100%; max-height: 180px;">
-											${selectArticleListForBest.content}
-											</div>
-										</div>
-										<div class="hidden-lg hidden-md hidden-sm col-xs-12" style="overflow: auto; width: 100%; max-height: 180px;">
-											${selectArticleListForBest.content}
-											</div>
-									
+										<div style="overflow: auto; width: 100%; max-height: 180px;">
+											${selectArticleListForBest.content}</div>
+									</div>
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
 									<!-- like + comment + book mark 위에 화면-->
 									
-									<div class="btn-group btn-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" > 
-											<font size="5" color="#FF0202" class="pull-right">${selectArticleListForBest.total_like}</font>
-		                                   </div>
-										<a class="pull-left col-lg-1 col-md-1 col-sm-1 col-xs-1 btn btn-white btn-large like_button" id="article_${selectArticleListForBest.id}"
+									<div class="btn-group btn-block">
+									
+										count : ${selectArticleListForBest.total_like}
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="article_${selectArticleListForBest.id}"
 										value="${selectArticleListForBest.id}"> 
-											<span class="like_Off pull-left" id="like_img"></span>
+											<span class="like_Off pull-right" id="like_img"></span>
+		
 										</a> 
 										
-										<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font>
 										</a> 
 										
 										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large bookmark_button" id="bookmark_${selectArticleListForBest.id}" 
 											value="${selectArticleListForBest.id}"> 
-										<a id="bookmark_button " class="pull-right col-lg-3 col-md-3 col-sm-3 col-xs-3 btn btn-white btn-large" id="${selectArticleListForBest.id }"> 
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 										</a> 
 										
@@ -401,7 +389,7 @@
 					</c:otherwise>
 				</c:choose>
 
-       
+
 			</div>
 
 			<!--// Recent Review Content  -->
