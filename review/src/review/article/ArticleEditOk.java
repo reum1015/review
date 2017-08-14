@@ -57,6 +57,8 @@ public class ArticleEditOk extends BaseController {
 		articleService = new ArticleServiceImpl(sqlSession, logger);
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);
 		
+		
+		
 		/** (3) 파일이 포함된 POST 파라미터 받기 */
 		try {
 			upload.multipartRequest(request);
@@ -141,7 +143,9 @@ public class ArticleEditOk extends BaseController {
 				  
 				  /** (10) 게시물 변경을 위한 Service 기능을 호출 */
 					try {						
+						if (articleService.selectArticleCountByMemberId(article) < 1) {
 						articleService.updateArticle(article);
+						}
 					} catch (Exception e) {
 						sqlSession.close();
 						web.redirect(null, e.getLocalizedMessage());

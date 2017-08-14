@@ -71,7 +71,7 @@ public class AddFavorite extends BaseController {
 		int total_like = web.getInt("total_like");
 		
 		//관심 작품 등록 해제 여부 false --> 해제 , true --> 등록
-				boolean isLikeState = false;
+		boolean isLikeState = false;
 
 		
 		System.out.println("like_countssssss ---------------------->" + like_count);
@@ -93,8 +93,6 @@ public class AddFavorite extends BaseController {
 				//관심등록 삭제
 				favoriteService.deleteRemoveFavorite(favorite);
 				articleService.likeCountMinus(article);
-				
-			
 				
 			}catch (Exception e) {
 			

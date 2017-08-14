@@ -59,7 +59,7 @@ $(function() {
 </script>
 </head>
 <body>
-	  <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
+	  <jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
 	  <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
 
 	<!-- 메인 화면 시작 -->

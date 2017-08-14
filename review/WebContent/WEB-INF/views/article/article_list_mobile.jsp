@@ -22,7 +22,7 @@ margin-top: 55px;
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/template/topbarsearch.jsp" />
+	<jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
 	<jsp:include page="/WEB-INF/views/template/bottombar.jsp" />
 
 	<!-- 메인 화면 시작 -->
@@ -55,10 +55,10 @@ margin-top: 55px;
 		    			<c:forEach var="article" items="${articleList}">
 		    				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		    				<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		    				<c:url var="readUrl" value="/article/article_read">
+		    				<c:url var="readUrl" value="/article/article_read_mobile">
 					            		<c:param name="article_id" value="${article.id}" />
 					            	</c:url>
-					            	<c:url var="readUser" value="/mymenu/user_page">
+					            	<c:url var="readUser" value="/mymenu/user_page_mobile">
 					            		<c:param name="member_id" value="${article.member_id}" />
 					            	</c:url>
 					            	<!-- 링크 + 썸네일 -->

@@ -18,7 +18,7 @@
 
 </head>
 <body>
-	  <jsp:include page="/WEB-INF/views/template/topbarsearch.jsp"/>
+	  <jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
 	  <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
 
 	<!-- 메인 화면 시작 -->

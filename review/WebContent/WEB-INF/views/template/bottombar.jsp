@@ -44,7 +44,7 @@
 		   <!-- bottom_invite -->       
 		<!-- bottom_user -->
 		<div class="col-xs-2 col-sm-2">
-		  <a class="navbar-brand glyphicon glyphicon-user" href="${pageContext.request.contextPath}/mymenu/user_page?member_id=${loginInfo.id}"></a>
+		  <a class="navbar-brand glyphicon glyphicon-user" href="${pageContext.request.contextPath}/mymenu/user_page_mobile?member_id=${loginInfo.id}"></a>
 		  </div>
 		<!--// bottom_user -->
 		</div>

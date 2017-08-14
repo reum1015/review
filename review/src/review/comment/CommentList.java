@@ -106,7 +106,17 @@ public class CommentList extends BaseController {
 		for (int i=0; i<item.size(); i++) {
 			Comment temp = item.get(i);
 			temp.setContent(web.convertHtmlTag(temp.getContent()));
+			
+			if(member_id == temp.getMember_id()){
+				temp.setMine(true);
+			}
+			
+			
 		}
+		
+		logger.debug("item >> " + item.toString());
+		
+		
 		
 		// --> import java.util.HashMap;
 		// --> import java.util.Map;

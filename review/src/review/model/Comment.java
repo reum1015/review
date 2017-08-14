@@ -13,6 +13,9 @@ public class Comment {
 	private String tag;		//  해시태그
 	private int member_id;
 	private int article_id;
+	private boolean isMine;
+	
+	
 	
 	// 페이지 구현을 위해서 추가된 값
 		private int limit_start;
@@ -83,6 +86,12 @@ public class Comment {
 		public void setArticle_id(int article_id) {
 			this.article_id = article_id;
 		}
+		public boolean isMine() {
+			return isMine;
+		}
+		public void setMine(boolean isMine) {
+			this.isMine = isMine;
+		}
 		public int getLimit_start() {
 			return limit_start;
 		}
@@ -100,10 +109,14 @@ public class Comment {
 			return "Comment [id=" + id + ", nick_name=" + nick_name + ", content=" + content + ", hit=" + hit
 					+ ", reg_date=" + reg_date + ", edit_date=" + edit_date + ", ip_address=" + ip_address
 					+ ", reported=" + reported + ", tag=" + tag + ", member_id=" + member_id + ", article_id="
-					+ article_id + ", limit_start=" + limit_start + ", list_count=" + list_count + "]";
+					+ article_id + ", isMine=" + isMine + ", limit_start=" + limit_start + ", list_count=" + list_count
+					+ "]";
 		}
 		
 		
+		
+		
+
 		
 		
 		

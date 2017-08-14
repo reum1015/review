@@ -11,6 +11,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/validate/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/validate/additional-methods.min.js"></script>
 
+<style type="text/css">
+.cancel {
+background-color: #585858;
+}
+.ok {
+background-color: #FF8000;
+}
+</style>
+
 <script type="text/javascript">
 $(function() {
 	// form태그에 부여한 id속성에 대한 유효성 검사 함수 호출
@@ -19,7 +28,8 @@ $(function() {
 		rules: {			
 			age: {
 				required: true,
-				digits: true
+				digits: true,
+				min: 13
 			},					
 			
 		},
@@ -28,7 +38,8 @@ $(function() {
 			
 			age: {
 				required: "age field is required.",
-				digits: "please enter a valid number."
+				digits: "please enter a valid number.",
+				min: "You must be over 13 years old. "
 			},
 					
 		}
@@ -110,13 +121,14 @@ $(function() {
 							</div>								
 						  </div>
 						  	<br />	
-						
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
-               <button type="button" class="btn btn-danger form-control" onclick="history.back();">Cancel</button>
-               </div>  										
-	              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
-						<button type="submit" class="btn btn-warning btn-block">Save Setting</button>							
-                     </div>
+						 	<div class="form-group">
+             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
+               <button type="button" class="btn cancel form-control" onclick="history.back();"><font size="4" face="Helvetica"  color="#fff">Cancel</font></button>
+               </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
+               <button type="submit" class="btn ok form-control"><font size="4"  face="Arial, Helvetica, sans-serif" color="#28282"><B>Save Setting</B></font></button>
+             </div>            
+            </div>  							
                      </form>		
 					</fieldset>
 				

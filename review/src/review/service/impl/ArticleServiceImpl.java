@@ -317,6 +317,19 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return result;
 	}
+
+	@Override
+	public int selectArticleAdminDateCount(Article article) throws Exception {
+		int result = 0;
+		try {			
+			result = sqlSession.selectOne("ArticleMapper.selectArticleAdminDateCount", article);
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("게시물 수 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
 	
 
 		

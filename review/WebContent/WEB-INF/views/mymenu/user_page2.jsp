@@ -58,8 +58,8 @@
 									<br />
 						<!-- my page + book mark -->
 						<div class="btn-group btn-block">
-					<a href="${pageContext.request.contextPath}/mymenu/user_page2?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
-				<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
+					<a href="${pageContext.request.contextPath}/mymenu/user_page?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
+				<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
 	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
 				<c:if test="${readMember.id==loginInfo.id}">
 				<a href="${pageContext.request.contextPath}/mymenu/bookmarkList?member_id=${loginInfo.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
@@ -70,7 +70,7 @@
 	<!--// page menu bar -->
 		<!-- member article  -->
 			   <div class="recent-container">	
-			   <div class="review-content row multi-columns-row">	      
+			  <div class="review-content row multi-columns-row">		      
 		     <c:choose>
 		    		<c:when test="${fn:length(memberarticleList) > 0}">
 		    			<c:forEach var="article" items="${memberarticleList}">
@@ -78,16 +78,13 @@
 		    				<div class="thumbnail">
 		    				<c:url var="readUrl" value="/article/article_read">
 					            <c:param name="article_id" value="${article.id}" />
-					            	</c:url>
-					            	<c:url var="readUser" value="/mymenu/user_page">					            						            	
-					            		<c:param name="member_id" value="${article.member_id}" />
-					            	</c:url>
+					            	</c:url>					            	
 					            	<!-- 링크 + 썸네일 -->
 					            	<a href="${readUrl}">
 								<c:choose>
 									<c:when test="${article.imagePath != null}">
 										<c:url var="downloadUrl" value="/download">
-											<c:param name="file" value="${member.imagePath}" />
+											<c:param name="file" value="${article.imagePath}" />
 										</c:url>
 										<img src="${downloadUrl}" class="img-responsive"/>
 									</c:when>
@@ -99,8 +96,7 @@
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
 					            	<div class="item">
-								<h4><font size="4" color="#000069"> ${article.title} </font></h4>
-								<div><font size="4" color="#000000"><a href="${readUser}">${article.nick_name}</a></font></div>
+								<h4><font size="4" color="#000069"> ${article.title} </font></h4>								
 								<div class="clearfix">
 									<div class="pull-left">${article.reg_date}</div>
 									<div class="pull-right"><font size="4" color="#000069">	${article.category}</font></div>
@@ -118,7 +114,7 @@
 				        </tr>
 		    		</c:otherwise>
 		    	</c:choose>
-		   </div>  		      
+		   </div>  		 	      
 		      <!--// Recent Review Content  -->	
 		      <!-- page number -->
 		        <nav class="text-center">

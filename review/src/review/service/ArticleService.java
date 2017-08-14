@@ -158,6 +158,15 @@ public interface ArticleService {
 	 */
 	public int selectFavoriteCount(Article article) throws Exception;
 	
+	/**
+	 * 전체 게시물 수 조회
+	 * 
+	 * @param document
+	 * @return int
+	 * @throws Exception
+	 */
+	public int selectArticleAdminDateCount(Article article) throws Exception;
+	
 	
 }
 

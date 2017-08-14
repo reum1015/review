@@ -153,6 +153,10 @@
 					var article_id = $(this).attr('value');
 			 			
 						 console.log("article_id : " + article_id);
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/reum1015/review.git
 			 			//로그인 안된 상태
 			 			if(member_id ==0){
 			 				alert("LogIn is required.");
@@ -168,10 +172,18 @@
 			 								alert("Like added");
 			 								$("#article_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
 			 								$("#articleList_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/reum1015/review.git
 			 							}else{
 			 								alert("Like removed");
 			 								$("#article_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
 			 								$("#articleList_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/reum1015/review.git
 			 							}
 			 				});
 			 

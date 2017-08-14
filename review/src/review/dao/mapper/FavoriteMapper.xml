@@ -59,7 +59,7 @@
 		OR replace(content ,' ','') like concat('%', #{content }, '%')					       
         ORDER BY a.like_count DESC
        LIMIT #{limit_start}, #{list_count}            
-	</select>		
+	</select>
 	
 	
 	<!-- 전체 관심작품 수를 조회한다. 페이지 구현 위해서 -->
@@ -81,7 +81,7 @@
 	
 	
 	<select id="selectfavoriteStateList" parameterType="review.model.Favorite" resultMap="favorite">
-	SELECT article_id FROM favorite WHERE member_id=#{member_id}
+		SELECT article_id FROM favorite WHERE member_id=#{member_id}
 	</select>
 	
 	

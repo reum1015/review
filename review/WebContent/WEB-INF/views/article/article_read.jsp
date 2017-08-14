@@ -267,14 +267,14 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 									<!-- 링크 + 썸네일 -->
 									<div class="read-container">									
 										<h3 class="page-header" style="text-align: left; margin-top: -5px;">
-										<a href="${readUser}"> ${readArticle.nick_name} </a>
+										<a href="${readUser}"> <font size="6" color="#FF8000">${readArticle.nick_name}</font> </a>
 											<span class="pull-right"> 
 												<!--  ** 페이지 호출 할 때 article_id를 url에 포함하여 삭제 페이지를 호출 할 때 article_id를 넘겨주는 소스입니다.  --> 
 												<!-- 추가 : article.member_id와 loginInfo의 id를 비교하여 버튼을 노출할 것인지를 판단 -->
 												<c:if test="${readArticle.member_id==loginInfo.id}">
-													<a href="${pageContext.request.contextPath}/article/article_edit?article_id=${readArticle.id}">
+													<a href="${pageContext.request.contextPath}/article/article_edit?article_id=${readArticle.id}&article_member_id=${readArticle.member_id}">
 						                  				<i class="glyphicon glyphicon-edit"></i></a>
-						                  	 		<a href="${pageContext.request.contextPath}/article/article_delete?article_id=${readArticle.id}">
+						                  	 		<a href="${pageContext.request.contextPath}/article/article_delete?article_id=${readArticle.id}&article_member_id=${readArticle.member_id}">
 						                  	  			<i class="glyphicon glyphicon-remove"></i></a>
 												</c:if>
 												<a href="${pageContext.request.contextPath}/article/article_list_main">
@@ -298,12 +298,12 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 			           <c:url var="downloadUrl" value="/download">
 				    <c:param name="file" value="${readArticle.imagePath}" />
 			        </c:url>
-			         <a class="col-lg-4 col-md-4 col-sm-4">
+			         <a class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 			      <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
 			      </a>	
 									</c:when>
 					<c:otherwise>
-					<a class=" col-lg-4 col-md-4 col-sm-4 ">
+					<a class=" col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-circle img-responsive"/>
 						</a>
 					</c:otherwise>
@@ -348,11 +348,13 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 		<!--// content body -->
 		<!-- comment -->
 		<!-- 덧글 -->
+		
+		
+		
 		<hr />
-		<form id="comment_form" method="post"
-			action="${pageContext.request.contextPath}/comment/comment_write">
+		<form id="comment_form" method="post" action="${pageContext.request.contextPath}/comment/comment_write">
 			<!-- 글 번호 상태 유지 -->
-			<input type='hidden' name='article_id' value='${readArticle.id}' />
+			<input type='hidden' name='article_id' value='${readArticle.id}'/>
 			<!-- 내용입력, 저장버튼 -->
 			<div class='form-group'>
 				<div class="input-group">
@@ -364,6 +366,9 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 			</div>
 		</form>		
 		<!--// comment -->	
+			
+			
+			
 			
 		<!-- 덧글 리스트 -->
 		<ul class="media-list" id="comment_list">
@@ -390,14 +395,9 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
                 <!-- 수정,삭제 버튼 -->        	
                 <div class='pull-right'>
 
- 	{{#isMember}} 
-					<a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
-                        <i class='glyphicon glyphicon-edit'></i>
-                    </a>
-                    <a href='${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
-                        <i class='glyphicon glyphicon-remove'></i>
-                    </a>
-	{{/isMember}}
+{{#isMineState mine id}}
+
+{{/isMineState}}
 
          
              </div>
@@ -431,6 +431,21 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 	$(function() {
 		
 		
+		/*
+		
+		 <c:if test='${item[0].member_id == loginInfo.id}'> 
+	<a href='${pageContext.request.contextPath}/comment/comment_edit?comment_id={{id}}' data-toggle="modal" data-target="#comment_edit_modal" class='btn btn-warning btn-xs'>
+                        <i class='glyphicon glyphicon-edit'></i>
+                    </a>
+                    <a href='${pageContext.request.contextPath}/comment/comment_delete?comment_id={{id}}' data-toggle="modal" data-target="#comment_delete_modal" class='btn btn-danger btn-xs'>
+                        <i class='glyphicon glyphicon-remove'></i>
+                    </a>   
+	</c:if >
+		
+		*/
+		
+		
+		/*
 		Handlebars.registerHelper('isMember',function(member_id,loginInfo){
 			var result='';
 			
@@ -444,15 +459,33 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 			}
 			return result;
 		});
-		
-		
-		
+		*/
+				
 		/** 페이지가 열리면서 동작하도록 이벤트 정의 없이 Ajax요청 */
+		
+		
+		Handlebars.registerHelper('isMineState', function(isMine,id) {
+				  var result = '';
+				  if(isMine) {
+					  result = '<a href="${pageContext.request.contextPath}/comment/comment_edit?comment_id='+id+'" data-toggle="modal" data-target="#comment_edit_modal" class="btn btn-warning btn-xs">'
+	               			+'<i class="glyphicon glyphicon-edit"></i>'+
+	                        '</a>'+
+	                        '<a href="${pageContext.request.contextPath}/comment/comment_delete?comment_id='+id+'" data-toggle="modal" data-target="#comment_delete_modal" class="btn btn-danger btn-xs">'
+	                            + '<i class="glyphicon glyphicon-remove"></i>'
+	                        +'</a>';
+					  
+				    return result;
+				  }else{
+					return result;
+				  }
+				});
+		
 		$.get("${pageContext.request.contextPath}/comment/comment_list", {article_id: "${readArticle.id}"}, function(json) {
 			if (json.rt != "OK") {
 				alert(json.rt);
 				return false;
 			}
+			
 			
 			// 템플릿 HTML을 로드한다.
 			var template = Handlebars.compile($("#tmpl_comment_item").html());
@@ -538,6 +571,12 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 				// --> JSON에 포함된 '&lt;br/&gt;'을 검색에서 <br/>로 변경함.
 				json.item.content = json.item.content.replace(/&lt;br\/&gt;/g, "<br/>");
 				
+				
+				
+				
+				
+				
+				
 				// 템플릿 HTML을 로드한다.
 				var template = Handlebars.compile($("#tmpl_comment_item").html());
 				// JSON에 포함된 작성 결과 데이터를 템플릿에 결합한다.
@@ -547,7 +586,19 @@ var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창�
 				
 				// 덧글 수정 모달 강제로 닫기
 				$("#comment_edit_modal").modal('hide');
+				
+
+				
+				
+				
+				
 			});
+			
+			
+			
+			
+			
+			
 		});
 	});
 </script>

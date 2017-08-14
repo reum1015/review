@@ -62,6 +62,10 @@
 	<delete id="deleteBookMarkAll" parameterType="review.model.BookMark">
 	  DELETE FROM bookmark WHERE article_id =#{article_id}
 	</delete>
+	
+	<select id="selectbookmarkStateList" parameterType="review.model.BookMark" resultMap="bookmark">
+		SELECT article_id FROM bookmark WHERE member_id=#{member_id}
+	</select>
 
 
 	

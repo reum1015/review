@@ -56,10 +56,10 @@ public class EditPic extends BaseController {
 		// 회원가입 처리를 위한 Service객체		
 		memberService = new MemberServiceImpl(sqlSession, logger);
 		imageFileService = new ImageFileServiceImpl(sqlSession, logger);			
-				
 					
 		/** (3) 로그인 여부 검사 */
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
+		 Member loginInfo = (Member) web.getSession("loginInfo");
 		if (web.getSession("loginInfo") == null) {
 			web.redirect(web.getRootPath() + "/index", "you should login");
 			return null;
@@ -78,7 +78,9 @@ public class EditPic extends BaseController {
 			
 			//  파라미터를 Beans로 묶기
 			Member member = new Member();
-			member.setId(member_id);
+			member.setId(loginInfo.getId());
+			
+			
 			// 지금 읽고 있는 게시물이 저장될 객체
 			Member readMember = null;
 			
@@ -86,9 +88,21 @@ public class EditPic extends BaseController {
 			file.setMember_id(member_id);
 			List<ImageFile> memberfileList = null;	
 			
+			  if(loginInfo != null){   
+		       loginInfo = (Member)web.getSession("loginInfo");
+		       
+		       logger.debug("loginInfo.getId()  ------> " + loginInfo.getId());
+			  }
+			  
 			try {		
 					
 				readMember = memberService.selectMember(member);
+				
+				 if(loginInfo.getId() != member_id) {
+		                web.redirect(null, "접근이 제한된 페이지 입니다.");
+		                return null;
+		             }
+				
 				memberfileList = imageFileService.selectMemberFileList(file);
 			} catch (Exception e) {
 				web.redirect(null, e.getMessage());
