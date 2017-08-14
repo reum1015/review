@@ -8,7 +8,14 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/common.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/mymenu.css" />
 
-
+<style type="text/css">
+.cancel {
+background-color: #585858;
+}
+.ok {
+background-color: #FF8000;
+}
+</style>
 
 </head>
 <body>
@@ -83,13 +90,15 @@
 			</div>			
 				<br />			
 			 	<br />	
-				<br />		
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
-               <button type="button" class="btn btn-danger form-control" onclick="history.back();">Cancel</button>
-               </div>  										
-	              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
-				<button type="submit" class="btn btn-warning btn-block">Save Setting</button>							
-                     </div>
+				<br />	 
+				<div class="form-group">
+             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
+               <button type="button" class="btn cancel form-control" onclick="history.back();"><font size="4" face="Helvetica"  color="#fff">Cancel</font></button>
+               </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
+               <button type="submit" class="btn ok form-control"><font size="4"  face="Arial, Helvetica, sans-serif" color="#28282"><B>Save Setting</B></font></button>
+             </div>            
+            </div>  	
                      </form>		
 					</fieldset>
 				

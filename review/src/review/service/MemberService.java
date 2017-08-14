@@ -95,23 +95,6 @@ public interface MemberService {
 	 */
 	public List<Member> selectMemberPic(Member member) throws Exception;
 	
-	/**
-	 *  회원 게시글 목록 조회
-	 * 
-	 * @param article
-	 *            - 카테고리 정보가 저장된 Beans
-	 * @return List - 게시물 목록
-	 * @throws Exception
-	 */
-	public List<Member> selectArticleListMember(Member member) throws Exception;
-
-	/**
-	 *  전체 회원 게시글 목록 조회
-	 *  @param favorite - 관심작품이 저장된 BEans
-	 *  @return int
-	 * @throws Exception
-	 */
-	public int selectArticleMemberCount(Member member) throws Exception;
 	
 	
 	/**
