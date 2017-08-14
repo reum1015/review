@@ -130,6 +130,8 @@ public class ArticleList extends BaseController {
 		//BestReviewList
 		List<Article> selectArticleListForBest = null;
 		
+		//회원의 bookmark 상태 확인
+		List<BookMark> bookMarkState = null;
 				
 		try {
 			// 전체 게시물 수
@@ -144,14 +146,13 @@ public class ArticleList extends BaseController {
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());
 			
-			
-			
 			articleList = articleService.selectArticleList(article);
 			
 			bookmarkCount = bookmarkService.selectCountBookMarkById(bookmark);
 			likeCount = favoriteService.selectCountFavoriteArticleById(favorite);
 			
 			favoriteStateList = favoriteService.selectfavoriteStateList(favorite);
+			bookMarkState = bookmarkService.selectBookMarkList(bookmark);
 			
 			selectArticleListForBest = articleService.selectArticleListForBest(article);
 			
@@ -166,6 +167,7 @@ public class ArticleList extends BaseController {
 		
 		logger.debug("favoriteStateList -------> " + favoriteStateList);
 		System.out.println("favoriteStateList ------- > " + favoriteStateList.toString());
+		System.out.println("bookMarkStateList ------- > " + bookMarkState.toString());
 		
 		
 		System.out.println("selectArticleListForBest ------------> " + selectArticleListForBest.toString());
@@ -208,9 +210,10 @@ public class ArticleList extends BaseController {
 		
 		
 		JSONArray favoriteState = new JSONArray();
-		
+		JSONArray bookMarkStateList = new JSONArray();
 		try{
 			favoriteState = new JSONArray(favoriteStateList.toArray());
+			bookMarkStateList = new JSONArray(bookMarkState.toArray());
 		}catch (JSONException e) {
 			
 			e.printStackTrace();
@@ -218,8 +221,8 @@ public class ArticleList extends BaseController {
 		
 		//좋아요 확인용 리스트 자바스크립트용
 		request.setAttribute("favoriteState", favoriteState);
-		
-		
+		//북마크 확인용 자바 스크립트용
+		request.setAttribute("bookMarkStateList", bookMarkStateList);
 		
 		request.setAttribute("articleList", articleList);
 		request.setAttribute("keyword", keyword);

@@ -164,8 +164,7 @@
 					var article_id = $(this).attr('value');
 			 			
 						 console.log("article_id : " + article_id);
-						
-						
+
 			 			//로그인 안된 상태
 			 			if(member_id ==0){
 			 				alert("LogIn is required.");
@@ -197,12 +196,16 @@
 		
 		//Like 버튼 끝
 		
+		
+		
+		
 		// Bookmark 버튼
 		var bookmark_count = $("#bookmark_count").val();
-		var member_id = $("#member_id").val();
-		var total_bookmark = $("#total_bookmark").val();		
+		var member_id = $("#member_id").val();	
 		var article_id = $("#article_id").val();
 		var isBookMarkState = $("#isBookMarkState").val();
+		
+		
 		
 		//북마크 On 이면 마크 표시
 		if(bookmark_count > 0){	
@@ -211,44 +214,42 @@
 				$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
 			}
 		
-		$("#bookmark_button").on('click',function(e){
-			e.preventDefault();
-			if(member_id == 0){
-				var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
-				
-				if(result){
-					location.replace('/review/member/login?article_id=' + article_id );
-					return false;
-				}else{
-					return false;
-				}
-			}
+		$(".bookmark_button").on('click',function(e){
+			var member_id = $("#member_id").val();
+			var article_id = $(this).attr('value');
 			
-			//북마크 On/Off
-			$.get("${pageContext.request.contextPath}/article/addBookMark", 
-					{bookmark_count : bookmark_count, member_id : member_id, total_bookmark : total_bookmark, article_id: article_id},
-					function(data){
-							var isBookMarkState = data.isBookMarkState;
-							 total_bookmark=data.total_bookmark;
-							 bookmark_count = data.bookmark_count;
-						
-							$("#bookmark_count").attr("value", bookmark_count);
-							$("#concernCount").text(total_bookmark);
-							
-							
-							if(isBookMarkState){							
-								$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");
-							}else{							
-								$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
-							}
-						});
+				//var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
+				
+				if( member_id == 0){
+					alert("LogIn is required.");
+					return;
+				}else{
+					//북마크 On/Off
+					$.get("${pageContext.request.contextPath}/article/addBookMark", 
+							{member_id : member_id, article_id: article_id},
+							function(data){
+									var isBookMarkState = data.isBookMarkState;
+									
+									if(isBookMarkState){
+										alert("Bookmark added");
+		 								$("#bookmark_" + article_id).empty().append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
+		 								$("#bookmarkList_" + article_id).empty().append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
+									}else{							
+										alert("Bookmark removed");
+		 								$("#bookmark_" + article_id).empty().append('<span class="bookmark_Off pull-right" id="bookmark_img"></span>');
+		 								$("#bookmarkList_" + article_id).empty().append('<span class="bookmark_Off pull-right" id="bookmark_img"></span>');
+									}
+								});
+				}
+			
+			
+			
 		});		
 		// Bookmark 버튼
 		
 		
-		/*
-		구매목록 리스트
-		구매목록에 구매 완료 표시
+	/*
+		좋아요 버튼
 	*/
 	var favoriteState= eval(${favoriteState});
 	var favoriteStateLength = favoriteState.length;
@@ -260,11 +261,18 @@
 		$("#article_" + epid).append('<span class="like_On pull-right" id="like_img"></span>');
 		$("#articleList_" + epid).empty();
 		$("#articleList_" + epid).append('<span class="like_On pull-right" id="like_img"></span>');
-		
-		
 	};
 		
-		
+	var bookmarkState = eval(${bookMarkStateList});
+	var bookmarkStateLength = bookmarkState.length;
+	
+	for(var i = 0; i <bookmarkStateLength ; i++){
+		var epid = bookmarkState[i].article_id;
+		$("#bookmark_" + epid).empty();
+		$("#bookmark_" + epid).append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
+		$("#bookmarkList_" + epid).empty();
+		$("#bookmarkList_" + epid).append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
+	};
 	
 		
 		
@@ -349,7 +357,8 @@
 											<font color="#a0a0a0"><i class="">Comment</i></font>
 										</a> 
 										
-										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${selectArticleListForBest.id }"> 
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large bookmark_button" id="bookmark_${selectArticleListForBest.id}" 
+											value="${selectArticleListForBest.id}"> 
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 										</a> 
 										
@@ -511,9 +520,12 @@
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font>
 										</a>
-										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }"> 
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large bookmark_button" id="bookmarkList_${article.id }"
+											value="${article.id}"> 
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 										</a> 
+										
+										
 										<input type="hidden" value="${article.total_like}" id="total_like"> 
 										<input type="hidden" value="${member_id}" id="member_id">
 										<input type="hidden" value="${bookmarkCount}"id="bookmark_count"> 

@@ -69,10 +69,8 @@ public class BookMarkServiceImpl implements BookMarkService {
 		List<BookMark> result = null;
 		
 		try {
-			result = sqlSession.selectList("BookMarkMapper.selectBookMarkList", bookmark);
-			if (result == null) {
-				throw new NullPointerException();
-			}
+			result = sqlSession.selectList("BookMarkMapper.selectbookmarkStateList", bookmark);
+			
 		} catch (NullPointerException e) {
 			throw new Exception("북마크 처리된 에피소드목록이 없습니다.");
 		} catch (Exception e) {
