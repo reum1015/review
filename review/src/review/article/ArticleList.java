@@ -101,9 +101,7 @@ public class ArticleList extends BaseController {
 		}
 		
 		logger.debug("member_id -----------------------------------> " + member_id);
-		
-	
-		
+
 		int likeCount = 0;
 
 		// 북마크 저장변수
@@ -164,6 +162,10 @@ public class ArticleList extends BaseController {
 		} finally {
 			sqlSession.close();
 		}
+		
+		
+		logger.debug("favoriteStateList -------> " + favoriteStateList);
+		System.out.println("favoriteStateList ------- > " + favoriteStateList.toString());
 		
 		
 		System.out.println("selectArticleListForBest ------------> " + selectArticleListForBest.toString());

@@ -145,7 +145,6 @@
 <script type="text/javascript">
 	$(function() {
 		var member_id = $("#member_id").val();
-		
 		var likeCount = $("#likeCount").val();
 		var member_id = $("#member_id").val();
 		var totalLike = $("#totalLike").val();
@@ -162,27 +161,31 @@
 		
 		$('.like_button').on('click', function(e) {
 					var member_id = $("#member_id").val();
-						var article_id = $(this).attr('id');
+					var article_id = $(this).attr('value');
 			 			
+						 console.log("article_id : " + article_id);
+						
+						
 			 			//로그인 안된 상태
 			 			if(member_id ==0){
 			 				alert("LogIn is required.");
 			 				return;
 			 			//로그인 상태	
 			 			}else{
-			 				$.get("${pageContext.request.contextPath}/like/favoriteAdd", 
-			 						{member_id : member_id, article_id : article_id},
+			 				$.get("${pageContext.request.contextPath}/like/favoriteAdd", {member_id : member_id, article_id : article_id},
 			 						function(data) {
 			 							var isLikeState = data.isLikeState;
 			 							var likeCount = data.likeCount;
 			 	
 			 							if(isLikeState){
 			 								alert("Like added");
-			 								$("#" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>')
+			 								$("#article_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
+			 								$("#articleList_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
 
 			 							}else{
 			 								alert("Like removed");
-			 								$("#" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>')
+			 								$("#article_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
+			 								$("#articleList_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
 
 			 							}
 			 				});
@@ -191,6 +194,7 @@
 			 			
 			 			
 			 		});
+		
 		//Like 버튼 끝
 		
 		// Bookmark 버튼
@@ -251,8 +255,13 @@
 	
 	for(var i = 0; i <favoriteStateLength ; i++){
 		var epid = favoriteState[i].article_id;
-		$("#" + epid).empty();
-		$("#" + epid).append('<span class="like_On pull-right" id="like_img"></span>')
+		var total_like = favoriteState[i].total_like;
+		$("#article_" + epid).empty();
+		$("#article_" + epid).append('<span class="like_On pull-right" id="like_img"></span>');
+		$("#articleList_" + epid).empty();
+		$("#articleList_" + epid).append('<span class="like_On pull-right" id="like_img"></span>');
+		
+		
 	};
 		
 		
@@ -280,23 +289,22 @@
 			<!--// Best Review category -->
 			<!-- Best Review Content  -->
 			<div class="review-content row multi-columns-row">
-
 				<c:choose>
 					<c:when test="${fn:length(selectArticleListForBest) > 0}">
-						<c:forEach var="favorite" items="${selectArticleListForBest}">
+						<c:forEach var="selectArticleListForBest" items="${selectArticleListForBest}">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<c:url var="readUrl" value="/article/article_read">
-										<c:param name="article_id" value="${favorite.id}" />
+										<c:param name="article_id" value="${selectArticleListForBest.id}" />
 									</c:url>
 									<c:url var="readUser" value="/mymenu/user_page">
-										<c:param name="member_id" value="${favorite.member_id}" />
+										<c:param name="member_id" value="${selectArticleListForBest.member_id}" />
 									</c:url>
 									<!-- 링크 + 썸네일 -->
 									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4"> <c:choose>
-											<c:when test="${favorite.imagePath != null}">
+											<c:when test="${selectArticleListForBest.imagePath != null}">
 												<c:url var="downloadUrl" value="/download">
-													<c:param name="file" value="${favorite.imagePath}" />
+													<c:param name="file" value="${selectArticleListForBest.imagePath}" />
 												</c:url>
 												<img src="${downloadUrl}" class="img-responsive img-rounded" />
 											</c:when>
@@ -310,40 +318,44 @@
 									<!--// 링크 + 썸네일 -->
 									<!-- 제목 + 작성자 + 조회수 -->
 									<div class="item col-lg-8 col-md-8 col-sm-7">
-										<a href="${readUser}"><font size="4" color="#FF8000">${favorite.nick_name}</font></a>
-										<div class="pull-right">${favorite.reg_date}</div>
+										<a href="${readUser}"><font size="4" color="#FF8000">${selectArticleListForBest.nick_name}</font></a>
+										<div class="pull-right">${selectArticleListForBest.reg_date}</div>
 										<div>
 											<font size="4" color="#28282 "> keyword: </font> <font
-												size="4" color="#a0a0a0"> ${favorite.category}</font>
+												size="4" color="#a0a0a0"> ${selectArticleListForBest.category}</font>
 										</div>
 										<div>
 											<font size="4" color="#28282 ">title:</font><font size="4"
-												color="#a0a0a0"> ${favorite.title} </font>
+												color="#a0a0a0"> ${selectArticleListForBest.title} </font>
 										</div>
 										<hr />
 										<div style="overflow: auto; width: 100%; max-height: 180px;">
-											${favorite.content}</div>
+											${selectArticleListForBest.content}</div>
 									</div>
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
-									<!-- like + comment + book mark -->
+									<!-- like + comment + book mark 위에 화면-->
+									
 									<div class="btn-group btn-block">
-
-										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${favorite.id}"> 
+									
+										count : ${selectArticleListForBest.total_like}
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="article_${selectArticleListForBest.id}"
+										value="${selectArticleListForBest.id}"> 
 											<span class="like_Off pull-right" id="like_img"></span>
+		
 										</a> 
 										
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font>
 										</a> 
 										
-										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${favorite.id }"> 
+										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${selectArticleListForBest.id }"> 
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 										</a> 
 										
-										<input type="hidden" value="${readArticle.total_like}" id="total_like"> 
+										<input type="hidden" value="${selectArticleListForBest.total_like}" id="total_like"> 
 										<input type="hidden" value="${member_id}" id="member_id"> 
-										<input type="hidden" value="${article_id}" id="article_id">
+										<input type="hidden" value="${selectArticleListForBest.id}" id="article_id">
 										<input type="hidden" value="${bookmarkCount}"id="bookmark_count"> 
 										<input type="hidden" value="${bookmarkCount}" id="total_bookmark"> 
 										<input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
@@ -492,29 +504,21 @@
 									<br />
 									<!-- like + comment + book mark -->
 									<div class="btn-group btn-block">
-										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> 
-											<span class="like_Off  pull-right" id="like_img"></span> 
-											<font color="#FF0040 ">
-												<span class="pull-right" id="concernCount">${article.total_like}</span>
-											</font>
-										</a> 
-										
-										
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="articleList_${article.id }"
+										value="${article.id}"> 
+											<span class="like_Off  pull-right" id="like_img"></span>
+										</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font>
-										</a> 
-										
+										</a>
 										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }"> 
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 										</a> 
-										
 										<input type="hidden" value="${article.total_like}" id="total_like"> 
-										<input type="hidden" value="${member_id}" id="member_id"> 
-										<input type="hidden" value="${article_id}" id="article_id">
+										<input type="hidden" value="${member_id}" id="member_id">
 										<input type="hidden" value="${bookmarkCount}"id="bookmark_count"> 
 										<input type="hidden" value="${bookmarkCount}" id="total_bookmark"> 
 										<input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
-										<input type="hidden" value="${likeCount}" id="total_like">
 										<input type="hidden" value="${likeCount}" id="like_count">
 										<input type="hidden" value="${isLikeState}" id="isLikeState">
 									</div>
