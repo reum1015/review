@@ -20,8 +20,7 @@ public class Index extends BaseController {
 	@Override
 	public String doRun(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
-			
+
 		String view = "index";
 		return view;
 	}

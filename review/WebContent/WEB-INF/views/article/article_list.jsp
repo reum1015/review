@@ -75,32 +75,27 @@
 	left: 0;
 	cursor: pointer;
 }
-
 .icon_bookmark2 {
 	width: 19px;
 	height: 29px;
 	background-image: url(../assets/imgs/clipping/sp_icon.png);
 	background-position: -90px -290px;
 }
-
 .bookmark_On {
 	width: 19px;
 	height: 29px;
 	background-image: url(../assets/imgs/clipping/sp_icon.png);
 	background-position: -60px -290px;
 }
-
 .bookmark_Off {
 	width: 19px;
 	height: 29px;
 	background-image: url(../assets/imgs/clipping/sp_icon.png);
 	background-position: -90px -290px;
 }
-
 .bmk {
 	overflow: hidden;
 }
-
 [class^=icon_] {
 	font-size: 0;
 	line-height: 0;
@@ -109,7 +104,6 @@
 	display: inline-block;
 	overflow: hidden;
 }
-
 /* 관심등록 Off 일때*/
 .like_Off {
 	display: inline-block;
@@ -119,7 +113,6 @@
 	background-image: url(../assets/imgs/clipping/sp_likeit2.png);
 	background-position: 0 0;
 }
-
 /* 관심등록 On 일때*/
 .like_On {
 	display: inline-block;
@@ -129,11 +122,9 @@
 	background-image: url(../assets/imgs/clipping/sp_likeit2.png);
 	background-position: -30px 0px;
 }
-
 .btn_h3 {
 	padding-top: 15px;
 }
-
 .total {
 	font-size: 18px;
 	color: #999;
@@ -145,14 +136,11 @@
 <script type="text/javascript">
 	$(function() {
 		var member_id = $("#member_id").val();
-		
 		var likeCount = $("#likeCount").val();
 		var member_id = $("#member_id").val();
 		var totalLike = $("#totalLike").val();
 		var article_id = $("#article_id").val();
 		var isLikeState = $("#isLikeState").val();
-
-
 		//관심등록 On 이면 마크 표시
 		if(likeCount > 0){
 		$("#like_img").removeClass("like_Off").addClass("like_On");
@@ -162,28 +150,28 @@
 		
 		$('.like_button').on('click', function(e) {
 					var member_id = $("#member_id").val();
-						var article_id = $(this).attr('id');
+					var article_id = $(this).attr('value');
 			 			
+						 console.log("article_id : " + article_id);
 			 			//로그인 안된 상태
 			 			if(member_id ==0){
 			 				alert("LogIn is required.");
 			 				return;
 			 			//로그인 상태	
 			 			}else{
-			 				$.get("${pageContext.request.contextPath}/like/favoriteAdd", 
-			 						{member_id : member_id, article_id : article_id},
+			 				$.get("${pageContext.request.contextPath}/like/favoriteAdd", {member_id : member_id, article_id : article_id},
 			 						function(data) {
 			 							var isLikeState = data.isLikeState;
 			 							var likeCount = data.likeCount;
 			 	
 			 							if(isLikeState){
 			 								alert("Like added");
-			 								$("#" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>')
-
+			 								$("#article_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
+			 								$("#articleList_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
 			 							}else{
 			 								alert("Like removed");
-			 								$("#" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>')
-
+			 								$("#article_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
+			 								$("#articleList_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
 			 							}
 			 				});
 			 
@@ -191,14 +179,19 @@
 			 			
 			 			
 			 		});
+		
 		//Like 버튼 끝
+		
+		
+		
 		
 		// Bookmark 버튼
 		var bookmark_count = $("#bookmark_count").val();
-		var member_id = $("#member_id").val();
-		var total_bookmark = $("#total_bookmark").val();		
+		var member_id = $("#member_id").val();	
 		var article_id = $("#article_id").val();
 		var isBookMarkState = $("#isBookMarkState").val();
+		
+		
 		
 		//북마크 On 이면 마크 표시
 		if(bookmark_count > 0){	
@@ -207,55 +200,65 @@
 				$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
 			}
 		
-		$("#bookmark_button").on('click',function(e){
-			e.preventDefault();
-			if(member_id == 0){
-				var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
-				
-				if(result){
-					location.replace('/review/member/login?article_id=' + article_id );
-					return false;
-				}else{
-					return false;
-				}
-			}
+		$(".bookmark_button").on('click',function(e){
+			var member_id = $("#member_id").val();
+			var article_id = $(this).attr('value');
 			
-			//북마크 On/Off
-			$.get("${pageContext.request.contextPath}/article/addBookMark", 
-					{bookmark_count : bookmark_count, member_id : member_id, total_bookmark : total_bookmark, article_id: article_id},
-					function(data){
-							var isBookMarkState = data.isBookMarkState;
-							 total_bookmark=data.total_bookmark;
-							 bookmark_count = data.bookmark_count;
-						
-							$("#bookmark_count").attr("value", bookmark_count);
-							$("#concernCount").text(total_bookmark);
-							
-							
-							if(isBookMarkState){							
-								$("#bookmark_img").removeClass("bookmark_Off").addClass("bookmark_On");
-							}else{							
-								$("#bookmark_img").removeClass("bookmark_On").addClass("bookmark_Off");
-							}
-						});
+				//var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
+				
+				if( member_id == 0){
+					alert("LogIn is required.");
+					return;
+				}else{
+					//북마크 On/Off
+					$.get("${pageContext.request.contextPath}/article/addBookMark", 
+							{member_id : member_id, article_id: article_id},
+							function(data){
+									var isBookMarkState = data.isBookMarkState;
+									
+									if(isBookMarkState){
+										alert("Bookmark added");
+		 								$("#bookmark_" + article_id).empty().append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
+		 								$("#bookmarkList_" + article_id).empty().append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
+									}else{							
+										alert("Bookmark removed");
+		 								$("#bookmark_" + article_id).empty().append('<span class="bookmark_Off pull-right" id="bookmark_img"></span>');
+		 								$("#bookmarkList_" + article_id).empty().append('<span class="bookmark_Off pull-right" id="bookmark_img"></span>');
+									}
+								});
+				}
+			
+			
+			
 		});		
 		// Bookmark 버튼
 		
 		
-		/*
-		구매목록 리스트
-		구매목록에 구매 완료 표시
+	/*
+		좋아요 버튼
 	*/
 	var favoriteState= eval(${favoriteState});
 	var favoriteStateLength = favoriteState.length;
 	
 	for(var i = 0; i <favoriteStateLength ; i++){
 		var epid = favoriteState[i].article_id;
-		$("#" + epid).empty();
-		$("#" + epid).append('<span class="like_On pull-right" id="like_img"></span>')
+		var total_like = favoriteState[i].total_like;
+		$("#article_" + epid).empty();
+		$("#article_" + epid).append('<span class="like_On pull-right" id="like_img"></span>');
+		$("#articleList_" + epid).empty();
+		$("#articleList_" + epid).append('<span class="like_On pull-right" id="like_img"></span>');
 	};
 		
-		
+	var bookmarkState = eval(${bookMarkStateList});
+	var bookmarkStateLength = bookmarkState.length;
+	
+	for(var i = 0; i <bookmarkStateLength ; i++){
+		var epid = bookmarkState[i].article_id;
+		$("#bookmark_" + epid).empty();
+		$("#bookmark_" + epid).append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
+		$("#bookmarkList_" + epid).empty();
+		$("#bookmarkList_" + epid).append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
+	};
 	
 		
 		
@@ -280,23 +283,22 @@
 			<!--// Best Review category -->
 			<!-- Best Review Content  -->
 			<div class="review-content row multi-columns-row">
-
 				<c:choose>
-					<c:when test="${fn:length(favoriteList) > 0}">
-						<c:forEach var="favorite" items="${selectArticleListForBest}">
+					<c:when test="${fn:length(selectArticleListForBest) > 0}">
+						<c:forEach var="selectArticleListForBest" items="${selectArticleListForBest}">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<c:url var="readUrl" value="/article/article_read">
-										<c:param name="article_id" value="${favorite.id}" />
+										<c:param name="article_id" value="${selectArticleListForBest.id}" />
 									</c:url>
 									<c:url var="readUser" value="/mymenu/user_page">
-										<c:param name="member_id" value="${favorite.member_id}" />
+										<c:param name="member_id" value="${selectArticleListForBest.member_id}" />
 									</c:url>
 									<!-- 링크 + 썸네일 -->
 									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4"> <c:choose>
-											<c:when test="${favorite.imagePath != null}">
+											<c:when test="${selectArticleListForBest.imagePath != null}">
 												<c:url var="downloadUrl" value="/download">
-													<c:param name="file" value="${favorite.imagePath}" />
+													<c:param name="file" value="${selectArticleListForBest.imagePath}" />
 												</c:url>
 												<img src="${downloadUrl}" class="img-responsive img-rounded" />
 											</c:when>
@@ -310,40 +312,45 @@
 									<!--// 링크 + 썸네일 -->
 									<!-- 제목 + 작성자 + 조회수 -->
 									<div class="item col-lg-8 col-md-8 col-sm-7">
-										<a href="${readUser}"><font size="4" color="#000000">${favorite.nick_name}</font></a>
-										<div class="pull-right">${favorite.reg_date}</div>
+										<a href="${readUser}"><font size="4" color="#FF8000">${selectArticleListForBest.nick_name}</font></a>
+										<div class="pull-right">${selectArticleListForBest.reg_date}</div>
 										<div>
-											<font size="4" color="#A0A0FF "> keyword: </font> <font
-												size="4" color="#000069"> ${favorite.category}</font>
+											<font size="4" color="#28282 "> keyword: </font> <font
+												size="4" color="#a0a0a0"> ${selectArticleListForBest.category}</font>
 										</div>
 										<div>
-											<font size="4" color="#A0A0FF ">title:</font><font size="4"
-												color="#000069"> ${favorite.title} </font>
+											<font size="4" color="#28282 ">title:</font><font size="4"
+												color="#a0a0a0"> ${selectArticleListForBest.title} </font>
 										</div>
 										<hr />
 										<div style="overflow: auto; width: 100%; max-height: 180px;">
-											${favorite.content}</div>
+											${selectArticleListForBest.content}</div>
 									</div>
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
-									<!-- like + comment + book mark -->
+									<!-- like + comment + book mark 위에 화면-->
+									
 									<div class="btn-group btn-block">
-
-										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${favorite.id}"> 
+									
+										count : ${selectArticleListForBest.total_like}
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="article_${selectArticleListForBest.id}"
+										value="${selectArticleListForBest.id}"> 
 											<span class="like_Off pull-right" id="like_img"></span>
+		
 										</a> 
 										
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font>
 										</a> 
 										
-										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${favorite.id }"> 
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large bookmark_button" id="bookmark_${selectArticleListForBest.id}" 
+											value="${selectArticleListForBest.id}"> 
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 										</a> 
 										
-										<input type="hidden" value="${readArticle.total_like}" id="total_like"> 
+										<input type="hidden" value="${selectArticleListForBest.total_like}" id="total_like"> 
 										<input type="hidden" value="${member_id}" id="member_id"> 
-										<input type="hidden" value="${article_id}" id="article_id">
+										<input type="hidden" value="${selectArticleListForBest.id}" id="article_id">
 										<input type="hidden" value="${bookmarkCount}"id="bookmark_count"> 
 										<input type="hidden" value="${bookmarkCount}" id="total_bookmark"> 
 										<input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
@@ -492,29 +499,24 @@
 									<br />
 									<!-- like + comment + book mark -->
 									<div class="btn-group btn-block">
-										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="${article.id }"> 
-											<span class="like_Off  pull-right" id="like_img"></span> 
-											<font color="#FF0040 ">
-												<span class="pull-right" id="concernCount">${article.total_like}</span>
-											</font>
-										</a> 
-										
-										
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="articleList_${article.id }"
+										value="${article.id}"> 
+											<span class="like_Off  pull-right" id="like_img"></span>
+										</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font>
-										</a> 
-										
-										<a id="bookmark_button" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large" id="${article.id }"> 
+										</a>
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large bookmark_button" id="bookmarkList_${article.id }"
+											value="${article.id}"> 
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
 										</a> 
 										
+										
 										<input type="hidden" value="${article.total_like}" id="total_like"> 
-										<input type="hidden" value="${member_id}" id="member_id"> 
-										<input type="hidden" value="${article_id}" id="article_id">
+										<input type="hidden" value="${member_id}" id="member_id">
 										<input type="hidden" value="${bookmarkCount}"id="bookmark_count"> 
 										<input type="hidden" value="${bookmarkCount}" id="total_bookmark"> 
 										<input type="hidden" value="${isBookMarkState}" id="isBookMarkState">
-										<input type="hidden" value="${likeCount}" id="total_like">
 										<input type="hidden" value="${likeCount}" id="like_count">
 										<input type="hidden" value="${isLikeState}" id="isLikeState">
 									</div>
