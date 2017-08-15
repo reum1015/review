@@ -163,15 +163,34 @@
 			 						function(data) {
 			 							var isLikeState = data.isLikeState;
 			 							var likeCount = data.likeCount;
+			 							var articleTotal = $("#articleTotal_" + article_id).text();
+										var articleListTotal = $("#articleListTotal_" + article_id).text();
+			 							
+			 							articleTotal = Number(articleTotal);
+			 							articleListTotal = Number(articleListTotal);
+			 							
 			 	
 			 							if(isLikeState){
 			 								alert("Like added");
 			 								$("#article_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
 			 								$("#articleList_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
+			 								articleTotal++;
+			 								articleListTotal++;
+			 								
+			 								$("#articleTotal_" + article_id).html(articleTotal);
+			 								$("#articleListTotal_" + article_id).html(articleListTotal);
 			 							}else{
 			 								alert("Like removed");
 			 								$("#article_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
 			 								$("#articleList_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
+			 								
+			 								articleTotal--;
+			 								articleListTotal--;
+			 							
+			 								$("#articleTotal_" + article_id).html(articleTotal);
+			 								$("#articleListTotal_" + article_id).html(articleListTotal);
+			 								
+			 								
 			 							}
 			 				});
 			 
@@ -204,6 +223,8 @@
 			var member_id = $("#member_id").val();
 			var article_id = $(this).attr('value');
 			
+			
+			
 				//var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
 				
 				if( member_id == 0){
@@ -215,6 +236,7 @@
 							{member_id : member_id, article_id: article_id},
 							function(data){
 									var isBookMarkState = data.isBookMarkState;
+									
 									
 									if(isBookMarkState){
 										alert("Bookmark added");
@@ -336,10 +358,9 @@
 									<!-- like + comment + book mark 위에 화면-->
 									<div class="btn-group btn-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" > 
-											<font size="5" color="#FF0202" class="pull-right">${selectArticleListForBest.total_like}</font>
-		                                   </div>
-										<a class="pull-left col-lg-1 col-md-1 col-sm-1 col-xs-1 btn btn-white btn-large like_button" id="article_${selectArticleListForBest.id}"
-										value="${selectArticleListForBest.id}"> 
+											<font size="5" color="#FF0202" class="pull-right" id="articleTotal_${selectArticleListForBest.id}">${selectArticleListForBest.total_like}</font>
+		                                </div>
+										<a class="pull-left col-lg-1 col-md-1 col-sm-1 col-xs-1 btn btn-white btn-large like_button" id="article_${selectArticleListForBest.id}" value="${selectArticleListForBest.id}"> 
 											<span class="like_Off pull-left" id="like_img"></span>
 										</a> 
 										
@@ -495,8 +516,11 @@
 									<br />
 									<!-- like + comment + book mark -->
 									<div class="btn-group btn-block">
-										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="articleList_${article.id }"
-										value="${article.id}"> 
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" > 
+											<font size="5" color="#FF0202" class="pull-right" id="articleListTotal_${article.id}">${article.total_like}</font>
+		                                </div>
+									
+										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="articleList_${article.id }" value="${article.id}"> 
 											<span class="like_Off  pull-right" id="like_img"></span>
 										</a>
 										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
