@@ -301,8 +301,7 @@
 		<div class="best-container">
 			<h1 class="page-header">
 				<small>Best Review about <font size="5" color="#282828">${keyword}</font></small>
-			</h1>
-			<!--// Best Review category -->
+			</h1>			
 			<!-- Best Review Content  -->
 			<div class="review-content row multi-columns-row">
 				<c:choose>
@@ -352,7 +351,6 @@
 										<div class="hidden-lg hidden-md hidden-sm col-xs-12" style="overflow: auto; width: 100%; max-height: 180px;">
 											${selectArticleListForBest.content}
 											</div>
-									
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
 									<!-- like + comment + book mark 위에 화면-->
@@ -370,16 +368,12 @@
 										<a class="pull-right col-lg-3 col-md-3 col-sm-3 col-xs-3 btn btn-white btn-large bookmark_button" id="bookmark_${selectArticleListForBest.id}" 
 											value="${selectArticleListForBest.id}"> 
 											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
-										</a> 									
-									
+										</a> 		
 									</div>
-									
 									<!--// like + comment + book mark -->
-
 								</div>
 							</div>
 						</c:forEach>
-
 					</c:when>
 					<c:otherwise>
 						<tr>
@@ -390,13 +384,9 @@
 						</tr>
 					</c:otherwise>
 				</c:choose>
-
-
 			</div>
-
-			<!--// Recent Review Content  -->
-
-			<!-- Recent page number -->
+			<!--// Best Review Content  -->
+			<!-- Best page number -->
 			<nav class="text-center">
 				<ul class="pagination">
 					<!-- 이전 그룹으로 이동 -->
@@ -415,18 +405,15 @@
 							<li class="disabled"><a href="#">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
-
 					<!-- 페이지 번호 -->
 					<!-- 현재 그룹의 시작페이지~끝페이지 사이를 1씩 증가하면서 반복 -->
 					<c:forEach var="i" begin="${pageHelper.startPage}"
 						end="${pageHelper.endPage }" step="1">
-
 						<!-- 각 페이지 번호로 이동할 수 있는 URL을 생성하여 page_url에 저장 -->
 						<c:url var="pageUrl" value="/article/article_list">
 							<c:param name="keyword" value="${keyword}"></c:param>
 							<c:param name="page" value="${i}"></c:param>
 						</c:url>
-
 						<!-- 반복중의 페이지 번호와 현재 위치한 페이지 번호가 같은 경우에 대한 분기 -->
 						<c:choose>
 							<c:when test="${pageHelper.page == i }">
@@ -455,16 +442,17 @@
 					</c:choose>
 				</ul>
 			</nav>
-			<!--// Best Review Content  -->
+			<!--// Best page number  -->			
 		</div>
 		<!--// Best Review category -->
 
-		<!-- Recent Review category -->
+
+
+		<!-- Recent Review category -->			
 		<div class="recent-container">
 			<h1 class="page-header">
-				<small>Review about <font size="5" color="#282828">${keyword}</font></small>
-			</h1>
-			<!--// Recent Review category -->
+				<small><font size="5" color="#282828">${keyword}</font>review </small>
+			</h1>			
 			<!-- Recent Review Content  -->
 			<div class="review-content row multi-columns-row">
 				<c:choose>
@@ -479,8 +467,7 @@
 										<c:param name="member_id" value="${article.member_id}" />
 									</c:url>
 									<!-- 링크 + 썸네일 -->
-									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> 
-									<c:choose>
+									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> <c:choose>
 											<c:when test="${article.imagePath != null}">
 												<c:url var="downloadUrl" value="/download">
 													<c:param name="file" value="${article.imagePath}" />
@@ -488,49 +475,51 @@
 												<img src="${downloadUrl}" class="img-responsive img-rounded" />
 											</c:when>
 											<c:otherwise>
-												<img	src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg"	class="img-responsive  img-rounded" />
+												<img
+													src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg"
+													class="img-responsive" />
 											</c:otherwise>
 										</c:choose>
 									</a>
 									<!--// 링크 + 썸네일 -->
-									<!-- 제목 + 작성자 + 조회수 -->									
-										<div class="item col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<a href="${readUser}"><font size="4" color="#000000">${article.nick_name}</font></a>
+									<!-- 제목 + 작성자 + 조회수 -->
+							<div class="item col-lg-8 col-md-8 col-sm-8 col-xs-8">
+										<a href="${readUser}"><font size="4" color="#FF8000">${article.nick_name}</font></a>
 										<div class="pull-right">${article.reg_date}</div>
 										<div>
-											<font size="4" color="#A0A0FF "> keyword: </font> <font
-												size="4" color="#000069"> ${article.category}</font>
+											<font size="4" color="#28282 "> keyword: </font> <font
+												size="4" color="#a0a0a0"> ${article.category}</font>
 										</div>
 										<div>
-											<font size="4" color="#A0A0FF ">title:</font><font size="4"
-												color="#000069"> ${article.title} </font>
+											<font size="4" color="#28282 ">title:</font><font size="4"
+												color="#a0a0a0"> ${article.title} </font>
 										</div>
 										<hr />
-								<div class="hidden-xs" style="overflow: auto; width: 100%; max-height: 180px;">
-											${article.content}</div>
-								</div>
-								<div class="hidden-lg hidden-md hidden-sm col-xs-12" style="overflow: auto; width: 100%; max-height: 180px;">
-												${article.content}</div>
-									</div>
+										<div class="hidden-xs" style="overflow: auto; width: 100%; max-height: 180px;">
+											${article.content}
+											</div>
+										</div>
+										<div class="hidden-lg hidden-md hidden-sm col-xs-12" style="overflow: auto; width: 100%; max-height: 180px;">
+											${article.content}
+											</div>
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
-									<!-- like + comment + book mark -->
-									<div class="btn-group btn-block">
-									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" > 
+									<!-- like + comment + book mark 위에 화면-->
+									<div class="btn-group btn-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" > 
 											<font size="5" color="#FF0202" class="pull-right" id="articleListTotal_${article.id}">${article.total_like}</font>
 		                                </div>
-									
-										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large like_button" id="articleList_${article.id }" value="${article.id}"> 
-											<span class="like_Off  pull-right" id="like_img"></span>
-										</a>
-										<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
-											<font color="#a0a0a0"><i class="">Comment</i></font>
-										</a>
-										<a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large bookmark_button" id="bookmarkList_${article.id }"  value="${article.id}"> 
-											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
+										<a class="pull-left col-lg-1 col-md-1 col-sm-1 col-xs-1 btn btn-white btn-large like_button" id="articleList_${article.id}" value="${article.id}"> 
+											<span class="like_Off pull-left" id="like_img"></span>
 										</a> 
 										
-										
+										<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+											<font color="#a0a0a0"><i class="">Comment</i></font>
+										</a>
+										<a class="pull-right col-lg-3 col-md-3 col-sm-3 col-xs-3 btn btn-white btn-large bookmark_button" id="bookmarkList_${article.id}" 
+											value="${article.id}"> 
+											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
+										</a> 		
 										<input type="hidden" value="${article.total_like}" id="total_like"> 
 										<input type="hidden" value="${member_id}" id="member_id">
 										<input type="hidden" value="${bookmarkCount}"id="bookmark_count"> 
@@ -540,27 +529,21 @@
 										<input type="hidden" value="${isLikeState}" id="isLikeState">
 									</div>
 									<!--// like + comment + book mark -->
-
 								</div>
 							</div>
 						</c:forEach>
 					</c:when>
-					
 					<c:otherwise>
 						<tr>
 							<td colspan="5" class="text-center" style="line-height: 100px;">
-								No Post about ${keyword}. <br /> Why don't you be a first
+								No Post about ${keyword}. <br /> Why don't you be a first best
 								reviewer about ${keyword}
 							</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
-
-
 			</div>
-
 			<!--// Recent Review Content  -->
-
 			<!-- Recent page number -->
 			<nav class="text-center">
 				<ul class="pagination">
@@ -580,18 +563,15 @@
 							<li class="disabled"><a href="#">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
-
 					<!-- 페이지 번호 -->
 					<!-- 현재 그룹의 시작페이지~끝페이지 사이를 1씩 증가하면서 반복 -->
 					<c:forEach var="i" begin="${pageHelper.startPage}"
 						end="${pageHelper.endPage }" step="1">
-
 						<!-- 각 페이지 번호로 이동할 수 있는 URL을 생성하여 page_url에 저장 -->
 						<c:url var="pageUrl" value="/article/article_list">
 							<c:param name="keyword" value="${keyword}"></c:param>
 							<c:param name="page" value="${i}"></c:param>
 						</c:url>
-
 						<!-- 반복중의 페이지 번호와 현재 위치한 페이지 번호가 같은 경우에 대한 분기 -->
 						<c:choose>
 							<c:when test="${pageHelper.page == i }">
@@ -620,11 +600,14 @@
 					</c:choose>
 				</ul>
 			</nav>
-			<!--// Recent page number -->
+			<!--// Recent page number  -->			
 		</div>
-		<!--// Recent Review -->
-	</div>
+		<!--// Recent Review category -->
 
+			
+
+	
+</div>
 	<!-- 메인 화면 끝 -->
 
 	<!-- footer -->
