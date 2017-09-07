@@ -8,6 +8,19 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/mypage.css" />
 
+<style type="text/css">
+.menu-bar {	
+margin-top: 30px;
+margin-bottom: 30px;
+}
+
+.user-menu-bar {
+height: 50px;
+background-color: #efefef;
+border-radius: 18px;
+}
+
+</style>
 
 
 </head>
@@ -20,7 +33,7 @@
 	<div class="container ">
 	<div class="container_mypage ">
 	<!-- page header -->
-					<div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">						
+					<div class="col-lg-10 col-md-12 col-sm-11 col-xs-12">						
 							<c:url var="downloadUrl" value="/download">
 				 <c:param name="file" value="${readMember.imagePath}" />
 			       </c:url>			
@@ -28,41 +41,43 @@
 						<!-- 이미지 화면에 출력 -->
 						<c:choose>
 						<c:when test="${readMember.imagePath != null}">
-								<a class="profile_img pull-left col-lg-4 col-md-4 col-sm-4 col-xs-5">
+								<a class="profile_img pull-left col-lg-offset-1 col-lg-4  col-md-4 col-sm-4 col-xs-5">
 		             <img src="${downloadUrl}" class="img-circle img-responsive" style="margin: auto" />
 			           </a>	
 									</c:when>
 									<c:otherwise>
-									<a class="profile_img pull-left col-lg-3 col-md-3 col-sm-4 col-xs-6">
+						<a class="profile_img pull-left col-lg-offset-1 col-lg-4  col-md-4 col-sm-4 col-xs-5">
 						<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-circle img-responsive"/>
 									</a>
 									</c:otherwise>
 								</c:choose>		
 			           <!-- 이미지 화면에 출력 -->
 			           <!-- 작성자 + 소개 -->			           
-			           <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1" style="overflow: auto; width: auto; max-height: 80px;">
-					<small><font size="4" color="#000069"> ${readMember.nick_name}</font></small>
+			           <div class="col-lg-5 col-md-6 col-sm-4 col-xs-2" style="overflow: auto; width: auto; ">
+					<small><font size="4" color="#585858">${readMember.nick_name}</font></small>
 						<br /> 
-						
-					<small><font size="4" color="#000069" >${readMember.introduce}</font></small> 
+						<small><font size="4" color="#a0a0a0" >
+<textarea id="introduce" name="introduce"  placeholder="about you" style="overflow: auto; width: 300px; height: 100px; text-align: left; border:0; resize: none; ">
+${readMember.introduce} 
+</textarea> 
+</font></small>					
 								</div>
 						 	<!--// 작성자 + 소개 -->
 						 	<!-- 설정 -->
 						<c:if test="${readMember.id==loginInfo.id}">
-						<a class="navbar-brand glyphicon glyphicon-cog col-lg-offset-5 col-lg-1 col-md-offset-5 col-md-1 hidden-sm hidden-xs" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>
-	                      <a class="pull-right navbar-brand glyphicon glyphicon-cog hidden-lg hidden-md col-sm-1 col-xs-1" href="${pageContext.request.contextPath}/mymenu/options_mobile" style="font-size: 1.5em;"></a>	  
+						<a class="navbar-brand glyphicon glyphicon-cog pull-right col-lg-1 col-md-1 hidden-sm hidden-xs" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em; color:#777;  "></a>
+	                      <a class="pull-right navbar-brand glyphicon glyphicon-cog hidden-lg hidden-md col-sm-1 col-xs-1" href="${pageContext.request.contextPath}/mymenu/options_mobile" style="font-size: 1.5em; color:#777; "></a>	  
 	                              </c:if> 	
 	                              <!--// 설정 -->											
 								<br /> 											
 								</div>
 									<br />
 						<!-- my page + book mark -->
-						<div class="btn-group btn-block">
-					<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
-				<a href="${pageContext.request.contextPath}/mymenu/user_page2?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
-	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
-				<c:if test="${readMember.id==loginInfo.id}">
-				<a href="${pageContext.request.contextPath}/mymenu/bookmarkList?member_id=${loginInfo.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
+						<div class="btn-group btn-block menu-bar col-lg-offset-1 col-md-offset-1 ">
+					<a href="#" class=" col-lg-4  col-md-4  col-sm-4 col-xs-6 btn btn-white btn-large "><span class="user-menu-bar btn btn-large"><font size="5" color="#FF8000" >Boards</font></span></a>
+				<a href="${pageContext.request.contextPath}/mymenu/user_page2?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large "><span class="user-menu-bar btn btn-large"><font class="user-menu-bar" size="5" color="#FF8000">List</font></span></a>
+	         <c:if test="${readMember.id==loginInfo.id}">
+				<a href="${pageContext.request.contextPath}/mymenu/bookmarkList?member_id=${loginInfo.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-2 btn btn-white btn-large"><span class=" btn btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 2.3em;  color:#FF8000; "></i></span></a>
                	</c:if>
 					</div>
 				<!--// my page + book mark -->								
@@ -74,48 +89,42 @@
 		     <c:choose>
 		    		<c:when test="${fn:length(memberarticleList) > 0}">
 		    			<c:forEach var="article" items="${memberarticleList}">
-		         <div class=" col-lg-11 col-md-12 col-sm-12 col-xs-12">
+                           <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
 								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		    				<c:url var="readUrl" value="/article/article_read">
 					            <c:param name="article_id" value="${article.id}" />
 					            	</c:url>					            	
 					            	<!-- 링크 + 썸네일 -->
-					            	<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					            	<a href="${readUrl}" class="col-lg-3 col-md-3 col-sm-3 col-xs-6"> 
 								<c:choose>
 									<c:when test="${article.imagePath != null}">
 										<c:url var="downloadUrl" value="/download">
 											<c:param name="file" value="${article.imagePath}" />
 										</c:url>
-			      <img src="${downloadUrl}" class="img-responsive" style="margin: auto" />
+			      <img src="${downloadUrl}" class="img-responsive img-rounded" style="margin: auto" />
 			    		</c:when>
 									<c:otherwise>
-						<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive"/>
+						<img src="${pageContext.request.contextPath}/assets/imgs/img/no_image_article.png" height="300px" width="340px" class="img-rounded img-responsive"/>
 						</c:otherwise>
 								</c:choose>
 							</a>
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
-					            		<div class="item col-lg-8 col-md-8 col-sm-7">
+					            		<div class="item col-lg-9 col-md-9 col-sm-9 col-xs-6">
 					            		<small>${article.reg_date}</small>
 											<small class="pull-right"> Hit: ${article.hit}</small> <br /> 
 											<small>
 												<font size="4" color="#28282 "> category: </font> 
-												<font size="4" color="#FF8000"> ${article.category}</font></small> <br />
+												<font size="4" color="#a0a0a0"> ${article.category}</font></small> <br />
 											<small>
 												<font size="4" color="#28282 ">title:</font>
-												<font size="4" color=#FF8000> ${article.title} </font>
+												<font size="4" color=#a0a0a0> ${article.title} </font>
 											</small>
-					            		
-							
-								
-								
-							<div style="overflow: auto; width: 100%; max-height: 180px;">
-											${article.content}</div>					
-							
-								
+<textarea readonly style="overflow: auto; width: 100%; height: 180px; text-align: left; border: 0; resize: none; ">
+${article.content}
+</textarea>								
 							</div>
 							<!--// 제목 + 작성자 + 조회수 -->
-							
 		    				</div>
 		    				</div>
 		    				</c:forEach>		    			

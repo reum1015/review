@@ -66,7 +66,7 @@ public class EditPicOk extends BaseController {
 				upload.multipartRequest(request);
 			} catch (Exception e) {
 				sqlSession.close();
-				web.redirect(null, "multipart 데이터가 아닙니다.");
+				web.redirect(null, "It's not multipart data");
 				return null;
 			}
 			

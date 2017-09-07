@@ -33,11 +33,11 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("저장된 게시물이 없습니다.");
+			throw new Exception("There is no article.");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("게시물 정보 등록에 실패했습니다.");
+			throw new Exception("fail to write review");
 		} finally {
 			sqlSession.commit();
 		}
@@ -53,10 +53,10 @@ public class ArticleServiceImpl implements ArticleService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 게시물이 없습니다.");
+			throw new Exception("There is no review");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("게시물 조회에 실패했습니다....");
+			throw new Exception("It's fail to search review.");
 		}
 		return result;
 	}
@@ -70,10 +70,10 @@ public class ArticleServiceImpl implements ArticleService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("검색한 조회된 글 목록이 없습니다.");
+			throw new Exception("There is no review list");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("검색한 글 목록 조회에 실패했습니다.");
+			throw new Exception("It's fail to search review.");
 		}
 		return result;
 	}
@@ -87,10 +87,10 @@ public class ArticleServiceImpl implements ArticleService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 글 목록이 없습니다.");
+			throw new Exception("There is no review list");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("글 목록 조회에 실패했습니다.");
+			throw new Exception("It's fail to search review list.");
 		}
 		return result;
 	}
@@ -104,10 +104,10 @@ public class ArticleServiceImpl implements ArticleService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 글 목록이 없습니다.");
+			throw new Exception("There is no review list.");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("글 목록 조회에 실패했습니다.");
+			throw new Exception("It's fail to search review list.");
 		}
 		return result;
 	}
@@ -121,7 +121,7 @@ public class ArticleServiceImpl implements ArticleService {
 				result = sqlSession.selectOne("ArticleMapper.selectMemberArticleCount", article);
 			} catch(Exception e) {
 				logger.error(e.getLocalizedMessage());
-				throw new Exception("회원작품 수 조회에 실패했습니다. ");
+				throw new Exception("It's fail to search member review list. ");
 			}
 			
 			return result;
@@ -136,7 +136,7 @@ public class ArticleServiceImpl implements ArticleService {
 			result = sqlSession.selectOne("ArticleMapper.selectArticleCount", article);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("검색한 게시물 수 조회에 실패했습니다.");
+			throw new Exception("It's fail to search review list.");
 		}
 
 		return result;
@@ -152,7 +152,7 @@ public class ArticleServiceImpl implements ArticleService {
 			result = sqlSession.selectOne("ArticleMapper.selectArticleMainCount", article);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("게시물 수 조회에 실패했습니다.");
+			throw new Exception("It's fail to search review list.");
 		}
 
 		return result;
@@ -167,11 +167,11 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+			throw new Exception("It's fail to search review.");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("조회수 갱신에 실패했습니다.");
+			throw new Exception("It's fail to add hit.");
 		} finally {
 			sqlSession.commit();
 		}
@@ -186,7 +186,7 @@ public class ArticleServiceImpl implements ArticleService {
 			result = sqlSession.selectOne("ArticleMapper.selectArticleCountByMemberId", article);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("게시물 수 조회에 실패했습니다.");
+			throw new Exception("It's fail to search member review list.");
 		}
 
 		return result;
@@ -201,11 +201,11 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+			throw new Exception("It's fail to search review list.");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("게시물 삭제에 실패했습니다.");
+			throw new Exception("It's fail to delete review list.");
 		} finally {
 			sqlSession.commit();
 		}
@@ -220,11 +220,11 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 게시물에 대한 요청입니다..서비스.");
+			throw new Exception("It's fail to search review list.");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("게시물 수정에 실패했습니다.");
+			throw new Exception("It's fail to edit review list.");
 		} finally {
 			sqlSession.commit();
 		}
@@ -240,11 +240,11 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 		}catch(NullPointerException e){
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+			throw new Exception("It's fail to search review list.");
 		}catch(Exception e){
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("like_count 갱신에 실패했습니다.");
+			throw new Exception("like_count plus fail");
 		}finally{
 			sqlSession.commit();
 		}
@@ -259,11 +259,11 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 		}catch(NullPointerException e){
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+			throw new Exception("It's fail to search review list.");
 		}catch(Exception e){
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("like_count 갱신에 실패했습니다.");
+			throw new Exception("like_count minus fail");
 		}finally{
 			sqlSession.commit();
 		}
@@ -278,10 +278,10 @@ public class ArticleServiceImpl implements ArticleService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("검색한 좋아요 조회된 글 목록이 없습니다.");
+			throw new Exception("It's fail to search review list.");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("검색한 좋아요 글 목록 조회에 실패했습니다.");
+			throw new Exception("It's fail to search best review list..");
 		}
 		return result;
 	}
@@ -295,28 +295,12 @@ public class ArticleServiceImpl implements ArticleService {
 				result = sqlSession.selectOne("ArticleMapper.selectFavoriteCount", article);
 			} catch(Exception e) {
 				logger.error(e.getLocalizedMessage());
-				throw new Exception("관심작품 수 조회에 실패했습니다. ");
+				throw new Exception("It's fail to search review list. ");
 			}
 			
 			return result;
 		}
 
-	@Override
-	public List<Article> selectArticleListForBest(Article article) throws Exception {
-		List<Article> result = null;
-		try {
-			result = sqlSession.selectList("ArticleMapper.selectArticleListForBest", article);
-			if (result == null) {
-				throw new NullPointerException();
-			}
-		} catch (NullPointerException e) {
-			throw new Exception("조회된 글 목록이 없습니다.");
-		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
-			throw new Exception("글 목록 조회에 실패했습니다.");
-		}
-		return result;
-	}
 
 	@Override
 	public int selectArticleAdminDateCount(Article article) throws Exception {
@@ -325,7 +309,7 @@ public class ArticleServiceImpl implements ArticleService {
 			result = sqlSession.selectOne("ArticleMapper.selectArticleAdminDateCount", article);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("게시물 수 조회에 실패했습니다.");
+			throw new Exception("It's fail to search review list.");
 		}
 
 		return result;

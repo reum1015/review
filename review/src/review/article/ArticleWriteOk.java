@@ -65,7 +65,7 @@ public class ArticleWriteOk extends BaseController {
 			upload.multipartRequest(request);
 		} catch (Exception e) {
 			sqlSession.close();
-			web.redirect(null, "multipart 데이터가 아닙니다.");
+			web.redirect(null, "it's not multipart data");
 			return null;
 		}
 		

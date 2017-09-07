@@ -5,7 +5,6 @@
 <html lang='ko'>
 <head>
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/common.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/mymenu.css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/validate/jquery.validate.min.js"></script>
@@ -49,12 +48,12 @@ $(function() {
 
 </head>
 <body>
-	  <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
+	  <jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
   <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
   
 
 	<!-- 메인 화면 시작 -->
-	<div class="container">
+	<div class="container col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10  col-sm-11 col-xs-12">
 	<div class="container_edit">
 		<!-- 왼쪽 정보편집부분 -->
 		<div class="account_basic col-lg-3 col-md-3 hidden-sm hidden-xs">
@@ -69,7 +68,7 @@ $(function() {
 		   	  	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/edit_pic?member_id=${loginInfo.id}"><font size="4" color="#2E2EFE">Change Picture</font></a>
 		   	</div>
-		   	<br  />
+		  <hr/>	
 		   	<div class="btn btn-link edit">
 		   	<a href="${pageContext.request.contextPath}/mymenu/log_out"><font size="4" color="#2E2EFE">Log out</font></a>
 		   	</div>
@@ -77,7 +76,7 @@ $(function() {
 		</div>
 		<!--// 왼쪽 정보편집부분 -->
 			<!-- Account info-->	
-		<div class="edit_form col-lg-offset-1 col-lg-5 col-md-offset-1 col-md-5 col-sm-12 col-xs-12">		
+		<div class="edit_form col-lg-offset-1 col-lg-6 col-md-offset-1 col-md-6 col-sm-12 col-xs-12">		
 				<fieldset>
 						<legend>Edit Profile</legend>						
 		<form class="form-horizontal" name="sign_up_form" method="post" id="myform"
@@ -92,10 +91,10 @@ $(function() {
 			  </div>		
 			  <br />
 			    	<div class="form-groups">
-			 <label for="about" class="pull-left">About you</label>
-			<textarea class="form-control" id="introduce" name="introduce"  placeholder="about you">
-			${loginInfo.introduce}
-			</textarea> 
+			 <label for="about" class="pull-left">About you</label>			 
+<textarea class="form-control" id="introduce" name="introduce"  placeholder="about you" style="overflow: auto; width: 100%; height: 100px; text-align: left; resize: none; ">
+${loginInfo.introduce}
+</textarea> 
 			  </div>	
 			  
 			  
@@ -122,10 +121,10 @@ $(function() {
 						  </div>
 						  	<br />	
 						 	<div class="form-group">
-             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
+             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:justify">           
                <button type="button" class="btn cancel form-control" onclick="history.back();"><font size="4" face="Helvetica"  color="#fff">Cancel</font></button>
                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:justify">             
                <button type="submit" class="btn ok form-control"><font size="4"  face="Arial, Helvetica, sans-serif" color="#28282"><B>Save Setting</B></font></button>
              </div>            
             </div>  							
@@ -136,13 +135,25 @@ $(function() {
 		<!--//  Account info -->				
 		</div>
 	</div>
-
 	<!-- 메인 화면 끝 -->
-
 	<!-- footer -->
-	
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-	<!--// footer -->
+		<div class="containers col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12" style="margin-top:20px; margin-bottom: -68px;">
+		<footer id="footer" >
+<div>
+<p class="pull-left">
+    <a href="${pageContext.request.contextPath}/legal/privacy">Privacy</a>&ensp; 
+	<a href="${pageContext.request.contextPath}/legal/terms">Terms</a> &ensp;
+	<a href="${pageContext.request.contextPath}/legal/feedback">Feedback</a>&ensp;
+	 <c:if test="${loginInfo.member_level == 'BB'}">
+	<a href="${pageContext.request.contextPath}/admin/admin_mobile">admin</a>
+    	</c:if>	
+</p>
+<p class="pull-right"><a href="#">Back to top</a></p>
+<p class="pull-left"> &copy;Review&amp;Bang&ensp;</p>
+</div>
+</footer>
+</div>
+	<!--// footer -->	
 	
 	
 	

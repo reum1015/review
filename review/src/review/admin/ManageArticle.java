@@ -17,6 +17,7 @@ import review.jsp.helper.BaseController;
 import review.jsp.helper.RegexHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Article;
+import review.model.Member;
 import review.service.ArticleService;
 import review.service.impl.ArticleServiceImpl;
 
@@ -45,6 +46,27 @@ public class ManageArticle extends BaseController {
 		regex = RegexHelper.getInstance();		
 		articleService = new ArticleServiceImpl(sqlSession, logger);		
 		
+		
+		//session에서 id값 가져오기
+		Member loginInfo = null;
+		String member_level=null;
+		int member_id = 0;		
+		loginInfo = (Member) web.getSession("loginInfo");		
+		if(loginInfo == null){
+			web.redirect(null,"it's not your page.");
+			return null;
+		} 
+		if(loginInfo != null){	
+			loginInfo = (Member)web.getSession("loginInfo");
+			member_id = loginInfo.getId();
+			member_level = loginInfo.getMember_level();
+			if(member_id == 0 || member_level.equals("AA")){
+				web.redirect(null, "it's not your page");
+				return null;
+			}
+		}
+		
+		
       /** (5) 조회할 정보에 대한 Beans 생성 */
 		Article article = new Article();
 		
@@ -64,6 +86,7 @@ public class ManageArticle extends BaseController {
 		
 		/** (7) 조회 결과를 View에 전달 */
 		request.setAttribute("total_count", total_count);
+		request.setAttribute("member_level", member_level);
 			
 		/** (13) 모든 절차가 종료되었으므로 DB접속 해제 후 페이지 이동 */
 		

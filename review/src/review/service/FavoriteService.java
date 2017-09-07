@@ -33,14 +33,7 @@ public interface FavoriteService {
 	 */
 	public void deleteRemoveFavorite(Favorite favorite)throws Exception;
 
-	/**
-	 * 관심작품 목록 조회
-	 *  @param favorite - 관심작품이 저장된 BEans
-	 *  @return List- 관심작품 목록
-	 * @throws Exception
-	 */
-	public List<Favorite> selectFavoriteList(Favorite favorite) throws Exception;
-	
+
 	/**
 	 *  전체 관심작품 목록 조회
 	 *  @param favorite - 관심작품이 저장된 BEans
@@ -64,5 +57,13 @@ public interface FavoriteService {
 	 */
 	public List<Favorite> selectfavoriteStateList(Favorite favorite) throws Exception;
 	
+	/**
+	 * 검색 게시글 목록 조회
+	 * 
+	 * @param article 카테고리 정보가 저장된 Beans
+	 * @return List - 게시물 목록
+	 * @throws Exception
+	 */
+	public List<Favorite> selectArticleListForBest(Favorite favorite) throws Exception;
 	
 }

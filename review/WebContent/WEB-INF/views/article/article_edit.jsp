@@ -18,7 +18,7 @@
 
 </head>
 <body>
-	  <jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
+	  <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
 	  <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
 
 	<!-- 메인 화면 시작 -->
@@ -69,7 +69,7 @@
 		</div>       
      <!-- keyword -->
 		<div class="form-group">
-			<label for="category" class="col-sm-2 control-label">keyword</label>
+			<label for="category" class="col-sm-2 control-label">category</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="category" name="category"  value="${readArticle.category}"/>
 			</div>
@@ -83,7 +83,7 @@
 		</div>
 		<!-- 내용 -->
 		<div class="form-group">
-			<label for="content" class="col-sm-2 control-label">내용</label>
+			<label for="content" class="col-sm-2 control-label">content</label>
 			<div class="col-sm-10">
 			<textarea id="content" name="content" style="width: 100%; height: 240px;" placeholder="what's your experience?">${readArticle.content}</textarea>			
 			</div>

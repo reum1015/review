@@ -28,7 +28,7 @@ public class OptionsMobile extends BaseController {
 		/** (3) 로그인 여부 검사 */
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
 		if (web.getSession("loginInfo") == null) {
-			web.redirect(web.getRootPath() + "/main", "you should login");
+			web.redirect(web.getRootPath() + "/index", "login is required");
 			return null;
 		}
 		

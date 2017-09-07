@@ -9,7 +9,11 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/legalmenu.css" />
 
-
+<style type="text/css">
+.legal_form  {
+padding-left: 40px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/template/topbar.jsp" />
@@ -18,7 +22,7 @@
 
 	<div class="containers" >
 		<!-- 왼쪽 정보편집부분 -->
-		<div id="" class="legal_basic col-lg-2 col-md-3 hidden-sm hidden-xs">
+		<div id="" class="legal_basic col-lg-2 col-md-3 col-sm-3  hidden-xs">
 			<div class="btn btn-link">
 				<a href="${pageContext.request.contextPath}/admin/manage_article">
 				<font	size="5">Manage Article</font></a>
@@ -43,7 +47,7 @@
 		</div>
 		<!--// 왼쪽 정보편집부분 -->	
 		<!-- 오른쪽 내용 -->	
-		<div id="" class="legal_form col-lg-8  col-md-7 col-sm-12 col-xs-12">
+		<div id="" class="legal_form col-lg-8  col-md-7 col-sm-7 col-xs-12">
 			<fieldset>
 				<legend><h1>Manage User</h1></legend>
 			<form class="form-horizontal" name="sign_up_form" method="post" id="myform"
@@ -74,12 +78,15 @@
 	                 
 						<button type="submit" class="btn btn-warning btn-block">Save Setting</button>							
                      </div>
-                     </form>	
-
+                     </form>
 			</fieldset>
+				<br/>	
+    <br/>	
+      <br/>	
+      <br/>	
+    <br/>	
 		</div>		
 		<!-- 오른쪽 내용 -->
-
 	</div>
 
 	<!-- footer -->

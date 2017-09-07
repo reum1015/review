@@ -106,13 +106,13 @@ public class CommentEditOk extends BaseController {
 		/** (5) 입력 받은 파라미터에 대한 유효성 검사 */
 		if (comment_id == 0) {
 			sqlSession.close();
-			web.printJsonRt("덧글 번호가 없습니다.");
+			web.printJsonRt("there is no comment_id.");
 			return null;
 		}	
 
 		if (!regex.isValue(content)) {
 			sqlSession.close();
-			web.printJsonRt("내용을 입력하세요.");
+			web.printJsonRt("content fild is required.");
 			return null;
 		}
 

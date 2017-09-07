@@ -16,16 +16,16 @@ body{
 }
 
 .topmenu-brands{
-	margin-top: 18px;
-	margin-left: 120px;
+	margin-top: 5px;
+	margin-left: 130px;
 }
 .topmenu-brands-sm{
-	margin-top: 18px;
+	margin-top: 5px;
 	margin-left: 80px;
 }
 .topmenu-icon{
-    margin-top: 7px;
-	margin-left: -2px;
+    margin-top: 5px;
+	margin-left: -5px;
 }
 .topmenu-search {
 	margin-top: 10px;
@@ -49,18 +49,18 @@ body{
   <!-- not login top_bar -->	
  <div class="topmenu-main col-lg-12 col-md-12 col-sm-12 col-xs-12">
      <!-- top_main big-->
-	<div class="col-lg-4 col-md-4 hidden-sm hidden-xs">       
+	<div class="col-lg-4 hidden-md hidden-sm hidden-xs">       
        <a class="topmenu-brands" href="${pageContext.request.contextPath}/index">
-	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.png"
-	height="50px" width="200px"  />
+	<img alt="title" src="${pageContext.request.contextPath}/assets/imgs/img/title.png"
+	height="55px" width="200px" style="margin-top: 5px;" />
 	</a>
 	</div>	
        <!--// top_main big-->
         <!-- top_main sm-->
-	<div class="hidden-lg hidden-md  col-sm-4 hidden-xs">       
+	<div class="hidden-lg col-md-3 col-sm-4 hidden-xs">       
        <a class="topmenu-brands-sm" href="${pageContext.request.contextPath}/index">
-	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.png"
-	height="50px" width="200px" />
+	<img alt="title" src="${pageContext.request.contextPath}/assets/imgs/img/title.png"
+	height="55px" width="200px" style="margin-top: 5px;" />
 	</a>
 	</div>	
        <!--// top_main sm-->              
@@ -82,8 +82,8 @@ placeholder="Search" value="${keyword}" />
          <!-- top_main small-->
        <div class="topmenu-icon hidden-lg hidden-md hidden-sm col-xs-1" >       
        <a class="topmenu-icon" href="${pageContext.request.contextPath}/index" >
-	<img alt="main" src="${pageContext.request.contextPath}/assets/icon/reviewicon.png"
-	 height="50px" width="50px"  />
+	<img alt="reviewicon" src="${pageContext.request.contextPath}/assets/icon/reviewicon.png"
+	 height="45px" width="50px" style="margin-top: 3px;" />
 	</a>	
        </div>
        <!--// top_main small-->
@@ -107,7 +107,15 @@ placeholder="Search" value="${keyword}" />
        <a class="topmenu-sign" href="${pageContext.request.contextPath}/member/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up /</a>       
        <a class="topmenu-log" href="${pageContext.request.contextPath}/member/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a>
        </div>	
-       <!--// top_login -->    
+       <!--// top_login -->  
+       <!-- top_article -->
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs pull-right" style="margin-right: 10px;">
+		<a href="${pageContext.request.contextPath}/article/article_list_main" data-toggle="modal" data-target="" class="navbar-brand glyphicon glyphicon-th-list" style="color:#DF0101"></a>		
+		</div>
+       <div class="hidden-lg hidden-md col-sm-1 col-xs-1 pull-right" style="margin-right: 10px;">
+		<a href="${pageContext.request.contextPath}/article/article_list_main_mobile" data-toggle="modal" data-target="" class="navbar-brand glyphicon glyphicon-th-list" style="color:#DF0101"></a>		
+		</div>
+		<!--// top_article -->    
 	</div>
 	<!--// not login top_bar -->	
 		</c:when>	
@@ -116,16 +124,16 @@ placeholder="Search" value="${keyword}" />
 	<!-- top_main big-->
 	<div class="col-lg-3 col-md-3 hidden-sm hidden-xs">       
        <a class="topmenu-brands" href="${pageContext.request.contextPath}/index">
-	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.png"
-	height="50px" width="200px" />
+	<img alt="title" src="${pageContext.request.contextPath}/assets/imgs/img/title.png"
+	height="55px" width="200px" style="margin-top: 5px;" />
 	</a>
 	</div>	
        <!--// top_main big-->
        <!-- top_main sm-->
 	<div class="hidden-lg hidden-md  col-sm-4 hidden-xs">       
        <a class="topmenu-brands-sm" href="${pageContext.request.contextPath}/index">
-	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/title.png"
-	height="50px" width="200px" />
+	<img alt="title" src="${pageContext.request.contextPath}/assets/imgs/img/title.png"
+	height="55px" width="200px" style="margin-top: 5px;" />
 	</a>
 	</div>	
        <!--// top_main sm-->
@@ -147,8 +155,8 @@ placeholder="Search" value="${keyword}" />
          <!-- top_main small-->
        <div class="topmenu-icon hidden-lg hidden-md hidden-sm  col-xs-1" >       
        <a class="topmenu-icon" href="${pageContext.request.contextPath}/index" >
-	<img alt="main" src="${pageContext.request.contextPath}/assets/icon/reviewicon.png"
-	 height="50px" width="50px"  />
+	<img alt="reviewicon" src="${pageContext.request.contextPath}/assets/icon/reviewicon.png"
+	 height="45px" width="50px" style="margin-top: 3px;" />
 	</a>	
        </div>
        <!--// top_main small-->            

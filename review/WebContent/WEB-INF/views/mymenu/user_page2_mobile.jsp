@@ -8,7 +8,18 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/mypage.css" />
 
+<style type="text/css">
+.menu-bar {	
+margin-top: 30px;
+margin-bottom: 30px;
+}
 
+.user-menu-bar {
+height: 50px;
+background-color: #efefef;
+border-radius: 18px;
+}
+</style>
 
 </head>
 <body>
@@ -20,52 +31,54 @@
 	<div class="container">
 	<div class="container_mypage ">
 	<!-- page header -->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">						
+					<div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">						
 							<c:url var="downloadUrl" value="/download">
 				 <c:param name="file" value="${readMember.imagePath}" />
 			       </c:url>			
-						<div style="text-align: left; margin-top: 2px;">
+						<div style="margin-top: 2px; margin-left: -35px; margin-right: -10px;">
 						<!-- 이미지 화면에 출력 -->
 						<c:choose>
 						<c:when test="${readMember.imagePath != null}">
-								<a class="profile_img pull-left col-lg-4 col-md-4 col-sm-4 col-xs-5">
+								<a class="profile_img pull-left col-lg-offset-1 col-lg-4  col-md-4 col-sm-3 col-xs-5">
 		             <img src="${downloadUrl}" class="img-circle img-responsive" style="margin: auto" />
 			           </a>	
 									</c:when>
 									<c:otherwise>
-									<a class="profile_img pull-left col-lg-3 col-md-3 col-sm-4 col-xs-6">
+						<a class="profile_img pull-left col-lg-offset-1 col-lg-4  col-md-4 col-sm-3 col-xs-5">
 						<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-circle img-responsive"/>
 									</a>
 									</c:otherwise>
 								</c:choose>		
 			           <!-- 이미지 화면에 출력 -->
 			           <!-- 작성자 + 소개 -->			           
-			           <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1" style="overflow: auto; width: auto; max-height: 80px;">
-					<small><font size="4" color="#000069"> ${readMember.nick_name}</font></small>
+			           
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-1" style="overflow: auto; width: auto; margin-left: -10px; margin-right: -10px">
+					<small><font size="4" color="#585858">${readMember.nick_name}</font></small>
 						<br /> 
-						
-					<small><font size="4" color="#000069" >${readMember.introduce}</font></small> 
+		
+<textarea disabled id="introduce" name="introduce"  placeholder="about you" style="overflow: auto; width: auto; height: 100px; text-align: left; border:0; resize: none; background-color:#fff; ">
+${readMember.introduce} 
+</textarea> 			
 								</div>
 						 	<!--// 작성자 + 소개 -->
 						 	<!-- 설정 -->
 						<c:if test="${readMember.id==loginInfo.id}">
-						<a class="navbar-brand glyphicon glyphicon-cog col-lg-offset-5 col-lg-1 col-md-offset-5 col-md-1 hidden-sm hidden-xs" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em;"></a>
-	                      <a class="pull-right navbar-brand glyphicon glyphicon-cog hidden-lg hidden-md col-sm-1 col-xs-1" href="${pageContext.request.contextPath}/mymenu/options_mobile" style="font-size: 1.5em;"></a>	  
+						<a class="navbar-brand glyphicon glyphicon-cog col-lg-offset-6 col-lg-1 col-md-offset-4 col-md-1 hidden-sm hidden-xs" href="${pageContext.request.contextPath}/mymenu/account_info" style="font-size: 1.5em; color:#777;  "></a>
+	                      <a class="pull-right navbar-brand glyphicon glyphicon-cog hidden-lg hidden-md col-sm-1 col-xs-1" href="${pageContext.request.contextPath}/mymenu/options_mobile" style="font-size: 1.5em; color:#777; "></a>	  
 	                              </c:if> 	
 	                              <!--// 설정 -->											
 								<br /> 											
 								</div>
 									<br />
 						<!-- my page + book mark -->
-						<div class="btn-group btn-block">
-					<a href="${pageContext.request.contextPath}/mymenu/user_page_mobile?member_id=${readMember.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-list" style="font-size: 1.5em;"></i></a>
-				<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-th-large" style="font-size: 1.5em;"></i></a>
-	           <!-- 이부분 login info 가 아니라 몬가로 바꿔야함 -->		
-				<c:if test="${readMember.id==loginInfo.id}">
-				<a href="${pageContext.request.contextPath}/mymenu/bookmarkList_mobile?member_id=${loginInfo.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 1.5em;"></i></a>
+						<div class="btn-group btn-block menu-bar col-lg-offset-1 col-md-offset-1" style="margin-left: -25px;">
+					<a href="${pageContext.request.contextPath}/mymenu/user_page_mobile?member_id=${readMember.id}" class=" col-lg-4  col-md-4  col-sm-4 col-xs-6 btn btn-white btn-large "><span class="user-menu-bar btn btn-large"><font size="5" color="#FF8000" >Boards</font></span></a>
+				<a href="#" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large "><span class="user-menu-bar btn btn-large"><font class="user-menu-bar" size="5" color="#FF8000">List</font></span></a>
+	         <c:if test="${readMember.id==loginInfo.id}">
+				<a href="${pageContext.request.contextPath}/mymenu/bookmarkList_mobile?member_id=${loginInfo.id}" class="col-lg-4 col-md-4 col-sm-4 col-xs-2 btn btn-white btn-large"><span class=" btn btn-large"><i class="glyphicon glyphicon-bookmark" style="font-size: 2.3em;  color:#FF8000; "></i></span></a>
                	</c:if>
 					</div>
-				<!--// my page + book mark -->								
+				<!--// my page + book mark -->		
 							</div>	
 	<!--// page menu bar -->
 		<!-- member article  -->
@@ -75,8 +88,8 @@
 		    		<c:when test="${fn:length(memberarticleList) > 0}">
 		    			<c:forEach var="article" items="${memberarticleList}">
 		    				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-		    				<div class="thumbnail">
-		    				<c:url var="readUrl" value="/article/article_read">
+		    				<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		    				<c:url var="readUrl" value="/article/article_read_mobile">
 					            <c:param name="article_id" value="${article.id}" />
 					            	</c:url>					            	
 					            	<!-- 링크 + 썸네일 -->
@@ -86,22 +99,22 @@
 										<c:url var="downloadUrl" value="/download">
 											<c:param name="file" value="${article.imagePath}" />
 										</c:url>
-										<img src="${downloadUrl}" class="img-responsive"/>
+										<img src="${downloadUrl}" class="img-responsive img-rounded"/>
 									</c:when>
 									<c:otherwise>
-										<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive"/>
+									<img src="${pageContext.request.contextPath}/assets/imgs/img/no_image_article.png" height="190px" width="220px" class="img-rounded img-responsive"/>
 									</c:otherwise>
 								</c:choose>
 							</a>
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
-					            	<div class="item">
-								<h4><font size="4" color="#000069"> ${article.title} </font></h4>								
-								<div class="clearfix">
-									<div class="pull-left">${article.reg_date}</div>
-									<div class="pull-right"><font size="4" color="#000069">	${article.category}</font></div>
-								</div>
-							</div>
+					         	<div class="item">
+					            	<h6  ><font size="4" color="#FF8000">	${article.category}</font></h6>
+								<h4 style="overflow:hidden;white-space:nowrap; text-overflow:ellipsis; width:auto;"><font size="4" color="#a0a0a0"> ${article.title} </font></h4>								
+								<div class="clearfix">	
+								<div class="pull-right"><font size="2" color="#000">${article.reg_date}</font></div>
+								</div>								
+							</div>		
 							<!--// 제목 + 작성자 + 조회수 -->
 		    				</div>
 		    				</div>

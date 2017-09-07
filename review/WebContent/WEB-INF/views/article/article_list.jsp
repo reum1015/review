@@ -9,64 +9,48 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
 <!-- Javascript -->
 <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/assets/js/tab-x/bootstrap-tabs-x.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/tab-x/bootstrap-tabs-x.min.js"></script>
 
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- StarRating -->
-<link
-	href="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.css"
+<link	href="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.css"
 	media="all" rel="stylesheet" type="text/css" />
 
 <!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
-<link
-	href="${pageContext.request.contextPath}/assets/css/star-rating/theme.css"
+<link	href="${pageContext.request.contextPath}/assets/css/star-rating/theme.css"
 	media="all" rel="stylesheet" type="text/css" />
 
 
-<link
-	href="${pageContext.request.contextPath}/assets/css/selectbox/css/bootstrap-select.css"
+<link	href="${pageContext.request.contextPath}/assets/css/selectbox/css/bootstrap-select.css"
 	media="all" rel="stylesheet" type="text/css" />
 
 <!-- important mandatory libraries -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-<script
-	src="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.js"
+<script src="${pageContext.request.contextPath}/assets/css/star-rating/star-rating.js"
 	type="text/javascript"></script>
 
 <!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
-<script
-	src="${pageContext.request.contextPath}/assets/css/star-rating/theme.js"></script>
-<script
-	src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/css/star-rating/theme.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 
 <!-- Multi-column -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/plugins/multi-column/ie-row-fix.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/multi-column/ie-row-fix.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css" />
 
 <!-- handlebars -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/plugins/handlebars/handlebars-v4.0.5.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/handlebars/handlebars-v4.0.5.js"></script>
 
 <!-- ajax -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.css" />
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/ajax/ajax_helper.js"></script>
 
 <!-- ajaxForm -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/ajax-form/jquery.form.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/ajax-form/jquery.form.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 <!-- main css -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/article_list.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_list.css" />
 
 <style type="text/css">
 .chk_bookmark label {
@@ -131,6 +115,10 @@
 	font-family: arial;
 	font-weight: normal;
 }
+
+textarea: focus {
+  outline: none;
+}
 </style>
 
 <script type="text/javascript">
@@ -170,8 +158,7 @@
 			 							articleListTotal = Number(articleListTotal);
 			 							
 			 	
-			 							if(isLikeState){
-			 								alert("Like added");
+			 							if(isLikeState){			 								
 			 								$("#article_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
 			 								$("#articleList_" + article_id).empty().append('<span class="like_On pull-right" id="like_img"></span>');
 			 								articleTotal++;
@@ -179,8 +166,7 @@
 			 								
 			 								$("#articleTotal_" + article_id).html(articleTotal);
 			 								$("#articleListTotal_" + article_id).html(articleListTotal);
-			 							}else{
-			 								alert("Like removed");
+			 							}else{			 								
 			 								$("#article_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
 			 								$("#articleList_" + article_id).empty().append('<span class="like_Off pull-right" id="like_img"></span>');
 			 								
@@ -239,11 +225,11 @@
 									
 									
 									if(isBookMarkState){
-										alert("Bookmark added");
+										
 		 								$("#bookmark_" + article_id).empty().append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
 		 								$("#bookmarkList_" + article_id).empty().append('<span class="bookmark_On pull-right" id="bookmark_img"></span>');
 									}else{							
-										alert("Bookmark removed");
+										
 		 								$("#bookmark_" + article_id).empty().append('<span class="bookmark_Off pull-right" id="bookmark_img"></span>');
 		 								$("#bookmarkList_" + article_id).empty().append('<span class="bookmark_Off pull-right" id="bookmark_img"></span>');
 									}
@@ -283,91 +269,100 @@
 	};
 	
 		
-		
 	});
 </script>
 
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/template/topbar.jsp" />
-	<jsp:include page="/WEB-INF/views/template/bottombar.jsp" />
+	
 
 	<!-- 메인 화면 시작 -->
 
 	<div class="container">
 
 		<!-- Best Review category -->
-		<div class="best-container">
-			<h1 class="page-header">
-				<small>Best Review about <font size="5" color="#282828">${keyword}</font></small>
+		<div class="best-container ">
+			<h1 class="page-header col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
+				<small><font size="5" color="#FF8000">${keyword}</font> Best Review  </small>
 			</h1>			
 			<!-- Best Review Content  -->
-			<div class="review-content row multi-columns-row">
+			<div class="review-content row multi-columns-row ">
 				<c:choose>
 					<c:when test="${fn:length(selectArticleListForBest) > 0}">
 						<c:forEach var="selectArticleListForBest" items="${selectArticleListForBest}">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
 								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<c:url var="readUrl" value="/article/article_read">
 										<c:param name="article_id" value="${selectArticleListForBest.id}" />
+										<c:param name="keyword" value="${keyword}" />
 									</c:url>
 									<c:url var="readUser" value="/mymenu/user_page">
 										<c:param name="member_id" value="${selectArticleListForBest.member_id}" />
 									</c:url>
+									<c:url var="searchButton" value="/article/article_search_button">
+										<c:param name="keyword" value="${keyword}" />
+									</c:url>
 									<!-- 링크 + 썸네일 -->
-									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> <c:choose>
+									<a href="${readUrl}" class="col-lg-3 col-md-3 col-sm-3 col-xs-6"> 
+									<c:choose>
 											<c:when test="${selectArticleListForBest.imagePath != null}">
 												<c:url var="downloadUrl" value="/download">
 													<c:param name="file" value="${selectArticleListForBest.imagePath}" />
 												</c:url>
-												<img src="${downloadUrl}" class="img-responsive img-rounded" />
+												<img alt="article image" src="${downloadUrl}" class="img-responsive img-rounded" />
 											</c:when>
 											<c:otherwise>
-												<img
-													src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg"
-													class="img-responsive" />
+												<img alt="noimage" src="${pageContext.request.contextPath}/assets/imgs/img/no_image_article.png" height="250px" width="300px" class="img-rounded img-responsive"/>
 											</c:otherwise>
 										</c:choose>
 									</a>
 									<!--// 링크 + 썸네일 -->
 									<!-- 제목 + 작성자 + 조회수 -->
-							<div class="item col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<a href="${readUser}"><font size="4" color="#FF8000">${selectArticleListForBest.nick_name}</font></a>
-										<div class="pull-right">${selectArticleListForBest.reg_date}</div>
-										<div>
-											<font size="4" color="#28282 "> keyword: </font> <font
+							<div class="item col-lg-9 col-md-9 col-sm-9 col-xs-6">
+										<a href="${readUser}"><font size="4" color="#585858">${selectArticleListForBest.nick_name}</font></a>
+								
+								<%-- <div class="pull-right ">
+								<a href="${searchButton}" style="font-size: 1.0em;">							
+							 <font size="4" color=#a0a0a0>More</font>
+							 </a>
+							 </div> --%>
+							 										<div>
+											<font size="4" color="#28282"> category: </font> <font
 												size="4" color="#a0a0a0"> ${selectArticleListForBest.category}</font>
 										</div>
 										<div>
 											<font size="4" color="#28282 ">title:</font><font size="4"
 												color="#a0a0a0"> ${selectArticleListForBest.title} </font>
+												<br/>
+												<div class="pull-right">${selectArticleListForBest.reg_date}</div>
 										</div>
 										<hr />
-										<div class="hidden-xs" style="overflow: auto; width: 100%; max-height: 180px;">
-											${selectArticleListForBest.content}
-											</div>
+<textarea readonly class="hidden-xs" style="overflow: auto; width: 100%; height: 180px; text-align: left; border: 0; resize: none; ">
+${selectArticleListForBest.content}
+</textarea>											
 										</div>
-										<div class="hidden-lg hidden-md hidden-sm col-xs-12" style="overflow: auto; width: 100%; max-height: 180px;">
-											${selectArticleListForBest.content}
-											</div>
+<textarea readonly class="hidden-lg hidden-md hidden-sm col-xs-12" style="overflow: auto; width: 100%; height: 180px; text-align: left;  border: 0; resize: none; ">
+${selectArticleListForBest.content}
+</textarea>
+										
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
 									<!-- like + comment + book mark 위에 화면-->
 									<div class="btn-group btn-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" > 
+									  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-2" > 
 											<font size="5" color="#FF0202" class="pull-right" id="articleTotal_${selectArticleListForBest.id}">${selectArticleListForBest.total_like}</font>
 		                                </div>
 										<a class="pull-left col-lg-1 col-md-1 col-sm-1 col-xs-1 btn btn-white btn-large like_button" id="article_${selectArticleListForBest.id}" value="${selectArticleListForBest.id}"> 
 											<span class="like_Off pull-left" id="like_img"></span>
 										</a> 
 										
-										<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+										<a href="${readUrl}" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font>
 										</a>
 										<a class="pull-right col-lg-3 col-md-3 col-sm-3 col-xs-3 btn btn-white btn-large bookmark_button" id="bookmark_${selectArticleListForBest.id}" 
 											value="${selectArticleListForBest.id}"> 
-											<span class="bookmark_Off pull-right" id="bookmark_img"></span>
+											<span class="bookmark_Off pull-right" id="bookmark_img" ></span>
 										</a> 		
 									</div>
 									<!--// like + comment + book mark -->
@@ -376,12 +371,13 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<tr>
-							<td colspan="5" class="text-center" style="line-height: 100px;">
-								No Post about ${keyword}. <br /> Why don't you be a first best
-								reviewer about ${keyword}
-							</td>
-						</tr>
+						<div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
+							<span class="text-center" style="line-height: 50px;">
+								No Post about <font size="5" color="#FF8000">${keyword}</font>. 
+								<br /> 
+								Why don't you be a first best	reviewer about <font size="5" color="#FF8000">${keyword}</font>
+							</span>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -450,15 +446,15 @@
 
 		<!-- Recent Review category -->			
 		<div class="recent-container">
-			<h1 class="page-header">
-				<small><font size="5" color="#282828">${keyword}</font>review </small>
+			<h1 class="page-header col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
+				<small><font size="5" color="#FF8000">${keyword}</font> review </small>
 			</h1>			
 			<!-- Recent Review Content  -->
 			<div class="review-content row multi-columns-row">
 				<c:choose>
 					<c:when test="${fn:length(articleList) > 0}">
 						<c:forEach var="article" items="${articleList}">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
 								<div class="thumbnail col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<c:url var="readUrl" value="/article/article_read">
 										<c:param name="article_id" value="${article.id}" />
@@ -466,8 +462,12 @@
 									<c:url var="readUser" value="/mymenu/user_page">
 										<c:param name="member_id" value="${article.member_id}" />
 									</c:url>
+									<c:url var="searchButton" value="/article/article_search_button">
+										<c:param name="keyword" value="${keyword}" />
+									</c:url>
 									<!-- 링크 + 썸네일 -->
-									<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> <c:choose>
+									<a href="${readUrl}" class="col-lg-3 col-md-3 col-sm-3 col-xs-6">  
+									<c:choose>
 											<c:when test="${article.imagePath != null}">
 												<c:url var="downloadUrl" value="/download">
 													<c:param name="file" value="${article.imagePath}" />
@@ -475,45 +475,47 @@
 												<img src="${downloadUrl}" class="img-responsive img-rounded" />
 											</c:when>
 											<c:otherwise>
-												<img
-													src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg"
-													class="img-responsive" />
+												<img src="${pageContext.request.contextPath}/assets/imgs/img/no_image_article.png" height="190px" width="220px" class="img-rounded img-responsive"/>
 											</c:otherwise>
 										</c:choose>
 									</a>
 									<!--// 링크 + 썸네일 -->
 									<!-- 제목 + 작성자 + 조회수 -->
-							<div class="item col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<a href="${readUser}"><font size="4" color="#FF8000">${article.nick_name}</font></a>
-										<div class="pull-right">${article.reg_date}</div>
+						<div class="item col-lg-9 col-md-9 col-sm-9 col-xs-6">
+							<a href="${readUser}"><font size="4" color="#585858">${article.nick_name}</font></a>							
+							<%-- <div class="pull-right "><a href="${searchButton}" style="font-size: 1.0em;">							
+							 <font size="4" color="#FF8000">More</font></a></div> --%>
 										<div>
-											<font size="4" color="#28282 "> keyword: </font> <font
-												size="4" color="#a0a0a0"> ${article.category}</font>
+											<font size="4" color="#28282 "> category: </font>
+											 <font size="4" color="#a0a0a0"> ${article.category}</font>
 										</div>
 										<div>
-											<font size="4" color="#28282 ">title:</font><font size="4"
-												color="#a0a0a0"> ${article.title} </font>
+											<font size="4" color="#28282 ">title:</font>
+											<font size="4" color="#a0a0a0"> ${article.title} </font>
+											<br/>
+											<div class="pull-right">${article.reg_date}</div>
 										</div>
 										<hr />
-										<div class="hidden-xs" style="overflow: auto; width: 100%; max-height: 180px;">
-											${article.content}
-											</div>
+<textarea readonly class="hidden-xs" style="overflow: auto; width: 100%; height: 180px; text-align: left; border: 0; resize: none; ">
+${article.content}
+</textarea>											
 										</div>
-										<div class="hidden-lg hidden-md hidden-sm col-xs-12" style="overflow: auto; width: 100%; max-height: 180px;">
-											${article.content}
-											</div>
+<textarea readonly class="hidden-lg hidden-md hidden-sm col-xs-12" style="overflow: auto; width: 100%; height: 180px; text-align: left;  border: 0; resize: none; ">
+${article.content}
+</textarea>
+										
 									<!--// 제목 + 작성자 + 조회수 -->
 									<br />
 									<!-- like + comment + book mark 위에 화면-->
 									<div class="btn-group btn-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" > 
+									    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-2" > 
 											<font size="5" color="#FF0202" class="pull-right" id="articleListTotal_${article.id}">${article.total_like}</font>
 		                                </div>
 										<a class="pull-left col-lg-1 col-md-1 col-sm-1 col-xs-1 btn btn-white btn-large like_button" id="articleList_${article.id}" value="${article.id}"> 
 											<span class="like_Off pull-left" id="like_img"></span>
 										</a> 
 										
-										<a href="${readUrl}" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-white btn-large">
+										<a href="${readUrl}" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 btn btn-white btn-large">
 											<font color="#a0a0a0"><i class="">Comment</i></font>
 										</a>
 										<a class="pull-right col-lg-3 col-md-3 col-sm-3 col-xs-3 btn btn-white btn-large bookmark_button" id="bookmarkList_${article.id}" 
@@ -534,12 +536,13 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<tr>
-							<td colspan="5" class="text-center" style="line-height: 100px;">
-								No Post about ${keyword}. <br /> Why don't you be a first best
-								reviewer about ${keyword}
-							</td>
-						</tr>
+					<div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
+							<span class="text-center" style="line-height: 50px;">
+								No Post about <font size="5" color="#FF8000">${keyword}</font>. 
+								<br /> 
+								Why don't you be a first reviewer about <font size="5" color="#FF8000">${keyword}</font>
+							</span>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -603,15 +606,16 @@
 			<!--// Recent page number  -->			
 		</div>
 		<!--// Recent Review category -->
-
-			
-
-	
 </div>
 	<!-- 메인 화면 끝 -->
 
 	<!-- footer -->
+	<jsp:include page="/WEB-INF/views/template/topbar.jsp" />
+	<jsp:include page="/WEB-INF/views/template/bottombar.jsp" />
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+
+
 
 
 </body>

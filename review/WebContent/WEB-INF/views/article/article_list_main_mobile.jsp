@@ -7,21 +7,14 @@
 <head>
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
  
- <!-- main css --> 
+ <!-- main css -->
+ 
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_list_main.css" />
 
 <style type="text/css">
-  	/* 게시물 항목 하나 */
-	.item { padding: 0px 5px; }
-	/* 게시물 제목 */
-	.item h4 { margin-top: 10px; margin-bottom: 5px; }
-	/* 썸네일 이미지 크기 */
-	.img-responsive { 
-	width: 100%;	
-	}
-	.recent-container {
-	margin-top: 55px;
-	}
+.container {
+margin-top: -35px;
+}
 </style>
 
 </head>
@@ -42,38 +35,37 @@
 		    	<c:choose>
 		    		<c:when test="${fn:length(articleList) > 0}">
 		    			<c:forEach var="article" items="${articleList}">
-		    				
 		    				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 		    				<div class="thumbnail">
 		    				<c:url var="readUrl" value="/article/article_read_mobile">
-					            		<c:param name="article_id" value="${article.id}" />
+					            <c:param name="article_id" value="${article.id}" />
 					            	</c:url>
 					            	<c:url var="readUser" value="/mymenu/user_page_mobile">					            						            	
 					            		<c:param name="member_id" value="${article.member_id}" />
 					            	</c:url>
 					            	<!-- 링크 + 썸네일 -->
 					            	<a href="${readUrl}">
-								<c:choose>								
-									<c:when test="${article.imagePath != null}">									
+								<c:choose>
+									<c:when test="${article.imagePath != null}">
 										<c:url var="downloadUrl" value="/download">
 											<c:param name="file" value="${article.imagePath}" />
-										</c:url>										
-										<img src="${downloadUrl}" class="img-responsive img-rounded"/>
+										</c:url>
+										<img alt="image" src="${downloadUrl}" class="img-responsive img-rounded"/>
 									</c:when>
-									<c:otherwise>									
-										<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive"/>									
+									<c:otherwise>
+									<img alt="noimage" src="${pageContext.request.contextPath}/assets/imgs/img/no_image_article.png" height="190px" width="220px" class="img-rounded img-responsive"/>
 									</c:otherwise>
 								</c:choose>
 							</a>
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
-					            	<div class="item">
-								<h4><font size="3" color="#000069"> ${article.title} </font></h4>
-								<div><font size="3" color="#000000"><a href="${readUser}">${article.nick_name}</a></font></div>
-								<div class="clearfix">
-									<div class="pull-left">${article.reg_date}</div>
-									<div class="pull-right"><font size="3" color="#000069">	${article.category}</font></div>
-								</div>
+					            <div class="item">
+					            	<h6  ><font size="4" color="#FF8000">	${article.category}</font></h6>
+								<h4 style="overflow:hidden;white-space:nowrap; text-overflow:ellipsis; width:auto;"><font size="4" color="#a0a0a0"> ${article.title} </font></h4>								
+								<div><a href="${readUser}"><font size="4" color="#585858">${article.nick_name}</font></a></div>
+								<div class="clearfix">	
+								<div class="pull-right"><font size="2" color="#000">${article.reg_date}</font></div>
+								</div>								
 							</div>
 							<!--// 제목 + 작성자 + 조회수 -->
 		    				</div>

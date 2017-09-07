@@ -69,7 +69,7 @@ public class WebHelper {
 		
 		//페이지 이동 없이 세션이 유지되는 시간 설정 (초)
 		// --> 24시간
-		this.session.setMaxInactiveInterval(60*60*24);
+		this.session.setMaxInactiveInterval(60*60*48);
 
 		/** 내장객체 초기화 -> utf-8 설정, out객체 생성 */
 		try {

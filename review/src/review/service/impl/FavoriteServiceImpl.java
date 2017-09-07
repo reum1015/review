@@ -34,7 +34,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 			result = sqlSession.selectOne("FavoriteMapper.selectCountFavoriteArticleById", favorite);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("Like 등록여부 조회에 실패했습니다.");
+			throw new Exception("Like count fail.");
 		}
 
 		return result;
@@ -53,20 +53,18 @@ public class FavoriteServiceImpl implements FavoriteService {
 			}
 		}catch (NullPointerException e) {		
 			sqlSession.rollback();
-			throw new Exception("관심등록  정보가 없습니다.");
+			throw new Exception("it's failt add favorite.");
 		}catch (Exception e) {			
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("관심등록 추가에 실패했습니다.");
+			throw new Exception("it';s failt to add favorite");
 		}finally {
 			sqlSession.commit();
 		}
 		
 		return 0;
 	}
-
-
-
+	
 	@Override
 	public void deleteRemoveFavorite(Favorite favorite) throws Exception {
 	
@@ -77,36 +75,15 @@ public class FavoriteServiceImpl implements FavoriteService {
 			}
 		}catch (NullPointerException e) {		
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+			throw new Exception("this article doesnot exist");
 		}catch (Exception e) {			
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("관심등록 해제에 실패 했습니다.");
+			throw new Exception("it's fail to delete favoriilte");
 		}finally{
 			sqlSession.commit();
 		}
 	}
-
-
-
-	@Override
-	public List<Favorite> selectFavoriteList(Favorite favorite) throws Exception {
-		List<Favorite> result = null;
-		try {
-			result = sqlSession.selectList("FavoriteMapper.selectFavoriteList", favorite);
-			if (result == null) {
-				throw new NullPointerException();
-			}
-		} catch (NullPointerException e) {
-			throw new Exception("검색한 좋아요 조회된 글 목록이 없습니다.");
-		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
-			throw new Exception("검색한 좋아요 글 목록 조회에 실패했습니다.");
-		}
-		return result;
-	}
-
-
 
 	@Override
 	public int selectFavoriteCount(Favorite favorite) throws Exception {
@@ -117,7 +94,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 			result = sqlSession.selectOne("FavoriteMapper.selectFavoriteCount", favorite);
 		} catch(Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("관심작품 수 조회에 실패했습니다. ");
+			throw new Exception("it's fail to load favorite article");
 		}
 		
 		return result;
@@ -134,7 +111,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 		}catch(Exception e){
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("게시글 좋아요 삭제에 실패했습니다.");
+			throw new Exception("it's fail to delete article bc of like");
 		}finally{
 			sqlSession.commit();
 		}
@@ -150,7 +127,26 @@ public class FavoriteServiceImpl implements FavoriteService {
 			
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("검색한 좋아요 글 목록 조회에 실패했습니다.");
+			throw new Exception("fail to load favorite article");
+		}
+		return result;
+	}
+
+
+
+	@Override
+	public List<Favorite> selectArticleListForBest(Favorite favorite) throws Exception {
+		List<Favorite> result = null;
+		try {
+			result = sqlSession.selectList("FavoriteMapper.selectArticleListForBest", favorite);
+			if (result == null) {
+				throw new NullPointerException();
+			}
+		} catch (NullPointerException e) {
+			throw new Exception("this article does not exist.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("fail to load aritlce.");
 		}
 		return result;
 	}

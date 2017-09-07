@@ -57,7 +57,7 @@ public class ArticleEdit extends BaseController {
                   
          /** (3) 로그인 여부 검사 */      
          Member loginInfo = (Member) web.getSession("loginInfo");
-         // 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
+       
             if(web.getSession("loginInfo") == null){
                   sqlSession.close();
                   web.redirect(web.getRootPath() + "/index", "you need log in.");
@@ -86,7 +86,7 @@ public class ArticleEdit extends BaseController {
          logger.debug("member_id=" + member_id);
                
          if (article_id == 0) {
-            web.redirect(null, "글 번호가 지정되지 않았습니다.");
+            web.redirect(null, "do not get article_id number.");
             sqlSession.close();
             return null;
          }
@@ -123,7 +123,7 @@ public class ArticleEdit extends BaseController {
             readArticle = articleService.selectArticle(article);
             
             if(loginInfo.getId() != readArticle.getMember_id()) {
-                web.redirect(null, "접근이 제한된 페이지 입니다.");
+                web.redirect(null, "it's not your page.");
                 return null;
              }
            

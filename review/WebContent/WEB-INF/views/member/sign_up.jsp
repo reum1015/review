@@ -112,8 +112,8 @@ $(function() {
 		<!-- introduce -->
 		<div class="login_intro col-lg-7 col-md-7 col-sm-7 hidden-xs">
 			<a class="login_img" href="#">
-	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/login.png"
-	height="480px" width="100%" />
+	<img alt="signup" src="${pageContext.request.contextPath}/assets/imgs/img/login.png"
+	height="400px" width="100%" />
 	</a>
 				</div>
 		<!--// introduce -->		
@@ -122,7 +122,7 @@ $(function() {
 	<div class="sign_up_form">
 		<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">		
 				<fieldset>
-						<legend>Review&Bang</legend>
+						<legend>Review&amp;Bang</legend>
 						
 			<form class="form-horizontal" name="sign_up_form" method="post" id="myform"
       action="${pageContext.request.contextPath}/member/sign_up_ok">
@@ -171,7 +171,7 @@ $(function() {
 						<button type="submit" class="btn btn-warning btn-block">Sign Up</button>							
                      </div>
                      <p>By signing up, you agree to the 
-                     <a href="${pageContext.request.contextPath}/legal/Privacy">Privacy Policy</a>& 
+                     <a href="${pageContext.request.contextPath}/legal/Privacy">Privacy Policy</a>&amp; 
 	                <a href="${pageContext.request.contextPath}/legal/Terms">Terms of Service.</a>
 	                </p> 
                      </form>		

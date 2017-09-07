@@ -19,23 +19,21 @@
 					
 	
 	<!-- 나눔고딕 웹 폰트 적용 -->
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/nanumfont.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/opensans.css"/>
 		<!-- bootstrap-tabs-x  -->		
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/js/tab-x/bootstrap-tabs-x.min.css"/>
-		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		
 			
 	
 		
 		<!-- Multi-column -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/multi-column/ie-row-fix.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css" />
-		<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/image-upload/bootstrap-imageupload.min.js"></script>
-		
+	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/plugins/multi-column/multi-columns-row.css" />	
 		<!-- Twitter Bootstrap3 & jQuery -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
-	<script src="http://code.jquery.com/jquery.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="https://code.jquery.com/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-latest.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	
 		

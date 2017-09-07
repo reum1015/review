@@ -11,13 +11,6 @@
 <!-- main css -->
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/assets/css/article_list.css" />
 
-
-<style type="text/css">
-
-</style>
-
-
-
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/template/topbar.jsp" />

@@ -75,7 +75,7 @@ public class ArticleDeleteOk extends BaseController {
 		logger.debug("article_id" + article_id);
 				
 		if (article_id == 0) {
-			web.redirect(null, "글 번호가 지정되지 않았습니다.asd");
+			web.redirect(null, "I do not get aritlce_id number");
 			sqlSession.close();
 			return null;
 		}

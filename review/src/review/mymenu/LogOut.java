@@ -32,7 +32,7 @@ public class LogOut extends BaseController {
 		Member loginInfo = (Member) web.getSession("loginInfo");
 		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
 		if(loginInfo==null){
-			web.redirect(web.getRootPath() + "/main", "로그인 후에 이용 가능합니다.");
+			web.redirect(web.getRootPath() + "/index", "login is required");
 			return null;
 		}		
 		

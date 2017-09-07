@@ -121,11 +121,9 @@ public class SignUpOk extends BaseController {
 		/** (9) 가입이 완료되었으므로 메인페이지로 이동 */
 		sqlSession.close();
 		
+		web.redirect(web.getRootPath() + "/member/login", "Welcom to Review&Bang. " + nick_name);
 		
-		String view = "member/login";
-		/** 로그인 페이지로 변경 member/login */
-		return view;
-
+		return null;		
 		
 	}
 

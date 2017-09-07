@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import review.dao.MybatisConnectionFactory;
 import review.jsp.helper.BaseController;
+import review.jsp.helper.RegexHelper;
 import review.jsp.helper.WebHelper;
 import review.model.Member;
 import review.service.MemberService;
@@ -27,7 +28,8 @@ public class ManageAdminUpdate extends BaseController {
 	/** (1) 사용하고자 하는 Helper+Service 객체 선언 */
 	Logger logger;
 	SqlSession sqlSession;
-	WebHelper web;	
+	WebHelper web;
+	RegexHelper regex;	
 	MemberService memberService;
 	
 	@Override
@@ -35,14 +37,24 @@ public class ManageAdminUpdate extends BaseController {
 			throws ServletException, IOException {
 		
 		/** (2) 사용하고자 하는 Helper+Service 객체 생성 */
-		logger = LogManager.getFormatterLogger(request.getRequestURI());
+		logger = LogManager.getFormatterLogger(request.getRequestURI());	
 		sqlSession = MybatisConnectionFactory.getSqlSession();
 		web = WebHelper.getInstance(request, response);
+		regex = RegexHelper.getInstance();		
 		memberService = new MemberServiceImpl(sqlSession, logger);
+	
 		
+		
+	
+	
+				
+				
+				
 		/** (4) 파라미터 받기 */		
 		int id = web.getInt("id");
-
+		String member_level = web.getString("member_level");
+		logger.debug("member_level=======================" + member_level);
+		System.out.println("member_level ------------> " + member_level.toString());
 		// 전달받은 파라미터는 값의 정상여부 확인을 위해서 로그로 확인		
 		logger.debug("id=======================" + id);
 		
@@ -50,6 +62,7 @@ public class ManageAdminUpdate extends BaseController {
 		/** (7) 전달받은 파라미터를 Beans 객체에 담는다. */
 		Member member = new Member();						
 		member.setId(id);
+		member.setMember_level(member_level);
 		
 		/** (6) 게시물 목록 조회 */
 		Member update_member_level = null;
@@ -64,9 +77,13 @@ public class ManageAdminUpdate extends BaseController {
 		}
 		
 		/** (7) 조회 결과를 View에 전달 */
-		request.setAttribute("update_member_level", update_member_level);		
-					
-		/** (13) 모든 절차가 종료되었으므로 DB접속 해제 후 페이지 이동 */
+		request.setAttribute("update_member_level", update_member_level);
+		request.setAttribute("member_level", member_level);
+		
+		web.removeSession("loginInfo");
+		web.setSession("loginInfo", update_member_level);			
+								
+			/** (13) 모든 절차가 종료되었으므로 DB접속 해제 후 페이지 이동 */
 	    String view = "admin/manage_admin";
         return view;
 	}	

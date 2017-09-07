@@ -22,7 +22,7 @@ background-color: #FF8000;
 
 </head>
 <body>
-	  <jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
+	  <jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
 	  <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
 
 	<!-- 메인 화면 시작 -->
@@ -33,30 +33,30 @@ background-color: #FF8000;
             action="${pageContext.request.contextPath}/article/article_write_ok">
             <!-- file upload -->
             <div class="form-group">
-            <label for="file" class="col-lg-12 col-md-12 col-sm-12 hidden-xs" >Photo</label>
+            <label for="file" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >Photo <font size="2" color="#A4A4A4" class="share">(under 6mb)</font></label>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <input type="file" class="form-control" id=file name="file" />
             </div>
             </div>            
              <!-- category -->
               <div class="form-group">
-            <label for="category" class="col-lg-12 col-md-12 col-sm-12 hidden-xs" >keyword</label>
-            <div class="col-lg-12 col-md-12 col-sm-8 col-xs-8">
+            <label for="category" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >category</label>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <input type="text" class="form-control col-xs-4" id="category" name="category" placeholder="category" />
             </div>
             </div>           
             <!-- title -->
              <div class="form-group">
-            <label for="title" class="col-lg-12 col-md-12 col-sm-12 hidden-xs" >title</label>
+            <label for="title" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >title</label>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <input type="text" class="form-control" id="title" name="title" placeholder="title" />
             </div>
              </div>
             <!-- content -->
              <div class="form-group">
-            <label for="content" class="col-lg-12 col-md-12 col-sm-12 hidden-xs" >content</label>
+            <label for="content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >content</label>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <textarea id="content" name="content" style="width: 100%; height: 150px;" placeholder="what's your experience?"></textarea>
+            <textarea id="content" name="content" style="width: 100%; height: 150px; resize: none;" placeholder="what's your experience?"></textarea>
             </div>
             </div>
             <div class="form-group">

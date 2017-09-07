@@ -39,6 +39,14 @@ public interface BookMarkService {
 	 */
 	public List<BookMark> selectBookMarkList(BookMark bookmark) throws Exception;
 	
+	
+	/**
+	 * 북막크 확인용 목록 조회
+	 *  @param episode - 에피소드가 저장된 BEans
+	 *  @return List- 에피소드 목록
+	 * @throws Exception
+	 */
+	public List<BookMark> selectBookMarkStateList(BookMark bookmark) throws Exception;
 	/**
 	 *  전체 북마크 목록 조회
 	 *  @param episode - 에피소드가 저장된 BEans

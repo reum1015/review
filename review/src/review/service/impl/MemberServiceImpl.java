@@ -143,8 +143,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updateAccountMember(Member member) throws Exception {
-		
+	public void updateAccountMember(Member member) throws Exception {		
 		try {
 			int result = sqlSession.update("MemberMapper.updateAccountMember", member);
 			if (result == 0) {
@@ -227,7 +226,7 @@ public class MemberServiceImpl implements MemberService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 프로필에 대한 요청입니다.");
+			throw new Exception("profile does not exist.");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
@@ -247,10 +246,10 @@ public class MemberServiceImpl implements MemberService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 회원정보이 없습니다.");
+			throw new Exception("this member does not exist");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("회원정보 조회에 실패했습니다....");
+			throw new Exception("failt to laod member profile....");
 		}
 		return result;
 	}
@@ -266,7 +265,7 @@ public class MemberServiceImpl implements MemberService {
 				result = sqlSession.selectOne("MemberMapper.selectAdminMemberCount", member);
 			} catch(Exception e) {
 				logger.error(e.getLocalizedMessage());
-				throw new Exception("회원 수 조회에 실패했습니다. ");
+				throw new Exception("fail to count member ");
 			}			
 			return result;
 		}
@@ -280,7 +279,7 @@ public class MemberServiceImpl implements MemberService {
 				result = sqlSession.selectOne("MemberMapper.selectAdminMemberDateCount", member);
 			} catch(Exception e) {
 				logger.error(e.getLocalizedMessage());
-				throw new Exception("회원 수 조회에 실패했습니다. ");
+				throw new Exception("fail to count member ");
 			}			
 			return result;
 		}
@@ -294,16 +293,16 @@ public class MemberServiceImpl implements MemberService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 회원정보가 없습니다...ad");
+			throw new Exception("fail to count member...ad");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("회원정보 조회에 실패했습니다...asaas.");
+			throw new Exception("fail to count member..asaas.");
 		}
 		return result;
 	}
 
 	@Override
-	public void updateAdminMemberLevel(Member member) throws Exception {
+	public void updateAdminMemberLevel(Member member) throws Exception {		
 		try {
 			int result = sqlSession.update("MemberMapper.updateAdminMemberLevel", member);
 			if (result == 0) {
@@ -311,7 +310,7 @@ public class MemberServiceImpl implements MemberService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("information do not change");
+			throw new Exception("information does not change");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
@@ -320,6 +319,7 @@ public class MemberServiceImpl implements MemberService {
 			sqlSession.commit();
 		}
 	}	
+	
 	@Override
 	public List<Member> selectAdminMemberEmailDate(Member member) throws Exception {
 		List<Member> result = null;

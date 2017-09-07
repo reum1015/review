@@ -71,6 +71,10 @@ public class ArticleListMobile extends BaseController {
 	/** (5) 조회할 정보에 대한 Beans 생성 */
 		// 검색어
 		String keyword = web.getString("keyword");
+		
+		logger.debug("keyword ---------------> " + keyword);
+		
+		
 		/** (3) 글 번호 파라미터 받기 */
 		int article_id = web.getInt("article_id");
 		logger.debug("article_id" + article_id);
@@ -93,9 +97,7 @@ public class ArticleListMobile extends BaseController {
 		}
 		
 		logger.debug("member_id -----------------------------------> " + member_id);
-		
-	
-		
+
 		int likeCount = 0;
 
 		// 북마크 저장변수
@@ -116,14 +118,16 @@ public class ArticleListMobile extends BaseController {
 		int total_count = 0;
 		int totalCount = 0;
 		List<Article> articleList = null;
-		List<Favorite> favoriteList = null;
+		
 		
 		//회원의 좋아요 상태 확인
 		List<Favorite> favoriteStateList = null;
 		
 		//BestReviewList
-		List<Article> selectArticleListForBest = null;
+		List<Favorite> selectArticleListForBest = null;
 		
+		//회원의 bookmark 상태 확인
+		List<BookMark> bookMarkState = null;
 				
 		try {
 			// 전체 게시물 수
@@ -132,8 +136,8 @@ public class ArticleListMobile extends BaseController {
 			
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
-			pageHelper.pageProcess(page, total_count, 10, 8);
-			pageHelper.pageProcess(page, totalCount, 10, 8);
+			pageHelper.pageProcess(page, total_count, 7, 50);
+			pageHelper.pageProcess(page, totalCount, 4, 50);
 			
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
@@ -143,13 +147,14 @@ public class ArticleListMobile extends BaseController {
 			favorite.setList_count(pageHelper.getList_count());
 			
 			articleList = articleService.selectArticleList(article);
-			favoriteList = favoriteService.selectFavoriteList(favorite);
+			
 			bookmarkCount = bookmarkService.selectCountBookMarkById(bookmark);
 			likeCount = favoriteService.selectCountFavoriteArticleById(favorite);
 			
 			favoriteStateList = favoriteService.selectfavoriteStateList(favorite);
+			bookMarkState = bookmarkService.selectBookMarkList(bookmark);
 			
-			selectArticleListForBest = articleService.selectArticleListForBest(article);
+			selectArticleListForBest = favoriteService.selectArticleListForBest(favorite);
 			
 			
 		} catch (Exception e) {
@@ -160,6 +165,11 @@ public class ArticleListMobile extends BaseController {
 		}
 		
 		
+		logger.debug("favoriteStateList -------> " + favoriteStateList);
+		System.out.println("favoriteStateList ------- > " + favoriteStateList.toString());
+		System.out.println("bookMarkStateList ------- > " + bookMarkState.toString());
+		
+		
 		System.out.println("selectArticleListForBest ------------> " + selectArticleListForBest.toString());
 		
 		// 조회결과가 존재할 경우 --> 갤러리라면 이미지 경로를 썸네일로 교체(에피소드 리스트)
@@ -168,7 +178,7 @@ public class ArticleListMobile extends BaseController {
 				Article item = articleList.get(i);
 				String imagePath = item.getImagePath();
 				if (imagePath != null) {
-					String thumbPath = upload.createThumbnail(imagePath, 220, 190, true);
+					String thumbPath = upload.createThumbnail(imagePath, 150, 150, false);
 					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 					item.setImagePath(thumbPath);
 					logger.debug("thumbnail create > " + item.getImagePath());
@@ -178,12 +188,12 @@ public class ArticleListMobile extends BaseController {
 		
 		
 		
-		if (favoriteList != null) {
-			for (int i=0; i<favoriteList.size(); i++) {
-				Favorite item = favoriteList.get(i);
+		if (selectArticleListForBest != null) {
+			for (int i=0; i<selectArticleListForBest.size(); i++) {
+				Favorite item = selectArticleListForBest.get(i);
 				String imagePath = item.getImagePath();
 				if (imagePath != null) {
-					String thumbPath = upload.createThumbnail(imagePath, 220, 190, true);
+					String thumbPath = upload.createThumbnail(imagePath, 150, 150, false);
 					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 					item.setImagePath(thumbPath);
 					logger.debug("thumbnail create > " + item.getImagePath());
@@ -200,9 +210,10 @@ public class ArticleListMobile extends BaseController {
 		
 		
 		JSONArray favoriteState = new JSONArray();
-		
+		JSONArray bookMarkStateList = new JSONArray();
 		try{
 			favoriteState = new JSONArray(favoriteStateList.toArray());
+			bookMarkStateList = new JSONArray(bookMarkState.toArray());
 		}catch (JSONException e) {
 			
 			e.printStackTrace();
@@ -210,21 +221,20 @@ public class ArticleListMobile extends BaseController {
 		
 		//좋아요 확인용 리스트 자바스크립트용
 		request.setAttribute("favoriteState", favoriteState);
-		
-		
+		//북마크 확인용 자바 스크립트용
+		request.setAttribute("bookMarkStateList", bookMarkStateList);
 		
 		request.setAttribute("articleList", articleList);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("pageHelper", pageHelper);
 		request.setAttribute("member_id", member_id);
-		request.setAttribute("favoriteList", favoriteList);
+		
 		request.setAttribute("isBookMarkState", isBookMarkState);
         request.setAttribute("bookmarkCount", bookmarkCount);
         request.setAttribute("likeCount", likeCount);
         request.setAttribute("isLikeState", isLikeState);
         
         request.setAttribute("selectArticleListForBest", selectArticleListForBest);
-		
 		
 		String view = "article/article_list_mobile";
 		

@@ -111,8 +111,8 @@ $(function() {
 		<!-- introduce -->
 		<div class="login_intro col-lg-7 col-md-7 col-sm-7 hidden-xs">
 			<a class="login_img" href="#">
-	<img alt="main" src="${pageContext.request.contextPath}/assets/imgs/img/login.png"
-	height="480px" width="100%" />
+	<img alt="signup" src="${pageContext.request.contextPath}/assets/imgs/img/login.png"
+	height="350px" width="100%" />
 	</a>
 				</div>
 		<!--// introduce -->		
@@ -121,7 +121,7 @@ $(function() {
 	<div class="sign_up_form">
 		<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">		
 				<fieldset>
-						<legend>Review&Bang</legend>
+						<legend>Review&amp;Bang</legend>
 						
 			<form class="form-horizontal" name="sign_up_form" method="post" id="myform"
       action="${pageContext.request.contextPath}/member/sign_up_ok">

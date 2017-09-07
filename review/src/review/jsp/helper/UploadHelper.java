@@ -46,15 +46,10 @@ public class UploadHelper {
 	// ----------- 싱글톤 객체 생성 끝 ----------
 
 	/** 자신의 Workspace 경로1 */
-	// public static final String homeDir = "/home";
+		// C:/Users/yunsig/Desktop/book/  -- 윤식
 	
-	
-	//"C:/Users/yunsig/Desktop/Java/workspace"; -- 윤식
-	//"D:/gitLocal/"; -- 아름
-	// C:/Users/yunsig/Desktop/book
-	
-	
-	 public static final String homeDir = "D:/gitLocal/";
+	// public static final String homeDir = "C:/Users/yunsig/Desktop/book/";
+    public static final String homeDir = "/mnt/blockstorage/";
 	/** 업로드 된 결과물이 저장될 폴더 */
 	public static final String fileDir = homeDir + "/upload";
 	/** 업로드가 진행될 임시 폴더 */
@@ -113,8 +108,8 @@ public class UploadHelper {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		// UTF-8 처리 지정
 		upload.setHeaderEncoding("UTF-8");
-		// 최대 파일 크기 --> 20M
-		upload.setSizeMax(20 * 1024 * 1024);
+		// 최대 파일 크기 --> 6M
+		upload.setSizeMax(6 * 1024 * 1024);
 		// 실제 업로드를 수행하여 파일 및 파라미터들을 얻기
 		List<FileItem> items = upload.parseRequest(request);
 

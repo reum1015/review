@@ -53,6 +53,9 @@ public class LoginOk extends BaseController {
 		// --> login.jsp에 배치된 폼으로부터 전송되는 입력값.
 		String email = web.getString("email");
 		String user_pw = web.getString("user_pw");
+
+		
+		int article_id = web.getInt("article_id");
 		
 		logger.debug("email=" + email);
 		logger.debug("userPw=" + user_pw);
@@ -79,18 +82,25 @@ public class LoginOk extends BaseController {
 			return null;
 		}	
 		
-		/** (7) 프로필 이미지 처리 */
-		// 프로필 이미지가 있을 경우 썸네일을 생성하여 쿠키에 별도로 저장
 		
-
 		
 		/** (8) 조회된 회원 정보를 세션에 저장 */
 		// 로그인 처리는 아이디와 비밀번호를 기반으로 조회된 정보를
 		// 세션에 보관하는 과정을 말한다.
 		// 로그인에 대한 판별은 저장된 세션정보의 존재 여부로 판별한다.
+		
+			
 		web.setSession("loginInfo", loginInfo);
 		
+		//작품 정보가 있는경우 작품 리스트 페이지로 이동
+				String rootPath = web.getRootPath();
+				String url = rootPath + "/article/article_read?article_id=" + article_id;
 		
+				if(article_id != 0){
+					sqlSession.close();
+					web.redirect(url,  null);
+					return null;
+				}
 
 		/** (9) 가입이 완료되었으므로 메인페이지로 이동 */
 		sqlSession.close();

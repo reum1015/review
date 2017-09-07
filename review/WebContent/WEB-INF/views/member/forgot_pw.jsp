@@ -8,24 +8,24 @@
 <jsp:include page="/WEB-INF/views/template/head.jsp"></jsp:include>
  
  <!-- main css -->
- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/common.css"/>
- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/eachMain.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/login_main.css" />
+ 
+
 
 <style type="text/css">
 </style>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/template/topbar.jsp"/>
+	<jsp:include page="/WEB-INF/views/template/topbar_mobile.jsp"/>
   <jsp:include page="/WEB-INF/views/template/bottombar.jsp"/>
 	<!-- 메인 화면 시작 -->	
 		<div class="container" style="min-height: 450px;">		
 	<div class="row">
-    <div class="col-lg-6 col-md-6 col-md-offset-3" style="margin-top: 80px;">
+    <div class="col-lg-6 col-md-6 col-md-offset-3 col-sm-offset-2 col-sm-8" style="margin-top: 80px;">
       <h1 class="page-header">Reset Password</h1>
       <p>
-            We can help you find your password using your 
-            Review&Bang email address linked to your account.
+      Review&amp;Bang also does not know about your password. I'm so Sorry. T.T<br/>
+      However, We can help you find your password using your 
+            Review&amp;Bang email address linked to your account.
       </p>
       
       <!-- 이메일 주소 입력 폼 시작 -->

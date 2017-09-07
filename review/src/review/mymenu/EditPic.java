@@ -71,7 +71,7 @@ public class EditPic extends BaseController {
 			logger.debug("member_id" + member_id);
 					
 			if (member_id == 0) {
-				web.redirect(null, "회원 번호가 지정되지 않았습니다.");
+				web.redirect(null, "do not get member_id.");
 				sqlSession.close();
 				return null;
 			}
@@ -99,7 +99,7 @@ public class EditPic extends BaseController {
 				readMember = memberService.selectMember(member);
 				
 				 if(loginInfo.getId() != member_id) {
-		                web.redirect(null, "접근이 제한된 페이지 입니다.");
+		                web.redirect(null, "It's not your page.");
 		                return null;
 		             }
 				

@@ -36,8 +36,25 @@
          DELETE FROM bookmark WHERE member_id=#{member_id} AND article_id=#{article_id}
 	</delete>
 		
-		<!-- 북마크 목록을 조회한다. -->
+	<!-- 북마크 목록을 조회한다. -->
 	<select id="selectBookMarkList" parameterType="review.model.BookMark" resultMap="bookmark">
+     		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, 
+		(SELECT concat(file_dir, '/', file_name) FROM imageFile
+		 WHERE article_id=a.id 
+		 AND 
+		 content_type LIKE ('image/%') 		
+			ORDER BY id ASC LIMIT 0, 1
+			) 	AS imagePath	
+		FROM   article as a
+        INNER JOIN member as m ON a.member_id = m.id
+         INNER JOIN bookmark as b ON b.article_id = a.id        
+         WHERE  b.member_id=#{member_id}
+       	ORDER BY b.id DESC  
+         LIMIT #{limit_start}, #{list_count}        
+	</select>	
+	
+			<!-- 북마크 되어있는지 확인을 위한 목록 조회한다. -->
+	<select id="selectBookMarkStateList" parameterType="review.model.BookMark" resultMap="bookmark">
      		SELECT a.id, a.category, m.nick_name, a.title, a.content, a.member_id, DATE_FORMAT(a.reg_date, '%Y-%m-%d') as reg_date, 
 		(SELECT concat(file_dir, '/', file_name) FROM imageFile
 		 WHERE article_id=a.id 

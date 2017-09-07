@@ -35,11 +35,11 @@ public class BookMarkServiceImpl implements BookMarkService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("저장된 북마크가 없습니다.");
+			throw new Exception("It's fail to add bookmark.");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("북마크 저장에 실패했습니다.");
+			throw new Exception("It's fail to add bookmark.");
 		} finally {
 			sqlSession.commit();
 		}
@@ -54,11 +54,11 @@ public class BookMarkServiceImpl implements BookMarkService {
 			}
 		}catch (NullPointerException e) {		
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 게시물에 대한 요청입니다.");
+			throw new Exception("It's fail to delete bookmark..");
 		}catch (Exception e) {			
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("북마크 해제에 실패 했습니다.");
+			throw new Exception("It's fail to delete bookmark..");
 		}finally{
 			sqlSession.commit();
 		}
@@ -66,8 +66,23 @@ public class BookMarkServiceImpl implements BookMarkService {
 
 	@Override
 	public List<BookMark> selectBookMarkList(BookMark bookmark) throws Exception {
-		List<BookMark> result = null;
+		List<BookMark> result = null;		
+		try {
+			result = sqlSession.selectList("BookMarkMapper.selectBookMarkList", bookmark);
+			
+		} catch (NullPointerException e) {
+			throw new Exception("there is no bookmark list.");
+		} catch (Exception e) {
+			logger.error(e.getLocalizedMessage());
+			throw new Exception("it;s fail to load bookmarklist.");
+		}		
 		
+		return result;
+	}
+	
+	@Override
+	public List<BookMark> selectBookMarkStateList(BookMark bookmark) throws Exception {
+		List<BookMark> result = null;		
 		try {
 			result = sqlSession.selectList("BookMarkMapper.selectbookmarkStateList", bookmark);
 			
@@ -91,7 +106,7 @@ public class BookMarkServiceImpl implements BookMarkService {
 			result = sqlSession.selectOne("BookMarkMapper.selectBookMarkCount", bookmark);
 		} catch(Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("북마크 수 조회에 실패했습니다. ");
+			throw new Exception("it's fail to count bookmark ");
 		}
 		
 		return result;
@@ -106,7 +121,7 @@ public class BookMarkServiceImpl implements BookMarkService {
 			result = sqlSession.selectOne("BookMarkMapper.selectCountBookMarkById", bookmark);
 		} catch(Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("북마크 확인 조회에 실패했습니다. ");
+			throw new Exception("it's fail to bookmark count. ");
 		}		
 		return result;
 	}
@@ -120,12 +135,13 @@ public class BookMarkServiceImpl implements BookMarkService {
 		}catch(Exception e){
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("게시글 북마크 삭제에 실패했습니다.");
+			throw new Exception("it's fail to delete bookmark delete");
 		}finally{
 			sqlSession.commit();
 		}
 	}
 
+	
 	
 
 

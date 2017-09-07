@@ -128,7 +128,7 @@ public class ArticleList extends BaseController {
 		List<Favorite> favoriteStateList = null;
 		
 		//BestReviewList
-		List<Article> selectArticleListForBest = null;
+		List<Favorite> selectArticleListForBest = null;
 		
 		//회원의 bookmark 상태 확인
 		List<BookMark> bookMarkState = null;
@@ -136,15 +136,19 @@ public class ArticleList extends BaseController {
 		try {
 			// 전체 게시물 수
 			total_count = articleService.selectArticleCount(article);
+			totalCount = favoriteService.selectFavoriteCount(favorite);
 			
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
-			pageHelper.pageProcess(page, total_count, 10, 8);
-			pageHelper.pageProcess(page, totalCount, 10, 8);
+			pageHelper.pageProcess(page, total_count, 7, 50);
+			pageHelper.pageProcess(page, totalCount, 4, 50);
 			
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
 			article.setList_count(pageHelper.getList_count());
+			
+			favorite.setLimit_start(pageHelper.getLimit_start());
+			favorite.setList_count(pageHelper.getList_count());
 			
 			articleList = articleService.selectArticleList(article);
 			
@@ -152,9 +156,9 @@ public class ArticleList extends BaseController {
 			likeCount = favoriteService.selectCountFavoriteArticleById(favorite);
 			
 			favoriteStateList = favoriteService.selectfavoriteStateList(favorite);
-			bookMarkState = bookmarkService.selectBookMarkList(bookmark);
+			bookMarkState = bookmarkService.selectBookMarkStateList(bookmark);
 			
-			selectArticleListForBest = articleService.selectArticleListForBest(article);
+			selectArticleListForBest = favoriteService.selectArticleListForBest(favorite);
 			
 			
 		} catch (Exception e) {
@@ -178,7 +182,7 @@ public class ArticleList extends BaseController {
 				Article item = articleList.get(i);
 				String imagePath = item.getImagePath();
 				if (imagePath != null) {
-					String thumbPath = upload.createThumbnail(imagePath, 220, 190, true);
+					String thumbPath = upload.createThumbnail(imagePath, 150, 150, false);
 					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 					item.setImagePath(thumbPath);
 					logger.debug("thumbnail create > " + item.getImagePath());
@@ -190,10 +194,10 @@ public class ArticleList extends BaseController {
 		
 		if (selectArticleListForBest != null) {
 			for (int i=0; i<selectArticleListForBest.size(); i++) {
-				Article item = selectArticleListForBest.get(i);
+				Favorite item = selectArticleListForBest.get(i);
 				String imagePath = item.getImagePath();
 				if (imagePath != null) {
-					String thumbPath = upload.createThumbnail(imagePath, 220, 190, true);
+					String thumbPath = upload.createThumbnail(imagePath, 150, 150, false);
 					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 					item.setImagePath(thumbPath);
 					logger.debug("thumbnail create > " + item.getImagePath());

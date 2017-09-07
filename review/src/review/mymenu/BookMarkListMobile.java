@@ -66,7 +66,8 @@ public class BookMarkListMobile extends BaseController {
 		bookmarkService = new BookMarkServiceImpl(sqlSession, logger);
 			
 		/** (3) 로그인 여부 검사 */
-		// 로그인 중이 아니라면 이 페이지를 동작시켜서는 안된다.
+	
+		 Member loginInfo = (Member) web.getSession("loginInfo");
 			if(web.getSession("loginInfo") == null){
 					sqlSession.close();
 					web.redirect(web.getRootPath() + "/index", "you need log in.");
@@ -79,7 +80,7 @@ public class BookMarkListMobile extends BaseController {
 		logger.debug("member_id=" + member_id);
 				System.out.println("-----"+ member_id);
 		if (member_id == 0) {
-			web.redirect(null, "회원 번호가 지정되지 않았습니다.");
+			web.redirect(null, "do not get member_id.");
 			sqlSession.close();
 			return null;
 		}
@@ -115,7 +116,10 @@ public class BookMarkListMobile extends BaseController {
 			
 
 			readMember = memberService.selectMember(member);
-			
+			 if(loginInfo.getId() != member_id) {
+	                web.redirect(null, "It's not your page.");
+	                return null;
+	             }
 			
 		} catch (Exception e) {
 			web.redirect(null, e.getLocalizedMessage());
@@ -130,7 +134,7 @@ public class BookMarkListMobile extends BaseController {
 				BookMark item = bookmarkList.get(i);
 				String imagePath = item.getImagePath();
 				if (imagePath != null) {
-					String thumbPath = upload.createThumbnail(imagePath, 220, 190, true);
+					String thumbPath = upload.createThumbnail(imagePath, 150, 150, false);
 					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 					item.setImagePath(thumbPath);
 					logger.debug("thumbnail create > " + item.getImagePath());
@@ -142,7 +146,7 @@ public class BookMarkListMobile extends BaseController {
 				if (readMember != null) {
 					String imagePath = readMember.getImagePath();
 					if (imagePath != null) {
-						String thumbPath = upload.createThumbnail(imagePath, 150, 150, true);
+						String thumbPath = upload.createThumbnail(imagePath, 150, 150, false);
 					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 						readMember.setImagePath(thumbPath);
 						logger.debug("thumbnail create > " + readMember.getImagePath());

@@ -75,7 +75,7 @@ public class CommentSelelct extends BaseController {
 		// 덧글이 소속될 게시물의 일련번호
 		if (article_id == 0) {
 			sqlSession.close();
-			web.printJsonRt("게시물 일련번호가 없습니다....");
+			web.printJsonRt("there is no article_id");
 			return null;
 		}
 		

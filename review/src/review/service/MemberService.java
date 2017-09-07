@@ -129,6 +129,9 @@ public interface MemberService {
 	 */
 	public void updateAdminMemberLevel(Member member)throws Exception;
 	
+	
+
+	
 	/**
 	 * 회원 전체 이메일 주소
 	 * @param member	  

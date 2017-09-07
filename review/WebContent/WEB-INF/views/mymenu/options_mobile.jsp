@@ -38,10 +38,8 @@
 			<div class="btn-text" style="text-align: left">Change Picture</div>
 			</button>
 			</form>
-		   	<br  />
-		   	<br  />		  
-		   	<label for="about" class="pull-left">About</label> 
-		   	<br  />
+		   	<br  />	
+		   	<hr/>		  
 		   	<form  name="form" method="post" action="${pageContext.request.contextPath}/mymenu/log_out">
 			<button class="btn btn-block btn-lblue-gray btn-lg">		
 			<div class="btn-text" style="text-align: left">Log Out</div>

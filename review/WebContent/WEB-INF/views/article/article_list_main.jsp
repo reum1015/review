@@ -12,7 +12,9 @@
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/article_list_main.css" />
 
 <style type="text/css">
-
+.container {
+margin-top: -25px;
+}
 </style>
 
 </head>
@@ -48,22 +50,22 @@
 										<c:url var="downloadUrl" value="/download">
 											<c:param name="file" value="${article.imagePath}" />
 										</c:url>
-										<img src="${downloadUrl}" class="img-responsive img-rounded"/>
+										<img alt="article image"  src="${downloadUrl}" class="img-responsive img-rounded"/>
 									</c:when>
 									<c:otherwise>
-										<img src="${pageContext.request.contextPath}/assets/imgs/img/frog1.jpg" class="img-responsive"/>
+									<img alt="noimage" src="${pageContext.request.contextPath}/assets/imgs/img/no_image_article.png" height="190px" width="220px" class="img-rounded img-responsive"/>
 									</c:otherwise>
 								</c:choose>
 							</a>
 							<!--// 링크 + 썸네일 -->
 					            	<!-- 제목 + 작성자 + 조회수 -->
 					            	<div class="item">
-								<h4><font size="4" color="#FF8000"> ${article.title} </font></h4>
+					            	<h6  ><font size="4" color="#FF8000">	${article.category}</font></h6>
+								<h4 style="overflow:hidden;white-space:nowrap; text-overflow:ellipsis; width:auto;"><font size="4" color="#a0a0a0"> ${article.title} </font></h4>								
 								<div><a href="${readUser}"><font size="4" color="#585858">${article.nick_name}</font></a></div>
-								<div class="clearfix">
-									<div class="pull-left"><font size="2" color="#000">${article.reg_date}</font></div>
-									<div class="pull-right"><font size="4" color="#FF8000">	${article.category}</font></div>
-								</div>
+								<div class="clearfix">	
+								<div class="pull-right"><font size="2" color="#000">${article.reg_date}</font></div>
+								</div>								
 							</div>
 							<!--// 제목 + 작성자 + 조회수 -->
 		    				</div>

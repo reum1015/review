@@ -52,7 +52,7 @@ public class ForgotPwOk extends BaseController {
 		// 로그인 중이라면 이페이지를 동작시켜서는 안된다.
 		if(web.getSession("loginInfo")!=null){
 			sqlSession.close();
-			web.redirect(web.getRootPath() + "/main", "you already login");
+			web.redirect(web.getRootPath() + "/index", "you already login");
 			return null;
 		}
 		

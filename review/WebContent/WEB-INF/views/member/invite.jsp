@@ -20,7 +20,7 @@
 		<div class="container" style="min-height: 500px;">		
 	<div class="row">
     <div class="col-lg-6 col-md-6 col-md-offset-3 col-sm-12 col-xs-12" style="margin-top: 40px;">
-      <h2 class="page-header">Introduce Review&Bang to your friends</h2>
+      <h2 class="page-header">Introduce Review&amp;Bang to your friends</h2>
       
       <!-- 이메일 주소 입력 폼 시작 -->
        <form name="myform" method="post" action="${pageContext.request.contextPath}/member/invite_ok">

@@ -8,11 +8,15 @@
 <footer id="footer" >
 <div>
 <p class="pull-right"><a href="#">Back to top</a></p>
-<p class="pull-left"> &copy;Review&Bang&ensp;</p>
+<p class="pull-left"> &copy;Review&amp;Bang&ensp;</p>
 <p class="pull-left">
     <a href="${pageContext.request.contextPath}/legal/privacy">Privacy</a>&ensp; 
 	<a href="${pageContext.request.contextPath}/legal/terms">Terms</a> &ensp;
-	<a href="${pageContext.request.contextPath}/legal/feedback">Feedback</a>
+	<a href="${pageContext.request.contextPath}/legal/feedback">Feedback</a>&ensp;
+	 <c:if test="${loginInfo.member_level == 'BB'}">
+	<a href="${pageContext.request.contextPath}/admin/admin_mobile">admin</a>
+    	</c:if>
+	
 </p>
 </div>
 </footer>

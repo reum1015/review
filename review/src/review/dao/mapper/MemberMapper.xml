@@ -129,17 +129,20 @@
 		<!-- 관리자에서 회원 전체 email 을 날짜별로 조회한다. -->
 	<select id="selectAdminMemberEmailDate" parameterType="review.model.Member" resultMap="member">
 		select id, email, name, nick_name from member WHERE reg_date BETWEEN #{reg_date1} AND #{reg_date2}
+		ORDER  BY id DESC		
+		LIMIT #{limit_start}, #{list_count}
 		</select>
 		
 		<!-- 관리자에서 회원 id번호  조회한다. -->
 	<select id="selectAdminMemberId" parameterType="review.model.Member" resultMap="member">
-		select id from member where nick_name= #{nick_name}
+		select id, email, name, nick_name, member_level from member where nick_name= #{nick_name}
 		</select>
+
+		<!-- 회원정보를 변경한다 -->
+	<update id="updateAdminMemberLevel" parameterType="review.model.Member">
+			UPDATE member SET member_level=#{member_level} where id=#{id}
+	</update>
 		
-		<!-- 관리자에서 관리자 권한 변경해줌 -->
-	<select id="updateAdminMemberLevel" parameterType="review.model.Member" resultType="int">
-		update member set  member_level="BB" where id=#{id}
-		</select>
 	
 	
 </mapper>

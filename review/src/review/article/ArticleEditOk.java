@@ -64,7 +64,7 @@ public class ArticleEditOk extends BaseController {
 			upload.multipartRequest(request);
 		} catch (Exception e) {
 			sqlSession.close();
-			web.redirect(null, "multipart 데이터가 아닙니다.");
+			web.redirect(null, "it's not multipart data");
 			return null;
 		}
 		
@@ -76,7 +76,7 @@ public class ArticleEditOk extends BaseController {
         	article_id = Integer.parseInt(paramMap.get("article_id"));
         } catch (NumberFormatException e) {
 			sqlSession.close();
-			web.redirect(null, "글 번호가 올바르지 않습니다.edit_ok 부분");
+			web.redirect(null, "do not get aritcle_id number");
 			return null;
 		}	
 		
@@ -120,17 +120,7 @@ public class ArticleEditOk extends BaseController {
 				logger.debug("ip_address=" + ip_address);
 				logger.debug("member_id=" + member_id);
 				
-				if(!regex.isValue(title)) {
-					sqlSession.close();
-					web.redirect(null, "title field is required");
-					return null;
-				}
-				
-				if(!regex.isValue(content)) {
-					sqlSession.close();
-					web.redirect(null, "content field is required");
-					return null;
-				}
+			
 				
 				  Article article = new Article();
 				  article.setId(article_id);

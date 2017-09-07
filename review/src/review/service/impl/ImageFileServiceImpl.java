@@ -92,11 +92,11 @@ public class ImageFileServiceImpl implements ImageFileService{
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("삭제된 파일 정보가 없습니다.");
+			throw new Exception("fail to delete pic");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("첨부파일 정보 삭제에 실패했습니다.");
+			throw new Exception("fail to delete pic");
 		} finally {
 			sqlSession.commit();
 		}
@@ -112,7 +112,7 @@ public class ImageFileServiceImpl implements ImageFileService{
 			result = sqlSession.selectList("ImageFileMapper.selectArticleFileList", file);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("파일 정보 조회에 실패했습니다.");
+			throw new Exception("fail to laod pic.");
 		}
 		
 		return result;
@@ -127,7 +127,7 @@ public class ImageFileServiceImpl implements ImageFileService{
 			result = sqlSession.selectList("ImageFileMapper.selectMemberFileList", file);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("파일 정보 조회에 실패했습니다.");
+			throw new Exception("fail to load  pic.");
 		}
 		
 		return result;
@@ -141,7 +141,7 @@ public class ImageFileServiceImpl implements ImageFileService{
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("첨부파일 정보 삭제에 실패했습니다.");
+			throw new Exception("fail to delete pic.");
 		} finally {
 			sqlSession.commit();
 		}

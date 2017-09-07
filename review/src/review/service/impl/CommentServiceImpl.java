@@ -54,10 +54,10 @@ public class CommentServiceImpl implements CommentService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 덧글이 없습니다.");
+			throw new Exception("no comment list.");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 조회에 실패했습니다.");
+			throw new Exception("fail to load comment.");
 		}
 
 		return result;
@@ -73,10 +73,10 @@ public class CommentServiceImpl implements CommentService {
 				throw new NullPointerException();
 			}
 		} catch (NullPointerException e) {
-			throw new Exception("조회된 덧글이 없습니다.");
+			throw new Exception("fail to load comment.");
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 목록 조회에 실패했습니다.");
+			throw new Exception("fail to load comment.");
 		}
 
 		return result;
@@ -92,7 +92,7 @@ public class CommentServiceImpl implements CommentService {
 					"CommentMapper.selectCommentCountByMemberId", comment);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 수 조회에 실패했습니다.");
+			throw new Exception("fail to count comment.");
 		}
 		return result;
 	}
@@ -106,11 +106,11 @@ public class CommentServiceImpl implements CommentService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 덧글에 대한 요청입니다.");
+			throw new Exception("this comment doesnot exist.");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 삭제에 실패했습니다.");
+			throw new Exception("fail to delete comment");
 		} finally {
 			sqlSession.commit();
 		}
@@ -125,11 +125,11 @@ public class CommentServiceImpl implements CommentService {
 			}
 		} catch (NullPointerException e) {
 			sqlSession.rollback();
-			throw new Exception("존재하지 않는 덧글에 대한 요청입니다.");
+			throw new Exception("this comment does not exist");
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 수정에 실패했습니다.");
+			throw new Exception("fail to edit comment");
 		} finally {
 			sqlSession.commit();
 		}
@@ -144,7 +144,7 @@ public class CommentServiceImpl implements CommentService {
 		} catch (Exception e) {
 			sqlSession.rollback();
 			logger.error(e.getLocalizedMessage());
-			throw new Exception("덧글 삭제에 실패했습니다.");
+			throw new Exception("fail to delete comment.");
 		} finally {
 			sqlSession.commit();
 		}

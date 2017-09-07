@@ -9,6 +9,11 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/legalmenu.css" />
 
+<style type="text/css">
+.legal_form  {
+padding-left: 40px;
+}
+</style>
 
 </head>
 <body>
@@ -18,7 +23,7 @@
 
 	<div class="containers" >
 		<!-- 왼쪽 정보편집부분 -->
-		<div id="" class="legal_basic col-lg-2 col-md-3 hidden-sm hidden-xs">
+		<div id="" class="legal_basic col-lg-2 col-md-3 col-sm-3  hidden-xs">
 			<div class="btn btn-link">
 				<a href="${pageContext.request.contextPath}/admin/manage_article">
 				<font	size="5">Manage Article</font></a>
@@ -43,7 +48,7 @@
 		</div>
 		<!--// 왼쪽 정보편집부분 -->	
 		<!-- 오른쪽 내용 -->	
-		<div id="" class="legal_form col-lg-8  col-md-7 col-sm-12 col-xs-12">
+		<div class="legal_form col-lg-8  col-md-7 col-sm-7 col-xs-12">
 			<fieldset>
 				<legend><h1>Manage Article</h1></legend>
 				
@@ -68,8 +73,8 @@
 			  	<br />
 			  	<br />
 			  	<br />	
-			  	<br />
-			  					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
+			  
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">               
                <button type="button" class="btn btn-danger form-control" onclick="history.back();">Cancel</button>
                </div>  				  									
 	                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
@@ -77,12 +82,17 @@
 						<button type="submit" class="btn btn-warning btn-block">Save Setting</button>							
                      </div>
                      </form>	
-
 			</fieldset>
+			<br/>	
+    <br/>	
+      <br/>	
+      <br/>	
+    <br/>	
+      
+	</div>
 		</div>		
 		<!-- 오른쪽 내용 -->
 
-	</div>
 
 	<!-- footer -->
 

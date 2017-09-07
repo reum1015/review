@@ -79,13 +79,16 @@ public class ArticleReadMobile extends BaseController {
 		
 		logger.debug("member_id -----------------------------------> " + member_id);
 		
+		String keyword = web.getString("keyword");		
+		logger.debug("keyword ---------------> " + keyword);
+		
 		/** (3) 글 번호 파라미터 받기 */
 		int article_id = web.getInt("article_id");
 		logger.debug("article_id" + article_id);
 		
 						
 		if (article_id == 0) {
-			web.redirect(null, "글 번호가 지정되지 않았습니다.");
+			web.redirect(null, "do not get aritcle_id number");
 			sqlSession.close();
 			return null;
 		}
@@ -142,7 +145,7 @@ public class ArticleReadMobile extends BaseController {
 		if (readArticle != null) {
 			String imagePath = readArticle.getImagePath();
 			if (imagePath != null) {
-				String thumbPath = upload.createThumbnail(imagePath, 340, 300, true);
+				String thumbPath = upload.createThumbnail(imagePath, 240, 240, false);
 			// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 			readArticle.setImagePath(thumbPath);
 				logger.debug("thumbnail create > " + readArticle.getImagePath());
@@ -166,7 +169,7 @@ public class ArticleReadMobile extends BaseController {
         request.setAttribute("isLikeState", isLikeState);
         request.setAttribute("member_id", member_id);
 		request.setAttribute("article_id", article_id);
-		 
+		request.setAttribute("keyword", keyword);
 	
 	
 		String view = "article/article_read_mobile";

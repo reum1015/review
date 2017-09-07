@@ -60,7 +60,7 @@ public class CommentEdit extends BaseController {
 		// 덧글이 소속될 게시물의 일련번호
 		if (comment_id == 0) {
 			sqlSession.close();
-			web.printJsonRt("덧글 일련번호가 없습니다.");
+			web.printJsonRt("there is no comment_id");
 			return null;
 		}
 		

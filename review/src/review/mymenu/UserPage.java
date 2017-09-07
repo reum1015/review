@@ -65,7 +65,7 @@ public class UserPage extends BaseController {
 		logger.debug("member_id=" + member_id);
 				System.out.println("-----"+ member_id);
 		if (member_id == 0) {
-			web.redirect(null, "회원 번호가 지정되지 않았습니다.");
+			web.redirect(null, "do not get memeber_id");
 			sqlSession.close();
 			return null;
 		}
@@ -120,7 +120,7 @@ public class UserPage extends BaseController {
 				Article item = memberarticleList.get(i);
 				String imagePath = item.getImagePath();
 				if (imagePath != null) {
-					String thumbPath = upload.createThumbnail(imagePath, 220, 190, true);
+					String thumbPath = upload.createThumbnail(imagePath, 150, 150, false);
 					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 					item.setImagePath(thumbPath);
 					logger.debug("thumbnail create > " + item.getImagePath());
@@ -132,7 +132,7 @@ public class UserPage extends BaseController {
 				if (readMember != null) {
 					String imagePath = readMember.getImagePath();
 					if (imagePath != null) {
-						String thumbPath = upload.createThumbnail(imagePath, 150, 150, true);
+						String thumbPath = upload.createThumbnail(imagePath, 150, 150, false);
 					// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 						readMember.setImagePath(thumbPath);
 						logger.debug("thumbnail create > " + readMember.getImagePath());

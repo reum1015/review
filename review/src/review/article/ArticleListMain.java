@@ -73,7 +73,7 @@ public class ArticleListMain extends BaseController {
 			total_count = articleService.selectArticleMainCount(article);
 			// 나머지 페이지 번호계산하기
 			// --> 현재 페이지, 전체 게시물 수, 한페이지의 목록수, 그룹갯수
-			pageHelper.pageProcess(page, total_count, 20, 8);
+			pageHelper.pageProcess(page, total_count, 20, 50);
 			
 			// 페이지 번호 계산결과에서 Limit절에 필요한 값을 Beans에 추가
 			article.setLimit_start(pageHelper.getLimit_start());
@@ -94,7 +94,7 @@ public class ArticleListMain extends BaseController {
 						Article item = articleList.get(i);
 						String imagePath = item.getImagePath();
 						if (imagePath != null) {
-							String thumbPath = upload.createThumbnail(imagePath, 340, 300, true);
+							String thumbPath = upload.createThumbnail(imagePath, 150, 150, true);
 							// 글 목록 컬렉션 내의 Beans 객체가 갖는 이미지 경로를 썸네일로 변경한다.
 							item.setImagePath(thumbPath);
 							logger.debug("thumbnail create > " + item.getImagePath());

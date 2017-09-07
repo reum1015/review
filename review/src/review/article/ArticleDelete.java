@@ -67,7 +67,7 @@ public class ArticleDelete extends BaseController {
 		logger.debug("member_id=" + member_id);
 		
 		if (article_id == 0) {
-			web.redirect(null, "글 번호가 지정되지 않았습니다.123");
+			web.redirect(null, "do not get article_id number");
 			sqlSession.close();
 			return null;
 		}
@@ -105,7 +105,7 @@ public class ArticleDelete extends BaseController {
 			 readArticle = articleService.selectArticle(article);
 	            
 	            if(loginInfo.getId() != readArticle.getMember_id()) {
-	                web.redirect(null, "접근이 제한된 페이지 입니다.");
+	                web.redirect(null, "it's not your page.");
 	                return null;
 	             }
 			articleCount = articleService.selectArticleCountByMemberId(article);
