@@ -57,7 +57,7 @@ border-radius: 18px;
 					<small><font size="4" color="#585858">${readMember.nick_name}</font></small>
 						<br /> 
 						<small><font size="4" color="#a0a0a0" >
-<textarea id="introduce" name="introduce"  placeholder="about you" style="overflow: auto; width: 300px; height: 100px; text-align: left; border:0; resize: none; ">
+<textarea id="introduce" name="introduce" style="overflow: auto; width: 300px; height: 100px; text-align: left; border:0; resize: none; ">
 ${readMember.introduce} 
 </textarea> 
 </font></small>					

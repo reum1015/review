@@ -214,8 +214,18 @@ textarea: focus {
 				//var result = confirm("로그인이 필요한 서비스 입니다. 로그인 창으로 이동하시겠습니까?");
 				
 				if( member_id == 0){
-					alert("LogIn is required.");
-					return;
+					
+					var result = confirm("login is required. Do you want to move login page?");
+					
+					if(result){
+						
+						location.replace('/review/member/login?article_id=' + article_id );
+						return false;
+					}else{
+						return;
+					}
+					
+					
 				}else{
 					//북마크 On/Off
 					$.get("${pageContext.request.contextPath}/article/addBookMark", 
